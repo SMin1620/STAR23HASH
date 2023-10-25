@@ -58,8 +58,6 @@ public class SecurityConfig {
         http.authorizeHttpRequests((req) -> req
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/members/register")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/members/login")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/members/email")).permitAll().requestMatchers(mvcMatcherBuilder.pattern("/api/members/refresh")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/api/members/nickname")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/h2-console/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/favicon.ico")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/error")).permitAll()
