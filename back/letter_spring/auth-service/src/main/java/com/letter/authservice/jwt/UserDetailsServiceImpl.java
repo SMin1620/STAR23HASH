@@ -27,9 +27,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * */
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
 
-        Member member = memberRepository.findByEmail(email)
+        Member member = memberRepository.findByPhone(phone)
                 // 전달된 이메일과 같은 유저가 없다면, 예외처리 발생.
                 .orElseThrow(() -> {
                     log.error("Invalid authentication!");
@@ -37,15 +37,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 });
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-//        return new org
-//                .springframework
-//                .security
-//                .core
-//                .userdetails
-//                .User(user.getEmail(), user.getPassword(), grantedAuthorities);
 
         return org.springframework.security.core.userdetails.User.builder()
-                .username(email)
+                .username(phone)
                 .password(member.getPassword())
                 .authorities(grantedAuthorities)
                 .build();
