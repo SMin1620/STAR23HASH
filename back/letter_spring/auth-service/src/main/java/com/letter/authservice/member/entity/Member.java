@@ -20,27 +20,14 @@ public class Member {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    private String phone;
 
     private String password;
-
-    @Column(nullable = false, unique = true)
-    private String nickname;
-
-    private String birth;
-
-    private String gender;
 
     @Column(nullable = false)
     private LocalDateTime createAt;
 
-    private int positiveCoin;
-    private int negativeCoin;
-    private int neutralCoin;
-
     // 리프레시 토큰
     private String refreshToken;
-
-    private int isWrite;
 
 }
