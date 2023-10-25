@@ -34,12 +34,12 @@ public class MemberService {
 
 
     public TokenDto memberLogin(HttpServletResponse response, MemberDto.MemberLoginRequestDto requestBody) {
-        Member member = memberRepository.findByEmail(requestBody.getEmail()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Member member = memberRepository.findByPhone(requestBody.getPhone()).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         System.out.println("로그인 시작 ");
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        requestBody.getEmail(),
+                        requestBody.getPhone(),
                         requestBody.getPassword()
                 )
         );
@@ -61,12 +61,8 @@ public class MemberService {
 
     public Member memberRegister(MemberDto.MemberRegisterRequestDto requestBody) {
         Member member = Member.builder()
-                .email(requestBody.getEmail())
+                .phone(requestBody.getPhone())
                 .password(passwordEncoder.encode(requestBody.getPassword()))
-                .nickname(requestBody.getNickname())
-                .positiveCoin(0)
-                .negativeCoin(0)
-                .neutralCoin(0)
                 .createAt(LocalDateTime.now())
                 .build();
 
@@ -75,19 +71,13 @@ public class MemberService {
 
     }
 
-    public boolean emailDoubleCheck(String email) {
-        Optional<Member> member = memberRepository.findByEmail(email);
+    public boolean emailDoubleCheck(String phone) {
+        Optional<Member> member = memberRepository.findByPhone(phone);
         return member.isPresent();
     }
 
-    public boolean nicknameDoubleCheck(String nickname) {
-        Optional<Member> member = memberRepository.findByNickname(nickname);
-        return member.isPresent();
-
-    }
-
-    public Member memberInfo(String memberEmail) {
-        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+    public Member memberInfo(String phone) {
+        Member member = memberRepository.findByPhone(phone).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         return member;
     }
 
@@ -112,10 +102,10 @@ public class MemberService {
 //        }
 
         // 3. 엑세스 토큰에서 email 가져옴
-        String email = jwtTokenProvider.getUserEmail(token);
+        String phone = jwtTokenProvider.getUserEmail(token);
 
         // 4. 레디스의 refresh token 을 가져온다.
-        String refresh = redisTemplate.opsForValue().get(email);
+        String refresh = redisTemplate.opsForValue().get(phone);
 
         System.out.println("refresh token >>> "+ refresh);
 
@@ -127,8 +117,8 @@ public class MemberService {
         }
 
         // 6. 엑세스 토큰 재발급 :: 리프레시 토큰은 재발급 하지 않을 것임.
-        Optional<Member> member = memberRepository.findByEmail(email);
-        Authentication authentication = jwtTokenProvider.getAuthenticationByUsername(member.get().getEmail());
+        Optional<Member> member = memberRepository.findByPhone(phone);
+        Authentication authentication = jwtTokenProvider.getAuthenticationByUsername(member.get().getPhone());
 
         String newAccessToken = jwtTokenProvider.createAccessToken(authentication);
 
@@ -143,25 +133,5 @@ public class MemberService {
                 .memberId(member.get().getId())
                 .build();
         return tokenDto;
-    }
-
-    public long getMemberId(String email) {
-        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-        return member.getId();
-    }
-
-    /**
-     * reroll
-     */
-    public Member reroll(String email) {
-        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-        if(member.getPositiveCoin() < 5 || member.getNegativeCoin() < 5 || member.getNeutralCoin() < 5){
-            throw new BusinessLogicException(ExceptionCode.COIN_LACK);
-        }
-        member.setPositiveCoin(member.getPositiveCoin() - 5);
-        member.setNegativeCoin(member.getNegativeCoin() - 5);
-        member.setNeutralCoin(member.getNeutralCoin() - 5);
-
-        return member;
     }
 }
