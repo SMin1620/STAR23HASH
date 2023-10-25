@@ -17,11 +17,18 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
+  background-color: #734472;
+
+  margin-top: 5rem;
+
+  display: flex;
+  justify-content: center;
+
+}
+
+.Title{
+  color: white;
+  font-size: 5rem;
+  font-weight: bold;
 }
