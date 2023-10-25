@@ -108,7 +108,6 @@ public class MemberController {
             e.printStackTrace();
             throw new BusinessLogicException(ExceptionCode.INVALID_REFRESH_TOKEN);
         }
-
     }
 
         /**
