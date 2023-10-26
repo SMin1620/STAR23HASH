@@ -17,17 +17,15 @@
 }
 
 body {
-
   background-color: #734472;
 
   margin-top: 5rem;
 
   display: flex;
   justify-content: center;
-
 }
 
-.Title{
+.Title {
   color: white;
   font-size: 5rem;
   font-weight: bold;
