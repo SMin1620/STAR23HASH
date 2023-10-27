@@ -53,6 +53,10 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
 	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+	// Swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
 }
 
 dependencyManagement {
