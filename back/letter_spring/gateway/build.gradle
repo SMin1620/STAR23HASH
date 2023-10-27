@@ -2,6 +2,9 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.12'
 	id 'io.spring.dependency-management' version '1.1.3'
+
+	// swagger
+	id 'com.epages.restdocs-api-spec' version '0.18.2'
 }
 
 group = 'com.letter'
@@ -49,11 +52,22 @@ dependencies {
 	// https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
 	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 
-	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-webflux-ui
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-webflux-ui', version: '1.7.0'
-
-
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webflux-ui
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webflux-ui', version: '2.2.0'
+	testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
 }
+
+// swagger
+openapi3 {
+	server = 'https://localhost:9000'
+	title = 'rest docs + swagger UI'
+	description = 'My API description'
+	version = '0.0.1'
+	format = 'json'
+	outputFileNamePrefix = 'open-api-3-labeling-service'
+	outputDirectory = 'src/main/resources/static/docs'
+}
+
 
 dependencyManagement {
 	imports {
