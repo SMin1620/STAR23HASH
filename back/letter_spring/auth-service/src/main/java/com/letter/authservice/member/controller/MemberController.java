@@ -9,6 +9,8 @@ import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
 import com.letter.authservice.member.mapper.MemberMapper;
 import com.letter.authservice.member.service.MemberService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "회원 API")
 @RestController
 @Slf4j
 @RequiredArgsConstructor
@@ -31,6 +34,7 @@ public class MemberController {
     /**
      * 로그인 (닉네임만 보내주기)
      */
+    @Operation(summary = "로그인")
     @PostMapping("/login")
     public BaseResponse login(HttpServletResponse response, @RequestBody MemberDto.MemberLoginRequestDto requestBody) {
         TokenDto tokenDto = memberService.memberLogin(response, requestBody);
