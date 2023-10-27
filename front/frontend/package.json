@@ -13,14 +13,19 @@
   "dependencies": {
     "@types/styled-components": "^5.1.29",
     "axios": "^1.5.1",
+    "gsap": "^3.12.2",
     "next": "13.5.6",
     "prettier-plugin-tailwindcss": "^0.5.6",
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.0",
-    "styled-reset": "^4.5.1"
+    "styled-reset": "^4.5.1",
+    "three": "^0.157.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -28,13 +33,24 @@
     "@typescript-eslint/eslint-plugin": "^6.9.0",
     "@typescript-eslint/parser": "^6.9.0",
     "autoprefixer": "^10",
+    "babel-loader": "^9.1.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "core-js": "^3.33.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8.52.0",
     "eslint-config-next": "13.5.6",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "html-webpack-plugin": "^5.5.3",
     "postcss": "^8",
     "prettier": "^3.0.3",
+    "source-map-loader": "^4.0.1",
     "tailwindcss": "^3",
-    "typescript": "^5"
+    "terser-webpack-plugin": "^5.3.9",
+    "typescript": "^5",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }
