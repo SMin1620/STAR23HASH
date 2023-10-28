@@ -40,6 +40,7 @@ export const LetterContent = styled.span`
   margin-top: 0.5rem;
 `
 export const LetterReceived = styled.li`
+  position: relative;
   background-image: url('/icons/RandomLetterBG.svg');
 `
 export const LetterSent = styled.li`
@@ -55,4 +56,9 @@ background-image: url('/icons/RandomLetterBG.svg');
   background-color: rgba(13, 124, 255, 0.2); 
   border-radius: 10px; 
   
+`
+export const NewLetterImage = styled(CustonImage)`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 `

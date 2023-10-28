@@ -26,8 +26,8 @@ ${reset}
 body{
   background-image: url('/icons/TempBG_3.svg');
   background-repeat: repeat-x;
+  font-family: 'Dovemayo_gothic';
 
-    ${FlexCenter};
 }
 
 `

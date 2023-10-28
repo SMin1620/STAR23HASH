@@ -24,8 +24,13 @@ export default function Letter() {
         <h.LetterLogWrapper className="h-screen w-full overflow-y-scroll ">
           <ul role="list" className="space-y-4 pt-6  text-gray-700">
             <h.LetterReceived className=" ml-4 mr-4 flex flex-col rounded-lg p-4">
-              <h.LetterName>풍성한 크리링</h.LetterName>
-              <h.LetterDate>2023.10.11</h.LetterDate>
+              <div className="flex flex-col justify-center">
+                <h.LetterName>풍성한 크리링</h.LetterName>
+                <h.LetterDate>2023.10.11</h.LetterDate>
+              </div>
+
+              <h.NewLetterImage className="w-12" src="/icons/ShowAllBtn.svg" />
+
               <h.LetterContent>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Maiores impedit perferendis suscipit eaque, iste dolor
@@ -33,9 +38,11 @@ export default function Letter() {
               </h.LetterContent>
             </h.LetterReceived>
 
-            <h.LetterSent className=" ml-4 mr-4 flex flex-col items-end rounded-lg p-4">
-              <h.LetterName>풍성한 크리링</h.LetterName>
-              <h.LetterDate>2023.10.11</h.LetterDate>
+            <h.LetterSent className=" ml-4 mr-4 flex flex-col rounded-lg p-4">
+              <div className="flex flex-col items-end justify-center">
+                <h.LetterName>풍성한 크리링</h.LetterName>
+                <h.LetterDate>2023.10.11</h.LetterDate>
+              </div>
               <h.LetterContent>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Maiores impedit perferendis suscipit eaque, iste dolor
