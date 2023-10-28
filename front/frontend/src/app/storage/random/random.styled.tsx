@@ -10,8 +10,10 @@ export const RandomCardWrapper = styled.div`
   min-width: 20rem;
 `
 
-export const BackBtnWrapper = styled.div``
-
+export const BackBtnWrapper = styled.div`
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+`
 export const CustonImage = styled.img``
 
 export const RandomMainTitle = styled.div`

@@ -18,6 +18,8 @@
 
 body {
   background-color: #734472;
+  background-image: url('/icons/TempBG_3.svg');
+  background-repeat: repeat-x;
 }
 
 .Title {
