@@ -18,14 +18,14 @@ export default function Write() {
           <st.SendObject>
             <Link href={'/write/wfriend/getfriend'}>
               <st.SendImg
-                src="/write/send_friend.png"
+                src="/write/Solar System.svg"
                 alt="친구에게 보내기"
               ></st.SendImg>
               <st.SendText>친구</st.SendText>
             </Link>
             <Link href={'/write/wfriend'}>
               <st.SendImg
-                src="/write/send_random.png"
+                src="/write/Rocket-2.svg"
                 alt="랜덤친구 사귀기"
               ></st.SendImg>
               <st.SendText>랜덤</st.SendText>
