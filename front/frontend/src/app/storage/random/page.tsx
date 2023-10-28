@@ -18,7 +18,7 @@ export default function Ramdon() {
         </r.RandomMainTitle>
 
         <r.RandomCardWrapper className=" m-4 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
-          <Link href="#" className="min-w- group">
+          <Link href="/storage/random/history" className="min-w- group">
             <div className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg">
               <r.CustonImage
                 src="/icons/planets/Planet-1.svg"
