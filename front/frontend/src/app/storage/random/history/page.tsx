@@ -22,220 +22,26 @@ export default function Letter() {
         </h.RandomMainTitle>
 
         <h.LetterLogWrapper className="h-screen w-full overflow-y-scroll ">
-          <ul role="list" className=" space-y-8 bg-white text-gray-600">
-            <li className="flex gap-x-3">
-              <span>
-                <strong className="font-semibold text-gray-900">
-                  Push to deploy.
-                </strong>{' '}
+          <ul role="list" className="space-y-4 pt-6  text-gray-700">
+            <h.LetterReceived className=" ml-4 mr-4 flex flex-col rounded-lg p-4">
+              <h.LetterName>풍성한 크리링</h.LetterName>
+              <h.LetterDate>2023.10.11</h.LetterDate>
+              <h.LetterContent>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Maiores impedit perferendis suscipit eaque, iste dolor
                 cupiditate blanditiis ratione.
-              </span>
-            </li>
+              </h.LetterContent>
+            </h.LetterReceived>
 
-            <>
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>{' '}
-              <li className="flex gap-x-3">
-                <span>
-                  <strong className="font-semibold text-gray-900">
-                    Push to deploy.
-                  </strong>{' '}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </span>
-              </li>
-            </>
+            <h.LetterSent className=" ml-4 mr-4 flex flex-col items-end rounded-lg p-4">
+              <h.LetterName>풍성한 크리링</h.LetterName>
+              <h.LetterDate>2023.10.11</h.LetterDate>
+              <h.LetterContent>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Maiores impedit perferendis suscipit eaque, iste dolor
+                cupiditate blanditiis ratione.
+              </h.LetterContent>
+            </h.LetterSent>
           </ul>
         </h.LetterLogWrapper>
       </div>
