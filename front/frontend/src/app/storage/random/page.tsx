@@ -176,17 +176,6 @@ export default function Ramdon() {
             </a>
           </>
         </r.RandomCardWrapper>
-
-        <div>
-          <Link href={'/storage/random'}>랜덤보관함으로 가깅</Link>
-        </div>
-        <div>
-          <Link href={'/storage/friend'}>칭구보관함으로 가깅</Link>
-        </div>
-        <div>
-          <Link href={'/'}>호무</Link>
-        </div>
-        <r.TestDiv>에러나오지마랑</r.TestDiv>
       </div>
     </>
   )
