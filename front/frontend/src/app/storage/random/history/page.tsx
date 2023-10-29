@@ -7,7 +7,7 @@ export default function Letter() {
     <>
       <GlobalStyle />
       <div className="flex h-screen flex-col ">
-        <h.BackBtnWrapper className="flex flex-row-reverse">
+        <h.BackBtnWrapper className="flex ">
           <h.CustonImage
             className="m-2 h-7 w-7 object-contain"
             src="/icons/BackBtn.svg"

@@ -12,7 +12,7 @@ export const RandomCardWrapper = styled.div`
 
 export const BackBtnWrapper = styled.div`
   margin-top: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
 `
 export const CustonImage = styled.img``
 
