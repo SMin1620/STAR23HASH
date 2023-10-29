@@ -1,3 +1,9 @@
+import * as s from './storage.styled'
+
 export default function Loading() {
-  return <>로딩 중</>
+  return (
+    <>
+      <s.TestText>로딩중우주웆우</s.TestText>
+    </>
+  )
 }
