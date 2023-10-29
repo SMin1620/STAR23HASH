@@ -49,9 +49,6 @@ export const LetterContainer = styled.div`
   padding: 1rem;
 `
 export const CloseBotton = styled.button`
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem;
   box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(
     61.834769770503044,
@@ -67,3 +64,30 @@ export const CloseBotton = styled.button`
   font-weight: bold;
   font-size: 1.2rem;
 `
+export const LetterContent = styled.div`
+  margin-top: 0.5rem;
+`
+export const LetterContentWrapper = styled.div`
+  //   background-image: url('/icons/RandomLetterBG.svg');
+  box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgba(
+    250.00000029802322,
+    247.00000047683716,
+    240.00000089406967,
+    1
+  );
+
+  border-radius: 5px;
+`
+export const MediaWrapper = styled.div`
+  overflow: hidden;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  background-color: #f2f2f2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+`
+export const CustonImage = styled.img``
