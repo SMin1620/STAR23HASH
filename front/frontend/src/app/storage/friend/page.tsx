@@ -24,7 +24,7 @@ export default function Friend() {
 
         <f.LetterItemWrapper className="h-screen w-full overflow-y-scroll ">
           <div className='className=" xl:gap-x-8" m-8 grid grid-cols-3 gap-x-8 gap-y-5 sm:grid-cols-3  lg:grid-cols-3 xl:m-12 xl:grid-cols-3'>
-            <Link href="/storage/random/history" className="min-w- group">
+            <Link href="/storage/friend/letter" className="min-w- group">
               <div className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg">
                 <f.CustonImage
                   src="/icons/Text.svg"
@@ -33,7 +33,7 @@ export default function Friend() {
                 />
               </div>
             </Link>
-            <Link href="/storage/random/history" className="min-w- group">
+            <Link href="/storage/friend/letter" className="min-w- group">
               <div className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg">
                 <f.CustonImage
                   src="/icons/Video.svg"
@@ -42,7 +42,7 @@ export default function Friend() {
                 />
               </div>
             </Link>
-            <Link href="/storage/random/history" className="min-w- group">
+            <Link href="/storage/friend/letter" className="min-w- group">
               <div className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg">
                 <f.CustonImage
                   src="/icons/Picture.svg"
@@ -51,7 +51,7 @@ export default function Friend() {
                 />
               </div>
             </Link>
-            <Link href="/storage/random/history" className="min-w- group">
+            <Link href="/storage/friend/letter" className="min-w- group">
               <div className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg">
                 <f.CustonImage
                   src="/icons/Sound.svg"
