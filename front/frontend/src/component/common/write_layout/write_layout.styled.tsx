@@ -2,21 +2,21 @@
 
 import styled from 'styled-components'
 
+export const SendBoxDiv = styled.div``
 export const SendBox = styled.div`
+  min-width: 20rem;
+  height: 45rem;
+  max-width: 45rem;
+
   display: flex;
-  box-shadow:
-    5px 5px 10px rgba(0, 0, 0, 0.1),
-    -5px -5px 10px rgba(0, 0, 0, 0.1),
-    5px -5px 10px rgba(0, 0, 0, 0.1),
-    -5px 5px 10px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 1);
-  width: 328px;
-  height: 750px;
-  border-radius: 20px;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 `
 
 export const InnerCircle = styled.div`
   position: absolute;
+  top: 0;
   display: flex;
 `
 export const InnerCircle1 = styled.div`
@@ -51,16 +51,14 @@ export const InnerCircle3 = styled.div`
   height: 25px;
 `
 export const button = styled.button`
-  position: absolute;
   box-shadow: 0px 4px 2px
     rgba(113.9000129699707, 97.38451838493347, 98.1026342511177, 1);
   background-color: #947d7e;
-  width: 294px;
+  width: 80%;
+  margin-bottom: 20px;
   height: 45px;
   border-radius: 20px;
   color: white;
   font-size: 16px;
   font-weight: bold;
-  margin-left: 15px;
-  margin-top: 680px;
 `
