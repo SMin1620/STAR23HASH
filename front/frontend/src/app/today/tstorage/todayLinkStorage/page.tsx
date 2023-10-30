@@ -1,31 +1,48 @@
 'use client'
 import { Canvas } from '@react-three/fiber'
 import { Suspense } from 'react'
-import { OrbitControls, SpotLight } from '@react-three/drei'
+import { Float, OrbitControls, SpotLight, Stars } from '@react-three/drei'
 import UfoModel from '../../../../component/today/todayStorage/link/ufoModel/ufoModel'
 import PlanetModel from '../../../../component/today/todayStorage/link/planetModel/planetModel'
 import AstronautModel from '../../../../component/today/todayStorage/link/astronautModel/astronautModel'
+import GradientBackground from '../../../../component/Three/three.styled'
 
 export default function todayLinkStorage() {
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <GradientBackground>
       <Canvas
         style={{ width: '100%', height: '100%' }}
         camera={{ position: [0, 1, 5], fov: 70 }}
       >
+        <Stars
+          radius={100}
+          depth={25}
+          count={6000}
+          factor={5}
+          saturation={1}
+          fade
+          speed={2}
+        />
         <Suspense fallback={null}>
           <ambientLight intensity={1.0} />
-          <UfoModel
-            url="/assets/ufo.glb"
-            scale={[2, 2, 2]}
-            position={[0, 2, 0]}
-          />
+          <Float
+            speed={5}
+            rotationIntensity={0}
+            floatIntensity={1}
+            floatingRange={[0, 0.1]}
+          >
+            <UfoModel
+              url="/assets/ufo.glb"
+              scale={[2, 2, 2]}
+              position={[0, 2, 0]}
+            />
+          </Float>
           <SpotLight
-            color="#fffec8"
+            color="#feff16"
             distance={10}
-            angle={0.9}
+            angle={1.0}
             attenuation={5}
-            anglePower={10}
+            anglePower={5}
           />
           {[1, 2, 3, 4].map((index) => (
             <AstronautModel
@@ -47,6 +64,6 @@ export default function todayLinkStorage() {
           <OrbitControls />
         </Suspense>
       </Canvas>
-    </div>
+    </GradientBackground>
   )
 }
