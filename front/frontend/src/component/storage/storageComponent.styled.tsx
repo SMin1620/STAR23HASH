@@ -21,7 +21,7 @@ export const CardStateImage = styled(CustomImage)`
 `
 
 export const CardImageWrapper = styled.div`
-  border=radius: 0.5rem;
+  border-radius: 0.5rem;
   overflow: hidden;
 `
 
