@@ -27,11 +27,6 @@ export default function todayLinkStorage() {
             attenuation={5}
             anglePower={10}
           />
-          <PlanetModel
-            url="/assets/planet-1.glb"
-            scale={[4, 4, 4]}
-            position={[0, -6, 0]}
-          />
           {[1, 2, 3, 4].map((index) => (
             <AstronautModel
               key={index}
@@ -44,6 +39,11 @@ export default function todayLinkStorage() {
               ]}
             />
           ))}
+          <PlanetModel
+            url="/assets/planet-1.glb"
+            scale={[4, 4, 4]}
+            position={[0, -6, 0]}
+          />
           <OrbitControls />
         </Suspense>
       </Canvas>
