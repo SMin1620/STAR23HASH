@@ -2,24 +2,46 @@
 
 import styled from 'styled-components'
 
-export const TestDiv = styled.div`
-  color: red;
+export const FriendPage = styled.div`
+  display: flex;
+  flex-direction: column;
 `
-
 export const BackBtnWrapper = styled.div`
   margin-top: 0.5rem;
   margin-left: 0.5rem;
 `
 
-export const CustonImage = styled.img``
+export const CustomImage = styled.img``
 
-export const FriendHeadWrapper = styled.div`
+export const CalenderButton = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-left: auto;
+
+  position: relative;
 `
-export const LetterItemWrapper = styled.div`
+export const Calender = styled.p`
+  position: absolute;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+  color: white;
+`
+
+export const DateContainer = styled.span`
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: white;
+`
+
+export const LetterItemContainer = styled.div`
+  width: 100%;
+
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(155, 122, 165, 0.8);
   overflow-y: scroll;
@@ -31,38 +53,11 @@ export const LetterItemWrapper = styled.div`
   }
 `
 
-export const LetterName = styled.h1`
-  color: #111827;
-  font-size: 1rem;
-  font-weight: bold;
+export const LetterItemWrapper = styled.div`
+  display: grid;
+  margin: 2rem;
 `
-export const LetterDate = styled.p`
-  color: #696969;
-  font-size: 0.7rem;
-`
-export const LetterContent = styled.span`
-  margin-top: 0.5rem;
-`
-export const LetterReceived = styled.li`
-  position: relative;
-  background-image: url('/icons/RandomLetterBG.svg');
-`
-export const LetterSent = styled.li`
-position: relative;
-background-image: url('/icons/RandomLetterBG.svg'); 
-&::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(13, 124, 255, 0.2); 
-  border-radius: 10px; 
-  
-`
-export const NewLetterImage = styled(CustonImage)`
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+export const Item = styled.div`
+  overflow: hidden;
+  border-radius: 0.5rem;
 `

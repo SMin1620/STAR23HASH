@@ -41,6 +41,7 @@ export const RandomCardContainer = styled.div`
   }
 `
 export const RandomCardWrapper = styled.div`
+  margin: 1rem;
   min-width: 20rem;
 `
 
