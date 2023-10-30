@@ -5,14 +5,33 @@ import styled from 'styled-components'
 export const LetterBoard = styled.div`
   background-image: url('/icons/SolarSystem.svg');
   background-repeat: no-repeat;
+
+  display: grid;
+  place-items: center;
+`
+export const LetterContainer = styled.div`
+  display: grid;
+
+  position: relative;
+  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 1);
+
+  min-height: 20rem;
+
+  border-radius: 0.625rem;
+  padding: 1rem;
 `
 
 export const DecoBottonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
+
+  margin-bottom: 1rem;
+  align-self: flex-start;
+  justify-self: start;
 `
-export const LetterDecoBotton = styled.div`
+const LetterDecoBotton = styled.div`
   border-radius: 500px;
   width: 1.5rem;
   height: 1.5rem;
@@ -38,16 +57,34 @@ export const GreenDecoBotton = styled(LetterDecoBotton)`
   );
 `
 
-export const LetterContainer = styled.div`
-  position: relative;
-  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 1);
+export const MediaWrapper = styled.div`
+  overflow: hidden;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  background-color: #f2f2f2;
 
-  min-height: 20rem;
-
-  border-radius: 0.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
 `
+export const CustomImage = styled.img``
+
+export const LetterContent = styled.div`
+  margin-top: 0.5rem;
+  // background-image: url('/icons/RandomLetterBG.svg');
+  box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgba(
+    250.00000029802322,
+    247.00000047683716,
+    240.00000089406967,
+    1
+  );
+
+  padding: 1rem;
+  border-radius: 0.5rem;
+`
+
 export const CloseBotton = styled.button`
   box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(
@@ -63,31 +100,8 @@ export const CloseBotton = styled.button`
   color: white;
   font-weight: bold;
   font-size: 1.2rem;
-`
-export const LetterContent = styled.div`
-  margin-top: 0.5rem;
-`
-export const LetterContentWrapper = styled.div`
-  //   background-image: url('/icons/RandomLetterBG.svg');
-  box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
-  background-color: rgba(
-    250.00000029802322,
-    247.00000047683716,
-    240.00000089406967,
-    1
-  );
 
-  border-radius: 5px;
+  margin-top: 1rem;
+  align-self: flex-end;
+  justify-self: end;
 `
-export const MediaWrapper = styled.div`
-  overflow: hidden;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  background-color: #f2f2f2;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-`
-export const CustonImage = styled.img``
