@@ -1,15 +1,13 @@
 import Link from 'next/link'
 import * as r from './random.styled'
+
+import BackButton from '@/component/storage/BackButton'
+
 export default function Ramdon() {
   return (
     <>
       <r.RandomPage className="h-screen">
-        <r.BackBtnWrapper>
-          <r.CustomImage
-            className="m-2 h-7 w-7 object-contain"
-            src="/icons/BackBtn.svg"
-          />
-        </r.BackBtnWrapper>
+        <BackButton />
 
         <r.TitleWrapper>
           <r.CustomImage src="/icons/SolarSystem.svg" />

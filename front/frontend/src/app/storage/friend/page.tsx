@@ -1,16 +1,12 @@
 import Link from 'next/link'
 import * as f from './friend.styled'
+import BackButton from '@/component/storage/BackButton'
 
 export default function Friend() {
   return (
     <>
       <f.FriendPage className="h-screen">
-        <f.BackBtnWrapper>
-          <f.CustomImage
-            className="m-2 h-7 w-7 object-contain"
-            src="/icons/BackBtn.svg"
-          />
-        </f.BackBtnWrapper>
+        <BackButton />
 
         <f.CalenderButton>
           <f.CustomImage className="h-28 w-20" src="/icons/CalenderBtn.svg" />
