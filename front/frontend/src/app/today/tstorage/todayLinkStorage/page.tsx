@@ -26,7 +26,7 @@ export default function todayLinkStorage() {
         <Suspense fallback={null}>
           <ambientLight intensity={1.0} />
           <Float
-            speed={5}
+            speed={6}
             rotationIntensity={0}
             floatIntensity={1}
             floatingRange={[0, 0.1]}
@@ -40,21 +40,23 @@ export default function todayLinkStorage() {
           <SpotLight
             color="#feff16"
             distance={10}
-            angle={1.0}
+            angle={0.9}
             attenuation={5}
-            anglePower={5}
+            anglePower={3}
+            position={[0, 2, 0]}
           />
           {[1, 2, 3, 4].map((index) => (
-            <AstronautModel
-              key={index}
-              url={`/assets/astronaut${index}.glb`}
-              scale={[0.3, 0.3, 0.3]}
-              position={[
-                Math.random() * 2 - 1,
-                Math.random() * 3 - 2,
-                Math.random() * 3 - 2,
-              ]}
-            />
+            <Float key={index} speed={2} floatIntensity={0.5}>
+              <AstronautModel
+                url={`/assets/astronaut${index}.glb`}
+                scale={[0.3, 0.3, 0.3]}
+                position={[
+                  Math.random() * 2 - 1,
+                  Math.random() * 3 - 2,
+                  Math.random() * 3 - 2,
+                ]}
+              />
+            </Float>
           ))}
           <PlanetModel
             url="/assets/planet-1.glb"
