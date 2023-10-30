@@ -49,7 +49,9 @@ export default function WriteFriend() {
               </st.Medias>
             </st.AddContent>
           </st.ContentBox>
-          <stt.button onClick={handleSendClick}>전송</stt.button>
+          <stt.SendBoxDiv>
+            <stt.button onClick={handleSendClick}>전송</stt.button>
+          </stt.SendBoxDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
     </>
