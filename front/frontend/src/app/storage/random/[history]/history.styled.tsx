@@ -89,7 +89,7 @@ background-image: url('/icons/RandomLetterBG.svg');
   border-radius: 10px; 
   
 `
-export const NewLetterImage = styled(CustomImage)`
+export const IsNewLetterImage = styled(CustomImage)`
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
