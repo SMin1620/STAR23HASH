@@ -1,12 +1,10 @@
 import Link from 'next/link'
-import GlobalStyle from '../GlobalStyles'
 import * as r from './random.styled'
 export default function Ramdon() {
   return (
     <>
-      <GlobalStyle />
-      <r.RandomPage className="flex h-screen flex-col">
-        <r.BackBtnWrapper className="flex">
+      <r.RandomPage className="h-screen">
+        <r.BackBtnWrapper>
           <r.CustomImage
             className="m-2 h-7 w-7 object-contain"
             src="/icons/BackBtn.svg"
@@ -18,15 +16,11 @@ export default function Ramdon() {
           <r.Title>랜덤메시지</r.Title>
         </r.TitleWrapper>
 
-        <r.RandomCardContainer className="mt-4 h-screen w-full overflow-y-scroll ">
+        <r.RandomCardContainer className="h-screen ">
           <r.RandomCardWrapper className=" m-4 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
             {/* card component start */}
             <Link href="/storage/random/{ID}">
               <r.Card className="group">
-                {/* card state */}
-
-                {/* end card state */}
-
                 <r.CardImageWrapper className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full group-hover:opacity-75">
                   <r.CardStateImage
                     className=" w-1/3 "
