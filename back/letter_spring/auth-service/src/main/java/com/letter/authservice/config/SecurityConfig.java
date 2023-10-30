@@ -66,7 +66,6 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern( "/v3/api-docs/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/webjars/**")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern( "/openapi/**")).permitAll()
-                                .requestMatchers(mvcMatcherBuilder.pattern("/api/diary")).permitAll()
                         .anyRequest().authenticated()
 //                        .anyRequest().permitAll()
                 )   // 다음 리퀘스트에 대한 사용권한 체크
