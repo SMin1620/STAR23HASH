@@ -1,4 +1,4 @@
-package com.letter.authservice.auth;
+package com.letter.authservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;

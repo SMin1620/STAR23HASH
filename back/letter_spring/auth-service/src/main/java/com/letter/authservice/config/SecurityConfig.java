@@ -1,4 +1,4 @@
-package com.letter.authservice.auth;
+package com.letter.authservice.config;
 
 
 import com.letter.authservice.jwt.JwtAccessDeniedHandler;
