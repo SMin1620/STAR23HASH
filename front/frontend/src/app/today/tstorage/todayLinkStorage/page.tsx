@@ -1,13 +1,34 @@
 'use client'
 import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Float, OrbitControls, SpotLight, Stars } from '@react-three/drei'
 import UfoModel from '../../../../component/today/todayStorage/link/ufoModel/ufoModel'
 import PlanetModel from '../../../../component/today/todayStorage/link/planetModel/planetModel'
 import AstronautModel from '../../../../component/today/todayStorage/link/astronautModel/astronautModel'
 import GradientBackground from '../../../../component/Three/three.styled'
+import RandomPosition from '../../../../component/today/todayStorage/randomPosition/randomPostion'
 
-export default function todayLinkStorage() {
+export default function TodayLinkStorage() {
+  const [astronautPositions, setAstronautPositions] = useState([])
+
+  const positionRange = 5
+  const maxAttempts = 100
+
+  const addRandomAstronaut = () => {
+    const newPosition = RandomPosition(
+      astronautPositions,
+      positionRange,
+      maxAttempts,
+    )
+    setAstronautPositions([...astronautPositions, newPosition])
+  }
+
+  useEffect(() => {
+    addRandomAstronaut()
+    addRandomAstronaut()
+    addRandomAstronaut()
+    addRandomAstronaut()
+  }, [])
   return (
     <GradientBackground>
       <Canvas
