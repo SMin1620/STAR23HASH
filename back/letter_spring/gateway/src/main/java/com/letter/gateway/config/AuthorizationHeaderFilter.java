@@ -13,10 +13,11 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+import org.springframework.core.Ordered;
 
 @Slf4j
 @Component
-public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<AuthorizationHeaderFilter.Config> {
+public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<AuthorizationHeaderFilter.Config> implements Ordered{
     private final Environment environment;
 
     public AuthorizationHeaderFilter(Environment environment) {
@@ -26,13 +27,26 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
     @Override
     public GatewayFilter apply(Config config) {
+        System.out.println("게이트 웨이 검증 시작 >>>");
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
+
+            System.out.println("request " + request);
+
+
+            // Skip filter for /api/members/login path
+            if (request.getURI().getPath().equals("/api/members/login") || request.getURI().getPath().equals("/api/members/register")) {
+                System.out.println("통과");
+                return chain.filter(exchange);
+            }
+
+
             if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION))
                 return onError(exchange, "No authorization header", HttpStatus.UNAUTHORIZED);
             String authorizationHeader = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
             String jwt = authorizationHeader.replace("Bearer ", "");
 
+            System.out.println("게이트웨이 검증 로직 중간 >>>" + jwt);
             boolean valid = isJwtValid(request, jwt);
             if (!valid) return onError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
 
@@ -41,6 +55,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
+        System.out.println("게이트웨이 검증 에러 >>>");
         ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(httpStatus);
         log.error(err);
@@ -54,8 +69,8 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                     .parseClaimsJws(jwt).getBody()
                     .getSubject();
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         addAuthorizationHeaders(request, subject);
@@ -67,6 +82,11 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         request.mutate()
                 .header("X-Authorization-Email", email)
                 .build();
+    }
+
+    @Override
+    public int getOrder() {
+        return -1; // 순서를 지정. 낮은 숫자가 더 높은 우선순위를 가짐.
     }
 
     public static class Config {}
