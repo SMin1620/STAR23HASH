@@ -7,7 +7,25 @@ import * as THREE from 'three'
 import { Orbit } from 'next/font/google'
 //카메라 천천ㅎ 이동하기 gsap
 import { gsap } from 'gsap'
+import { PerspectiveCamera, PositionalAudio, Stars } from '@react-three/drei'
 
+// function Start() {
+//   return (
+//     <>
+//       <div ref={mountRef} style={style}>
+//         <Stars
+//           radius={100}
+//           depth={50}
+//           count={5000}
+//           factor={4}
+//           saturation={0}
+//           fade
+//           speed={1}
+//         />
+//       </div>
+//     </>
+//   )
+// }
 const ThreeComponent = ({ style }) => {
   const mountRef = useRef(null)
   // 클릭 상태 추적을 위한 변수
@@ -344,7 +362,7 @@ const ThreeComponent = ({ style }) => {
     }
   }, [])
 
-  return <div ref={mountRef} style={style} />
+  return <div ref={mountRef} style={style}></div>
 }
 
 export default ThreeComponent
