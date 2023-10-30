@@ -1,16 +1,13 @@
 import Link from 'next/link'
 import * as h from './history.styled'
+import BackButton from '@/component/storage/BackButton'
 
 export default function History() {
   return (
     <>
       <h.HistoryPage className="h-screen ">
-        <h.BackBtnWrapper>
-          <h.CustomImage
-            className="m-2 h-7 w-7 object-contain"
-            src="/icons/BackBtn.svg"
-          />
-        </h.BackBtnWrapper>
+        <BackButton />
+
         <h.TitleWrapper className="mb-6">
           <h.CustomImage
             src="/icons/planets/Planet-1.svg"
