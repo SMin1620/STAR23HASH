@@ -18,14 +18,8 @@
 
 body {
   background-color: #734472;
-
-  margin-top: 5rem;
-
-  display: flex;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background-image: url('/icons/TempBG_3.svg');
+  background-repeat: repeat-x;
 }
 
 .Title {
