@@ -1,6 +1,5 @@
 package com.letter.authservice.member.service;
 
-import com.letter.authservice.config.RestTemplateErrorHandler;
 import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
@@ -26,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -66,16 +64,6 @@ public class MemberService {
         jwtTokenProvider.setHeaderAccessToken(response, accessToken);
         jwtTokenProvider.setHeaderRefreshToken(response, refreshToken);
 
-        // 로드밸런서 테스트
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-        restTemplate.setErrorHandler(new RestTemplateErrorHandler());
-        String noteUrl = env.getProperty("note-service");
-
-        System.out.println("noteUrl >>> " + noteUrl);
-        ResponseEntity<String> responseData = restTemplate.exchange(noteUrl, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
-
-        System.out.println("responseData >>> " + responseData);
         return tokenDto;
     }
 

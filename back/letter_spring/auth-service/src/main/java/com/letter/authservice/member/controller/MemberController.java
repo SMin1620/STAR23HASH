@@ -31,6 +31,15 @@ public class MemberController {
     private final MemberMapper memberMapper;
     private final JwtTokenProvider jwtTokenProvider;
 
+
+    @GetMapping("/test")
+    public String test(HttpServletResponse response, HttpServletRequest request) {
+        System.out.println("auth test");
+
+        response.setHeader("Authorization", request.getHeader("Authorization"));
+        return "auth test";
+    }
+
     /**
      * 로그인 (닉네임만 보내주기)
      */
@@ -89,5 +98,7 @@ public class MemberController {
             throw new BusinessLogicException(ExceptionCode.INVALID_REFRESH_TOKEN);
         }
     }
+
+
 
 }
