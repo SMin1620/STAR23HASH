@@ -27,7 +27,4 @@ public class Member {
     @Column(nullable = false)
     private LocalDateTime createAt;
 
-    // 리프레시 토큰
-    private String refreshToken;
-
 }
