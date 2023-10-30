@@ -1,4 +1,4 @@
-package com.letter.authservice.auth;
+package com.letter.authservice.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
