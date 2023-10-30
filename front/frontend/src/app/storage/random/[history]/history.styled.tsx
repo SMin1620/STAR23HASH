@@ -2,8 +2,9 @@
 
 import styled from 'styled-components'
 
-export const TestDiv = styled.div`
-  color: red;
+export const HistoryPage = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 export const BackBtnWrapper = styled.div`
@@ -11,14 +12,23 @@ export const BackBtnWrapper = styled.div`
   margin-left: 0.5rem;
 `
 
-export const CustonImage = styled.img``
+export const CustomImage = styled.img``
 
-export const RandomMainTitle = styled.div`
+export const TitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `
-export const LetterLogWrapper = styled.div`
+export const Title = styled.p`
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: white;
+`
+
+export const LetterLogContainer = styled.div`
+  width: 100%;
+
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 1);
   overflow-y: scroll;
@@ -30,6 +40,17 @@ export const LetterLogWrapper = styled.div`
   }
 `
 
+export const LetterLogWrapper = styled.ul`
+  padding-top: 1.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+`
+
+export const LetterHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 export const LetterName = styled.h1`
   color: #111827;
   font-size: 1rem;
@@ -42,12 +63,20 @@ export const LetterDate = styled.p`
 export const LetterContent = styled.span`
   margin-top: 0.5rem;
 `
-export const LetterReceived = styled.li`
+
+const LetterFormat = styled.li`
   position: relative;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+`
+export const LetterReceived = styled(LetterFormat)`
   background-image: url('/icons/RandomLetterBG.svg');
 `
-export const LetterSent = styled.li`
-position: relative;
+export const LetterSent = styled(LetterFormat)`
 background-image: url('/icons/RandomLetterBG.svg'); 
 &::before {
   content: "";
@@ -60,7 +89,7 @@ background-image: url('/icons/RandomLetterBG.svg');
   border-radius: 10px; 
   
 `
-export const NewLetterImage = styled(CustonImage)`
+export const NewLetterImage = styled(CustomImage)`
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;

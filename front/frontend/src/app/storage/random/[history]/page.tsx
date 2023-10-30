@@ -1,33 +1,31 @@
 import Link from 'next/link'
-import GlobalStyle from '../../GlobalStyles'
 import * as h from './history.styled'
 
-export default function Letter() {
+export default function History() {
   return (
     <>
-      <GlobalStyle />
-      <div className="flex h-screen flex-col ">
-        <h.BackBtnWrapper className="flex ">
-          <h.CustonImage
+      <h.HistoryPage className="h-screen ">
+        <h.BackBtnWrapper>
+          <h.CustomImage
             className="m-2 h-7 w-7 object-contain"
             src="/icons/BackBtn.svg"
           />
         </h.BackBtnWrapper>
-        <h.RandomMainTitle className="mb-6">
-          <h.CustonImage
+        <h.TitleWrapper className="mb-6">
+          <h.CustomImage
             src="/icons/planets/Planet-1.svg"
             className="h-40 w-40"
           />
-          <p className="text-lg font-bold text-white">풍성한 크리링</p>
-        </h.RandomMainTitle>
+          <h.Title>풍성한 크리링</h.Title>
+        </h.TitleWrapper>
 
-        <h.LetterLogWrapper className="h-screen w-full overflow-y-scroll ">
-          <ul role="list" className="space-y-4 pt-6  text-gray-700">
-            <h.LetterReceived className=" ml-4 mr-4 flex flex-col rounded-lg p-4">
-              <div className="flex flex-col justify-center">
+        <h.LetterLogContainer className="h-screen">
+          <h.LetterLogWrapper role="list" className="space-y-4">
+            <h.LetterReceived>
+              <h.LetterHeader>
                 <h.LetterName>풍성한 크리링</h.LetterName>
                 <h.LetterDate>2023.10.11</h.LetterDate>
-              </div>
+              </h.LetterHeader>
 
               <h.NewLetterImage className="w-12" src="/icons/ShowAllBtn.svg" />
 
@@ -38,20 +36,20 @@ export default function Letter() {
               </h.LetterContent>
             </h.LetterReceived>
 
-            <h.LetterSent className=" ml-4 mr-4 flex flex-col rounded-lg p-4">
-              <div className="flex flex-col items-end justify-center">
+            <h.LetterSent>
+              <h.LetterHeader className="items-end">
                 <h.LetterName>풍성한 크리링</h.LetterName>
                 <h.LetterDate>2023.10.11</h.LetterDate>
-              </div>
+              </h.LetterHeader>
               <h.LetterContent>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 Maiores impedit perferendis suscipit eaque, iste dolor
                 cupiditate blanditiis ratione.
               </h.LetterContent>
             </h.LetterSent>
-          </ul>
-        </h.LetterLogWrapper>
-      </div>
+          </h.LetterLogWrapper>
+        </h.LetterLogContainer>
+      </h.HistoryPage>
     </>
   )
 }
