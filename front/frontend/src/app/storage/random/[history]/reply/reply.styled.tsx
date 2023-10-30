@@ -5,14 +5,32 @@ import styled from 'styled-components'
 export const LetterBoard = styled.div`
   background-image: url('/icons/SolarSystem.svg');
   background-repeat: no-repeat;
+
+  display: grid;
+  place-items: center;
+`
+export const LetterContainer = styled.div`
+  display: grid;
+  position: relative;
+  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 1);
+
+  min-height: 20rem;
+
+  border-radius: 0.625rem;
+  padding: 1rem;
 `
 
 export const DecoBottonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
+
+  margin-bottom: 1rem;
+  align-self: flex-start;
+  justify-self: start;
 `
-export const LetterDecoBotton = styled.div`
+const LetterDecoBotton = styled.div`
   border-radius: 500px;
   width: 1.5rem;
   height: 1.5rem;
@@ -38,17 +56,72 @@ export const GreenDecoBotton = styled(LetterDecoBotton)`
   );
 `
 
-export const LetterContainer = styled.div`
-  position: relative;
-  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 1);
+export const LetterContent = styled.div`
+  margin-top: 0.5rem;
+`
+export const LetterInput = styled.textarea`
+  height: 12rem;
 
-  min-height: 20rem;
+  //   background-image: url('/icons/RandomLetterBG.svg');
+  box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgba(
+    250.00000029802322,
+    247.00000047683716,
+    240.00000089406967,
+    1
+  );
 
-  border-radius: 0.625rem;
+  border-radius: 0.5rem;
+  resize: none;
+
   padding: 1rem;
 `
+
+export const LetterReceived = styled.div`
+  position: relative;
+
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gorder-radius: 0.5rem;
+`
+
+export const LetterHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+export const LetterName = styled.h1`
+  color: #111827;
+  font-size: 1rem;
+  font-weight: bold;
+`
+export const LetterDate = styled.p`
+  color: #696969;
+  font-size: 0.7rem;
+`
+export const WarningText = styled.p`
+  margin-top: auto;
+  justify-self: center;
+
+  font-size: 0.8rem;
+  color: #e95a42;
+  font-weight: bold;
+
+  word-wrap: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`
+export const ButtonWrapper = styled.div`
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
 export const Button = styled.button`
+  margin-top: auto;
+
   box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(
     61.834769770503044,
@@ -63,42 +136,4 @@ export const Button = styled.button`
   color: white;
   font-weight: bold;
   font-size: 1.2rem;
-`
-export const LetterContent = styled.div`
-  margin-top: 0.5rem;
-`
-
-export const LetterInput = styled.textarea`
-  //   background-image: url('/icons/RandomLetterBG.svg');
-  box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
-  background-color: rgba(
-    250.00000029802322,
-    247.00000047683716,
-    240.00000089406967,
-    1
-  );
-
-  border-radius: 5px;
-  resize: none;
-`
-
-export const LetterReceived = styled.div`
-  position: relative;
-`
-export const LetterName = styled.h1`
-  color: #111827;
-  font-size: 1rem;
-  font-weight: bold;
-`
-export const LetterDate = styled.p`
-  color: #696969;
-  font-size: 0.7rem;
-`
-export const WarningText = styled.p`
-  font-size: 0.8rem;
-  color: #e95a42;
-  font-weight: bold;
-  word-wrap: break-word;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `

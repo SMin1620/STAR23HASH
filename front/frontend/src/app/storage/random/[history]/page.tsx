@@ -22,12 +22,17 @@ export default function History() {
         <h.LetterLogContainer className="h-screen">
           <h.LetterLogWrapper role="list" className="space-y-4">
             <h.LetterReceived>
+              <Link href={`/storage/random/{ID}/reply`}>
+                <h.IsNewLetterImage
+                  className="w-12"
+                  src="/icons/ShowAllBtn.svg"
+                />
+              </Link>
+
               <h.LetterHeader>
                 <h.LetterName>풍성한 크리링</h.LetterName>
                 <h.LetterDate>2023.10.11</h.LetterDate>
               </h.LetterHeader>
-
-              <h.NewLetterImage className="w-12" src="/icons/ShowAllBtn.svg" />
 
               <h.LetterContent>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
