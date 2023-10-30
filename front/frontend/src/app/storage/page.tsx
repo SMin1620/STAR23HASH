@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import * as st from './storage.styled'
 import TestButton from '@/component/storage/TestButton'
+import PlanetCard from '@/component/storage/random/PlanetCard'
 
 export default function Storage() {
   return (
@@ -17,6 +18,13 @@ export default function Storage() {
       </st.TestText>
 
       <TestButton text="hello" />
+      <PlanetCard
+        id={1}
+        planetNumber={1}
+        name="김감자"
+        date="2020.02.02"
+        state="written"
+      />
     </>
   )
 }
