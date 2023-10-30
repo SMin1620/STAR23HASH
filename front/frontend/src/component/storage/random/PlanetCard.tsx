@@ -34,7 +34,6 @@ export default function PlanetCard({
             alt="state"
           />
         ) : null}
-
         <c.CustomImage
           src={`/icons/planets/Planet-${planetNumber}.svg`}
           alt="planet icon."
