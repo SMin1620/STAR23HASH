@@ -5,7 +5,7 @@ import BackButton from '@/component/storage/BackButton'
 export default function History() {
   return (
     <>
-      <h.HistoryPage className="absolute h-screen ">
+      <h.HistoryPage className="absolute h-screen w-screen">
         <BackButton />
 
         <h.TitleWrapper className="mb-6">
@@ -16,7 +16,7 @@ export default function History() {
           <h.Title>풍성한 크리링</h.Title>
         </h.TitleWrapper>
 
-        <h.LetterLogContainer className="h-screen">
+        <h.LetterLogContainer className="h-screen ">
           <h.LetterLogWrapper role="list" className="space-y-4">
             <h.LetterReceived>
               <Link href={`/storage/random/{ID}/reply`}>
