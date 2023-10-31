@@ -1,25 +1,29 @@
-type Position = [number, number, number]
+export type Position = [number, number, number]
 
 export default function RandomPosition(
   positions: Position[],
   positionRange: number,
   maxAttempts: number,
+  minDistance: number,
+  allowedRange: number,
 ): Position {
-  const newPosition: Position = [0, 0, 0]
-
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
-    newPosition[0] = (Math.random() - 0.5) * positionRange * 2
-    newPosition[1] = (Math.random() - 0.5) * positionRange * 2
-    newPosition[2] = (Math.random() - 0.5) * positionRange * 2
+    const newPosition: Position = [
+      (Math.random() - 0.5) * allowedRange,
+      (Math.random() - 0.5) * allowedRange,
+      (Math.random() - 0.5) * allowedRange,
+    ]
 
     let hasCollision = false
     for (const position of positions) {
+      const deltaX = position[0] - newPosition[0]
+      const deltaY = position[1] - newPosition[1]
+      const deltaZ = position[2] - newPosition[2]
       const distance = Math.sqrt(
-        Math.pow((position[0] = newPosition[0]), 2) +
-          Math.pow((position[1] = newPosition[1]), 2) +
-          Math.pow((position[2] = newPosition[2]), 2),
+        deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ,
       )
-      if (distance < 2.0) {
+
+      if (distance < minDistance) {
         hasCollision = true
         break
       }
