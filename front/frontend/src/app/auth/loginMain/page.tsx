@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Logincomponent from '../../../component/Three/login'
 import Modal from '../../../component/login/modal'
 
-export default function loginMain() {
+export default function LoginMain() {
   const [inputValue, setInputValue] = useState('')
   const [showModal, setShowModal] = useState(false)
   const [loginSuccess, setLoginSuccess] = useState(false)
