@@ -76,4 +76,13 @@ public class MemberDto {
         private long id;
         private String phone;
     }
+
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class MemberAnotherRequestDto{
+        private String phone;
+    }
 }

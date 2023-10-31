@@ -190,7 +190,7 @@ public class JwtTokenProvider {
     /**
      * 토큰으로 회원 정보 조회
      */
-    public String getUserEmail(String token){
+    public String getUserPhone(String token){
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 

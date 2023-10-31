@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -99,6 +100,14 @@ public class MemberController {
         }
     }
 
+    @GetMapping()
+    public Long getId(HttpServletRequest request){
+        return memberService.getId(request);
+    }
+    @GetMapping("/another")
+    public Long getAnotherId(@RequestBody @Valid MemberDto.MemberAnotherRequestDto memberAnotherRequestDto){
+        return memberService.getAnotherId(memberAnotherRequestDto.getPhone());
+    }
 
 
 }
