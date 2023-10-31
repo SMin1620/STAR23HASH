@@ -1,12 +1,14 @@
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import GlobalStyle from '../../GlobalStyles'
 import * as st from './inputfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
+import Modal from '@/component/write/modal'
 import { useRouter } from 'next/navigation'
 export default function WriteFriend() {
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [hint, setHint] = useState('')
   const router = useRouter()
   const handleSendClick = async () => {
     router.push(`/write/send?isSuccess=true`)
@@ -21,6 +23,16 @@ export default function WriteFriend() {
     //   setIsSuccess(false)
     // }
   }
+  const handleInputText = (hint: string) => {
+    console.log('Input Text from Modal:', hint)
+
+    setShowModal(false)
+    // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
+  }
+  function openModal() {
+    setShowModal(true)
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -36,7 +48,11 @@ export default function WriteFriend() {
           <st.ContentBox>
             <st.InputContent></st.InputContent>
             <st.Hint>
-              <st.HintCheck type="checkbox" />
+              <st.HintCheck
+                type="checkbox"
+                checked={showModal}
+                onChange={() => openModal()}
+              />
               <st.HintCheckCustom />
               나에 대한 힌트 주기
             </st.Hint>
@@ -54,6 +70,7 @@ export default function WriteFriend() {
           </stt.SendBoxDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
+      {showModal && <Modal onConfirm={handleInputText} />}
     </>
   )
 }
