@@ -1,6 +1,19 @@
-import Link from 'next/link'
+'use client'
+
+import { useRouter } from 'next/navigation'
 import * as r from './reply.styled'
+
 export default function Letter() {
+  const router = useRouter()
+
+  const handleSend = () => {
+    // 전송
+    router.replace(`/storage/random`)
+  }
+  const handleBackBtnClick = () => {
+    router.back()
+  }
+
   return (
     <>
       <r.LetterBoard className="absolute h-screen w-screen">
@@ -28,8 +41,8 @@ export default function Letter() {
 
           <r.WarningText>작성된 편지는 20:00에 일괄 전송됩니다.</r.WarningText>
           <r.ButtonWrapper>
-            <r.Button>돌아가기</r.Button>
-            <r.Button>답장하기</r.Button>
+            <r.Button onClick={handleBackBtnClick}>돌아가기</r.Button>
+            <r.Button onClick={handleSend}>답장하기</r.Button>
           </r.ButtonWrapper>
         </r.LetterContainer>
       </r.LetterBoard>
