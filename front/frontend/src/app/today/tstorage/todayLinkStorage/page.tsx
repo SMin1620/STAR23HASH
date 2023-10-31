@@ -7,33 +7,40 @@ import PlanetModel from '../../../../component/today/todayStorage/link/planetMod
 import AstronautModel from '../../../../component/today/todayStorage/link/astronautModel/astronautModel'
 import GradientBackground from '../../../../component/Three/three.styled'
 import RandomPosition from '../../../../component/today/todayStorage/randomPosition/randomPostion'
+import { Position } from '../../../../component/today/todayStorage/randomPosition/randomPostion'
 
 export default function TodayLinkStorage() {
-  const [astronautPositions, setAstronautPositions] = useState([])
+  const [astronautPositions, setAstronautPositions] = useState<Position[]>([])
 
   const positionRange = 5
   const maxAttempts = 100
+  const totalAmount = 10
+  const allowedRange = 10
+  const minDistance = 50
 
   const addRandomAstronaut = () => {
-    const newPosition = RandomPosition(
-      astronautPositions,
-      positionRange,
-      maxAttempts,
-    )
-    setAstronautPositions([...astronautPositions, newPosition])
+    const newAstronautPositions = [...astronautPositions]
+    for (let i = 0; i < totalAmount; i++) {
+      const newPosition: Position = RandomPosition(
+        newAstronautPositions,
+        positionRange,
+        maxAttempts,
+        minDistance,
+        allowedRange,
+      )
+      newAstronautPositions.push(newPosition)
+    }
+    setAstronautPositions(newAstronautPositions)
   }
 
   useEffect(() => {
-    addRandomAstronaut()
-    addRandomAstronaut()
-    addRandomAstronaut()
     addRandomAstronaut()
   }, [])
   return (
     <GradientBackground>
       <Canvas
         style={{ width: '100%', height: '100%' }}
-        camera={{ position: [0, 1, 5], fov: 70 }}
+        camera={{ position: [0, 2.2, 5], fov: 70 }}
       >
         <Stars
           radius={100}
@@ -54,8 +61,8 @@ export default function TodayLinkStorage() {
           >
             <UfoModel
               url="/assets/ufo.glb"
-              scale={[2, 2, 2]}
-              position={[0, 2, 0]}
+              scale={[1.6, 1.6, 1.6]}
+              position={[0, 2.5, 0]}
             />
           </Float>
           <SpotLight
@@ -64,12 +71,12 @@ export default function TodayLinkStorage() {
             angle={0.9}
             attenuation={5}
             anglePower={3}
-            position={[0, 2, 0]}
+            position={[0, 3.1, 0]}
           />
-          {[1, 2, 3, 4].map((index) => (
-            <Float key={index} speed={2} floatIntensity={0.5}>
+          {Array.from({ length: totalAmount }).map((_, index) => (
+            <Float key={index} speed={1} floatIntensity={0.1}>
               <AstronautModel
-                url={`/assets/astronaut${index}.glb`}
+                url={`/assets/astronaut${(index % 4) + 1}.glb`}
                 scale={[0.3, 0.3, 0.3]}
                 position={[
                   Math.random() * 2 - 1,
