@@ -1,22 +1,35 @@
 'use client'
-import { useState, ChangeEvent } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import Logincomponent from '../../../component/Three/login'
 import Modal from '../../../component/login/modal'
+import PhoneStore from '@/store/phone'
 
-export default function LoginMain() {
-  const [inputValue, setInputValue] = useState('')
+export default function loginMain() {
+  const pathname = usePathname()
+  const { phone, setPhone } = PhoneStore()
+  const router = useRouter()
+  const [inputValue, setInputValue] = useState<string>('')
   const [showModal, setShowModal] = useState(false)
   const [loginSuccess, setLoginSuccess] = useState(false)
 
   function loginClick() {
     if (inputValue !== '1234') {
+      setPhone(inputValue)
       setShowModal(true)
       setLoginSuccess(false)
     } else {
-      setShowModal(true)
       setLoginSuccess(true)
+      setPhone(inputValue)
+      router.push('/auth/loginPassword')
     }
+  }
+
+  // 모달 창이 닫힐 때 input 창을 비우는 함수
+  const closeModal = () => {
+    setShowModal(false)
+    setInputValue('') // input 창 초기화
   }
 
   return (
@@ -37,13 +50,13 @@ export default function LoginMain() {
               placeholder="전화번호를 입력해 주세요"
               name="phone"
               type="tel"
-              // value={inputValue}
+              value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             ></input>
             <button onClick={loginClick}>로그인</button>
             {showModal && (
               <Modal
-                onClose={() => setShowModal(false)}
+                onClose={closeModal}
                 message={loginSuccess ? true : false}
               />
             )}
