@@ -99,3 +99,11 @@ export const IsNewLetterImage = styled(CustomImage)`
   top: 0.5rem;
   right: 0.5rem;
 `
+
+// LetterItem
+
+export const Item = styled.div`
+  overflow: hidden;
+  border-radius: 0.5rem;
+  cursor: pointer;
+`
