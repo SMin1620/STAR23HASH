@@ -7,7 +7,7 @@ import PlanetCard from '@/component/storage/random/PlanetCard'
 export default function Ramdon() {
   return (
     <>
-      <r.RandomPage className="h-screen">
+      <r.RandomPage className="absolute h-screen">
         <BackButton />
 
         <r.TitleWrapper>
@@ -15,7 +15,7 @@ export default function Ramdon() {
           <r.Title>랜덤메시지</r.Title>
         </r.TitleWrapper>
 
-        <r.RandomCardContainer className="h-screen">
+        <r.RandomCardContainer className="h-screen w-screen">
           <r.RandomCardWrapper className=" m-4 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
             {/* card component start */}
 
