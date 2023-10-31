@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ThreeComponent from '@/component/Three/login'
+import Test from '@/component/Three/test'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +20,9 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <div id="modal-root" />
-        <ThreeComponent
+
+        {/* apply temp background */}
+        <Test
           style={{
             position: 'absolute',
             width: '100%',
