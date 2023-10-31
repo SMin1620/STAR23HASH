@@ -116,8 +116,8 @@ public class MemberService {
 //            throw new IllegalArgumentException("엑세스 토큰이 잘못 됨");
 //        }
 
-        // 3. 엑세스 토큰에서 email 가져옴
-        String phone = jwtTokenProvider.getUserEmail(token);
+        // 3. 엑세스 토큰에서 Phone 가져옴
+        String phone = jwtTokenProvider.getUserPhone(token);
 
         // 4. 레디스의 refresh token 을 가져온다.
         String refresh = redisTemplate.opsForValue().get(phone);
@@ -148,5 +148,17 @@ public class MemberService {
                 .memberId(member.get().getId())
                 .build();
         return tokenDto;
+    }
+
+    public Long getId(HttpServletRequest request){
+        Member member = memberRepository.findByPhone(
+                jwtTokenProvider.getUserPhone(
+                        jwtTokenProvider.resolveToken(request))).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return member.getId();
+    }
+
+    public Long getAnotherId(String phone){
+        Member member = memberRepository.findByPhone(phone).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        return member.getId();
     }
 }
