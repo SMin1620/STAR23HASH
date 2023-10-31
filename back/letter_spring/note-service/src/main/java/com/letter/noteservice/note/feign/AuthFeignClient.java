@@ -1,4 +1,4 @@
-package com.letter.noteservice.config;
+package com.letter.noteservice.note.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

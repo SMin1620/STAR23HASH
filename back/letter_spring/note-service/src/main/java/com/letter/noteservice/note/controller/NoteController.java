@@ -1,6 +1,6 @@
 package com.letter.noteservice.note.controller;
 
-import com.letter.noteservice.config.AuthFeignClient;
+import com.letter.noteservice.note.feign.AuthFeignClient;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
