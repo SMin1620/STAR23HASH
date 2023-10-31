@@ -2,6 +2,7 @@ package com.letter.noteservice.note.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import java.time.LocalDateTime;
 
@@ -19,22 +20,22 @@ public class Note {
     @Column(name = "note_id")
     private Long id;
 
-    @Column(nullable = false)
-    private Long sender_id;
+    @Column(nullable = false, name = "sender_id")
+    private Long senderId;
 
-    @Column(nullable = false)
-    private String sender_name;
+    @Column(nullable = false, name = "sender_name")
+    private String senderName;
 
-    @Column(nullable = false)
-    private Long receiver_id;
+    @Column(nullable = false, name = "receiver_id")
+    private Long receiverId;
 
-    @Column(nullable = false)
-    private String receiver_name;
+    @Column(nullable = false, name = "receiver_name")
+    private String receiverName;
 
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
@@ -42,5 +43,11 @@ public class Note {
 
     @Column(nullable = false)
     private Boolean reply;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(nullable = false, name = "room_id")
+    @BatchSize(size = 100)
+    private Room room;
+
 
 }

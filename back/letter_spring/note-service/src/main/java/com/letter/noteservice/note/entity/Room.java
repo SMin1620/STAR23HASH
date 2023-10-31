@@ -19,19 +19,19 @@ public class Room {
     @Column(name = "room_id")
     private Long id;
 
-    @Column(nullable = false)
-    private Long sender_id;
+    @Column(nullable = false, name = "sender_id")
+    private Long senderId;
 
-    @Column(nullable = false)
-    private String sender_name;
+    @Column(nullable = false, name = "sender_name")
+    private String senderName;
 
-    @Column(nullable = false)
-    private Long receiver_id;
+    @Column(nullable = false, name = "receiver_id")
+    private Long receiverId;
 
-    @Column(nullable = false)
-    private String receiver_name;
+    @Column(nullable = false, name = "receiver_name")
+    private String receiverName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
 }
