@@ -80,7 +80,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     // 성공적으로 검증이 되었기 때문에 인증된 헤더로 요청을 변경해준다. 서비스는 해당 헤더에서 아이디를 가져와 사용한다.
     private void addAuthorizationHeaders(ServerHttpRequest request, String email) {
         request.mutate()
-                .header("X-Authorization-Email", email)
+                .header("Member-Authorization-Phone", email)
                 .build();
     }
 
