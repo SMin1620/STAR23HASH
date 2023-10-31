@@ -13,9 +13,10 @@ enum LetterType {
 type Props = {
   id: number
   type: LetterType
+  isRead: boolean
 }
 
-export default function LetterCard({ id, type }: Props) {
+export default function LetterCard({ id, type, isRead }: Props) {
   const router = useRouter()
 
   const handleClick = () => {
@@ -27,6 +28,14 @@ export default function LetterCard({ id, type }: Props) {
       onClick={handleClick}
       className="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 group w-full"
     >
+      {isRead ? (
+        <c.CardStateImage
+          className="w-1/3"
+          src="/icons/Check.svg"
+          alt="state"
+        />
+      ) : null}
+
       <c.CustomImage
         src={`/icons/${LetterType[type]}.svg`}
         alt="item."

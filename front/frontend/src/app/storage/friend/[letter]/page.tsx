@@ -1,6 +1,19 @@
-import Link from 'next/link'
+'use client'
+
+import { useState } from 'react'
+
 import * as l from './letter.styled'
+import { useRouter } from 'next/navigation'
+
 export default function Letter() {
+  // api요청 데이터 취득.
+  const router = useRouter()
+  const [content, setContent] = useState<string>()
+
+  const handleClick = () => {
+    router.back()
+  }
+
   return (
     <>
       <l.LetterBoard className="absolute h-screen w-screen">
@@ -28,7 +41,7 @@ export default function Letter() {
             ratione.
           </l.LetterContent>
 
-          <l.CloseBotton>닫기</l.CloseBotton>
+          <l.CloseBotton onClick={handleClick}>닫기</l.CloseBotton>
         </l.LetterContainer>
       </l.LetterBoard>
     </>
