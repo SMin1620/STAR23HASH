@@ -3,7 +3,7 @@ import * as l from './letter.styled'
 export default function Letter() {
   return (
     <>
-      <l.LetterBoard className="h-screen bg-[length:700px] bg-[left_top_15rem]">
+      <l.LetterBoard className="absolute h-screen w-screen">
         <l.LetterContainer className="w-80 md:w-2/3 lg:w-2/3">
           <l.DecoBottonWrapper>
             <l.RedDecoBotton />

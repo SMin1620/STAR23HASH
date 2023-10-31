@@ -3,7 +3,7 @@ import * as r from './reply.styled'
 export default function Letter() {
   return (
     <>
-      <r.LetterBoard className=" h-screen bg-[length:700px] bg-[left_top_15rem]">
+      <r.LetterBoard className="absolute h-screen w-screen">
         <r.LetterContainer className="h-3/4 w-80 md:w-2/3 lg:w-2/3">
           <r.DecoBottonWrapper>
             <r.RedDecoBotton />

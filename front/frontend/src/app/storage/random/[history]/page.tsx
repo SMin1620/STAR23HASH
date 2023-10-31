@@ -5,7 +5,7 @@ import BackButton from '@/component/storage/BackButton'
 export default function History() {
   return (
     <>
-      <h.HistoryPage className="h-screen ">
+      <h.HistoryPage className="absolute h-screen ">
         <BackButton />
 
         <h.TitleWrapper className="mb-6">

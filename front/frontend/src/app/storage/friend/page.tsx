@@ -5,7 +5,7 @@ import BackButton from '@/component/storage/BackButton'
 export default function Friend() {
   return (
     <>
-      <f.FriendPage className="h-screen">
+      <f.FriendPage className="absolute h-screen w-screen">
         <BackButton />
 
         <f.CalenderButton>
