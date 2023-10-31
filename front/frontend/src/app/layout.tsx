@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import Test from '@/component/Three/test'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +20,16 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <div id="modal-root" />
+
+        {/* apply temp background */}
+        <Test
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            zIndex: -1,
+          }}
+        />
       </body>
     </html>
   )
