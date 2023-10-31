@@ -37,7 +37,7 @@ public class MemberController {
     public String test(HttpServletResponse response, HttpServletRequest request) {
         System.out.println("auth test");
 
-        response.setHeader("Authorization", request.getHeader("Authorization"));
+//        response.setHeader("Authorization", request.getHeader("Authorization"));
         return "auth test";
     }
 
@@ -64,7 +64,7 @@ public class MemberController {
     /**
      * 멤버 정보 확인(api 명세서랑 다름)
      */
-    @GetMapping
+    @GetMapping("/mypage")
     public BaseResponse getMemberInfo(HttpServletRequest request)  {
         //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
         String token = jwtTokenProvider.resolveToken(request);
