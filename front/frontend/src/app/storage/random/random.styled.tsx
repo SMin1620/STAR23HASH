@@ -28,8 +28,6 @@ export const Title = styled.p`
 export const RandomCardContainer = styled.div`
   margin-top: 1rem;
 
-  width: 100%;
-
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(155, 122, 165, 0.8);
   overflow-y: scroll;
