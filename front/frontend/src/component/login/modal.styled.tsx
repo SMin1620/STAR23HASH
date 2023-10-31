@@ -17,6 +17,7 @@ export const ModalContent = styled.div`
   z-index: 20;
   position: fixed;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   top: 50%;
