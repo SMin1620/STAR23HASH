@@ -18,10 +18,17 @@
 
 body {
   background-color: #734472;
+  font-family: -apple-system, Dovemayo_gothic, sans-serif;
 }
 
 .Title {
   color: white;
   font-size: 3rem;
   font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Dovemayo_gothic';
+  font-weight: 200;
+  src: url('/fonts/Dovemayo_gothic.ttf') format('truetype');
 }
