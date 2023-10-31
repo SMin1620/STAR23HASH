@@ -3,8 +3,8 @@
 import styled from 'styled-components'
 
 export const LetterBoard = styled.div`
-  background-image: url('/icons/SolarSystem.svg');
-  background-repeat: no-repeat;
+  // background-image: url('/icons/SolarSystem.svg');
+  // background-repeat: no-repeat;
 
   display: grid;
   place-items: center;
