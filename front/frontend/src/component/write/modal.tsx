@@ -21,6 +21,7 @@ function Modal({ onConfirm }: { onConfirm: (text: string) => void }) {
           <M.ModalImg src="/write/Planet-2.svg" alt="ModalImg" />
           <M.ModalInput
             value={inputText}
+            placeholder="힌트를 적어주세요'v'"
             onChange={(e) => setInputText(e.target.value)}
           ></M.ModalInput>
           {/* <M.ModalInputTextLimit>/50</M.ModalInputTextLimit> */}
