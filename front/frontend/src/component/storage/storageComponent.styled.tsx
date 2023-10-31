@@ -103,6 +103,7 @@ export const IsNewLetterImage = styled(CustomImage)`
 // LetterItem
 
 export const Item = styled.div`
+  position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
   cursor: pointer;

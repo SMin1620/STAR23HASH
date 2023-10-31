@@ -38,10 +38,23 @@ export const DateContainer = styled.span`
   font-weight: 700;
   color: white;
 `
+export const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+export const Title = styled.p`
+  margin-top: 0.3rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: white;
+`
 
 export const LetterItemContainer = styled.div`
   width: 100%;
 
+  margin-top: 1rem;
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(155, 122, 165, 0.8);
   overflow-y: scroll;
