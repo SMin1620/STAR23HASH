@@ -8,7 +8,6 @@ import Modal from '@/component/write/modal'
 import { useRouter } from 'next/navigation'
 export default function WriteFriend() {
   const [showModal, setShowModal] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
   const [hint, setHint] = useState('')
   const router = useRouter()
   const handleSendClick = async () => {
@@ -70,8 +69,8 @@ export default function WriteFriend() {
             <stt.button onClick={handleSendClick}>전송</stt.button>
           </stt.SendBoxDiv>
         </stt.SendBox>
-        {showModal && <Modal onConfirm={handleInputText} />}
       </stt.SendBoxDiv>
+      {showModal && <Modal onConfirm={handleInputText} />}
     </>
   )
 }

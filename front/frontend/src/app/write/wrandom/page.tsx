@@ -1,8 +1,23 @@
+'use client'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import GlobalStyle from '../GlobalStyles'
 import * as st from './wrandom.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 export default function WriteFriend() {
+  const router = useRouter()
+  const handleSend = async () => {
+    // try {
+    //   // Axios를 사용하여 데이터 요청을 수행
+    //   const response = await axios.post('your-api-endpoint', data)
+    //   // 성공한 경우 isSuccess 상태를 true로 업데이트
+    //   setIsSuccess(true)
+    // } catch (error) {
+    //   // 실패한 경우 isSuccess 상태를 false로 업데이트
+    //   setIsSuccess(false)
+    // }
+    router.push(`/write/send?isSuccess=true`)
+  }
   return (
     <>
       <GlobalStyle />
@@ -18,9 +33,9 @@ export default function WriteFriend() {
           <st.ContentBox>
             <st.InputContent></st.InputContent>
           </st.ContentBox>
-          <Link href="/write/send">
-            <stt.button>전송</stt.button>
-          </Link>
+          <stt.SendBoxDiv>
+            <stt.button onClick={handleSend}>전송</stt.button>
+          </stt.SendBoxDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
     </>

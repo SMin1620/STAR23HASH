@@ -24,9 +24,11 @@ export const ModalContent = styled.div`
   background-color: #fff;
   padding: 1rem;
   border: 2px solid gray;
+  text-align: center;
 `
 
 export const ModalText = styled.div`
+  margin-bottom: 0.5rem;
   font-size: 16px;
   font-weight: bold;
 `
@@ -60,11 +62,19 @@ export const ModalInputTextLimit = styled.div`
   left: 231px;
 `
 export const CloseButton = styled.button`
-  margin-top: 0.5rem;
   width: 245px;
   height: 30px;
   background-color: #947d7e;
   color: white;
   font-size: 13px;
+  border-radius: 10px;
+`
+
+export const CloseButton2 = styled.button`
+  width: 100px;
+  height: 30px;
+  background-color: #ffe189;
+  font-size: 16px;
+  font-weight: bold;
   border-radius: 10px;
 `
