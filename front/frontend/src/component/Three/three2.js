@@ -412,7 +412,7 @@ function Scene() {
 
   return (
     <>
-      <Stars
+      {/* <Stars
         radius={100}
         depth={25}
         count={6000}
@@ -420,7 +420,7 @@ function Scene() {
         saturation={2}
         fade
         speed={2}
-      />
+      /> */}
       <Planet1 />
       <Planet2 />
       <Planet3 />
@@ -439,7 +439,7 @@ function Scene() {
 
 function ThreeComponent({ style }) {
   return (
-    <GradientBackground style={style}>
+    <div style={style}>
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
         <Scene />
       </Canvas>
@@ -455,7 +455,7 @@ function ThreeComponent({ style }) {
           opacity: 0,
         }}
       ></div>
-    </GradientBackground>
+    </div>
   )
 }
 
