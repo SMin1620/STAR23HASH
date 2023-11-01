@@ -1,6 +1,8 @@
 package com.letter.letterservice.letter.service;
 
 import com.letter.letterservice.config.AuthFeignClient;
+import com.letter.letterservice.letter.dto.Contact;
+import com.letter.letterservice.letter.dto.ContactRequestDto;
 import com.letter.letterservice.letter.dto.LetterRequestDto;
 import com.letter.letterservice.letter.dto.MemberAnotherRequestDto;
 import com.letter.letterservice.letter.entity.Letter;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.net.http.HttpRequest;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -34,6 +37,11 @@ public class LetterService {
 
         letterRepository.save(Letter.toEntity(senderId, receiverId, letterRequestDto));
         letterRepository.flush();
+        return true;
+    }
+
+    @Transactional
+    public Boolean createContact(HttpServletRequest request, ContactRequestDto contactRequestDto){
         return true;
     }
 }

@@ -3,6 +3,8 @@ package com.letter.authservice.member.service;
 import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
+import com.letter.authservice.member.dto.Contact;
+import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
@@ -25,6 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -161,4 +165,31 @@ public class MemberService {
         Member member = memberRepository.findByPhone(phone).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         return member.getId();
     }
+
+    public Boolean checkPhone(String phone){
+        Optional<Member> member = memberRepository.findByPhone(phone);
+
+        if(member.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean createContact(HttpServletRequest request, ContactRequestDto contactRequestDto){
+
+        Member member = memberRepository.findByPhone(
+                jwtTokenProvider.getUserPhone(
+                jwtTokenProvider.resolveToken(request))).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        List<Contact> newContacts = new ArrayList<>();
+
+        for(Contact c:contactRequestDto.getContacts()){
+            Optional<Member> m = memberRepository.findByPhone(c.getPhone());
+            if(!m.isEmpty()){
+                Contact newContact = new Contact(c.getName(),c.getPhone());
+                newContacts.add(newContact);
+            }
+        }
+        return true;
+    }
+
 }

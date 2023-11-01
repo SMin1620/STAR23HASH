@@ -1,6 +1,7 @@
 package com.letter.letterservice.letter.controller;
 
 import com.letter.letterservice.common.BaseResponse;
+import com.letter.letterservice.letter.dto.ContactRequestDto;
 import com.letter.letterservice.letter.dto.LetterRequestDto;
 import com.letter.letterservice.letter.dto.MemberAnotherRequestDto;
 import com.letter.letterservice.letter.service.LetterService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/letters")
@@ -24,10 +27,17 @@ public class LetterController {
 
 
     @PostMapping()
-    public BaseResponse registLetter(HttpServletRequest request,
+    public BaseResponse createLetter(HttpServletRequest request,
                                      @RequestBody @Valid LetterRequestDto letterRequestDto
                                      ){
         return new BaseResponse(HttpStatus.OK,"편지 보내기 성공",letterService.createLetter(request, letterRequestDto));
+    }
+
+    @PostMapping("/contact")
+    public BaseResponse createContact(HttpServletRequest request,
+                                      @RequestBody @Valid ContactRequestDto contactRequestDto
+                                      ){
+        return new BaseResponse(HttpStatus.OK, "연락처 저장", letterService.createContact(request, contactRequestDto));
     }
 
 }
