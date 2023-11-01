@@ -134,6 +134,5 @@ export const Button = styled.button`
   border-radius: 1.25rem;
 
   color: white;
-  font-weight: bold;
   font-size: 1.2rem;
 `
