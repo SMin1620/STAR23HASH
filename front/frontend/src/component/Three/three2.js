@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import * as THREE from 'three'
 import GradientBackground from './three.styled'
+import { Orbit } from 'next/font/google'
 
 function Planet1() {
   const fbx = useFBX('/assets/Planet-5.fbx')
@@ -134,14 +135,14 @@ function RandomComponent({ forwardedRef }) {
   mesh.position.set(-2.2, -0.2, -3.9) // Set your coordinates
   const scale = 1.9
   mesh.scale.set(scale, scale, scale)
-  mesh.rotation.z = -0.2
+  // mesh.rotation.z = -0.2
 
   return <primitive object={mesh} ref={forwardedRef} />
 }
 
 function FriendComponent({ forwardedRef }) {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/random.png')
+  const texture = textureLoader.load('/main/friend.png')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
@@ -412,15 +413,7 @@ function Scene() {
 
   return (
     <>
-      <Stars
-        radius={100}
-        depth={25}
-        count={6000}
-        factor={5}
-        saturation={2}
-        fade
-        speed={2}
-      />
+      {/* <OrbitControls /> */}
       <Planet1 />
       <Planet2 />
       <Planet3 />
@@ -432,14 +425,13 @@ function Scene() {
       {/* <StorageComponent /> */}
       <Ufo forwardedRef={ufoRef} />
       <Table forwardedRef={tableRef} />
-      {/* Add your objects here */}
     </>
   )
 }
 
 function ThreeComponent({ style }) {
   return (
-    <GradientBackground style={style}>
+    <div style={style}>
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
         <Scene />
       </Canvas>
@@ -447,6 +439,7 @@ function ThreeComponent({ style }) {
         id="fade-out-div"
         style={{
           position: 'fixed',
+          zIndex: 20,
           top: 0,
           left: 0,
           width: '100%',
@@ -455,7 +448,7 @@ function ThreeComponent({ style }) {
           opacity: 0,
         }}
       ></div>
-    </GradientBackground>
+    </div>
   )
 }
 

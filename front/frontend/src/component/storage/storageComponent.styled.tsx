@@ -37,7 +37,6 @@ export const CardTitle = styled.h4`
   //   margin-top: 0.5rem;
   font-size: 1rem;
   line-height: 1.5rem;
-  font-weight: bold;
   color: white;
 `
 
@@ -58,7 +57,6 @@ export const LetterHeader = styled.div`
 export const LetterName = styled.h1`
   color: #111827;
   font-size: 1rem;
-  font-weight: bold;
 `
 export const LetterDate = styled.p`
   color: #696969;

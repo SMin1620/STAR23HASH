@@ -1,17 +1,8 @@
 'use client'
-import {
-  Canvas,
-  useThree,
-  useFrame,
-  extend,
-  useLoader,
-} from '@react-three/fiber'
-import { PlaneGeometry, MeshBasicMaterial, Mesh, TextureLoader } from 'three'
-
-import { OrbitControls, Stars } from '@react-three/drei'
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
+import { Stars } from '@react-three/drei'
 import { useFBX, useGLTF } from '@react-three/drei'
 import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
 import * as THREE from 'three'
 import GradientBackground from './three.styled'
 
@@ -33,7 +24,7 @@ function Ufo() {
   fbx.rotation.z = 0.1
 
   // 회전 초기값 설정
-  fbx.rotation.y = Math.PI / 2 // 이 값을 조절하여 시작 각도를 변경할 수 있습니다.
+  fbx.rotation.y = Math.PI / 2
 
   useFrame(({ clock }) => {
     // 매 프레임마다 y축으로 조금씩 회전
@@ -100,9 +91,6 @@ function Scene() {
     const AmbientLigthtight = new THREE.AmbientLight('white', 0.8)
     AmbientLigthtight.position.z = 2
     scene.add(AmbientLigthtight)
-
-    // const lightHelper = new THREE.DirectionalLightHelper(light, 5)
-    // scene.add(lightHelper)
   }, [])
 
   // Animation
