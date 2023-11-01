@@ -7,10 +7,8 @@ const Delivery: React.FC = () => {
   useEffect(() => {
     const calculateRemainingTime = () => {
       const now = new Date()
-      console.log(now)
       const targetTime = new Date()
       targetTime.setHours(18, 0, 0) // 오후 6시
-      console.log(targetTime)
 
       let remainingTime = targetTime.getTime() - now.getTime()
 
