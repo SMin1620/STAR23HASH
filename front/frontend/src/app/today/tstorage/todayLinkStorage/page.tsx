@@ -6,36 +6,32 @@ import UfoModel from '../../../../component/today/todayStorage/link/ufoModel/ufo
 import PlanetModel from '../../../../component/today/todayStorage/link/planetModel/planetModel'
 import AstronautModel from '../../../../component/today/todayStorage/link/astronautModel/astronautModel'
 import GradientBackground from '../../../../component/Three/three.styled'
-import RandomPosition from '../../../../component/today/todayStorage/randomPosition/randomPostion'
-import { Position } from '../../../../component/today/todayStorage/randomPosition/randomPostion'
+import {
+  Position,
+  checkMinDistance,
+} from '../../../../component/today/todayStorage/checkPosition/checkPosition'
 
 export default function TodayLinkStorage() {
-  const [astronautPositions, setAstronautPositions] = useState<Position[]>([])
+  const totalAmount = 5
+  // const minDistance = 2
+  // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
 
-  const positionRange = 5
-  const maxAttempts = 100
-  const totalAmount = 10
-  const allowedRange = 10
-  const minDistance = 50
+  // useEffect(() => {
+  //   const positions: Position[] = []
+  //   for (let i = 0; i < totalAmount; i++) {
+  //     let newPosition
+  //     do {
+  //       newPosition = [
+  //         Math.random() * 2 - 1,
+  //         Math.random() * 3 - 2,
+  //         Math.random() * 3 - 2,
+  //       ] as Position
+  //     } while (!checkMinDistance(positions, newPosition, minDistance))
+  //     positions.push(newPosition)
+  //   }
+  //   setAstronautPostions(positions)
+  // }, [])
 
-  const addRandomAstronaut = () => {
-    const newAstronautPositions = [...astronautPositions]
-    for (let i = 0; i < totalAmount; i++) {
-      const newPosition: Position = RandomPosition(
-        newAstronautPositions,
-        positionRange,
-        maxAttempts,
-        minDistance,
-        allowedRange,
-      )
-      newAstronautPositions.push(newPosition)
-    }
-    setAstronautPositions(newAstronautPositions)
-  }
-
-  useEffect(() => {
-    addRandomAstronaut()
-  }, [])
   return (
     <GradientBackground>
       <Canvas
@@ -46,10 +42,10 @@ export default function TodayLinkStorage() {
           radius={100}
           depth={25}
           count={6000}
-          factor={5}
+          factor={7}
           saturation={1}
           fade
-          speed={2}
+          speed={1}
         />
         <Suspense fallback={null}>
           <ambientLight intensity={1.0} />
