@@ -12,6 +12,10 @@ public interface AuthFeignClient {
     @GetMapping("/api/members/test")
     String findMember(@RequestHeader String token);
 
+    /**
+     * 본인 phone 를 인증 서버로 보냄
+     */
     @PostMapping("/api/members/feign/random")
     NoteDto.NoteCreateResDto findRandomMember(String phone);
+
 }

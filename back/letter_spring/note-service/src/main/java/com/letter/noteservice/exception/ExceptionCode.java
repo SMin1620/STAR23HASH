@@ -6,7 +6,6 @@ public enum ExceptionCode {
 
     // Member
     PHONE_ALREADY_EXISTS(409, "Phone Already Exists"),
-
     INVALID_REFRESH_TOKEN(400,"Invalid Refresh Token"),
     INVALID_ACCESS_TOKEN(401,"Invalid Access Token"),
     FAILED_CREATE_ACCESS_TOKEN(500, "Failed Create Access Token"),
@@ -19,6 +18,11 @@ public enum ExceptionCode {
     BUYER_NOT_FOUND(404, "Buyer Not Found"),
     COIN_LACK(409, "Coin Lack"),
     EMOTION_NOT_FOUND(404, "Emotion Not Found"),
+
+    /**
+     * Note and Room
+     */
+    ROOM_ALREADY_EXISTS(409, "Room Already Exists"),
 
 
     FAILED_TO_UPDATE_MEMBER(500, "Failed Update Member"),
