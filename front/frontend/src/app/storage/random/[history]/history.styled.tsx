@@ -22,7 +22,6 @@ export const TitleWrapper = styled.div`
 export const Title = styled.p`
   font-size: 1.125rem;
   line-height: 1.75rem;
-  font-weight: 700;
   color: white;
 `
 
