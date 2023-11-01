@@ -38,5 +38,6 @@ public class NoteDto {
         private LocalDateTime createdAt;
         private Boolean read;
         private Boolean reply;
+        private Long roomId;
     }
 }
