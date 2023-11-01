@@ -6,44 +6,7 @@ import RandomModel from '../../../../component/today/todayStorage/random/randomP
 import GradientBackground from '../../../../component/Three/three.styled'
 import { Models } from '@/component/today/todayStorage/random/planetModel/planetModel'
 
-// const Models = [
-//   {
-//     name: 'planet1',
-//     url: '/assets/planet-1.glb',
-//     scale: [7, 7, 7],
-//     position: [-3, -20, -63],
-//   },
-//   {
-//     name: 'planet2',
-//     url: '/assets/planet-2.glb',
-//     scale: [3, 3, 3],
-//     position: [-1, -17, -43],
-//   },
-//   {
-//     name: 'planet3',
-//     url: '/assets/planet-3.glb',
-//     scale: [5, 5, 5],
-//     position: [1, -14, -23],
-//   },
-//   {
-//     name: 'planet4',
-//     url: '/assets/planet-4.glb',
-//     scale: [5, 5, 5],
-//     position: [3, -11, -3],
-//   },
-//   {
-//     name: 'planet5',
-//     url: '/assets/planet-5.glb',
-//     scale: [5, 5, 5],
-//     position: [5, -8, 23],
-//   },
-//   {
-//     name: 'planet6',
-//     url: '/assets/planet-6.glb',
-//     scale: [5, 5, 5],
-//     position: [7, -5, 43],
-//   },
-// ]
+const totalAmount = 10
 
 export default function Page() {
   return (
@@ -56,7 +19,7 @@ export default function Page() {
           radius={100}
           depth={25}
           count={6000}
-          factor={7}
+          factor={8}
           saturation={1}
           fade
           speed={2}
@@ -64,14 +27,23 @@ export default function Page() {
         <Suspense fallback={null}>
           <ambientLight intensity={0.8} />
           <spotLight position={[10, 10, -10]} angle={0.3} />
-          {Models.map((model) => (
-            <RandomModel
-              key={model.name}
-              url={model.url}
-              scale={model.scale}
-              position={model.position}
-            />
-          ))}
+          {Array.from({ length: totalAmount }).map((_, index) => {
+            const model = Models[index % Models.length]
+            const startPostion = [-3, -20, -63]
+            const position = [
+              startPostion[0] + 2 * index,
+              startPostion[1] + 3 * index,
+              startPostion[2] + 20 * index,
+            ]
+            return (
+              <RandomModel
+                key={index}
+                url={model.url}
+                scale={model.scale}
+                position={position}
+              />
+            )
+          })}
         </Suspense>
         <OrbitControls />
       </Canvas>
