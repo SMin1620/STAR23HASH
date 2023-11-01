@@ -50,7 +50,7 @@ export default function Ramdon() {
             <PlanetCard
               id={Math.floor(Math.random() * 15) + 1}
               planetNumber={Math.floor(Math.random() * 15) + 1}
-              name="김감자"
+              name="김김자"
               date="2020.02.02"
               state="written"
             />

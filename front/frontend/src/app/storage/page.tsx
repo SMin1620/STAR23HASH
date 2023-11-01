@@ -11,13 +11,24 @@ export default function Storage() {
     <>
       <div className="absolute z-10">
         <st.TestText>
-          <Link href={'/storage/random'}>랜덤보관함으로 가깅</Link>
+          <Link href={'/storage/random'} className="text-white">
+            랜덤보관함으로 가깅
+          </Link>
         </st.TestText>
         <st.TestText>
-          <Link href={'/storage/friend'}>칭구보관함으로 가깅</Link>
+          <Link href={'/storage/friend'} className="text-white">
+            칭구보관함으로 가깅
+          </Link>
         </st.TestText>
         <st.TestText>
-          <Link href={'/'}>호무</Link>
+          <Link href={'/storage/test'} className="text-white">
+            테스트 페이지로 가깅
+          </Link>
+        </st.TestText>
+        <st.TestText>
+          <Link href={'/'} className="text-white">
+            홈
+          </Link>
         </st.TestText>
       </div>
       {/* <Three style={{ position: 'absolute', width: '100%', height: '100%' }} /> */}

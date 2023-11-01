@@ -21,7 +21,6 @@ export const TitleWrapper = styled.div`
 export const Title = styled.p`
   font-size: 1.125rem;
   line-height: 1.75rem;
-  font-weight: 700;
   color: white;
 `
 
@@ -62,7 +61,6 @@ export const CardTitle = styled.h4`
   margin-top: 1rem;
   font-size: 1rem;
   line-height: 1.5rem;
-  font-weight: bold;
   color: white;
 `
 
