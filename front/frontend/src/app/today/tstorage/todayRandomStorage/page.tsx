@@ -1,14 +1,25 @@
 'use client'
-import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
+import { Canvas, useThree } from '@react-three/fiber'
+import { Suspense, useEffect } from 'react'
 import { OrbitControls, Stars } from '@react-three/drei'
 import RandomModel from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import GradientBackground from '../../../../component/Three/three.styled'
 import { Models } from '@/component/today/todayStorage/random/planetModel/planetModel'
+import RocketModel from '@/component/today/todayStorage/random/rocketModel/rocketModel'
+import * as THREE from 'three'
 
 const totalAmount = 10
 
-export default function Page() {
+export default function TodayRandomStorage() {
+  const Axes = () => {
+    const { scene } = useThree()
+
+    useEffect(() => {
+      const axesHelper = new THREE.AxesHelper(100)
+      scene.add(axesHelper)
+    }, [scene])
+    return null
+  }
   return (
     <GradientBackground>
       <Canvas
@@ -24,6 +35,7 @@ export default function Page() {
           fade
           speed={2}
         />
+        <Axes />
         <Suspense fallback={null}>
           <ambientLight intensity={0.8} />
           <spotLight position={[10, 10, -10]} angle={0.3} />
@@ -31,8 +43,8 @@ export default function Page() {
             const model = Models[index % Models.length]
             const startPostion = [-3, -20, -63]
             const position = [
-              startPostion[0] + 2 * index,
-              startPostion[1] + 3 * index,
+              startPostion[0] + -2 * index,
+              startPostion[1] + 10 * index,
               startPostion[2] + 20 * index,
             ]
             return (
@@ -44,6 +56,12 @@ export default function Page() {
               />
             )
           })}
+          <RocketModel
+            url="/assets/rocket-1.glb"
+            scale={[8, 8, 8]}
+            position={[-23, 38, -50]}
+            rotation={[Math.PI / 10, Math.PI, Math.PI / -8]}
+          />
         </Suspense>
         <OrbitControls />
       </Canvas>
