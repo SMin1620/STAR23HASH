@@ -4,6 +4,8 @@ import com.letter.authservice.common.BaseResponse;
 import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
+import com.letter.authservice.member.dto.Contact;
+import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
@@ -14,12 +16,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "회원 API")
 @RestController
@@ -109,5 +114,14 @@ public class MemberController {
         return memberService.getAnotherId(phone);
     }
 
+    @GetMapping("/check/{phone}")
+    public BaseResponse checkPhone(@PathVariable("phone") String phone){
+        return new BaseResponse(HttpStatus.OK, "전화번호 체크", memberService.checkPhone(phone));
+    }
+
+    @PostMapping("/contact")
+    public Boolean createContact(HttpServletRequest request,@RequestBody @Valid ContactRequestDto contactRequestDto){
+        return memberService.createContact(request,contactRequestDto);
+    }
 
 }

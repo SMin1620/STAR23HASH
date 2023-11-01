@@ -44,6 +44,8 @@ public class Letter {
 
     private String hintContent;
 
+    private Boolean store;
+
     public static Letter toEntity(Long senderId, Long receiverId, LetterRequestDto letterRequestDto){
         return Letter.builder()
                 .senderId(senderId)
@@ -54,6 +56,7 @@ public class Letter {
                 .receiverId(receiverId)
                 .read(false)
                 .hintContent(letterRequestDto.getHintContent())
+                .store(false)
                 .build();
     }
 
