@@ -39,4 +39,42 @@ public class NoteDto {
         private Boolean read;
         private Boolean reply;
     }
+    /**
+     * 랜덤 쪽지 목록 조회
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class NoteListResDto {
+        private Long id;
+        private Long senderId;
+        private String senderName;
+        private Long receiverId;
+        private String receiverName;
+        private String content;
+        private LocalDateTime createdAt;
+        private Boolean send;
+        private Boolean read;
+    }
+
+    /**
+     * 랜덤 쪽지 상세 조회
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class NoteDetailResDto {
+        private Long id;
+        private Long senderId;
+        private String senderName;
+        private Long receiverId;
+        private String receiverName;
+        private String content;
+        private LocalDateTime createdAt;
+    }
+
 }
