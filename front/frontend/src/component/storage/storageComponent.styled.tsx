@@ -54,6 +54,10 @@ export const LetterHeader = styled.div`
   flex-direction: column;
   justify-content: center;
 `
+export const SentLetterHeader = styled(LetterHeader)`
+  align-items: flex-end;
+`
+
 export const LetterName = styled.h1`
   color: #111827;
   font-size: 1rem;
