@@ -40,7 +40,7 @@ services:
     volumes:
       - ./:/app/server/letter/auth-service/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/free?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/letter?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ssafy106
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
@@ -57,7 +57,7 @@ services:
     volumes:
       - ./:/app/server/letter/letter-service/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/free?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/letter?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ssafy106
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
@@ -73,7 +73,7 @@ services:
     volumes:
       - ./:/app/server/letter/note-service/
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/free?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/letter?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ssafy106
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
