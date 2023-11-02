@@ -87,7 +87,7 @@ services:
     volumes:
       - ./:/app/server/mysql/
     environment:
-      MYSQL_DATABASE: letter
+      MYSQL_DATABASE: free
       MYSQL_ROOT_PASSWORD: ssafy106
     ports:
       - "3306:3306"

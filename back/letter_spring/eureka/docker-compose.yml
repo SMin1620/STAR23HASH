@@ -30,6 +30,7 @@ services:
       - auth-service
       - letter-service
       - note-service
+      - mysql
 
   auth-service:
     build:
