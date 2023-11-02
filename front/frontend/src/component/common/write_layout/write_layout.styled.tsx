@@ -2,7 +2,9 @@
 
 import styled from 'styled-components'
 
-export const SendBoxDiv = styled.div``
+export const SendBoxDiv = styled.div`
+  background-color: #c5e7ac;
+`
 export const SendBox = styled.div`
   min-width: 20rem;
   height: 45rem;
@@ -62,3 +64,5 @@ export const button = styled.button`
   font-size: 16px;
   font-weight: bold;
 `
+
+export const EmptyDiv = styled.div``

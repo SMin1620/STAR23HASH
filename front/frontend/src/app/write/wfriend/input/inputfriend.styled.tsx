@@ -81,9 +81,9 @@ export const AddContent = styled.div`
 `
 
 export const ContentInfoText = styled.div`
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 15px;
+  font-size: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 `
 
 export const Medias = styled.div`
