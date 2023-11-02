@@ -15,8 +15,9 @@ export default function Error({ error, reset }: Props) {
   return (
     <>
       <div className="absolute z-10">
-        <h1>에러 페이지</h1>
+        <h1 className="text-white">에러 페이지</h1>
         <button
+          className="text-white"
           onClick={() => {
             reset()
           }}
