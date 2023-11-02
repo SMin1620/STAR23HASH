@@ -18,6 +18,22 @@ const axiosInstance = axios.create({
   withCredentials: true,
 })
 
+const setLocalStorageValue = (key: string, value: any): void => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(key, `Bearer ${value}`)
+  }
+}
+
+const getLocalStorageValue = <T>(key: string): T | null => {
+  if (typeof window !== 'undefined') {
+    const storedValue = localStorage.getItem(key)
+    console.log('token : ', storedValue)
+
+    return storedValue ? JSON.parse(storedValue) : null
+  }
+  return null
+}
+
 export const userTest = async (): Promise<Response> => {
   try {
     const res: AxiosResponse = await axiosInstance.post(
@@ -32,8 +48,9 @@ export const userTest = async (): Promise<Response> => {
       throw new Error('에러')
     }
 
-    console.log(res)
-
+    console.log(res.data.data.accessToken)
+    setLocalStorageValue('token', res.data.data.accessToken)
+    getLocalStorageValue('token')
     return res.data
   } catch (error) {
     throw new Error('네트워크 오류')
