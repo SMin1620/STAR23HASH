@@ -43,8 +43,12 @@ export default function TodayRandomStorage() {
     <GradientBackground>
       <Canvas
         style={{ width: '100%', height: '100%' }}
-        camera={{ position: [-17, -60, -90], near: 0.01 }}
-        // {...bind()}
+        camera={{
+          position: [-17, 50, -100],
+          // rotation: [0, Math.PI / 8, 0],
+          near: 0.01,
+        }}
+        {...bind()}
       >
         <Stars
           radius={100}
@@ -65,7 +69,7 @@ export default function TodayRandomStorage() {
             const position = [
               startPostion[0],
               startPostion[1] + 10 * index,
-              startPostion[2] + 50 * index,
+              startPostion[2] + 60 * index,
             ]
             return (
               <RandomPlanet
