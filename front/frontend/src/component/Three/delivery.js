@@ -1,10 +1,8 @@
 'use client'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
-import { Stars } from '@react-three/drei'
 import { useFBX, useGLTF } from '@react-three/drei'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import GradientBackground from './three.styled'
 
 function Ufo() {
   const ref = useRef()
@@ -100,15 +98,6 @@ function Scene() {
 
   return (
     <>
-      <Stars
-        radius={90}
-        depth={30}
-        count={5000}
-        factor={6}
-        saturation={2}
-        fade
-        speed={1}
-      />
       <Planet1 />
       <Planet2 />
       <Ufo />
@@ -117,11 +106,11 @@ function Scene() {
 }
 function DeliveryComponent({ style }) {
   return (
-    <GradientBackground style={style}>
+    <div style={style}>
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
         <Scene />
       </Canvas>
-    </GradientBackground>
+    </div>
   )
 }
 

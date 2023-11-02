@@ -1,20 +1,10 @@
-// 'use client'
-import {
-  Canvas,
-  useThree,
-  useFrame,
-  extend,
-  useLoader,
-} from '@react-three/fiber'
+'use client'
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { PlaneGeometry, MeshBasicMaterial, Mesh, TextureLoader } from 'three'
-
-import { OrbitControls, Stars } from '@react-three/drei'
 import { useFBX, useGLTF } from '@react-three/drei'
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import * as THREE from 'three'
-import GradientBackground from './three.styled'
-import { Orbit } from 'next/font/google'
 
 function Planet1() {
   const fbx = useFBX('/assets/Planet-5.fbx')
@@ -132,8 +122,8 @@ function RandomComponent({ forwardedRef }) {
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
-  mesh.position.set(-2.2, -0.2, -3.9) // Set your coordinates
-  const scale = 1.9
+  mesh.position.set(-1.8, -0.5, -4.0) // Set your coordinates
+  const scale = 1.3
   mesh.scale.set(scale, scale, scale)
   // mesh.rotation.z = -0.2
 
@@ -146,10 +136,10 @@ function FriendComponent({ forwardedRef }) {
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
-  mesh.position.set(-4, -1.5, -3.9) // Set your coordinates
-  const scale = 1.9
+  mesh.position.set(-2.9, -1.2, -4.0) // Set your coordinates
+  const scale = 1.2
   mesh.scale.set(scale, scale, scale)
-  mesh.rotation.z = -0.2
+  // mesh.rotation.z = 0.3
 
   return <primitive object={mesh} ref={forwardedRef} />
 }
@@ -160,10 +150,10 @@ function TodayComponent() {
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
-  mesh.position.set(2, 3.5, -3.9) // Set your coordinates
+  mesh.position.set(2, 4.1, -5.9) // Set your coordinates
   const scale = 1.9
   mesh.scale.set(scale, scale, scale)
-  mesh.rotation.z = -0.2
+  // mesh.rotation.z = -0.2
 
   return <primitive object={mesh} />
 }
@@ -310,6 +300,8 @@ function Scene() {
     }
 
     function ufoClick(e) {
+      const currentHour = new Date().getHours()
+      console.log(currentHour)
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
@@ -332,22 +324,16 @@ function Scene() {
               duration: 1.0,
               opacity: 1,
               onComplete: () => {
-                window.location.href = '/today/delivery'
+                console.log(currentHour)
+                if (currentHour >= 12 || currentHour <= 6) {
+                  window.location.href = '/today/arrive'
+                } else {
+                  window.location.href = '/today/delivery'
+                }
               },
             })
           },
-          // onComplete: () => {
-          //   const fadeOutDiv = document.getElementById('fade-out-div')
-          //   gsap.to(fadeOutDiv.style, {
-          //     duration: 2,
-          //     opacity: 1,
-          //     onComplete: () => {
-          //       window.location.href = '/today/delivery'
-          //     },
-          //   })
-          // },
         })
-        // console.log('UFO clicked')
       }
     }
 
@@ -405,11 +391,6 @@ function Scene() {
       window.removeEventListener('click', randomClick)
     }
   }, [])
-
-  // Animation
-  useFrame(({ clock }) => {
-    // animation logic here
-  })
 
   return (
     <>

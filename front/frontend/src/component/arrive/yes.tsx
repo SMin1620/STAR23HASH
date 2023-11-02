@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import * as a from './arrive.styled'
 export default function yes() {
   return (
     <div>
@@ -10,51 +11,23 @@ export default function yes() {
       </div>
       <div
         style={{ marginTop: '150px', flexDirection: 'column' }}
-        className="mt-20 flex items-center justify-center pt-20 text-2xl text-white"
+        className="mt-20 flex items-center justify-center pt-20 text-2xl"
       >
-        <div
-          style={{
-            backgroundColor: '#FFE189',
-            borderRadius: '10px',
-            color: 'black',
-            width: '100px',
-            height: '50px',
-            textAlign: 'center',
-            marginBottom: '10px',
-          }}
-        >
-          <Link href="/today/tstorage/todayLinkStorage">친구</Link>
-        </div>
-        <div
-          style={{
-            backgroundColor: '#FFE189',
-            borderRadius: '10px',
-            color: 'black',
-            width: '100px',
-            height: '50px',
-            textAlign: 'center',
-            marginBottom: '10px',
-          }}
-        >
-          <Link href="/today/tstorage/todayLinkStorage">랜덤</Link>
-        </div>
-        <div
-          style={{
-            backgroundColor: '#FFE189',
-            borderRadius: '10px',
-            color: 'black',
-            width: '100px',
-            height: '50px',
-            textAlign: 'center',
-            marginBottom: '10px',
-          }}
-        >
-          <Link href="/today/tstorage/todayLinkStorage">링크</Link>
-        </div>
-
-        {/* <div>친구</div>
-          <div>랜덤</div>
-          <div>링크</div> */}
+        <a.arriveButton>
+          <Link href="/today/tstorage/todayLinkStorage">
+            <a.arriveLink> 친구</a.arriveLink>
+          </Link>
+        </a.arriveButton>
+        <a.arriveButton>
+          <Link href="/today/tstorage/todayLinkStorage">
+            <a.arriveLink>랜덤</a.arriveLink>
+          </Link>
+        </a.arriveButton>
+        <a.arriveButton>
+          <Link href="/today/tstorage/todayLinkStorage">
+            <a.arriveLink>링크</a.arriveLink>
+          </Link>
+        </a.arriveButton>
       </div>
     </div>
   )
