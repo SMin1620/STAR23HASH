@@ -10,6 +10,7 @@ import {
   Position,
   checkMinDistance,
 } from '../../../../component/today/todayStorage/checkPosition/checkPosition'
+import Light from '@/component/today/todayStorage/light/light'
 
 export default function TodayLinkStorage() {
   const totalAmount = 5
@@ -47,8 +48,9 @@ export default function TodayLinkStorage() {
           fade
           speed={1}
         />
+        <Light />
         <Suspense fallback={null}>
-          <ambientLight intensity={1.0} />
+          <ambientLight intensity={0.8} />
           <Float
             speed={6}
             rotationIntensity={0}
