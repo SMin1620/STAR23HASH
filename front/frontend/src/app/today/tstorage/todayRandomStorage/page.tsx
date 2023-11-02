@@ -10,7 +10,7 @@ import * as THREE from 'three'
 import RandomPlanet from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import { useGesture } from '@use-gesture/react'
 
-const totalAmount = 20
+const totalAmount = 30
 
 export default function TodayRandomStorage() {
   const Axes = () => {
@@ -42,8 +42,8 @@ export default function TodayRandomStorage() {
     <GradientBackground>
       <Canvas
         style={{ width: '100%', height: '100%' }}
-        camera={{ position: [-20, 10, -100], near: 0.01 }}
-        {...bind()}
+        camera={{ position: [-17, -10, -90], near: 0.01 }}
+        // {...bind()}
       >
         <Stars
           radius={100}
@@ -57,7 +57,6 @@ export default function TodayRandomStorage() {
         <Axes />
         <Suspense fallback={null}>
           <ambientLight intensity={0.8} />
-          <spotLight position={[10, 10, -10]} angle={0.3} />
           {Array.from({ length: totalAmount }).map((_, index) => {
             const model = Models[index % Models.length]
             const startPostion = [-3, -20, -63]
@@ -83,7 +82,7 @@ export default function TodayRandomStorage() {
             rotation={[Math.PI / 10, Math.PI, Math.PI / -8]}
           />
         </Suspense>
-        {/* <OrbitControls /> */}
+        <OrbitControls />
       </Canvas>
     </GradientBackground>
   )
