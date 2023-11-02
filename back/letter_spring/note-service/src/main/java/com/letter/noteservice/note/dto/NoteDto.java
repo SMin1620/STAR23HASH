@@ -36,8 +36,8 @@ public class NoteDto {
         private String receiverName;
         private String content;
         private LocalDateTime createdAt;
-        private Boolean read;
-        private Boolean reply;
+        private Boolean isRead;
+        private Boolean isReply;
     }
     /**
      * 랜덤 쪽지 목록 조회
@@ -56,7 +56,7 @@ public class NoteDto {
         private String content;
         private LocalDateTime createdAt;
         private Boolean send;
-        private Boolean read;
+        private Boolean isRead;
     }
 
     /**

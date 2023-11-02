@@ -13,7 +13,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 //    @Query(value = "select n from Note n where n.room.id = :roomId and n.receiverId = :memberId")
 //    List<Note> findByLastNote(Long roomId, Long memberId);
 
-    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId and n.read = false order by n.id desc")
+    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId and n.isRead = false order by n.id desc")
     Optional<Note> findRoomByNote(Long roomId, Long memberId);
 
 

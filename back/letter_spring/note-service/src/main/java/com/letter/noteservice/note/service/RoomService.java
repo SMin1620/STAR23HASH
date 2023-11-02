@@ -56,14 +56,14 @@ public class RoomService {
 
             // 쪽지 읽음 여부 처리
             Optional<Note> readNote = noteRepository.findRoomByNote(room.getId(), memberId);
-            if (readNote.isPresent()) roomDto.setReply(true);
-            else roomDto.setReply(false);
+            if (readNote.isPresent()) roomDto.setIsReply(true);
+            else roomDto.setIsReply(false);
 
             // 쪽지 답장 여부 처리
             Note replyNote = noteRepository.findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(room.getId(), memberId)
                             .orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOTE_NOT_FOUND));
-            if (replyNote.getReceiverId() == memberId && replyNote.getRead()) roomDto.setReply(true);
-            else roomDto.setReply(false);
+            if (replyNote.getReceiverId() == memberId && replyNote.getIsRead()) roomDto.setIsReply(true);
+            else roomDto.setIsReply(false);
 
             roomListResDtos.add(roomDto);
         }
@@ -97,6 +97,6 @@ public class RoomService {
 
     @Transactional
     public void updateRoomReadStatus(Room room) {
-        room.setRead(false);
+        room.setIsRead(false);
     }
 }

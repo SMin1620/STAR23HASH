@@ -42,8 +42,8 @@ public class RoomDto {
         private Long receiverId;
         private String receiverName;
         private LocalDateTime createdAt;
-        private Boolean read;
-        private Boolean reply;
+        private Boolean isRead;
+        private Boolean isReply;
     }
 
 
