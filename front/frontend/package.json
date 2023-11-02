@@ -16,6 +16,7 @@
     "@react-three/gltfjsx": "^4.3.4",
     "@types/styled-components": "^5.1.29",
     "@types/three": "^0.157.2",
+    "@use-gesture/react": "^10.3.0",
     "axios": "^1.6.0",
     "gsap": "^3.12.2",
     "next": "13.5.6",
