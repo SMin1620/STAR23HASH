@@ -47,6 +47,34 @@ export default function Ramdon() {
               date="2020.02.02"
               state="written"
             />
+            <TestPlanetCard
+              id={1}
+              planetNumber={3}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
+            <TestPlanetCard
+              id={1}
+              planetNumber={5}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
+            <TestPlanetCard
+              id={1}
+              planetNumber={6}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
+            <TestPlanetCard
+              id={1}
+              planetNumber={4}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
 
             <PlanetCard
               id={1}

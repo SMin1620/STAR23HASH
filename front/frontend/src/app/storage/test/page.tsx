@@ -13,15 +13,21 @@ export default async function Test() {
     <>
       <div className="absolute z-10 grid h-screen w-screen items-center justify-center">
         <st.TestBoard className=" h-96  w-fit items-center justify-center overflow-y-scroll">
-          <TestPlanetCard
+          {/* <TestPlanetCard
             id={1}
             planetNumber={1}
             name="김감자"
             date="2020.02.02"
             state="written"
-          />
+          /> */}
 
-          <TestPlanet />
+          <TestPlanet planetNum={1} />
+          <TestPlanet planetNum={2} />
+          <TestPlanet planetNum={3} />
+          <TestPlanet planetNum={4} />
+          <TestPlanet planetNum={5} />
+          <TestPlanet planetNum={6} />
+
           <span>Axios Test</span>
           <hr />
           {test.map((it) => (
