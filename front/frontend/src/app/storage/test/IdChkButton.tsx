@@ -1,10 +1,10 @@
 'use client'
 
 import { idCheckTest } from '@/app/utils/storage/idCheckTest'
-
+import { authAxiosTest } from '@/app/utils/storage/authAxiosTest'
 export default function IdChkButton() {
   const handleClick = () => {
-    idCheckTest()
+    authAxiosTest()
   }
 
   return (
