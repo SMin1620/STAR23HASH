@@ -7,21 +7,19 @@ import Fail from './component/fail'
 import { useSearchParams } from 'next/navigation'
 
 type Props = {
-
   searchParams: {
     isSuccess: string
   }
 }
 
-export default function SendResult({  searchParams }: Props) {
-
+export default function SendResult({ searchParams }: Props) {
   // if(searchParams.isSuccess){
   //   console.log('bool');
-    
+
   // }
   // else{
   //   console.log(typeof(searchParams.isSuccess));
-    
+
   // }
 
   return (
@@ -34,7 +32,7 @@ export default function SendResult({  searchParams }: Props) {
             <stt.InnerCircle2></stt.InnerCircle2>
             <stt.InnerCircle3></stt.InnerCircle3>
           </stt.InnerCircle>
-          {searchParams.isSuccess==="true"? 
+          {searchParams.isSuccess === 'true' ? (
             <>
               <st.ContentBox>
                 <Success />
@@ -43,7 +41,7 @@ export default function SendResult({  searchParams }: Props) {
                 <stt.button>확인</stt.button>
               </Link>
             </>
-           : 
+          ) : (
             <>
               <st.ContentBox>
                 <Fail />
@@ -52,7 +50,7 @@ export default function SendResult({  searchParams }: Props) {
                 <stt.button>돌아가기</stt.button>
               </Link>
             </>
-          }
+          )}
         </stt.SendBox>
       </stt.SendBoxDiv>
     </>
