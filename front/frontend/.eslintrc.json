@@ -31,7 +31,11 @@
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "no-unused-vars": "off", //타입스크립트 사용시 interface의 변수명을 eslint가 잡지 않도록 함.
     "@typescript-eslint/no-unused-vars": "warn", //대신 사용하지 않는 변수는 @typescript/eslint를 통해 잡아줌.
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react-hooks/rules-of-hooks": "error", // Hooks 규칙 확인
+    "react-hooks/exhaustive-deps": "warn", // effect의 의존성 배열 확인
+    "@next/next/no-img-element": "off", // Next.js의 <img> 요소 사용 경고 끄기
+    "jsx-a11y/alt-text": "off" // img 요소의 alt 속성 확인 규칙 끄기
   },
   "env": {
     "node": true,
