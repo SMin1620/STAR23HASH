@@ -22,4 +22,11 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     @Query(value = "select n from Note n where n.room.id =:roomId")
     List<Note> findAllByNote(Long roomId);
 
+    /**
+     * 쪽지 답장
+     */
+    // 답장시 이전 받은 메시지 답장 여부 처리
+    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId")
+    Optional<Note> findByPreNote(Long roomId, Long memberId);
+
 }

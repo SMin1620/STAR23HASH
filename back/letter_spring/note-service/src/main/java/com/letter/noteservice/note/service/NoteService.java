@@ -1,13 +1,11 @@
 package com.letter.noteservice.note.service;
 
-import com.letter.noteservice.common.BaseResponse;
 import com.letter.noteservice.exception.BusinessLogicException;
 import com.letter.noteservice.exception.ExceptionCode;
 import com.letter.noteservice.note.dto.NoteDto;
 import com.letter.noteservice.note.entity.Note;
 import com.letter.noteservice.note.entity.Room;
 import com.letter.noteservice.note.feign.AuthFeignClient;
-import com.letter.noteservice.note.mapper.NoteMapper;
 import com.letter.noteservice.note.repository.NoteRepository;
 import com.letter.noteservice.note.repository.RoomRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -92,6 +89,9 @@ public class NoteService {
         String phone = request.getHeader("Member-Authorization-Phone");
         System.out.println("phone >>> " + phone);
 
+        // 인증 서버에서 유저 id 가져오기
+        Long memberId = authFeignClient.findMemberId(phone);
+
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROOM_NOT_FOUND));
 
@@ -108,6 +108,11 @@ public class NoteService {
                 .build();
 
         noteRepository.save(note);
+
+        // 이전 쪽지 답장 여부 처리
+        Note preNote = noteRepository.findByPreNote(roomId, memberId)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOTE_NOT_FOUND));
+        preNote.setReply(true);
 
         return note;
     }
