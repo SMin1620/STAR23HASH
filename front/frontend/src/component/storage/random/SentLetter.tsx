@@ -12,10 +12,10 @@ type Props = {
 export default function SentLetter({ id, name, date, content }: Props) {
   return (
     <c.LetterSent>
-      <c.LetterHeader className="items-end">
+      <c.SentLetterHeader className="items-start">
         <c.LetterName>{name}</c.LetterName>
         <c.LetterDate>{date}</c.LetterDate>
-      </c.LetterHeader>
+      </c.SentLetterHeader>
 
       <c.LetterContent>{content}</c.LetterContent>
     </c.LetterSent>

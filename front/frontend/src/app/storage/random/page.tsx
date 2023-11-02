@@ -3,6 +3,7 @@ import * as r from './random.styled'
 
 import BackButton from '@/component/storage/BackButton'
 import PlanetCard from '@/component/storage/random/PlanetCard'
+import TestPlanetCard from '../test/testcomponent/TestPlanetCard'
 
 export default function Ramdon() {
   return (
@@ -39,6 +40,41 @@ export default function Ramdon() {
                 </r.TitleWrapper>
               </Link>
             </r.Card> */}
+            <TestPlanetCard
+              id={1}
+              planetNumber={1}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
+            <TestPlanetCard
+              id={1}
+              planetNumber={3}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
+            <TestPlanetCard
+              id={1}
+              planetNumber={5}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
+            <TestPlanetCard
+              id={1}
+              planetNumber={6}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
+            <TestPlanetCard
+              id={1}
+              planetNumber={4}
+              name="김감자"
+              date="2020.02.02"
+              state="written"
+            />
 
             <PlanetCard
               id={1}
