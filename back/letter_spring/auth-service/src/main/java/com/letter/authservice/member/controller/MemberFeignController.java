@@ -1,6 +1,9 @@
 package com.letter.authservice.member.controller;
 
+import com.letter.authservice.exception.BusinessLogicException;
+import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.member.dto.MemberFeignDto;
+import com.letter.authservice.member.dto.NicknameDto;
 import com.letter.authservice.member.entity.Member;
 import com.letter.authservice.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,12 +39,33 @@ public class MemberFeignController {
             member = memberRepository.findByRandom();
             if (! member.getPhone().equals(phone)) break;
         }
+
+        // 랜덤 동물 닉네임 유효성 검사
+        String senderNickname = NicknameDto.randomNickname();
+        while (senderNickname.length() > 8) {
+            senderNickname = NicknameDto.randomNickname();
+        }
+        String receiverNickname = NicknameDto.randomNickname();
+        while (receiverNickname.length() > 8) {
+            receiverNickname = NicknameDto.randomNickname();
+        }
         
         return MemberFeignDto.MemberFeignRandomDto.builder()
                 .senderId(memberRepository.findByPhone(phone).get().getId())
-                .senderName("보낸 사람 닉네임")
+                .senderName(senderNickname)
                 .receiverId(member.getId())
-                .receiverName("받는 사람 닉네임")
+                .receiverName(receiverNickname)
                 .build();
     }
+
+    @GetMapping("/{phone}")
+    public Long findMemberId(@PathVariable(name = "phone") String phone) {
+
+        Member member = memberRepository.findByPhone(phone)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return member.getId();
+    }
+
+
 }
