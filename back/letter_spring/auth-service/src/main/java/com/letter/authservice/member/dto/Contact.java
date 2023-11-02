@@ -14,4 +14,11 @@ public class Contact {
     private String name;
     private String phone;
 
+    public static Contact toDto(Contact contact){
+        return Contact.builder()
+                .name(contact.getName())
+                .phone(contact.getPhone())
+                .build();
+    }
+
 }
