@@ -65,18 +65,6 @@ public class NoteController {
     }
 
     /**
-     * 쪽지 방 상세 조회
-     */
-//    @GetMapping("/room/{roomId}")
-//    public BaseResponse roomDetail(
-//            HttpServletRequest request,
-//            @PathVariable("roomId") Long roomId
-//    ) {
-//        Room room = roomService.roomDetail(request, roomId);
-//        return new BaseResponse(HttpStatus.OK, "쪽지 방 상세 조회 성공", roomMapper.findRoom(room));
-//    }
-
-    /**
      * 쪽지 방 목록 조회
      */
     @GetMapping("/room")
