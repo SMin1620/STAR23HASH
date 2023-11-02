@@ -78,3 +78,16 @@ export const CloseButton2 = styled.button`
   font-weight: bold;
   border-radius: 10px;
 `
+
+export const FileInput = styled.input`
+  height: 40px;
+`
+export const FileInputWrapper = styled.div``
+
+export const FileInputLabel = styled.label``
+
+export const XButton = styled.button`
+  position: absolute;
+  top: 15px;
+  left: 250px;
+`
