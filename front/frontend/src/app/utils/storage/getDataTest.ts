@@ -1,12 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-// import { item } from '@/app/types/types'
-
-interface item {
-  userId: number
-  id: number
-  title: string
-  body: string
-}
+import { item } from '@/app/types/storage/types'
 
 export const getDataTest = async (): Promise<item[]> => {
   try {
