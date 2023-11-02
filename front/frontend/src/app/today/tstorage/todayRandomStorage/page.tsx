@@ -33,8 +33,8 @@ export default function TodayRandomStorage() {
       planeRefs.forEach((ref) => {
         if (ref.current) {
           // ref.current.position.x += x * 0.05
-          ref.current.position.y += y * -0.1
-          ref.current.position.z += y * -0.5
+          ref.current.position.y += y * -0.01
+          ref.current.position.z += y * -0.05
         }
       })
     },
@@ -44,11 +44,11 @@ export default function TodayRandomStorage() {
       <Canvas
         style={{ width: '100%', height: '100%' }}
         camera={{
-          position: [-17, 50, -100],
+          position: [-22, 50, -100],
           // rotation: [0, Math.PI / 8, 0],
           near: 0.01,
         }}
-        {...bind()}
+        // {...bind()}
       >
         <Stars
           radius={100}
@@ -81,12 +81,12 @@ export default function TodayRandomStorage() {
               />
             )
           })}
-          {/* <RocketModel
+          <RocketModel
             url="/assets/rocket-1.glb"
-            scale={[8, 8, 8]}
-            position={[-23, 38, -50]}
-            rotation={[Math.PI / 10, Math.PI, Math.PI / -8]}
-          /> */}
+            scale={[10, 10, 10]}
+            position={[-23, 73, 85]}
+            rotation={[Math.PI / 4.5, Math.PI, Math.PI / -8]}
+          />
         </Suspense>
         <OrbitControls />
       </Canvas>
