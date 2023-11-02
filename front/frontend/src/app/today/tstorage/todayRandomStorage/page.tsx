@@ -1,14 +1,16 @@
 'use client'
 import { Canvas, useThree } from '@react-three/fiber'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { OrbitControls, Stars } from '@react-three/drei'
 import RandomModel from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import GradientBackground from '../../../../component/Three/three.styled'
 import { Models } from '@/component/today/todayStorage/random/planetModel/planetModel'
 import RocketModel from '@/component/today/todayStorage/random/rocketModel/rocketModel'
 import * as THREE from 'three'
+import RandomPlanet from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
+import { useGesture } from '@use-gesture/react'
 
-const totalAmount = 10
+const totalAmount = 20
 
 export default function TodayRandomStorage() {
   const Axes = () => {
@@ -20,11 +22,28 @@ export default function TodayRandomStorage() {
     }, [scene])
     return null
   }
+
+  const planeRefs = Array(totalAmount)
+    .fill(null)
+    .map(() => ({ current: null as THREE.Object3D | null }))
+
+  const bind = useGesture({
+    onDrag: ({ offset: [x, y] }) => {
+      planeRefs.forEach((ref) => {
+        if (ref.current) {
+          ref.current.position.z += y * 0.01
+          // ref.current.position.x += x * 0.01
+          ref.current.position.y += y * 0.01
+        }
+      })
+    },
+  })
   return (
     <GradientBackground>
       <Canvas
         style={{ width: '100%', height: '100%' }}
         camera={{ position: [-20, 10, -100], near: 0.01 }}
+        {...bind()}
       >
         <Stars
           radius={100}
@@ -48,11 +67,12 @@ export default function TodayRandomStorage() {
               startPostion[2] + 20 * index,
             ]
             return (
-              <RandomModel
+              <RandomPlanet
                 key={index}
                 url={model.url}
                 scale={model.scale}
                 position={position}
+                mesh={planeRefs[index]}
               />
             )
           })}
@@ -63,7 +83,7 @@ export default function TodayRandomStorage() {
             rotation={[Math.PI / 10, Math.PI, Math.PI / -8]}
           />
         </Suspense>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
       </Canvas>
     </GradientBackground>
   )
