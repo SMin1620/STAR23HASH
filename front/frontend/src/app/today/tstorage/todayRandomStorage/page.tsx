@@ -32,8 +32,8 @@ export default function TodayRandomStorage() {
       planeRefs.forEach((ref) => {
         if (ref.current) {
           // ref.current.position.x += x * 0.05
-          ref.current.position.y += y * 0.1
-          ref.current.position.z += y * 0.5
+          ref.current.position.y += y * -0.1
+          ref.current.position.z += y * -0.5
         }
       })
     },
