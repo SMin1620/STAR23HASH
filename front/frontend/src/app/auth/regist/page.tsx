@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 export default function Regist() {
   const router = useRouter()
-  const { phone, setPhone } = PhoneStore()
+  const { phone } = PhoneStore()
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
@@ -17,11 +17,13 @@ export default function Regist() {
   function PasswordAuthClick() {
     if (inputValue !== '1234') {
     } else {
-      router.push('/main')
+      router.push('/auth/registpass')
     }
   }
 
-  function sendAuthClick() {}
+  function sendAuthClick() {
+    alert('인증번호가 전송되었습니다.')
+  }
 
   return (
     <div>
@@ -31,6 +33,8 @@ export default function Regist() {
             style={{ marginTop: '790px' }}
             className="flex flex-col items-center justify-center"
           >
+            <div className="p-4 text-4xl text-white">별이삼샵</div>
+
             <div className="mb-3 text-6xl">{phone}</div>
             <button
               onClick={sendAuthClick}

@@ -1,17 +1,8 @@
 'use client'
-import {
-  Canvas,
-  useThree,
-  useFrame,
-  extend,
-  useLoader,
-} from '@react-three/fiber'
-import { PlaneGeometry, MeshBasicMaterial, Mesh, TextureLoader } from 'three'
-
-import { OrbitControls, Stars } from '@react-three/drei'
-import { useFBX, useGLTF } from '@react-three/drei'
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
+import { Canvas, useThree, useFrame } from '@react-three/fiber'
+import { Stars } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import GradientBackground from './three.styled'
 
@@ -43,11 +34,6 @@ function Planet2() {
   gltf.scene.rotation.z = -0.5
   gltf.scene.rotation.y = -0.8
 
-  //   useFrame(({ clock }) => {
-  //     // 매 프레임마다 y축으로 조금씩 이동
-  //     ref.current.position.x += Math.sin(clock.getElapsedTime()) * 0.001
-  //   })
-
   return <primitive object={gltf.scene} ref={ref} />
 }
 
@@ -72,15 +58,7 @@ function Scene() {
     const AmbientLigthtight = new THREE.AmbientLight('white', 1)
     AmbientLigthtight.position.z = 2
     scene.add(AmbientLigthtight)
-
-    // const lightHelper = new THREE.DirectionalLightHelper(light, 5)
-    // scene.add(lightHelper)
   }, [])
-
-  // Animation
-  useFrame(({ clock }) => {
-    // animation logic here
-  })
 
   return (
     <>

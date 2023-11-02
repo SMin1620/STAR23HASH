@@ -21,15 +21,15 @@ function Modal({ onClose, message }: ModalProps) {
           <></>
         ) : (
           <div>
-            <div className="text-center" style={{ marginBottom: '20px' }}>
+            <M.content className="text-center">
               <div>등록된 계정이 없어요</div>
               <div>가입하시겠습니까?</div>
-            </div>
+            </M.content>
             <div className="flex" style={{ justifyContent: 'space-between' }}>
               <Link href="/auth/regist">
-                <div>넹</div>
+                <M.yesButton>넹</M.yesButton>
               </Link>
-              <button onClick={onClose}>아니용</button>
+              <M.noButton onClick={onClose}>아니용</M.noButton>
             </div>
           </div>
         )}
