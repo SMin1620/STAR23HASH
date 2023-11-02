@@ -33,9 +33,9 @@ export default function WriteFriend() {
           <st.ContentBox>
             <st.InputContent></st.InputContent>
           </st.ContentBox>
-          <stt.SendBoxDiv>
+          <stt.EmptyDiv>
             <stt.button onClick={handleSend}>전송</stt.button>
-          </stt.SendBoxDiv>
+          </stt.EmptyDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
     </>
