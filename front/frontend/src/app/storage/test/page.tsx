@@ -1,6 +1,8 @@
+import IdChkButton from './IdChkButton'
+import LoginButton from './LoginButton'
 import * as st from './storage.styled'
 
-import { getDataTest } from '@/app/utils/getDataTest'
+import { getDataTest } from '@/app/utils/storage/getDataTest'
 
 export default async function Test() {
   const test = await getDataTest()
@@ -19,6 +21,10 @@ export default async function Test() {
               <hr />
             </>
           ))}
+          <div className="flex flex-row">
+            <LoginButton />
+            <IdChkButton />
+          </div>
         </st.TestBoard>
       </div>
     </>
