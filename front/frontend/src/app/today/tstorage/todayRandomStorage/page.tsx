@@ -1,14 +1,17 @@
 'use client'
 import { Canvas, useThree } from '@react-three/fiber'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { OrbitControls, Stars } from '@react-three/drei'
 import RandomModel from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import GradientBackground from '../../../../component/Three/three.styled'
 import { Models } from '@/component/today/todayStorage/random/planetModel/planetModel'
 import RocketModel from '@/component/today/todayStorage/random/rocketModel/rocketModel'
 import * as THREE from 'three'
+import RandomPlanet from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
+import { useGesture } from '@use-gesture/react'
+import Light from '@/component/today/todayStorage/light/light'
 
-const totalAmount = 10
+const totalAmount = 30
 
 export default function TodayRandomStorage() {
   const Axes = () => {
@@ -20,11 +23,32 @@ export default function TodayRandomStorage() {
     }, [scene])
     return null
   }
+
+  const planeRefs = Array(totalAmount)
+    .fill(null)
+    .map(() => ({ current: null as THREE.Object3D | null }))
+
+  const bind = useGesture({
+    onDrag: ({ offset: [x, y] }) => {
+      planeRefs.forEach((ref) => {
+        if (ref.current) {
+          // ref.current.position.x += x * 0.05
+          ref.current.position.y += y * -0.01
+          ref.current.position.z += y * -0.05
+        }
+      })
+    },
+  })
   return (
     <GradientBackground>
       <Canvas
         style={{ width: '100%', height: '100%' }}
-        camera={{ position: [-20, 10, -100], near: 0.01 }}
+        camera={{
+          position: [-22, 50, -100],
+          // rotation: [0, Math.PI / 8, 0],
+          near: 0.01,
+        }}
+        // {...bind()}
       >
         <Stars
           radius={100}
@@ -36,31 +60,32 @@ export default function TodayRandomStorage() {
           speed={2}
         />
         <Axes />
+        <Light />
         <Suspense fallback={null}>
-          <ambientLight intensity={0.8} />
-          <spotLight position={[10, 10, -10]} angle={0.3} />
+          <ambientLight intensity={0.5} />
           {Array.from({ length: totalAmount }).map((_, index) => {
             const model = Models[index % Models.length]
             const startPostion = [-3, -20, -63]
             const position = [
-              startPostion[0] + -2 * index,
+              startPostion[0],
               startPostion[1] + 10 * index,
-              startPostion[2] + 20 * index,
+              startPostion[2] + 60 * index,
             ]
             return (
-              <RandomModel
+              <RandomPlanet
                 key={index}
                 url={model.url}
                 scale={model.scale}
                 position={position}
+                mesh={planeRefs[index]}
               />
             )
           })}
           <RocketModel
             url="/assets/rocket-1.glb"
-            scale={[8, 8, 8]}
-            position={[-23, 38, -50]}
-            rotation={[Math.PI / 10, Math.PI, Math.PI / -8]}
+            scale={[10, 10, 10]}
+            position={[-23, 73, 85]}
+            rotation={[Math.PI / 4.5, Math.PI, Math.PI / -8]}
           />
         </Suspense>
         <OrbitControls />
