@@ -32,13 +32,13 @@ public class Room {
     @Column(nullable = false, name = "receiver_name")
     private String receiverName;
 
-    @Column(nullable = false, name = "read")
+    @Column(nullable = false, name = "is_read")
     @ColumnDefault("false")
-    private Boolean read;
+    private Boolean isRead;
 
-    @Column(nullable = false, name = "reply")
+    @Column(nullable = false, name = "is_reply")
     @ColumnDefault("false")
-    private Boolean reply;
+    private Boolean isReply;
 
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
@@ -46,5 +46,5 @@ public class Room {
     @ColumnDefault("false")
     private Boolean store;
 
-    private String status;
+    private String sendStatus;
 }

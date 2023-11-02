@@ -51,8 +51,8 @@ public class NoteService {
                 .senderName(data.getSenderName())
                 .receiverId(data.getReceiverId())
                 .receiverName(data.getReceiverName())
-                .read(false)
-                .reply(false)
+                .isRead(false)
+                .isReply(false)
                 .store(false)
                 .createdAt(LocalDateTime.now())
                 .build();
@@ -66,8 +66,8 @@ public class NoteService {
                 .receiverName(data.getReceiverName())
                 .content(dto.getContent())
                 .createdAt(LocalDateTime.now())
-                .read(false)
-                .reply(false)
+                .isRead(false)
+                .isReply(false)
                 .room(room)
                 .build();
         noteRepository.save(note);
@@ -102,8 +102,8 @@ public class NoteService {
                 .receiverName(room.getSenderName())
                 .content(dto.getContent())
                 .createdAt(room.getCreatedAt())
-                .read(false)
-                .reply(false)
+                .isRead(false)
+                .isReply(false)
                 .room(room)
                 .build();
 
@@ -112,7 +112,7 @@ public class NoteService {
         // 이전 쪽지 답장 여부 처리
         Note preNote = noteRepository.findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(roomId, memberId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOTE_NOT_FOUND));
-        preNote.setReply(true);
+        preNote.setIsReply(true);
 
         return note;
     }
@@ -148,8 +148,8 @@ public class NoteService {
             if (note.getSenderId() == memberId) dto.setSend(true);
             else dto.setSend(false);
 
-            if (note.getReceiverId() == memberId && ! note.getRead()) dto.setRead(false);
-            else dto.setRead(true);
+            if (note.getReceiverId() == memberId && ! note.getIsRead()) dto.setIsRead(false);
+            else dto.setIsRead(true);
 
             noteListResDtos.add(dto);
         }
@@ -175,7 +175,7 @@ public class NoteService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOTE_NOT_FOUND));
 
         // 쪽지 읽음 처리 여부
-        if (! note.getRead() && note.getSenderId() != memberId) updateNoteReadStatus(note);
+        if (! note.getIsRead() && note.getSenderId() != memberId) updateNoteReadStatus(note);
 
         return NoteDto.NoteDetailResDto.builder()
                 .id(note.getId())
@@ -191,6 +191,6 @@ public class NoteService {
 
     @Transactional
     public void updateNoteReadStatus(Note note) {
-        note.setRead(true);
+        note.setIsRead(true);
     }
 }

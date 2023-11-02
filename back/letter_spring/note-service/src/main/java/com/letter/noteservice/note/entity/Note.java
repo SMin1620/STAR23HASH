@@ -38,11 +38,11 @@ public class Note {
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
-    private Boolean read;
+    @Column(nullable = false, name = "is_read")
+    private Boolean isRead;
 
-    @Column(nullable = false)
-    private Boolean reply;
+    @Column(nullable = false, name = "is_reply")
+    private Boolean isReply;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "room_id")
