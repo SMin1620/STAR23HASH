@@ -16,6 +16,7 @@ export default function Regist() {
   // 인증확인 로직
   function PasswordAuthClick() {
     if (inputValue !== '1234') {
+      alert('틀렸어용')
     } else {
       router.push('/auth/registpass')
     }
