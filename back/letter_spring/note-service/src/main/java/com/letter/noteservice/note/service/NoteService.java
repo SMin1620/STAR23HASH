@@ -110,7 +110,7 @@ public class NoteService {
         noteRepository.save(note);
 
         // 이전 쪽지 답장 여부 처리
-        Note preNote = noteRepository.findByPreNote(roomId, memberId)
+        Note preNote = noteRepository.findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(roomId, memberId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOTE_NOT_FOUND));
         preNote.setReply(true);
 
