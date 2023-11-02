@@ -2,6 +2,7 @@ package com.letter.noteservice.note.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -31,7 +32,19 @@ public class Room {
     @Column(nullable = false, name = "receiver_name")
     private String receiverName;
 
+    @Column(nullable = false, name = "read")
+    @ColumnDefault("false")
+    private Boolean read;
+
+    @Column(nullable = false, name = "reply")
+    @ColumnDefault("false")
+    private Boolean reply;
+
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
+    @ColumnDefault("false")
+    private Boolean store;
+
+    private String status;
 }
