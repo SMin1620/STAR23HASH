@@ -33,7 +33,7 @@ export default function TodayRandomStorage() {
         if (ref.current) {
           // ref.current.position.x += x * 0.05
           ref.current.position.y += y * 0.1
-          ref.current.position.z += y * 0.2
+          ref.current.position.z += y * 0.5
         }
       })
     },
@@ -43,7 +43,7 @@ export default function TodayRandomStorage() {
       <Canvas
         style={{ width: '100%', height: '100%' }}
         camera={{ position: [-17, -10, -90], near: 0.01 }}
-        // {...bind()}
+        {...bind()}
       >
         <Stars
           radius={100}
@@ -63,7 +63,7 @@ export default function TodayRandomStorage() {
             const position = [
               startPostion[0],
               startPostion[1] + 10 * index,
-              startPostion[2] + 20 * index,
+              startPostion[2] + 50 * index,
             ]
             return (
               <RandomPlanet
@@ -82,7 +82,7 @@ export default function TodayRandomStorage() {
             rotation={[Math.PI / 10, Math.PI, Math.PI / -8]}
           />
         </Suspense>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
       </Canvas>
     </GradientBackground>
   )
