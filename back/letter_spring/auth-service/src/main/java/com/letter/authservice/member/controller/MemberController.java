@@ -124,4 +124,10 @@ public class MemberController {
         return memberService.createContact(request,contactRequestDto);
     }
 
+    @GetMapping("/contact")
+    public List<Contact> getContact(HttpServletRequest request){
+
+        return memberService.checkContact(request);
+    }
+
 }

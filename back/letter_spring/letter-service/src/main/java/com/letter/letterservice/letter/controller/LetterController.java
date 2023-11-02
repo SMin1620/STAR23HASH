@@ -10,10 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,11 +30,21 @@ public class LetterController {
         return new BaseResponse(HttpStatus.OK,"편지 보내기 성공",letterService.createLetter(request, letterRequestDto));
     }
 
+    @GetMapping()
+    public BaseResponse getLetterList(HttpServletRequest request){
+        return new BaseResponse(HttpStatus.OK, "편지 리스트", letterService.getLetterList(request));
+    }
+
     @PostMapping("/contact")
     public BaseResponse createContact(HttpServletRequest request,
                                       @RequestBody @Valid ContactRequestDto contactRequestDto
                                       ){
         return new BaseResponse(HttpStatus.OK, "연락처 저장", letterService.createContact(request, contactRequestDto));
+    }
+
+    @GetMapping("/contact")
+    public BaseResponse getContact(HttpServletRequest request){
+        return new BaseResponse(HttpStatus.OK, "연락처 리스트", letterService.getContact(request));
     }
 
 }

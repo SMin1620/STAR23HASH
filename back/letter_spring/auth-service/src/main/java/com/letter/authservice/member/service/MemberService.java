@@ -14,7 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.util.RedisAssertions;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -30,6 +33,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -38,6 +42,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final RedisTemplate<String, String> redisTemplate;
+    private final RedisTemplate<String, Contact> redisTemplateObject;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
@@ -180,16 +185,27 @@ public class MemberService {
         Member member = memberRepository.findByPhone(
                 jwtTokenProvider.getUserPhone(
                 jwtTokenProvider.resolveToken(request))).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-        List<Contact> newContacts = new ArrayList<>();
 
+        ListOperations<String, Contact> list = redisTemplateObject.opsForList();
         for(Contact c:contactRequestDto.getContacts()){
             Optional<Member> m = memberRepository.findByPhone(c.getPhone());
             if(!m.isEmpty()){
                 Contact newContact = new Contact(c.getName(),c.getPhone());
-                newContacts.add(newContact);
+                list.rightPush(member.getId().toString(), newContact);
+                System.out.println(member.getId().toString());
             }
         }
         return true;
+    }
+
+    public List<Contact> checkContact(HttpServletRequest request){
+        Member member = memberRepository.findByPhone(jwtTokenProvider.getUserPhone(
+                        jwtTokenProvider.resolveToken(request)))
+                .orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        List<Contact> contactList= redisTemplateObject.opsForList().range(member.getId().toString(),0,-1);
+
+       return contactList;
     }
 
 }
