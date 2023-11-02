@@ -31,9 +31,9 @@ export default function TodayRandomStorage() {
     onDrag: ({ offset: [x, y] }) => {
       planeRefs.forEach((ref) => {
         if (ref.current) {
-          ref.current.position.z += y * 0.01
-          // ref.current.position.x += x * 0.01
-          ref.current.position.y += y * 0.01
+          // ref.current.position.x += x * 0.05
+          ref.current.position.y += y * 0.1
+          ref.current.position.z += y * 0.2
         }
       })
     },
@@ -62,7 +62,7 @@ export default function TodayRandomStorage() {
             const model = Models[index % Models.length]
             const startPostion = [-3, -20, -63]
             const position = [
-              startPostion[0] + -2 * index,
+              startPostion[0],
               startPostion[1] + 10 * index,
               startPostion[2] + 20 * index,
             ]
