@@ -9,6 +9,7 @@ import RocketModel from '@/component/today/todayStorage/random/rocketModel/rocke
 import * as THREE from 'three'
 import RandomPlanet from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import { useGesture } from '@use-gesture/react'
+import Light from '@/component/today/todayStorage/light/light'
 
 const totalAmount = 30
 
@@ -42,8 +43,8 @@ export default function TodayRandomStorage() {
     <GradientBackground>
       <Canvas
         style={{ width: '100%', height: '100%' }}
-        camera={{ position: [-17, -10, -90], near: 0.01 }}
-        {...bind()}
+        camera={{ position: [-17, -60, -90], near: 0.01 }}
+        // {...bind()}
       >
         <Stars
           radius={100}
@@ -55,8 +56,9 @@ export default function TodayRandomStorage() {
           speed={2}
         />
         <Axes />
+        <Light />
         <Suspense fallback={null}>
-          <ambientLight intensity={0.8} />
+          <ambientLight intensity={0.5} />
           {Array.from({ length: totalAmount }).map((_, index) => {
             const model = Models[index % Models.length]
             const startPostion = [-3, -20, -63]
@@ -75,14 +77,14 @@ export default function TodayRandomStorage() {
               />
             )
           })}
-          <RocketModel
+          {/* <RocketModel
             url="/assets/rocket-1.glb"
             scale={[8, 8, 8]}
             position={[-23, 38, -50]}
             rotation={[Math.PI / 10, Math.PI, Math.PI / -8]}
-          />
+          /> */}
         </Suspense>
-        {/* <OrbitControls /> */}
+        <OrbitControls />
       </Canvas>
     </GradientBackground>
   )
