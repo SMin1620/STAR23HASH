@@ -44,7 +44,7 @@ public class Note {
     @Column(nullable = false)
     private Boolean reply;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "room_id")
     @BatchSize(size = 100)
     private Room room;
