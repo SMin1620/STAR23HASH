@@ -30,7 +30,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://192.168.30.130:9000/api/:path*',
+        destination: 'http://k9e106.p.ssafy.io:9000/api/:path*',
       },
     ]
   },

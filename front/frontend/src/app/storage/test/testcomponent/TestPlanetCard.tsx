@@ -2,7 +2,6 @@
 
 import TestPlanet from '@/component/Three/testPlanet'
 import * as c from './storageComponent.styled'
-import { useRouter } from 'next/navigation'
 
 type Props = {
   id: number
@@ -19,8 +18,6 @@ export default function TestPlanetCard({
   date,
   state,
 }: Props) {
-  const router = useRouter()
-
   return (
     <c.Card className="group">
       <c.CardImageWrapper className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full group-hover:opacity-75">
@@ -36,9 +33,9 @@ export default function TestPlanetCard({
           alt="planet icon."
           className=" h-full w-full object-cover object-center "
         /> */}
-        <div className="aspect-h-1 aspect-w-1 h-full w-full object-cover object-center ">
-          <TestPlanet />
-        </div>
+        {/* <div className="aspect-h-1 aspect-w-1 h-full w-full object-cover object-center "> */}
+        <TestPlanet planetNum={planetNumber} />
+        {/* </div> */}
       </c.CardImageWrapper>
       <c.TitleWrapper>
         <c.CardTitle>{name}</c.CardTitle>

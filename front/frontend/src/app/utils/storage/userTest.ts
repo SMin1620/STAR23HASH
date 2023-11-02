@@ -12,7 +12,7 @@ interface Data {
   memberId: number
 }
 
-const DOMAIN = process.env.NEXT_PUBLIC_TEST
+const DOMAIN = process.env.NEXT_PUBLIC_TEST2
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -23,8 +23,8 @@ export const userTest = async (): Promise<Response> => {
     const res: AxiosResponse = await axiosInstance.post(
       `${DOMAIN}/api/members/login`,
       {
-        phone: '12',
-        password: '12',
+        phone: '1234',
+        password: '1234',
       },
     )
 
