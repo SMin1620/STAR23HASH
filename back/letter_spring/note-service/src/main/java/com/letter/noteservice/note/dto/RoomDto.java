@@ -43,7 +43,7 @@ public class RoomDto {
         private String receiverName;
         private LocalDateTime createdAt;
         private Boolean read;
-        private Boolean store;
+        private Boolean reply;
     }
 
 

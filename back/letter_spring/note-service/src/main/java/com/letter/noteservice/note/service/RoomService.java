@@ -1,5 +1,7 @@
 package com.letter.noteservice.note.service;
 
+import com.letter.noteservice.exception.BusinessLogicException;
+import com.letter.noteservice.exception.ExceptionCode;
 import com.letter.noteservice.note.dto.RoomDto;
 import com.letter.noteservice.note.entity.Note;
 import com.letter.noteservice.note.entity.Room;
@@ -52,9 +54,16 @@ public class RoomService {
                     .build();
 
 
-            Optional<Note> dto = noteRepository.findRoomByNote(room.getId(), memberId);
-            if (dto.isEmpty()) roomDto.setRead(true);
-            else roomDto.setRead(false);
+            // 쪽지 읽음 여부 처리
+            Optional<Note> readNote = noteRepository.findRoomByNote(room.getId(), memberId);
+            if (readNote.isPresent()) roomDto.setReply(true);
+            else roomDto.setReply(false);
+
+            // 쪽지 답장 여부 처리
+            Note replyNote = noteRepository.findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(room.getId(), memberId)
+                            .orElseThrow(() -> new BusinessLogicException(ExceptionCode.NOTE_NOT_FOUND));
+            if (replyNote.getReceiverId() == memberId && replyNote.getRead()) roomDto.setReply(true);
+            else roomDto.setReply(false);
 
             roomListResDtos.add(roomDto);
         }
