@@ -8,7 +8,7 @@ interface Phone {
 const PhoneStore = create<Phone>((set) => ({
   phone: '',
   setPhone: (phone: string) => {
-    set((state) => ({ phone: phone }))
+    set(() => ({ phone: phone }))
   },
 }))
 
