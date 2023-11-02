@@ -17,7 +17,7 @@ export default function Delivery({ children }: { children: React.ReactNode }) {
         </div>
         <div className="absolute z-10">
           <div
-            style={{ marginTop: '730px' }}
+            style={{ marginTop: '850px' }}
             className="mt-20 flex items-center justify-center pt-20 text-2xl text-white"
           >
             남은 시간

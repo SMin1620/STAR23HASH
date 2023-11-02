@@ -31,6 +31,29 @@ export const ModalContent = styled.div`
   borderradius: '.5em';
 `
 
-export const CloseButton = styled.button`
-  // Add your styles for the close button here.
+export const content = styled.div`
+  font-size: 15pt;
+  padding: 5px;
+  margin-bottom: 30px;
+`
+
+export const yesButton = styled.div`
+  background-color: #ffe189;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
+  margin-right: 30px;
+`
+
+export const noButton = styled.button`
+  background-color: #ffe189;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 40px;
+  border-radius: 10px;
 `

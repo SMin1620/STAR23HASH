@@ -1,23 +1,29 @@
 'use client'
 import Logincomponent from '../../../component/Three/login'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import PhoneStore from '@/store/phone'
 import { useRouter } from 'next/navigation'
+import { passwordAxios } from '@/app/utils/passwordAxios'
+import * as p from './loginpassword.styled'
 
 export default function LoginPassword() {
   const router = useRouter()
-  const { phone, setPhone } = PhoneStore()
+  const { phone } = PhoneStore()
   const [inputValue, setInputValue] = useState('')
 
-  useEffect(() => {
-    console.log(phone)
-  })
-
   // 암호확인 로직
-  function passwordClick() {
-    if (inputValue !== '1234') {
+  async function passwordClick() {
+    if (inputValue === '') {
+      alert('비밀번호를 입력해주세요')
     } else {
-      router.push('/main')
+      console.log('번호 :' + phone + '비번 : ' + inputValue)
+      const a = await passwordAxios(phone, inputValue)
+      console.log(a.message)
+      if (a.message == '로그인 성공') {
+        router.push('/main')
+      } else {
+        alert('비밀번호가 틀렸습니다.')
+      }
     }
   }
 
@@ -33,26 +39,15 @@ export default function LoginPassword() {
             <div className="mb-9">
               <img src="/assets/Astronaut-4.png" style={{ width: '230px' }} />
             </div>
-            <div>{phone}</div>
-            <input
-              style={{ width: '220px', height: '35px' }}
-              className="mb-5 rounded-lg bg-gray-300 text-center text-sm opacity-50	"
+            <div className="text-4xl text-white">{phone}</div>
+            <p.inputStyle
               placeholder="비밀번호를 입력해주세요"
               name="phone"
               type="password"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-            ></input>
-            <button
-              onClick={passwordClick}
-              style={{
-                backgroundColor: '#D9D9D9',
-                padding: '10px 20px 10px 20px',
-                borderRadius: '10px',
-              }}
-            >
-              확인
-            </button>
+            ></p.inputStyle>
+            <p.Button onClick={passwordClick}>확인</p.Button>
           </div>
         </div>
       </div>
