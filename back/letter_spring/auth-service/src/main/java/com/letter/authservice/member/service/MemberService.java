@@ -6,7 +6,9 @@ import com.letter.authservice.jwt.JwtTokenProvider;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
+import com.letter.authservice.member.entity.Roll;
 import com.letter.authservice.member.repository.MemberRepository;
+import com.letter.authservice.member.repository.RollRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final RollRepository rollRepository;
     private final RedisTemplate<String, String> redisTemplate;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
@@ -82,6 +85,13 @@ public class MemberService {
                 .build();
 
         memberRepository.save(member);
+
+        // 롤링페이퍼 자동 생성
+        Roll roll = Roll.builder()
+                .member(member)
+                .build();
+        rollRepository.save(roll);
+
         return member;
 
     }
