@@ -2,10 +2,6 @@
 
 import styled from 'styled-components'
 
-interface ContactObjectProps {
-  isSelected: boolean
-}
-
 export const ContentBox = styled.div`
   margin-top: auto;
   margin-bottom: auto;
@@ -14,10 +10,9 @@ export const ContentBox = styled.div`
 `
 export const ContactBox = styled.div`
   margin-top: 70px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-bottom: auto;
-  width: 90%;
   height: 35rem;
   overflow: auto;
   border: 1px solid lightgray;
@@ -25,17 +20,16 @@ export const ContactBox = styled.div`
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
 `
 
-export const ContactObject = styled.button<ContactObjectProps>`
-  height: 4.5rem;
+export const ContactObject = styled.div<{ $isSelected: boolean }>`
+  height: 4rem;
   width: 100%;
   text-align: left;
   border-bottom: 1px solid lightgray;
-
-  background-color: ${(props) =>
-    props.isSelected ? 'lightgray' : 'transparent'};
+  background-color: ${(props) => (props.$isSelected ? 'lightgray' : 'white')};
 `
 
 export const ContactName = styled.div`
+  padding-top: 10px;
   margin-bottom: 7px;
   margin-left: 10px;
   font-size: 1.5rem;
