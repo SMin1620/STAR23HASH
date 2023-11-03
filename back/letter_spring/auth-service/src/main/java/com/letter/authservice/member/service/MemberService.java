@@ -3,8 +3,6 @@ package com.letter.authservice.member.service;
 import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
-import com.letter.authservice.member.dto.Contact;
-import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
@@ -14,10 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.data.redis.util.RedisAssertions;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -33,7 +28,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -42,7 +36,6 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final RedisTemplate<String, String> redisTemplate;
-    private final RedisTemplate<String, Contact> redisTemplateObject;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
@@ -208,4 +201,14 @@ public class MemberService {
        return contactList;
     }
 
+
+    /**
+     * 테스츠 : 초기화
+     */
+    @Transactional
+    public Boolean reset() {
+        List<Member> memberList = memberRepository.findAll();
+        for (Member member : memberList) member.setIsWrite(false);
+        return true;
+    }
 }

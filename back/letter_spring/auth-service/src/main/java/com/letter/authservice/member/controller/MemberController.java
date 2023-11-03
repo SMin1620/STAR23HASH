@@ -4,8 +4,6 @@ import com.letter.authservice.common.BaseResponse;
 import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
-import com.letter.authservice.member.dto.Contact;
-import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
@@ -16,15 +14,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Tag(name = "회원 API")
 @RestController
@@ -109,19 +104,9 @@ public class MemberController {
     public Long getId(HttpServletRequest request){
         return memberService.getId(request);
     }
-    @GetMapping("/another/{phone}")
-    public Long getAnotherId(@PathVariable("phone") String phone){
-        return memberService.getAnotherId(phone);
-    }
-
-    @GetMapping("/check/{phone}")
-    public BaseResponse checkPhone(@PathVariable("phone") String phone){
-        return new BaseResponse(HttpStatus.OK, "전화번호 체크", memberService.checkPhone(phone));
-    }
-
-    @PostMapping("/contact")
-    public Boolean createContact(HttpServletRequest request,@RequestBody @Valid ContactRequestDto contactRequestDto){
-        return memberService.createContact(request,contactRequestDto);
+    @GetMapping("/another")
+    public Long getAnotherId(@RequestBody @Valid MemberDto.MemberAnotherRequestDto memberAnotherRequestDto){
+        return memberService.getAnotherId(memberAnotherRequestDto.getPhone());
     }
 
     @GetMapping("/contact")
@@ -129,5 +114,13 @@ public class MemberController {
 
         return memberService.checkContact(request);
     }
+    /**
+     * 테스트용 : 모든 유저 1일 1회 작성 횟수 초기화
+     */
+    @GetMapping("/reset")
+    public BaseResponse reset() {
+        return new BaseResponse(HttpStatus.OK, "초기화", memberService.reset());
+    }
+
 
 }

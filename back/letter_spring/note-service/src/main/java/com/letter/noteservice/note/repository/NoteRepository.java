@@ -13,8 +13,9 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 //    @Query(value = "select n from Note n where n.room.id = :roomId and n.receiverId = :memberId")
 //    List<Note> findByLastNote(Long roomId, Long memberId);
 
-    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId and n.isRead = false order by n.id desc")
-    Optional<Note> findRoomByNote(Long roomId, Long memberId);
+//    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId and n.isRead = false order by n.id desc")
+//    Optional<Note> findRoomByNote(Long roomId, Long memberId);
+    Optional<Note> findTopByRoomIdAndReceiverIdAndIsReadTrueOrderByCreatedAtDesc(Long roomId, Long memberId);
 
 
     /**
@@ -29,7 +30,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     // 답장시 이전 받은 메시지 답장 여부 처리
 //    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId order by n.id desc")
 //    Optional<Note> findByPreNote(Long roomId, Long memberId);
-    Optional<Note> findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(Long roomId, Long memberId);
+    Optional<Note> findTopByRoomIdAndReceiverIdOrSenderIdOrderByCreatedAtDesc(Long roomId, Long receiverId, Long senderId);
 
 
 }
