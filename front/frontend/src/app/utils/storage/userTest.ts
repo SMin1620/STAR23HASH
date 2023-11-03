@@ -53,7 +53,7 @@ const getCookieValue = (name: string): string | null => {
   return null
 }
 
-const DOMAIN = process.env.NEXT_PUBLIC_LOCAL || ''
+const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || ''
 
 const userTest = async (): Promise<any> => {
   console.log(DOMAIN)

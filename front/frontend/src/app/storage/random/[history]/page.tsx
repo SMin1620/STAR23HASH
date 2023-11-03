@@ -4,7 +4,13 @@ import BackButton from '@/component/storage/BackButton'
 import ReceivedLetter from '@/component/storage/random/ReceivedLetter'
 import SentLetter from '@/component/storage/random/SentLetter'
 
-export default function History() {
+type Props = {
+  roomid: number
+}
+
+export default async function History({ roomid }: Props) {
+  console.log('roomid is : ' + roomid)
+
   const content: string =
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.'
 
