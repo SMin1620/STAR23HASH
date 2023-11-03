@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -171,5 +172,15 @@ public class MemberService {
     public Long getAnotherId(String phone){
         Member member = memberRepository.findByPhone(phone).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         return member.getId();
+    }
+
+    /**
+     * 테스츠 : 초기화
+     */
+    @Transactional
+    public Boolean reset() {
+        List<Member> memberList = memberRepository.findAll();
+        for (Member member : memberList) member.setIsWrite(false);
+        return true;
     }
 }
