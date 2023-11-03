@@ -13,13 +13,14 @@ export default function WriteFriend() {
   const [showModal, setShowModal] = useState(false)
   const [inputModal, setInputModal] = useState(false)
   const [hint, setHint] = useState('')
-  const [contentType, setContentType] = useState(0)
+  const [contentType, setContentType] = useState(3) //기본 text 타입으로 설정
   const router = useRouter()
   const [mediaUrl, setMediaUrl] = useState('')
-  const ACCESS_KEY = process.env.NEXT_APP_AWS_S3_ACCESS_ID
-  const SECRET_ACCESS_KEY = process.env.NEXT_APP_AWS_S3_ACCESS_PW
-  const REGION = process.env.NEXT_APP_AWS_S3_REGION
-  const BUCKET = process.env.NEXT_APP_AWS_S3_BUCKET || 'default-bucket-name'
+  const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_ID
+  const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_PW
+  const REGION = process.env.NEXT_PUBLIC_AWS_S3_REGION
+  const BUCKET = process.env.NEXT_PUBLIC_AWS_S3_BUCKET || 'default-bucket-name'
+
   AWS.config.update({
     accessKeyId: ACCESS_KEY,
     secretAccessKey: SECRET_ACCESS_KEY,
@@ -73,6 +74,7 @@ export default function WriteFriend() {
         const S3Url = await handleImageUrlFromS3(params.Key)
         if (S3Url !== null) {
           setMediaUrl(S3Url)
+          console.log('mediaUrl', S3Url)
         }
       } catch (error) {
         console.log(error)
@@ -100,9 +102,9 @@ export default function WriteFriend() {
     setShowModal(true)
   }
 
-  const handleInputText = (hint: string) => {
-    console.log('Input Text from Modal:', hint)
-
+  const handleInputText = (text: string) => {
+    console.log('Input Text from Modal:', text)
+    setHint(text)
     setShowModal(false)
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
   }
