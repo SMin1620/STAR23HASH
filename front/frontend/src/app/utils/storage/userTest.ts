@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-interface Response {
+interface ResponseData {
   status: string
   message: string
   data: Data
@@ -12,46 +12,76 @@ interface Data {
   memberId: number
 }
 
-const DOMAIN = process.env.NEXT_PUBLIC_TEST2
-
 const axiosInstance = axios.create({
   withCredentials: true,
 })
 
-const setLocalStorageValue = (key: string, value: any): void => {
+const setCookieValue = (
+  name: string,
+  value: string,
+  options: any = {},
+): void => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem(key, `Bearer ${value}`)
+    const cookieOptions = {
+      // 기본 쿠키 옵션들 (추가 옵션을 필요에 맞게 설정할 수 있습니다)
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 만료 기간: 7일 (예시)
+      path: '/', // 쿠키의 경로
+      sameSite: 'strict', // 동일 출처 정책
+      // secure: process.env.NODE_ENV === 'production', // HTTPS에서만 쿠키 전송
+      ...options,
+    }
+
+    document.cookie = `${name}=${value}; ${Object.keys(cookieOptions)
+      .map((key) => `${key}=${cookieOptions[key]}`)
+      .join('; ')}`
   }
 }
 
-const getLocalStorageValue = <T>(key: string): T | null => {
+const getCookieValue = (name: string): string | null => {
   if (typeof window !== 'undefined') {
-    const storedValue = localStorage.getItem(key)
-    console.log('token : ', storedValue)
+    const cookieName = name + '='
+    const decodedCookie = decodeURIComponent(document.cookie)
+    const cookieArray = decodedCookie.split(';')
 
-    return storedValue ? JSON.parse(storedValue) : null
+    for (let i = 0; i < cookieArray.length; i++) {
+      const cookie = cookieArray[i].trim()
+      if (cookie.indexOf(cookieName) === 0) {
+        return cookie.substring(cookieName.length, cookie.length)
+      }
+    }
   }
   return null
 }
 
-export const userTest = async (): Promise<AxiosResponse> => {
+const DOMAIN = process.env.NEXT_PUBLIC_LOCAL || ''
+
+const userTest = async (): Promise<any> => {
+  console.log(DOMAIN)
+
   try {
-    const res: AxiosResponse = await axiosInstance.post(
+    const response: AxiosResponse = await axiosInstance.post(
       `${DOMAIN}/api/members/login`,
       {
-        phone: '1234',
-        password: '1234',
+        phone: '6',
+        password: '6',
       },
     )
 
-    if (!res || res.status !== 200) {
+    if (!response || response.status !== 200) {
       throw new Error('에러')
     }
 
-    console.log(res)
-    setLocalStorageValue('token', res.data.data.accessToken)
-    return res.data
+    setCookieValue('accessToken', `Bearer ${response.data.data.accessToken}`)
+    const accessToken = getCookieValue('accessToken')
+    console.log('Access Token:', accessToken)
+
+    console.log(response)
+
+    return response.data
   } catch (error) {
+    console.log(error)
     throw new Error('네트워크 오류')
   }
 }
+
+export default userTest

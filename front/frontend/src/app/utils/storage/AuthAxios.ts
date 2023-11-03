@@ -1,23 +1,35 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig, AxiosError } from 'axios'
 
 const api = axios.create({
   withCredentials: true,
 })
 
 export const setAuthToken = (token: string): void => {
-  localStorage.setItem('token', token)
+  localStorage.setItem('accessToken', token)
 }
 
-const getAuthToken = (): string | null => {
-  return localStorage.getItem('token')
+const getCookieValue = (name: string): string | null => {
+  if (typeof window !== 'undefined') {
+    const cookieName = name + '='
+    const decodedCookie = decodeURIComponent(document.cookie)
+    const cookieArray = decodedCookie.split(';')
+
+    for (let i = 0; i < cookieArray.length; i++) {
+      const cookie = cookieArray[i].trim()
+      if (cookie.indexOf(cookieName) === 0) {
+        return cookie.substring(cookieName.length, cookie.length)
+      }
+    }
+  }
+  return null
 }
 
 const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
   console.log(config)
-  const token = getAuthToken()
+  const accessToken = getCookieValue('accessToken')
   const headers = {
     ...config.headers,
-    Authorization: token,
+    Authorization: accessToken,
   }
 
   config.headers = headers
@@ -25,7 +37,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
   try {
     const response = await api(config)
     return response
-  } catch (error: any) {
+  } catch (error) {
     // if (error.response?.status === 403 || error.response?.status === 401) {
     // try {
     //   const reissueResponse = await axios.post(
@@ -37,7 +49,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
     //   )
 
     //   console.log('재발급 완료')
-    //   console.log(localStorage.getItem('token'))
+    //   console.log(localStorage.getItem('accessToken'))
 
     //   const reissuedToken = reissueResponse.headers.authorization
     //   setAuthToken(reissuedToken)

@@ -13,6 +13,10 @@ export default async function Test() {
     <>
       <div className="absolute z-10 grid h-screen w-screen items-center justify-center">
         <st.TestBoard className=" h-96  w-fit items-center justify-center overflow-y-scroll">
+          <div className="flex flex-row">
+            <LoginButton />
+            <IdChkButton />
+          </div>
           {/* <TestPlanetCard
             id={1}
             planetNumber={1}
@@ -38,10 +42,6 @@ export default async function Test() {
               <hr />
             </>
           ))}
-          <div className="flex flex-row">
-            <LoginButton />
-            <IdChkButton />
-          </div>
         </st.TestBoard>
       </div>
     </>
