@@ -25,6 +25,9 @@ public class Member {
     private String password;
 
     @Column(nullable = false)
+    private Boolean isWrite;
+
+    @Column(nullable = false)
     private LocalDateTime createAt;
 
 }

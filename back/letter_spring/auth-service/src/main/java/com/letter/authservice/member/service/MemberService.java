@@ -81,6 +81,7 @@ public class MemberService {
         Member member = Member.builder()
                 .phone(requestBody.getPhone())
                 .password(passwordEncoder.encode(requestBody.getPassword()))
+                .isWrite(false)
                 .createAt(LocalDateTime.now())
                 .build();
 
