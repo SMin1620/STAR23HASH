@@ -26,6 +26,14 @@ const nextConfig = {
 
     return config
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://k9e106.p.ssafy.io:9000/api/:path*',
+      },
+    ]
+  },
 }
 
 module.exports = { ...nextConfig }

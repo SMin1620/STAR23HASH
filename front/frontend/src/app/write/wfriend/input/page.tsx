@@ -9,17 +9,22 @@ import InputModal from '@/component/write/inputmodal'
 import { useRouter } from 'next/navigation'
 import uuid from 'react-uuid'
 import AWS from 'aws-sdk'
+import { createLetter } from '@/app/utils/write/createLetter'
 export default function WriteFriend() {
   const [showModal, setShowModal] = useState(false)
   const [inputModal, setInputModal] = useState(false)
+  const [content, setContent] = useState('')
   const [hint, setHint] = useState('')
-  const [contentType, setContentType] = useState(0)
+  const [contentType, setContentType] = useState(3) //기본 text 타입으로 설정
   const router = useRouter()
   const [mediaUrl, setMediaUrl] = useState('')
-  const ACCESS_KEY = process.env.NEXT_APP_AWS_S3_ACCESS_ID
-  const SECRET_ACCESS_KEY = process.env.NEXT_APP_AWS_S3_ACCESS_PW
-  const REGION = process.env.NEXT_APP_AWS_S3_REGION
-  const BUCKET = process.env.NEXT_APP_AWS_S3_BUCKET || 'default-bucket-name'
+  const [phone, setPhone] = useState('')
+
+  const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_ID
+  const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_PW
+  const REGION = process.env.NEXT_PUBLIC_AWS_S3_REGION
+  const BUCKET = process.env.NEXT_PUBLIC_AWS_S3_BUCKET || 'default-bucket-name'
+
   AWS.config.update({
     accessKeyId: ACCESS_KEY,
     secretAccessKey: SECRET_ACCESS_KEY,
@@ -73,6 +78,7 @@ export default function WriteFriend() {
         const S3Url = await handleImageUrlFromS3(params.Key)
         if (S3Url !== null) {
           setMediaUrl(S3Url)
+          console.log('mediaUrl', S3Url)
         }
       } catch (error) {
         console.log(error)
@@ -82,27 +88,13 @@ export default function WriteFriend() {
     }
   }
 
-  const handleSendClick = async () => {
-    router.push(`/write/send?isSuccess=true`)
-
-    // try {
-    //   // Axios를 사용하여 데이터 요청을 수행
-    //   const response = await axios.post('your-api-endpoint', data)
-    //   // 성공한 경우 isSuccess 상태를 true로 업데이트
-    //   setIsSuccess(true)
-    // } catch (error) {
-    //   // 실패한 경우 isSuccess 상태를 false로 업데이트
-    //   setIsSuccess(false)
-    // }
-  }
-
   function openModal() {
     setShowModal(true)
   }
 
-  const handleInputText = (hint: string) => {
-    console.log('Input Text from Modal:', hint)
-
+  const handleInputText = (text: string) => {
+    console.log('Input Text from Modal:', text)
+    setHint(text)
     setShowModal(false)
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
   }
@@ -131,6 +123,32 @@ export default function WriteFriend() {
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
   }
 
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const inputValue = e.currentTarget.value
+    setContent(inputValue)
+  }
+
+  const handleSendClick = async () => {
+    let type: string = 'text'
+    switch (contentType) {
+      case 0:
+        type = 'audio'
+        break
+      case 1:
+        type = 'movie'
+        break
+      case 2:
+        type = 'picture'
+        break
+      default:
+        break
+    }
+
+    const res = createLetter(content, type, mediaUrl, hint, phone)
+    console.log(res)
+
+    //router.push(`/write/send?isSuccess=true`)
+  }
   return (
     <>
       <GlobalStyle />
@@ -144,7 +162,11 @@ export default function WriteFriend() {
           <st.SpaceImg src="/write/Solar System.svg" alt="Solar System" />
 
           <st.ContentBox>
-            <st.InputContent></st.InputContent>
+            <st.InputContent
+              placeholder="내용을 입력하세요"
+              value={content}
+              onChange={handleContentChange}
+            ></st.InputContent>
             <st.Hint>
               <st.HintCheck
                 type="checkbox"
