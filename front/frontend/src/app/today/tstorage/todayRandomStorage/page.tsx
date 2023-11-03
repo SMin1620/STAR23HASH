@@ -14,16 +14,6 @@ import Light from '@/component/today/todayStorage/light/light'
 const totalAmount = 30
 
 export default function TodayRandomStorage() {
-  const Axes = () => {
-    const { scene } = useThree()
-
-    useEffect(() => {
-      const axesHelper = new THREE.AxesHelper(100)
-      scene.add(axesHelper)
-    }, [scene])
-    return null
-  }
-
   const planeRefs = Array(totalAmount)
     .fill(null)
     .map(() => ({ current: null as THREE.Object3D | null }))
@@ -48,7 +38,7 @@ export default function TodayRandomStorage() {
           // rotation: [0, Math.PI / 8, 0],
           near: 0.01,
         }}
-        // {...bind()}
+        {...bind()}
       >
         <Stars
           radius={100}
@@ -59,7 +49,6 @@ export default function TodayRandomStorage() {
           fade
           speed={2}
         />
-        <Axes />
         <Light />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
@@ -88,7 +77,7 @@ export default function TodayRandomStorage() {
             rotation={[Math.PI / 4.5, Math.PI, Math.PI / -8]}
           />
         </Suspense>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
       </Canvas>
     </GradientBackground>
   )
