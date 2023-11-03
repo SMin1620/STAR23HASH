@@ -25,5 +25,8 @@ public interface AuthFeignClient {
      */
     @GetMapping("/api/members/feign/{phone}")
     Long findMemberId(@PathVariable(name = "phone") String phone);
+    @GetMapping("/api/members/feign/{phone}/write")
+    Long findByPhoneAndIsWriteFalse(@PathVariable(name = "phone") String phone);
+
 
 }
