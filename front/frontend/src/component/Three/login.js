@@ -33,6 +33,10 @@ function Planet2() {
   gltf.scene.scale.set(scale, scale, scale)
   gltf.scene.rotation.z = -0.5
   gltf.scene.rotation.y = -0.8
+  useFrame(({ clock }) => {
+    // y축으로 조금씩 이동
+    ref.current.position.y += Math.sin(clock.getElapsedTime() + 1) * 0.004
+  })
 
   return <primitive object={gltf.scene} ref={ref} />
 }
