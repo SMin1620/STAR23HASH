@@ -22,7 +22,6 @@ export const InputContent = styled.textarea`
   padding: 10px;
 
   font-size: 16px;
-  font-weight: bold;
   resize: none;
   white-space: pre-wrap;
 
@@ -30,11 +29,12 @@ export const InputContent = styled.textarea`
   background-image: repeating-linear-gradient(
     white,
     white 34px,
-    black 34px,
-    black 35px
+    lightgray 34px,
+    lightgray 35px
   );
   line-height: 35px;
   padding: 8px 10px;
+  outline: none;
 `
 
 export const Loading = styled.img`
