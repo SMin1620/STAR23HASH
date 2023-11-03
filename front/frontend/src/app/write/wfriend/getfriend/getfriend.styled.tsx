@@ -2,13 +2,50 @@
 
 import styled from 'styled-components'
 
+interface ContactObjectProps {
+  isSelected: boolean
+}
+
 export const ContentBox = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   align-items: center;
   text-align: center;
 `
+export const ContactBox = styled.div`
+  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  width: 90%;
+  height: 35rem;
+  overflow: auto;
+  border: 1px solid lightgray;
+  border-radius: 0.5rem;
+  box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
+`
 
+export const ContactObject = styled.button<ContactObjectProps>`
+  height: 4.5rem;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid lightgray;
+
+  background-color: ${(props) =>
+    props.isSelected ? 'lightgray' : 'transparent'};
+`
+
+export const ContactName = styled.div`
+  margin-bottom: 7px;
+  margin-left: 10px;
+  font-size: 1.5rem;
+`
+
+export const ContactPhone = styled.div`
+  margin-left: 15px;
+  font-size: 0.8rem;
+  color: gray;
+`
 export const WhoSend = styled.div`
   font-size: 20px;
   font-weight: bold;

@@ -6,20 +6,26 @@ import * as st from './inputfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 import Modal from '@/component/write/modal'
 import InputModal from '@/component/write/inputmodal'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import uuid from 'react-uuid'
 import AWS from 'aws-sdk'
 import { createLetter } from '@/app/utils/write/createLetter'
-export default function WriteFriend() {
+
+type Props = {
+  searchParams: {
+    phone: string
+  }
+}
+
+export default function WriteFriend({ searchParams }: Props) {
   const [showModal, setShowModal] = useState(false)
   const [inputModal, setInputModal] = useState(false)
   const [content, setContent] = useState('')
   const [hint, setHint] = useState('')
   const [contentType, setContentType] = useState(3) //기본 text 타입으로 설정
-  const router = useRouter()
   const [mediaUrl, setMediaUrl] = useState('')
-  const [phone, setPhone] = useState('')
-
+  const [phone, setPhone] = useState(searchParams.phone)
+  const router = useRouter()
   const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_ID
   const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_PW
   const REGION = process.env.NEXT_PUBLIC_AWS_S3_REGION

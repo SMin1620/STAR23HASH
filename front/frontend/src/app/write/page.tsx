@@ -38,7 +38,7 @@ export default function Write() {
           <st.ContentBox>
             <st.WhoSend>누구에게 편지를 보낼까요?</st.WhoSend>
             <st.SendObject>
-              <Link href={'/write/wfriend/getfriend'}>
+              <Link href={'/write/wfriend/pullfriend'}>
                 <st.SendImg
                   src="/write/Solar System.svg"
                   alt="친구에게 보내기"
