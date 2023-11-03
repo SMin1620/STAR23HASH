@@ -5,9 +5,9 @@ import Logincomponent from '../../../component/Three/login'
 import Modal from '../../../component/login/modal'
 import PhoneStore from '@/store/phone'
 import { loginAxios } from '@/app/utils/loginAxios'
-import * as m from './loginmain.styled'
+import * as m from './loginMain.styled'
 
-export default function loginMain() {
+export default function LoginMain() {
   const { setPhone } = PhoneStore()
   const router = useRouter()
   const [inputValue, setInputValue] = useState<string>('')
