@@ -35,7 +35,8 @@
     "react-hooks/rules-of-hooks": "error", // Hooks 규칙 확인
     "react-hooks/exhaustive-deps": "warn", // effect의 의존성 배열 확인
     "@next/next/no-img-element": "off", // Next.js의 <img> 요소 사용 경고 끄기
-    "jsx-a11y/alt-text": "off" // img 요소의 alt 속성 확인 규칙 끄기
+    "jsx-a11y/alt-text": "off", // img 요소의 alt 속성 확인 규칙 끄기
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "env": {
     "node": true,
