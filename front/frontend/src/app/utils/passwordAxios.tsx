@@ -1,37 +1,50 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse, AxiosError } from 'axios'
 
-interface Response {
-  status: string
-  message: string
-  data: {
-    accessToken: string
-    refreshToken: string
-    memberId: number
+const DOMAIN = process.env.NEXT_PUBLIC_TEST
+
+const axiosInstance = axios.create({
+  withCredentials: true,
+})
+
+const setLocalStorageValue = (key: string, value: any): void => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(key, `Bearer ${value}`)
   }
 }
 
-// {
-//     ”phone” : 010xxxxxxxx,
-//     ”password”:
-//     }
+// interface Response {
+//   status: string
+//   message: string
+//   data: {
+//     accessToken: string
+//     refreshToken: string
+//     memberId: number
+//   }
+// }
+
 export const passwordAxios = async (
   phone: string,
   password: string,
-): Promise<Response> => {
+): Promise<AxiosResponse> => {
   try {
-    const requestData = {
-      phone: phone,
-      password: password,
-    }
-    const res: AxiosResponse = await axios.post(
+    const res: AxiosResponse = await axiosInstance.post(
+      // `${DOMAIN}/api/members/login`,
       `http://192.168.30.130:9000/api/members/login`,
-      requestData,
+      {
+        phone: phone,
+        password: password,
+      },
     )
+    console.log(res)
     if (!res || res.status !== 200) {
       throw new Error('에러')
+    } else {
+      setLocalStorageValue('token', res.data.data.accessToken)
+      return res
     }
-    return res.data
   } catch (error) {
+    console.log(error)
+
     throw new Error('네트워크 오류')
   }
 }
