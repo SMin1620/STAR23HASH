@@ -109,5 +109,13 @@ public class MemberController {
         return memberService.getAnotherId(memberAnotherRequestDto.getPhone());
     }
 
+    /**
+     * 테스트용 : 모든 유저 1일 1회 작성 횟수 초기화
+     */
+    @GetMapping("/reset")
+    public BaseResponse reset() {
+        return new BaseResponse(HttpStatus.OK, "초기화", memberService.reset());
+    }
+
 
 }
