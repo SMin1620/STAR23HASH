@@ -9,3 +9,5 @@ EXPOSE 3000
 CMD ["yarn", "start"]
 # COPY ./default.conf /etc/nginx/conf.d/default.conf
 # COPY --from=build /usr/src/app/dist/ /usr/share/nginx/html
+docker build -t my-app .
+docker run -p 3000:3000 my-app
