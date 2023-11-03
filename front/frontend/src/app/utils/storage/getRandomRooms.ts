@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import AuthAxios from './AuthAxios'
 
 interface Response {
@@ -15,6 +15,8 @@ interface Response {
 const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
 
 export const getRandomRooms = async (): Promise<any> => {
+  console.log('DOMAIN : ', DOMAIN)
+
   try {
     const response: AxiosResponse = await AuthAxios({
       method: 'get',
@@ -25,11 +27,11 @@ export const getRandomRooms = async (): Promise<any> => {
       throw new Error('에러')
     }
 
-    console.log(response)
+    console.log('getrandom out', response)
 
     return response.data
-  } catch (error) {
-    console.log(error)
+  } catch (error: AxiosError) {
+    console.log(error.response)
     // throw new Error('네트워크 오류')
   }
 }

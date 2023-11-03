@@ -25,8 +25,9 @@ const getCookieValue = (name: string): string | null => {
 }
 
 const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
-  console.log(config)
   const accessToken = getCookieValue('accessToken')
+  console.log('accessToken is : ', accessToken)
+
   const headers = {
     ...config.headers,
     Authorization: accessToken,
@@ -37,7 +38,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
   try {
     const response = await api(config)
     return response
-  } catch (error) {
+  } catch (error: AxiosError) {
     // if (error.response?.status === 403 || error.response?.status === 401) {
     // try {
     //   const reissueResponse = await axios.post(
@@ -71,7 +72,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
     //   throw error
     // }
 
-    console.log(error)
+    console.log(error.response)
   }
 }
 

@@ -46,3 +46,15 @@ export interface Room {
   read: boolean
   store: any
 }
+
+export interface Note {
+  id: number
+  senderId: number
+  senderName: string
+  receiverId: number
+  receiverName: string
+  content: string
+  createdAt: string
+  send: boolean
+  read: boolean
+}

@@ -8,7 +8,7 @@ export interface Response {
   data: boolean
 }
 
-const DOMAIN = process.env.NEXT_PUBLIC_LOCAL || ''
+const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || ''
 export const authAxiosTest = async (): Promise<any> => {
   try {
     const response: AxiosResponse = await AuthAxios({
