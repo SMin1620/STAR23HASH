@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -34,7 +35,9 @@ public class MemberFeignController {
         response.setHeader("Authorization", request.getHeader("Authorization"));
         
         // 램던 쪽지 받는 사람과 보내는 사람 중복을 금지 로직
-        Member member = new Member();
+        Member member = memberRepository.findByPhone(phone)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
         while (true) {
             member = memberRepository.findByRandom();
             if (! member.getPhone().equals(phone)) break;
@@ -63,6 +66,20 @@ public class MemberFeignController {
 
         Member member = memberRepository.findByPhone(phone)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        return member.getId();
+    }
+
+    @GetMapping("/{phone}/write")
+    public Long findMemberIdWrite(@PathVariable(name = "phone") String phone) {
+
+        System.out.println("phone valid >>> " + phone);
+
+        Member member = memberRepository.findByPhoneAndIsWriteFalse(phone)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        member.setIsWrite(true);
+        memberRepository.save(member);
 
         return member.getId();
     }
