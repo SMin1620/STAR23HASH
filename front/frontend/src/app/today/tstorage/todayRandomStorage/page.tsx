@@ -23,8 +23,8 @@ export default function TodayRandomStorage() {
       planeRefs.forEach((ref) => {
         if (ref.current) {
           // ref.current.position.x += x * 0.05
-          ref.current.position.y += y * -0.01
-          ref.current.position.z += y * -0.05
+          ref.current.position.y += y * -0.001
+          ref.current.position.z += y * -0.012
         }
       })
     },
@@ -58,7 +58,7 @@ export default function TodayRandomStorage() {
             const position = [
               startPostion[0],
               startPostion[1] + 10 * index,
-              startPostion[2] + 60 * index,
+              startPostion[2] + 120 * index,
             ]
             return (
               <RandomPlanet
