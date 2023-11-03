@@ -38,13 +38,24 @@ public class NoteService {
         String phone = request.getHeader("Member-Authorization-Phone");
         System.out.println("phone >>> " + phone);
 
+
+        // 쪽지 전송 중복 검사
+        // 인증 서버에서 유저 id 가져오기
+        try {
+            authFeignClient.findByPhoneAndIsWriteFalse(phone);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BusinessLogicException(ExceptionCode.MEMBER_ALREADY_WRITE);
+        }
+
+
         // 랜덤 난수 로직
         NoteDto.NoteCreateResDto data = authFeignClient.findRandomMember(phone);
-        System.out.println("data >>> " + data.toString() + " / " + data.getSenderName());
+        System.out.println("data >>> " + data.getSenderName());
 
         // Room 생성 체크
-        roomRepository.findBySenderIdAndReceiverId(data.getSenderId(), data.getReceiverId())
-                        .ifPresent(r -> {new BusinessLogicException(ExceptionCode.ROOM_ALREADY_EXISTS);});
+//        roomRepository.findBySenderIdAndReceiverId(data.getSenderId(), data.getReceiverId())
+//                        .ifPresent(r -> {new BusinessLogicException(ExceptionCode.ROOM_ALREADY_EXISTS);});
 
         Room room = Room.builder()
                 .senderId(data.getSenderId())
