@@ -13,16 +13,16 @@ type Contact = {
 
 export default function WriteFriend() {
   const [phone, setPhone] = useState('')
-  const [selectedContactIndex, setSelectedContactIndex] = useState(0)
+  const [selectedContactIndex, setSelectedContactIndex] = useState(-1)
 
   const router = useRouter()
   const contacts: Contact[] = [
-    { 이름: '조은정0', 연락처: '01012341234' },
-    { 이름: '조은정1', 연락처: '01012341234' },
-    { 이름: '조은정2', 연락처: '01012341234' },
-    { 이름: '조은정3', 연락처: '01012341234' },
+    { 이름: '김은정0', 연락처: '01012341234' },
+    { 이름: '이은정1', 연락처: '01012341234' },
+    { 이름: '박은정2', 연락처: '01012341234' },
+    { 이름: '최은정3', 연락처: '01012341234' },
     { 이름: '조은정4', 연락처: '01012341234' },
-    { 이름: '조은정5', 연락처: '01012341234' },
+    { 이름: '권은정5', 연락처: '01012341234' },
     { 이름: '조은정6', 연락처: '01012341234' },
     { 이름: '조은정7', 연락처: '01012341234' },
     { 이름: '조은정8', 연락처: '01012341234' },
@@ -47,6 +47,7 @@ export default function WriteFriend() {
       router.push(`/write/wfriend/input?phone=${phone}`)
     }
   }
+
   return (
     <>
       <GlobalStyle />
@@ -63,7 +64,7 @@ export default function WriteFriend() {
               <st.ContactObject
                 key={index}
                 onClick={() => selectContact(index)}
-                isSelected={selectedContactIndex === index}
+                $isSelected={selectedContactIndex === index}
               >
                 <st.ContactName>{contact.이름}</st.ContactName>
                 <st.ContactPhone>전화번호 : {contact.연락처}</st.ContactPhone>
