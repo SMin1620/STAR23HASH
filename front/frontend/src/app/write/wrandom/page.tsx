@@ -1,21 +1,22 @@
 'use client'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import GlobalStyle from '../GlobalStyles'
+import { createNote } from '@/app/utils/write/createNote'
 import * as st from './wrandom.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 export default function WriteFriend() {
+  const [content, setContent] = useState('')
   const router = useRouter()
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const inputValue = e.currentTarget.value
+    setContent(inputValue)
+  }
+
   const handleSend = async () => {
-    // try {
-    //   // Axios를 사용하여 데이터 요청을 수행
-    //   const response = await axios.post('your-api-endpoint', data)
-    //   // 성공한 경우 isSuccess 상태를 true로 업데이트
-    //   setIsSuccess(true)
-    // } catch (error) {
-    //   // 실패한 경우 isSuccess 상태를 false로 업데이트
-    //   setIsSuccess(false)
-    // }
+    const res = createNote(content)
+
     router.push(`/write/send?isSuccess=true`)
   }
   return (
@@ -31,7 +32,11 @@ export default function WriteFriend() {
           <st.SpaceImg src="/write/Rocket-2.svg" alt="Solar System" />
 
           <st.ContentBox>
-            <st.InputContent></st.InputContent>
+            <st.InputContent
+              placeholder="내용을 입력하세요"
+              value={content}
+              onChange={handleContentChange}
+            ></st.InputContent>
           </st.ContentBox>
           <stt.EmptyDiv>
             <stt.button onClick={handleSend}>전송</stt.button>
