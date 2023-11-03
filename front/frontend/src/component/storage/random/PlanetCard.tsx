@@ -8,7 +8,7 @@ type Props = {
   planetNumber: number
   name: string
   date: string
-  state?: string
+  state?: boolean
 }
 
 export default function PlanetCard({
@@ -27,7 +27,7 @@ export default function PlanetCard({
   return (
     <c.Card className="group" onClick={handleClick}>
       <c.CardImageWrapper className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full group-hover:opacity-75">
-        {state === 'written' ? (
+        {state ? (
           <c.CardStateImage
             className="w-1/3"
             src="/icons/Check.svg"

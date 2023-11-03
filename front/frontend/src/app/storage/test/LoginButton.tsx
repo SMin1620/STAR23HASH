@@ -1,5 +1,5 @@
 'use client'
-import { userTest } from '@/app/utils/storage/userTest'
+import userTest from '@/app/utils/storage/userTest'
 
 export default function LoginButton() {
   const handleClick = () => {

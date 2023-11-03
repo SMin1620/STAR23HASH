@@ -35,3 +35,14 @@ export interface letterInfo extends letter {
   nickname: string
   hint?: string
 }
+
+export interface Room {
+  id: number
+  senderId: number
+  senderName: string
+  receiverId: number
+  receiverName: string
+  createdAt: string
+  read: boolean
+  store: any
+}

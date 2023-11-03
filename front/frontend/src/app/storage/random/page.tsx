@@ -4,8 +4,12 @@ import * as r from './random.styled'
 import BackButton from '@/component/storage/BackButton'
 import PlanetCard from '@/component/storage/random/PlanetCard'
 import TestPlanetCard from '../test/testcomponent/TestPlanetCard'
+import { getRandomRooms } from '@/app/utils/storage/getRandomRooms'
+import { Room } from '@/app/types/storage/types'
+export default async function Ramdon() {
+  const randomRoomList: Room[] = await getRandomRooms()
+  console.log('randomrooms : ', randomRoomList)
 
-export default function Ramdon() {
   return (
     <>
       <r.RandomPage className="absolute h-screen">
@@ -19,6 +23,18 @@ export default function Ramdon() {
         <r.RandomCardContainer className="h-screen w-screen">
           <r.RandomCardWrapper className=" m-4 grid grid-cols-3 gap-x-3 gap-y-5 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
             {/* card component start */}
+
+            {randomRoomList &&
+              randomRoomList.map((room) => (
+                <PlanetCard
+                  key={room.id}
+                  id={room.id}
+                  planetNumber={Math.floor(Math.random() * 15) + 1}
+                  name={room.senderName}
+                  date={room.createdAt}
+                  state={room.read}
+                />
+              ))}
 
             {/* <r.Card className="group">
               <Link href="/storage/random/{ID}">
@@ -40,7 +56,7 @@ export default function Ramdon() {
                 </r.TitleWrapper>
               </Link>
             </r.Card> */}
-            <TestPlanetCard
+            {/* <TestPlanetCard
               id={1}
               planetNumber={1}
               name="김감자"
@@ -74,21 +90,21 @@ export default function Ramdon() {
               name="김감자"
               date="2020.02.02"
               state="written"
-            />
+            /> */}
 
             <PlanetCard
               id={1}
               planetNumber={1}
               name="김감자"
               date="2020.02.02"
-              state="written"
+              state={true}
             />
             <PlanetCard
               id={Math.floor(Math.random() * 15) + 1}
               planetNumber={Math.floor(Math.random() * 15) + 1}
               name="김김자"
               date="2020.02.02"
-              state="written"
+              state={true}
             />
 
             {/* card component end */}
