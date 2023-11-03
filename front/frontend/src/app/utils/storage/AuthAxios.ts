@@ -2,7 +2,6 @@ import axios, { AxiosRequestConfig } from 'axios'
 
 const api = axios.create({
   withCredentials: true,
-  baseURL: `${process.env.REACT_APP_BASE_URL}/api/v1`,
 })
 
 export const setAuthToken = (token: string): void => {
@@ -15,7 +14,6 @@ const getAuthToken = (): string | null => {
 
 const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
   console.log(config)
-
   const token = getAuthToken()
   const headers = {
     ...config.headers,
@@ -31,7 +29,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
     // if (error.response?.status === 403 || error.response?.status === 401) {
     // try {
     //   const reissueResponse = await axios.post(
-    //     `${process.env.REACT_APP_BASE_URL}/api/v1/auth/reissue`,
+    //     `재요청 api 필요`,
     //     {},
     //     {
     //       withCredentials: true,
