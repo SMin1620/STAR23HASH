@@ -45,6 +45,7 @@ public class RollService {
                 .roll(roll)
                 .content(dto.getContent())
                 .createdAt(LocalDateTime.now())
+                .isRead(false)
                 .build();
         paperRepository.save(paper);
 
@@ -56,6 +57,7 @@ public class RollService {
                         .content(paper.getContent())
                         .createdAt(paper.getCreatedAt())
                         .rollId(roll.getId())
+                        .isRead(false)
                         .build())
                 .build();
     }
@@ -72,7 +74,7 @@ public class RollService {
         LocalDateTime start = LocalDateTime.parse(LocalDateTime.now().toString().substring(0, 10) + "T00:00:00");
         LocalDateTime end = LocalDateTime.now();
 
-        List<Paper> paperList = paperRepository.findAllByRollIdAndIsReadFalseCreatedAtBetween(rollId, start, end);
+        List<Paper> paperList = paperRepository.findAllByRollIdAndIsReadFalseAndCreatedAtBetween(rollId, start, end);
         List<RollDto.PaperListResDto> paperListResDtos = new ArrayList<>();
         for (Paper paper : paperList) {
             RollDto.PaperListResDto paperListResDto = RollDto.PaperListResDto.builder()
@@ -92,5 +94,24 @@ public class RollService {
                 .paperList(paperListResDtos)
                 .build();
 
+    }
+
+    /**
+     * 페이퍼 상세 조회
+     * -> 읽음 처리
+     */
+    public RollDto.PaperDetailResDto paperDetail(HttpServletRequest request, Long paperId) {
+        Paper paper = paperRepository.findById(paperId)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.PAPER_NOT_FOUND));
+
+        paper.setIsRead(true);
+
+        return RollDto.PaperDetailResDto.builder()
+                .id(paperId)
+                .rollId(paper.getRoll().getId())
+                .content(paper.getContent())
+                .createdAt(paper.getCreatedAt())
+                .isRead(paper.getIsRead())
+                .build();
     }
 }
