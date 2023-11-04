@@ -1,5 +1,6 @@
 package com.letter.noteservice.note.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ public class NoteDto {
         private Long receiverId;
         private String receiverName;
         private String content;
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
         private Boolean isRead;
         private Boolean isReply;
@@ -54,6 +56,7 @@ public class NoteDto {
         private Long receiverId;
         private String receiverName;
         private String content;
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
         private Boolean send;
         private Boolean isRead;
@@ -74,6 +77,7 @@ public class NoteDto {
         private Long receiverId;
         private String receiverName;
         private String content;
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
     }
 
