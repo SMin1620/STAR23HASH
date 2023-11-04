@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface PaperRepository extends JpaRepository<Paper, Long> {
     List<Paper> findAllByRollId(Long rollId);
-    List<Paper> findAllByRollIdAndIsReadFalseCreatedAtBetween(Long rollId, LocalDateTime start, LocalDateTime end);
+    List<Paper> findAllByRollIdAndIsReadFalseAndCreatedAtBetween(Long rollId, LocalDateTime start, LocalDateTime end);
 }
