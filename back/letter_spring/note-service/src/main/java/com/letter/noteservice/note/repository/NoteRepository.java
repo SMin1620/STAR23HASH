@@ -1,10 +1,12 @@
 package com.letter.noteservice.note.repository;
 
 import com.letter.noteservice.note.entity.Note;
+import com.letter.noteservice.note.entity.Room;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,10 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     List<Note> findAllByNote(Long roomId);
 
     /**
+     * 오늘 온 쪽지 방 목록 조회
+     */
+
+    /**
      * 쪽지 답장
      */
     // 답장시 이전 받은 메시지 답장 여부 처리
@@ -32,5 +38,8 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 //    Optional<Note> findByPreNote(Long roomId, Long memberId);
     Optional<Note> findTopByRoomIdAndReceiverIdOrSenderIdOrderByCreatedAtDesc(Long roomId, Long receiverId, Long senderId);
 
-
+    /**
+     * 오늘 온 쪽지 방 목록 조회
+     */
+    Optional<Note> findAllByReceiverIdAndCreatedAtBetween(Long memberId, LocalDateTime start, LocalDateTime end);
 }
