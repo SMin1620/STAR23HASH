@@ -1,6 +1,6 @@
 'use client'
 import { Canvas, useThree } from '@react-three/fiber'
-import { Suspense, useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { OrbitControls, Stars } from '@react-three/drei'
 import RandomModel from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import GradientBackground from '../../../../component/Three/three.styled'
@@ -10,18 +10,48 @@ import * as THREE from 'three'
 import RandomPlanet from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import { useGesture } from '@use-gesture/react'
 import Light from '@/component/today/todayStorage/light/light'
+import RandomListGet from '@/app/utils/todayStorage/randomListGet'
 
 const totalAmount = 30
 
 export default function TodayRandomStorage() {
-  const Axes = () => {
-    const { scene } = useThree()
+  const [noteList, setNoteList] = useState(null)
 
-    useEffect(() => {
-      const axesHelper = new THREE.AxesHelper(100)
-      scene.add(axesHelper)
-    }, [scene])
-    return null
+  useEffect(() => {
+    const handleListApi = async () => {
+      const response = await RandomListGet()
+      console.log(response)
+
+      setNoteList(response.data)
+    }
+    handleListApi()
+  }, [])
+
+  const Data = () => {
+    return [
+      {
+        id: 1,
+        senderId: 1,
+        senderName: '빛나는 북극토끼',
+        receiverId: 33,
+        receiverName: '졸린 봉황',
+        content: '어쩔티비',
+        createdAt: '2023-11-02T09:57:51.124853',
+        send: true,
+        read: true,
+      },
+      {
+        id: 6,
+        senderId: 33,
+        senderName: '졸린 봉황',
+        receiverId: 1,
+        receiverName: '빛나는 북극토끼',
+        content: '저쩔티비',
+        createdAt: '2023-11-02T09:57:51.093082',
+        send: false,
+        read: true,
+      },
+    ]
   }
 
   const planeRefs = Array(totalAmount)
@@ -29,18 +59,27 @@ export default function TodayRandomStorage() {
     .map(() => ({ current: null as THREE.Object3D | null }))
 
   const bind = useGesture({
-    onDrag: ({ offset: [x, y] }) => {
+    onDrag: ({ offset: [x, y], direction, movement: [mx, my] }) => {
+      console.log(direction)
+      console.log('offset', x, y)
+      console.log('movement', x, y)
+
       planeRefs.forEach((ref) => {
         if (ref.current) {
+          if (my > 0) {
+            ref.current.position.y += y * -0.0001
+            ref.current.position.z += y * -0.0012
+          } else if (my < 0) {
+            ref.current.position.y += y * 0.0001
+            ref.current.position.z += y * 0.0012
+          }
           // ref.current.position.x += x * 0.05
-          ref.current.position.y += y * -0.01
-          ref.current.position.z += y * -0.05
         }
       })
     },
   })
   return (
-    <GradientBackground>
+    <GradientBackground style={{ touchAction: 'none' }}>
       <Canvas
         style={{ width: '100%', height: '100%' }}
         camera={{
@@ -48,7 +87,7 @@ export default function TodayRandomStorage() {
           // rotation: [0, Math.PI / 8, 0],
           near: 0.01,
         }}
-        // {...bind()}
+        {...bind()}
       >
         <Stars
           radius={100}
@@ -59,7 +98,6 @@ export default function TodayRandomStorage() {
           fade
           speed={2}
         />
-        <Axes />
         <Light />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
@@ -69,7 +107,7 @@ export default function TodayRandomStorage() {
             const position = [
               startPostion[0],
               startPostion[1] + 10 * index,
-              startPostion[2] + 60 * index,
+              startPostion[2] + 120 * index,
             ]
             return (
               <RandomPlanet
@@ -88,7 +126,7 @@ export default function TodayRandomStorage() {
             rotation={[Math.PI / 4.5, Math.PI, Math.PI / -8]}
           />
         </Suspense>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
       </Canvas>
     </GradientBackground>
   )
