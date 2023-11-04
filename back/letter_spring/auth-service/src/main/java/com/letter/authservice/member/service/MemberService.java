@@ -3,17 +3,18 @@ package com.letter.authservice.member.service;
 import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
+import com.letter.authservice.member.dto.Contact;
+import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
-import com.letter.authservice.member.entity.Roll;
 import com.letter.authservice.member.repository.MemberRepository;
-import com.letter.authservice.member.repository.RollRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,8 +38,8 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final RollRepository rollRepository;
     private final RedisTemplate<String, String> redisTemplate;
+    private final RedisTemplate<String, Contact> redisTemplateObject;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
@@ -82,18 +84,11 @@ public class MemberService {
         Member member = Member.builder()
                 .phone(requestBody.getPhone())
                 .password(passwordEncoder.encode(requestBody.getPassword()))
-                .isWrite(false)
                 .createAt(LocalDateTime.now())
+                .isWrite(false)
                 .build();
 
         memberRepository.save(member);
-
-        // 롤링페이퍼 자동 생성
-        Roll roll = Roll.builder()
-                .member(member)
-                .build();
-        rollRepository.save(roll);
-
         return member;
 
     }
@@ -173,6 +168,44 @@ public class MemberService {
         Member member = memberRepository.findByPhone(phone).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         return member.getId();
     }
+
+    public Boolean checkPhone(String phone){
+        Optional<Member> member = memberRepository.findByPhone(phone);
+
+        if(member.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean createContact(HttpServletRequest request, ContactRequestDto contactRequestDto){
+
+        Member member = memberRepository.findByPhone(
+                jwtTokenProvider.getUserPhone(
+                jwtTokenProvider.resolveToken(request))).orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        ListOperations<String, Contact> list = redisTemplateObject.opsForList();
+        for(Contact c:contactRequestDto.getContacts()){
+            Optional<Member> m = memberRepository.findByPhone(c.getPhone());
+            if(!m.isEmpty()){
+                Contact newContact = new Contact(c.getName(),c.getPhone());
+                list.rightPush(member.getId().toString(), newContact);
+                System.out.println(member.getId().toString());
+            }
+        }
+        return true;
+    }
+
+    public List<Contact> checkContact(HttpServletRequest request){
+        Member member = memberRepository.findByPhone(jwtTokenProvider.getUserPhone(
+                        jwtTokenProvider.resolveToken(request)))
+                .orElseThrow(()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        List<Contact> contactList= redisTemplateObject.opsForList().range(member.getId().toString(),0,-1);
+
+       return contactList;
+    }
+
 
     /**
      * 테스츠 : 초기화

@@ -1,6 +1,5 @@
-package com.letter.authservice.config;
+package com.letter.letterservice.config;
 
-import com.letter.authservice.member.dto.Contact;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +9,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
@@ -40,16 +38,6 @@ public class RedisConfig {
 
         return redisTemplate;
     }
-    @Bean
-    public RedisTemplate<String, Contact> redistTemplateObject(){
-        RedisTemplate<String, Contact> redisTemplateObject = new RedisTemplate<>();
-
-        redisTemplateObject.setKeySerializer(new StringRedisSerializer());
-        redisTemplateObject.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
-        redisTemplateObject.setConnectionFactory((redisConnectionFactory()));
-
-        return redisTemplateObject;
-    }
 
     //레디스 캐시
     @Bean
@@ -67,4 +55,5 @@ public class RedisConfig {
                 .cacheDefaults(redisCacheConfiguration)
                 .build();
     }
+
 }

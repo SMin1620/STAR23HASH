@@ -1,5 +1,6 @@
 package com.letter.letterservice.letter.entity;
 
+import com.letter.letterservice.letter.dto.LetterRequestDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,15 +26,15 @@ public class Letter {
     private String content;
 
     @Column(nullable = false)
-    private Type type;
+    private String type;
 
     private String fileUrl;
 
     @Column(nullable = false)
     private LocalDateTime createAt;
 
-    @Column(nullable = false)
-    private String nickname;
+//    @Column(nullable = false)
+//    private String nickname;
 
     @Column(nullable = false)
     private Long receiverId;
@@ -42,4 +43,21 @@ public class Letter {
     private Boolean read;
 
     private String hintContent;
+
+    private Boolean store;
+
+    public static Letter toEntity(Long senderId, Long receiverId, LetterRequestDto letterRequestDto){
+        return Letter.builder()
+                .senderId(senderId)
+                .content(letterRequestDto.getContent())
+                .type(letterRequestDto.getType())
+                .fileUrl(letterRequestDto.getFileUrl())
+                .createAt(LocalDateTime.now())
+                .receiverId(receiverId)
+                .read(false)
+                .hintContent(letterRequestDto.getHintContent())
+                .store(false)
+                .build();
+    }
+
 }
