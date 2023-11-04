@@ -68,7 +68,11 @@ public class RollService {
         Roll roll = rollRepository.findById(rollId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
 
-        List<Paper> paperList = paperRepository.findAllByRollId(rollId);
+        // 현재 날짜 2023-11-03
+        LocalDateTime start = LocalDateTime.parse(LocalDateTime.now().toString().substring(0, 10) + "T00:00:00");
+        LocalDateTime end = LocalDateTime.now();
+
+        List<Paper> paperList = paperRepository.findAllByRollIdAndIsReadFalseCreatedAtBetween(rollId, start, end);
         List<RollDto.PaperListResDto> paperListResDtos = new ArrayList<>();
         for (Paper paper : paperList) {
             RollDto.PaperListResDto paperListResDto = RollDto.PaperListResDto.builder()
