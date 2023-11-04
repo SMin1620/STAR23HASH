@@ -1,6 +1,6 @@
 'use client'
 import { Canvas, useThree } from '@react-three/fiber'
-import { Suspense, useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
 import { OrbitControls, Stars } from '@react-three/drei'
 import RandomModel from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import GradientBackground from '../../../../component/Three/three.styled'
@@ -10,10 +10,23 @@ import * as THREE from 'three'
 import RandomPlanet from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import { useGesture } from '@use-gesture/react'
 import Light from '@/component/today/todayStorage/light/light'
+import RandomListGet from '@/app/utils/todayStorage/randomListGet'
 
 const totalAmount = 30
 
 export default function TodayRandomStorage() {
+  const [noteList, setNoteList] = useState(null)
+
+  useEffect(() => {
+    const handleListApi = async () => {
+      const response = await RandomListGet()
+      console.log(response)
+
+      setNoteList(response.data)
+    }
+    handleListApi()
+  }, [])
+
   const Data = () => {
     return [
       {
