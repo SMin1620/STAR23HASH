@@ -75,6 +75,16 @@ public class NoteController {
         return new BaseResponse(HttpStatus.OK, "쪽지 방 목록 조회", roomList);
     }
 
+    /**
+     * 쪽지 방 목록 조회
+     */
+    @GetMapping("/room/today")
+    public BaseResponse roomListToday(
+            HttpServletRequest request
+    ) {
+        return new BaseResponse(HttpStatus.OK, "쪽지 방 목록 조회", roomService.roomListToday(request));
+    }
+
 
     /**
      * 쪽지 목록 모든 날짜 조회
