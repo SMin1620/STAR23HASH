@@ -1,5 +1,6 @@
 package com.letter.letterservice.letter.dto;
 
+import com.letter.letterservice.letter.entity.Type;
 import lombok.*;
 
 @Data

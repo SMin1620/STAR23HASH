@@ -4,6 +4,7 @@ import com.letter.authservice.common.BaseResponse;
 import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
+import com.letter.authservice.member.dto.Contact;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
@@ -20,6 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "회원 API")
 @RestController
@@ -109,6 +112,11 @@ public class MemberController {
         return memberService.getAnotherId(memberAnotherRequestDto.getPhone());
     }
 
+    @GetMapping("/contact")
+    public List<Contact> getContact(HttpServletRequest request){
+
+        return memberService.checkContact(request);
+    }
     /**
      * 테스트용 : 모든 유저 1일 1회 작성 횟수 초기화
      */

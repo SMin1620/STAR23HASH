@@ -15,7 +15,7 @@ public class MemberDto {
     @AllArgsConstructor
     @Builder
     public static class MemberLoginResponseDto{
-        private String nickname;
+        private String phone;
     }
 
     @Getter
