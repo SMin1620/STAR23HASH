@@ -23,5 +23,13 @@ export default function RandomPlanet({ url, scale, position, mesh }) {
 
   if (!randomPlanet) return null
   randomPlanet.position.set(...position)
-  return <primitive object={randomPlanet} ref={mesh} />
+  return (
+    <primitive
+      object={randomPlanet}
+      ref={mesh}
+      onClick={(e) => {
+        console.log('Planet', e, url)
+      }}
+    />
+  )
 }
