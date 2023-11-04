@@ -80,6 +80,7 @@ public class RollService {
                     .rollId(rollId)
                     .content(paper.getContent())
                     .createdAt(paper.getCreatedAt())
+                    .isRead(paper.getIsRead())
                     .build();
 
             paperListResDtos.add(paperListResDto);
