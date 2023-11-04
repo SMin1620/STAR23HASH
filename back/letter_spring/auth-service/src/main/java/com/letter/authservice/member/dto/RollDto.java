@@ -1,5 +1,6 @@
 package com.letter.authservice.member.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -47,6 +48,7 @@ public class RollDto {
         private Long id;
         private String content;
         private Long rollId;
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
     }
 }
