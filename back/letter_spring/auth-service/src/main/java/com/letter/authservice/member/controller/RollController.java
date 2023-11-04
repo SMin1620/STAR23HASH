@@ -44,4 +44,15 @@ public class RollController {
         return new BaseResponse(HttpStatus.OK, "롤링페이퍼 목록 조회 성공", rollPaperListResDto);
     }
 
+    /**
+     * 롤링페이퍼 상세조회
+     */
+    @GetMapping("/paper/{paperId}")
+    public BaseResponse paperDetail(
+            HttpServletRequest request,
+            @PathVariable("paperId") Long paperId
+    ) {
+        return new BaseResponse(HttpStatus.OK, "쪽지 상세 조회 성공", rollService.paperDetail(request, paperId));
+    }
+
 }
