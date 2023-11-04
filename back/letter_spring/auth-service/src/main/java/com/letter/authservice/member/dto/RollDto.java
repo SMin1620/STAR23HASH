@@ -48,6 +48,7 @@ public class RollDto {
         private Long id;
         private String content;
         private Long rollId;
+        private Boolean isRead;
         @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
     }
