@@ -20,7 +20,7 @@ export const getRandomRooms = async (): Promise<any> => {
   try {
     const response: AxiosResponse = await AuthAxios({
       method: 'get',
-      url: `${DOMAIN}/api/notes/room/`,
+      url: `${DOMAIN}/api/notes/room`,
     })
 
     if (!response || response.status !== 200) {

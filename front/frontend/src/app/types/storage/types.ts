@@ -56,5 +56,5 @@ export interface Note {
   content: string
   createdAt: string
   send: boolean
-  read: boolean
+  isRead: boolean
 }

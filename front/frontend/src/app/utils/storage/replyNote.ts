@@ -3,18 +3,24 @@ import AuthAxios from './AuthAxios'
 
 const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
 
-export const getNotes = async (roomId: number): Promise<any> => {
+export const replyNote = async (
+  roomId: number,
+  content: string,
+): Promise<any> => {
   try {
     const response: AxiosResponse = await AuthAxios({
       method: 'get',
-      url: `${DOMAIN}/api/notes/room/${roomId}`,
+      url: `${DOMAIN}/api/notes/${roomId}`,
+      data: {
+        content: content,
+      },
     })
 
-    if (!response || response.status !== 200) {
-      throw new Error('에러')
-    }
+    console.log(response)
 
-    console.log(response.data.data)
+    // if (!response || response.status !== 200) {
+    //   throw new Error('에러')
+    // }
 
     return response.data
   } catch (error) {

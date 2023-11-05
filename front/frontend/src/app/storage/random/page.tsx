@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import * as r from './random.styled'
 
@@ -6,9 +7,23 @@ import PlanetCard from '@/component/storage/random/PlanetCard'
 import TestPlanetCard from '../test/testcomponent/TestPlanetCard'
 import { getRandomRooms } from '@/app/utils/storage/getRandomRooms'
 import { Room } from '@/app/types/storage/types'
-export default async function Ramdon() {
-  const randomRoomList: Room[] = await getRandomRooms()
-  console.log('randomrooms : ', randomRoomList)
+import { useEffect, useState } from 'react'
+export default function Ramdom() {
+  const [randomRoomList, setRandomRoomList] = useState<Room[]>()
+
+  useEffect(() => {
+    const getRooms = async () => {
+      try {
+        const resopnse = await getRandomRooms()
+        setRandomRoomList(resopnse.data)
+        console.log('randomRooms : ', resopnse.data)
+      } catch (error) {
+        console.error('Error fetching random rooms:', error)
+      }
+    }
+
+    getRooms()
+  }, [])
 
   return (
     <>
