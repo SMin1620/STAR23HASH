@@ -107,9 +107,9 @@ public class MemberController {
     public Long getId(HttpServletRequest request){
         return memberService.getId(request);
     }
-    @GetMapping("/another")
-    public Long getAnotherId(@RequestBody @Valid MemberDto.MemberAnotherRequestDto memberAnotherRequestDto){
-        return memberService.getAnotherId(memberAnotherRequestDto.getPhone());
+    @GetMapping("/another/{phone}")
+    public Long getAnotherId(@PathVariable("phone") String phone){
+        return memberService.getAnotherId(phone);
     }
 
     @GetMapping("/contact")
