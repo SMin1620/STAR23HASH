@@ -125,5 +125,4 @@ public class MemberController {
         return new BaseResponse(HttpStatus.OK, "초기화", memberService.reset());
     }
 
-
 }
