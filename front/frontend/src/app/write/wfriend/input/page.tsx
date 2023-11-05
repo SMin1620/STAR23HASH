@@ -30,7 +30,7 @@ export default function WriteFriend({ searchParams }: Props) {
   const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_PW
   const REGION = process.env.NEXT_PUBLIC_AWS_S3_REGION
   const BUCKET = process.env.NEXT_PUBLIC_AWS_S3_BUCKET || 'default-bucket-name'
-
+  console.log('phone : ', phone)
   AWS.config.update({
     accessKeyId: ACCESS_KEY,
     secretAccessKey: SECRET_ACCESS_KEY,
