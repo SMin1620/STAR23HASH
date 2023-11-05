@@ -6,15 +6,15 @@ import GlobalStyle from './GlobalStyles'
 import * as st from './write.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 import Modal from '@/component/write/failmodal'
-
+import { checkNote } from '@/app/utils/write/checkNote'
 export default function Write() {
   const [res, setRes] = useState(true)
   const router = useRouter()
   const handleRandom = async () => {
-    // 대충 api 요청하는 부분
-    if (res) {
-      //router.push(`/write/wrandom`)
-      setRes(false)
+    const result = await checkNote()
+    if (result.status.toString() === '200') {
+      setRes(true)
+      router.push(`/write/wrandom`)
     } else {
       setRes(false)
     }
