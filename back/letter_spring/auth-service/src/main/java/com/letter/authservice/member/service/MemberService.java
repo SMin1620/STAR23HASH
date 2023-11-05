@@ -173,7 +173,7 @@ public class MemberService {
         Optional<Member> member = memberRepository.findByPhone(phone);
 
         if (member.isPresent()) return true;
-        return true;
+        return false;
     }
 
     public Boolean createContact(HttpServletRequest request, ContactRequestDto contactRequestDto){
