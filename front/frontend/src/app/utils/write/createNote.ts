@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 import AuthAxios from '../storage/AuthAxios'
 
-const DOMAIN = process.env.NEXT_PUBLIC_TEST2
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL
 
 export const createNote = async (content: string): Promise<AxiosResponse> => {
   try {
