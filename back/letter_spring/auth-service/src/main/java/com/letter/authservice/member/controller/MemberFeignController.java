@@ -84,5 +84,15 @@ public class MemberFeignController {
         return member.getId();
     }
 
+    @GetMapping("/{phone}/write/check")
+    public Boolean findMemberIdWriteCheck(@PathVariable(name = "phone") String phone) {
+        System.out.println("phone valid >>> " + phone);
 
+        Member member = memberRepository.findByPhone(phone)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        System.out.println(member.getIsWrite());
+        if (member.getIsWrite()) return true;
+        else return false;
+    }
 }
