@@ -4,9 +4,10 @@ const api = axios.create({
   withCredentials: true,
 })
 
-export const setAuthToken = (token: string): void => {
-  localStorage.setItem('accessToken', token)
-}
+// setCookie 없음
+// export const setAuthToken = (token: string): void => {
+//   localStorage.setItem('accessToken', token)
+// }
 
 const getCookieValue = (name: string): string | null => {
   if (typeof window !== 'undefined') {
