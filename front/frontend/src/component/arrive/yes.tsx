@@ -4,7 +4,7 @@ export default function yes() {
   return (
     <div>
       <div
-        style={{ marginTop: '780px' }}
+        style={{ marginTop: '650px' }}
         className="mt-20 flex items-center justify-center pt-20 text-2xl text-white"
       >
         편지가 도착했어요~

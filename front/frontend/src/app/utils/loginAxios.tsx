@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 
+const DOMAIN = process.env.NEXT_PUBLIC_TEST
+
 interface Response {
   status: string
   message: string
@@ -11,7 +13,7 @@ interface Response {
 export const loginAxios = async (phone: string): Promise<Response> => {
   try {
     const res: AxiosResponse = await axios.get(
-      `http://192.168.30.130:9000/api/members/check/${phone}`,
+      `${DOMAIN}/api/members/check/${phone}`,
     )
 
     if (!res || res.status !== 200) {

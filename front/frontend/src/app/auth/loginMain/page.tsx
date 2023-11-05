@@ -36,6 +36,10 @@ export default function LoginMain() {
       setPhone(inputValue)
       router.push('/auth/loginPassword')
     }
+
+    // setLoginSuccess(true)
+    // setPhone(inputValue)
+    // router.push('/auth/loginPassword')
   }
 
   // 모달 창 닫을때 input 창 비우는 함수
@@ -49,7 +53,7 @@ export default function LoginMain() {
       <div className="flex items-center justify-center">
         <div className="absolute z-10">
           <div
-            style={{ marginTop: '790px' }}
+            style={{ marginTop: '650px' }}
             className="flex flex-col items-center justify-center"
           >
             <div className="pb-10 text-4xl text-white">별이삼샵</div>

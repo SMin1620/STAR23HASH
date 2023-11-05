@@ -22,5 +22,12 @@ export default function AstronautModel({ url, scale, position }) {
 
   if (!astronaut) return null
   astronaut.position.set(...position)
-  return <primitive object={astronaut} />
+  return (
+    <primitive
+      object={astronaut}
+      onClick={(e) => {
+        console.log('Astronuat', url)
+      }}
+    />
+  )
 }

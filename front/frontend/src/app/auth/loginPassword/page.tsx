@@ -18,8 +18,8 @@ export default function LoginPassword() {
     } else {
       console.log('번호 :' + phone + '비번 : ' + inputValue)
       const a = await passwordAxios(phone, inputValue)
-      console.log(a.message)
-      if (a.message == '로그인 성공') {
+      console.log(a.data.message)
+      if (a.data.message == '로그인 성공') {
         router.push('/main')
       } else {
         alert('비밀번호가 틀렸습니다.')

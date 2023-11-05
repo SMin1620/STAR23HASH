@@ -1,40 +1,31 @@
 'use client'
 import { Canvas, useThree, useFrame } from '@react-three/fiber'
-import { useFBX, useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
 function Ufo() {
   const ref = useRef()
-  const fbx = useFBX('/assets/UFO.fbx')
+  const gltf = useGLTF('/assets/ufo.glb')
 
-  fbx.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true
-      child.receiveShadow = true
-    }
-  })
-
-  fbx.position.set(0, 0.5, 0)
-  const scale = 0.009
-  fbx.scale.set(scale, scale, scale)
-  fbx.rotation.x = 0.3
-  fbx.rotation.z = 0.1
-
-  // 회전 초기값 설정
-  fbx.rotation.y = Math.PI / 2
+  gltf.scene.position.set(0, 0.5, 0)
+  const scale = 1
+  gltf.scene.scale.set(scale, scale, scale)
+  gltf.scene.rotation.x = 0.3
+  gltf.scene.rotation.z = 0.1
+  gltf.scene.rotation.y = Math.PI / 2
 
   useFrame(({ clock }) => {
     // 매 프레임마다 y축으로 조금씩 회전
     ref.current.rotation.y += 0.02
   })
 
-  return <primitive object={fbx} ref={ref} />
+  return <primitive object={gltf.scene} ref={ref} />
 }
 
 function Planet1() {
   const ref = useRef()
-  const gltf = useGLTF('/assets/Planet-4.glb')
+  const gltf = useGLTF('/assets/glb/planet-4.glb')
 
   gltf.scene.position.set(-1.6, -1.5, 0)
   const scale = 0.75

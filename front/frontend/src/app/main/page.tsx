@@ -38,9 +38,12 @@ const Main: React.FC = () => {
   }, [])
 
   return (
-    <div className="flex items-center justify-center text-4xl text-white">
-      {remainingTime}
-    </div>
+    <>
+      <div className="ml-1 mt-12 flex text-2xl text-white">6시까지</div>
+      <div className="flex items-center justify-center text-5xl text-white">
+        {remainingTime}
+      </div>
+    </>
   )
 }
 
