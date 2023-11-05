@@ -108,4 +108,15 @@ public class NoteController {
         return new BaseResponse(HttpStatus.OK, "쪽지 상세 조회", noteService.noteDetail(request, noteId));
     }
 
+    /**
+     * 쪽지 작성 가능 체크
+     */
+    @GetMapping("/write/check")
+    public BaseResponse writeCheck(
+            HttpServletRequest request
+    ) {
+        noteService.writeCheck(request);
+        return new BaseResponse(HttpStatus.OK, "작성 가능", true);
+    }
+
 }
