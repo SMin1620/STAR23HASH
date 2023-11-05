@@ -19,6 +19,8 @@ public class FeignErrorDecoder implements ErrorDecoder {
             case 400:
             case 404:
             case 401:
+            case 409:
+            case 403:
                 break;
             default:
                 throw new RuntimeException("custom exception");
