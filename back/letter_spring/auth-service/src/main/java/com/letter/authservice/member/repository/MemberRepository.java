@@ -16,4 +16,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query(value = "select * from members order by RAND() limit 1", nativeQuery = true)
     Member findByRandom();
+
 }
