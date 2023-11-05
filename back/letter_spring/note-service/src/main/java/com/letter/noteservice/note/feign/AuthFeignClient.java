@@ -29,4 +29,9 @@ public interface AuthFeignClient {
     Long findByPhoneAndIsWriteFalse(@PathVariable(name = "phone") String phone);
 
 
+    /**
+     * 랜덤 쪽지 작성 가능 여부 체크
+     */
+    @GetMapping("/api/members/feign/{phone}/write/check")
+    Boolean findByPhoneAndIsWriteCheck(@PathVariable(name = "phone") String phone);
 }

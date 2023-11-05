@@ -204,4 +204,18 @@ public class NoteService {
     public void updateNoteReadStatus(Note note) {
         note.setIsRead(true);
     }
+
+    /**
+     * 랜덤 쪽지 작성 가능 여부 체크
+     */
+    public void writeCheck(HttpServletRequest request) {
+        // 요청 헤더에서 멤버 유니크 변수로 저장
+        String phone = request.getHeader("Member-Authorization-Phone");
+        System.out.println("phone >>> " + phone);
+
+        // 인증 서버에서 유저 id 가져오기
+        if (authFeignClient.findByPhoneAndIsWriteCheck(phone)) {
+            throw new BusinessLogicException(ExceptionCode.MEMBER_ALREADY_WRITE);
+        }
+    }
 }
