@@ -1,6 +1,5 @@
-// import TokenStore from '@/store/token'
 import axios, { AxiosResponse } from 'axios'
-import { setAccesstokentoServer } from './serverTokenHandler'
+
 interface ResponseData {
   status: string
   message: string
@@ -56,15 +55,15 @@ const getCookieValue = (name: string): string | null => {
 
 const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || ''
 
-const userTest = async (): Promise<any> => {
+const testRegister = async (): Promise<any> => {
   console.log(DOMAIN)
 
   try {
     const response: AxiosResponse = await axiosInstance.post(
-      `${DOMAIN}/api/members/login`,
+      `${DOMAIN}/api/members/register`,
       {
-        phone: '12345',
-        password: '12345',
+        phone: '6',
+        password: '6',
       },
     )
 
@@ -73,6 +72,8 @@ const userTest = async (): Promise<any> => {
     }
 
     setCookieValue('accessToken', `Bearer ${response.data.data.accessToken}`)
+    const accessToken = getCookieValue('accessToken')
+    console.log('Access Token:', accessToken)
 
     console.log(response)
 
@@ -83,4 +84,4 @@ const userTest = async (): Promise<any> => {
   }
 }
 
-export default userTest
+export default testRegister

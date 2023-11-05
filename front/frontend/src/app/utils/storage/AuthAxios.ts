@@ -4,20 +4,48 @@ const api = axios.create({
   withCredentials: true,
 })
 
-export const setAuthToken = (token: string): void => {
-  localStorage.setItem('token', token)
-}
+const setCookieValue = (
+  name: string,
+  value: string,
+  options: any = {},
+): void => {
+  if (typeof window !== 'undefined') {
+    const cookieOptions = {
+      // 기본 쿠키 옵션들 (추가 옵션을 필요에 맞게 설정할 수 있습니다)
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 만료 기간: 7일 (예시)
+      path: '/', // 쿠키의 경로
+      sameSite: 'strict', // 동일 출처 정책
+      // secure: process.env.NODE_ENV === 'production', // HTTPS에서만 쿠키 전송
+      ...options,
+    }
 
-const getAuthToken = (): string | null => {
-  return localStorage.getItem('token')
+    document.cookie = `${name}=${value}; ${Object.keys(cookieOptions)
+      .map((key) => `${key}=${cookieOptions[key]}`)
+      .join('; ')}`
+  }
+}
+const getCookieValue = (name: string): string | null => {
+  if (typeof window !== 'undefined') {
+    const cookieName = name + '='
+    const decodedCookie = decodeURIComponent(document.cookie)
+    const cookieArray = decodedCookie.split(';')
+
+    for (let i = 0; i < cookieArray.length; i++) {
+      const cookie = cookieArray[i].trim()
+      if (cookie.indexOf(cookieName) === 0) {
+        return cookie.substring(cookieName.length, cookie.length)
+      }
+    }
+  }
+  return null
 }
 
 const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
-  console.log(config)
-  const token = getAuthToken()
+  const accessToken = getCookieValue('accessToken')
+
   const headers = {
     ...config.headers,
-    Authorization: token,
+    Authorization: accessToken,
   }
 
   config.headers = headers
@@ -25,7 +53,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
   try {
     const response = await api(config)
     return response
-  } catch (error: any) {
+  } catch (error) {
     // if (error.response?.status === 403 || error.response?.status === 401) {
     // try {
     //   const reissueResponse = await axios.post(
@@ -37,7 +65,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
     //   )
 
     //   console.log('재발급 완료')
-    //   console.log(localStorage.getItem('token'))
+    //   console.log(localStorage.getItem('accessToken'))
 
     //   const reissuedToken = reissueResponse.headers.authorization
     //   setAuthToken(reissuedToken)

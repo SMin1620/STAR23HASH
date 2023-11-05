@@ -9,7 +9,7 @@ export default function IdChkButton() {
 
   return (
     <>
-      <button onClick={handleClick}>아이디 체크</button>
+      <button onClick={handleClick}>[Axios 실행]</button>
     </>
   )
 }

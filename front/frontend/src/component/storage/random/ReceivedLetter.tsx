@@ -4,7 +4,8 @@ import * as c from '../storageComponent.styled'
 import { useRouter } from 'next/navigation'
 
 type Props = {
-  id: number
+  historyId: number
+  noteId: number
   name: string
   date: string
   content: string
@@ -12,7 +13,8 @@ type Props = {
 }
 
 export default function ReceivedLetter({
-  id,
+  historyId,
+  noteId,
   name,
   date,
   content,
@@ -21,12 +23,12 @@ export default function ReceivedLetter({
   const router = useRouter()
 
   const handleClick = () => {
-    router.push(`/storage/random/${id}/reply`)
+    router.push(`/storage/random/${historyId}/${noteId}`)
   }
 
   return (
     <c.LetterReceived>
-      {isNew ? (
+      {!isNew ? (
         <c.IsNewLetterImage
           onClick={handleClick}
           className="w-12"
