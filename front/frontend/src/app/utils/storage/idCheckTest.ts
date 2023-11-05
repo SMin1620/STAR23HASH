@@ -6,7 +6,7 @@ export interface Response {
   data: boolean
 }
 
-const DOMAIN = process.env.NEXT_PUBLIC_TEST
+const DOMAIN = process.env.NEXT_PUBLIC_TEST2
 export const idCheckTest = async (): Promise<Response> => {
   try {
     const res: AxiosResponse = await axios.get(`${DOMAIN}/api/members/check/12`)
