@@ -9,10 +9,10 @@ function Scene() {
   return (
     <>
       <Stars
-        radius={100}
-        depth={25}
+        radius={120}
+        depth={20}
         count={6000}
-        factor={5}
+        factor={8}
         saturation={2}
         fade
         speed={2}
