@@ -134,7 +134,6 @@ public class MemberController {
             HttpServletRequest request,
             @PathVariable("phone") String phone
     ) {
-        memberService.checkPhone(phone);
-        return new BaseResponse(HttpStatus.OK, "폰 번호 중복 검사", true);
+        return new BaseResponse(HttpStatus.OK, "폰 번호 중복 검사", memberService.checkPhone(phone));
     }
 }
