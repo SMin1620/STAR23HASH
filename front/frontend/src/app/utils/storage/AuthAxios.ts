@@ -1,14 +1,29 @@
-import axios, { AxiosRequestConfig, AxiosError } from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 
 const api = axios.create({
   withCredentials: true,
 })
 
-// setCookie 없음
-// export const setAuthToken = (token: string): void => {
-//   localStorage.setItem('accessToken', token)
-// }
+const setCookieValue = (
+  name: string,
+  value: string,
+  options: any = {},
+): void => {
+  if (typeof window !== 'undefined') {
+    const cookieOptions = {
+      // 기본 쿠키 옵션들 (추가 옵션을 필요에 맞게 설정할 수 있습니다)
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 만료 기간: 7일 (예시)
+      path: '/', // 쿠키의 경로
+      sameSite: 'strict', // 동일 출처 정책
+      // secure: process.env.NODE_ENV === 'production', // HTTPS에서만 쿠키 전송
+      ...options,
+    }
 
+    document.cookie = `${name}=${value}; ${Object.keys(cookieOptions)
+      .map((key) => `${key}=${cookieOptions[key]}`)
+      .join('; ')}`
+  }
+}
 const getCookieValue = (name: string): string | null => {
   if (typeof window !== 'undefined') {
     const cookieName = name + '='
@@ -27,7 +42,6 @@ const getCookieValue = (name: string): string | null => {
 
 const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
   const accessToken = getCookieValue('accessToken')
-  console.log('accessToken is : ', accessToken)
 
   const headers = {
     ...config.headers,
@@ -39,7 +53,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
   try {
     const response = await api(config)
     return response
-  } catch (error: AxiosError) {
+  } catch (error) {
     // if (error.response?.status === 403 || error.response?.status === 401) {
     // try {
     //   const reissueResponse = await axios.post(
@@ -73,7 +87,7 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
     //   throw error
     // }
 
-    console.log(error.response)
+    console.log(error)
   }
 }
 
