@@ -172,8 +172,8 @@ public class MemberService {
     public Boolean checkPhone(String phone){
         Optional<Member> member = memberRepository.findByPhone(phone);
 
-        if(member.isEmpty()){
-            return false;
+        if(member.isPresent()){
+            throw new BusinessLogicException(ExceptionCode.PHONE_ALREADY_EXISTS);
         }
         return true;
     }

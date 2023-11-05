@@ -10,6 +10,7 @@ import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
 import com.letter.authservice.member.mapper.MemberMapper;
 import com.letter.authservice.member.service.MemberService;
+import com.netflix.eureka.cluster.HttpReplicationClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
@@ -125,4 +126,15 @@ public class MemberController {
         return new BaseResponse(HttpStatus.OK, "초기화", memberService.reset());
     }
 
+    /**
+     * 사용자 회원가입 시 폰 번호 중복 체크
+     */
+    @GetMapping("/check/{phone}")
+    public BaseResponse phoneCheck(
+            HttpServletRequest request,
+            @PathVariable("phone") String phone
+    ) {
+        memberService.checkPhone(phone);
+        return new BaseResponse(HttpStatus.OK, "폰 번호 중복 검사", true);
+    }
 }
