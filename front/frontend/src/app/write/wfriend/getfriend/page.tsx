@@ -1,10 +1,42 @@
+'use client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import GlobalStyle from '../../GlobalStyles'
 import * as st from './getfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
+import { useRouter } from 'next/navigation'
+import { getContacts } from '@/app/utils/write/getContacts'
+type Contact = {
+  name: string
+  phone: string
+}
 
 export default function WriteFriend() {
-  const choice = () => {}
+  const [phone, setPhone] = useState('')
+  const [contacts, setContacts] = useState<Contact[]>([])
+  const [selectedContactIndex, setSelectedContactIndex] = useState(-1)
+  useEffect(() => {
+    const getData = async () => {
+      const res = await getContacts()
+      setContacts(res.data)
+    }
+    getData()
+  }, [])
+  const router = useRouter()
+
+  const selectContact = (index: number) => {
+    setPhone(contacts[index].phone)
+    setSelectedContactIndex(index)
+  }
+
+  const handleSendClick = async () => {
+    if (phone === '') {
+      alert('보낼 사람을 선택해주세요!')
+    } else {
+      router.push(`/write/wfriend/input?phone=${phone}`)
+    }
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -15,13 +47,23 @@ export default function WriteFriend() {
             <stt.InnerCircle2></stt.InnerCircle2>
             <stt.InnerCircle3></stt.InnerCircle3>
           </stt.InnerCircle>
-          <st.ContentBox>
-            <st.WhoSend>당신의 진심을 전달해보세요</st.WhoSend>
-            <st.WhoSend>대충 연락처 불러오는부분</st.WhoSend>
-          </st.ContentBox>
-          <Link href="/write/wfriend/input">
-            <stt.button>편지쓰기</stt.button>
-          </Link>
+
+          <st.ContactBox>
+            {contacts.map((contact, index) => (
+              <st.ContactObject
+                key={index}
+                onClick={() => selectContact(index)}
+                $isSelected={selectedContactIndex === index}
+              >
+                <st.ContactName>{contact.name}</st.ContactName>
+                <st.ContactPhone>전화번호 : {contact.phone}</st.ContactPhone>
+              </st.ContactObject>
+            ))}
+          </st.ContactBox>
+
+          <stt.EmptyDiv>
+            <stt.button onClick={handleSendClick}>편지쓰기</stt.button>
+          </stt.EmptyDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
     </>

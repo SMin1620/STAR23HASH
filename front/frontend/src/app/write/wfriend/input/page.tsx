@@ -6,20 +6,26 @@ import * as st from './inputfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 import Modal from '@/component/write/modal'
 import InputModal from '@/component/write/inputmodal'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import uuid from 'react-uuid'
 import AWS from 'aws-sdk'
 import { createLetter } from '@/app/utils/write/createLetter'
-export default function WriteFriend() {
+
+type Props = {
+  searchParams: {
+    phone: string
+  }
+}
+
+export default function WriteFriend({ searchParams }: Props) {
   const [showModal, setShowModal] = useState(false)
   const [inputModal, setInputModal] = useState(false)
   const [content, setContent] = useState('')
   const [hint, setHint] = useState('')
   const [contentType, setContentType] = useState(3) //기본 text 타입으로 설정
-  const router = useRouter()
   const [mediaUrl, setMediaUrl] = useState('')
-  const [phone, setPhone] = useState('')
-
+  const [phone, setPhone] = useState(searchParams.phone)
+  const router = useRouter()
   const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_ID
   const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_PW
   const REGION = process.env.NEXT_PUBLIC_AWS_S3_REGION
@@ -78,7 +84,6 @@ export default function WriteFriend() {
         const S3Url = await handleImageUrlFromS3(params.Key)
         if (S3Url !== null) {
           setMediaUrl(S3Url)
-          console.log('mediaUrl', S3Url)
         }
       } catch (error) {
         console.log(error)
@@ -93,7 +98,6 @@ export default function WriteFriend() {
   }
 
   const handleInputText = (text: string) => {
-    console.log('Input Text from Modal:', text)
     setHint(text)
     setShowModal(false)
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
@@ -113,7 +117,6 @@ export default function WriteFriend() {
   }
 
   const handleInputMedia = (inputmedia: File) => {
-    console.log('medialink', inputmedia)
     MediaSave(inputmedia)
     setInputModal(false)
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
@@ -129,25 +132,13 @@ export default function WriteFriend() {
   }
 
   const handleSendClick = async () => {
-    let type: string = 'text'
-    switch (contentType) {
-      case 0:
-        type = 'audio'
-        break
-      case 1:
-        type = 'movie'
-        break
-      case 2:
-        type = 'picture'
-        break
-      default:
-        break
+    const res = await createLetter(content, contentType, mediaUrl, hint, phone)
+    console.log(res.status)
+    if (res.status.toString() === 'OK') {
+      router.push(`/write/send?isSuccess=true`)
+    } else {
+      router.push(`/write/send?isSuccess=false`)
     }
-
-    const res = createLetter(content, type, mediaUrl, hint, phone)
-    console.log(res)
-
-    //router.push(`/write/send?isSuccess=true`)
   }
   return (
     <>
