@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-const DOMAIN = process.env.NEXT_PUBLIC_TEST
+const DOMAIN = process.env.NEXT_PUBLIC_TEST2
 
 interface Response {
   status: string
@@ -10,6 +10,7 @@ interface Response {
 
 // “/api/members/check/{phone}”
 // http://192.168.30.130:9000/api/members/check/{phone}
+// http://k9e106.p.ssafy.io:9000/api/members/check/{phone}
 export const loginAxios = async (phone: string): Promise<Response> => {
   try {
     const res: AxiosResponse = await axios.get(
