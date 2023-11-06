@@ -1,5 +1,12 @@
 'use client'
+import * as st from '@/app/write/wfriend/input/inputfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
+import {
+  AstronautContainer,
+  AstronautImages,
+  AstronautImg,
+  SendBox,
+} from './write.styled'
 // import styled from 'styled-components'
 
 // export const Wbutton = styled.button`
@@ -27,15 +34,27 @@ import * as stt from '@/component/common/write_layout/write_layout.styled'
 export default function LinkWrite() {
   return (
     <>
-      <stt.SendBoxDiv className="flex h-screen w-screen items-center justify-center">
-        <stt.SendBox className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full">
+      <div className="flex h-screen w-screen items-center justify-center">
+        <SendBox className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full">
           <stt.InnerCircle>
             <stt.InnerCircle1></stt.InnerCircle1>
             <stt.InnerCircle2></stt.InnerCircle2>
             <stt.InnerCircle3></stt.InnerCircle3>
           </stt.InnerCircle>
-        </stt.SendBox>
-      </stt.SendBoxDiv>
+          <AstronautContainer>
+            <AstronautImages>
+              <AstronautImg src="/link/Astronaut-1.png" alt="Astronaut1" />
+              <AstronautImg src="/link/Astronaut-2.png" alt="Astronaut2" />
+              <AstronautImg src="/link/Astronaut-3.png" alt="Astronaut3" />
+              <AstronautImg src="/link/Astronaut-4.png" alt="Astronaut4" />
+            </AstronautImages>
+          </AstronautContainer>
+
+          <st.ContentBox>
+            <st.InputContent placeholder="내용을 입력하세요" />
+          </st.ContentBox>
+        </SendBox>
+      </div>
     </>
   )
 }
