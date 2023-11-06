@@ -11,6 +11,7 @@ import com.letter.noteservice.note.repository.RoomRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,13 +107,20 @@ public class NoteService {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROOM_NOT_FOUND));
 
+        // 쪽지 한번 답장 해야하는 로직 체크
+
+        Note lastNote = noteRepository.findTopByRoomIdOrderByCreatedAtDesc(roomId).get();
+        System.out.println("lastNote >>> " + lastNote + " " + lastNote.getSenderId() + " " + lastNote.getReceiverId() + " " + lastNote.getId());
+
+        if (lastNote.getSenderId() == memberId) throw new BusinessLogicException(ExceptionCode.NOTE_ALREADY_REPLY);
+
         Note note = Note.builder()
-                .senderId(room.getReceiverId())
-                .senderName(room.getReceiverName())
-                .receiverId(room.getSenderId())
-                .receiverName(room.getSenderName())
+                .senderId(lastNote.getReceiverId())
+                .senderName(lastNote.getReceiverName())
+                .receiverId(lastNote.getSenderId())
+                .receiverName(lastNote.getSenderName())
                 .content(dto.getContent())
-                .createdAt(room.getCreatedAt())
+                .createdAt(LocalDateTime.now())
                 .isRead(false)
                 .isReply(false)
                 .room(room)

@@ -5,6 +5,7 @@ import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
 import com.letter.authservice.member.dto.Contact;
+import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
@@ -113,6 +114,11 @@ public class MemberController {
         return memberService.getAnotherId(phone);
     }
 
+    @PostMapping("/contact")
+    public Boolean createContact(HttpServletRequest request, @RequestBody @Valid ContactRequestDto contactRequestDto){
+        return memberService.createContact(request, contactRequestDto);
+    }
+
     @GetMapping("/contact")
     public List<Contact> getContact(HttpServletRequest request){
 
@@ -135,5 +141,16 @@ public class MemberController {
             @PathVariable("phone") String phone
     ) {
         return new BaseResponse(HttpStatus.OK, "폰 번호 중복 검사", memberService.checkPhone(phone));
+    }
+
+    /**
+     * 사용자 랜덤 쪽지 작성 여부 체크
+     */
+    @GetMapping("/write/check")
+    public BaseResponse writeCheck(
+            HttpServletRequest request
+    ) {
+        memberService.writeCheck(request);
+        return new BaseResponse(HttpStatus.OK, "작성 가능", true);
     }
 }
