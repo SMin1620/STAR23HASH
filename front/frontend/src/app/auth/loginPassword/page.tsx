@@ -18,7 +18,7 @@ export default function LoginPassword() {
       alert('비밀번호를 입력해주세요')
     } else {
       console.log('번호 :' + phone + '비번 : ' + inputValue)
-      const a = await passwordAxios('13', '13')
+      const a = await passwordAxios(phone, inputValue)
       console.log(a.data.message)
       if (a.data.message == '로그인 성공') {
         router.push('/main')
