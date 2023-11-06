@@ -150,7 +150,6 @@ public class MemberController {
     public BaseResponse writeCheck(
             HttpServletRequest request
     ) {
-        memberService.writeCheck(request);
-        return new BaseResponse(HttpStatus.OK, "작성 가능", true);
+        return new BaseResponse(HttpStatus.OK, "작성 가능", memberService.writeCheck(request));
     }
 }
