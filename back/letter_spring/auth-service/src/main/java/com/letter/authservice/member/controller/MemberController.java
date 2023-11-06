@@ -5,6 +5,7 @@ import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
 import com.letter.authservice.jwt.JwtTokenProvider;
 import com.letter.authservice.member.dto.Contact;
+import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
@@ -111,6 +112,11 @@ public class MemberController {
     @GetMapping("/another/{phone}")
     public Long getAnotherId(@PathVariable("phone") String phone){
         return memberService.getAnotherId(phone);
+    }
+
+    @PostMapping("/contact")
+    public Boolean createContact(HttpServletRequest request, @RequestBody @Valid ContactRequestDto contactRequestDto){
+        return memberService.createContact(request, contactRequestDto);
     }
 
     @GetMapping("/contact")

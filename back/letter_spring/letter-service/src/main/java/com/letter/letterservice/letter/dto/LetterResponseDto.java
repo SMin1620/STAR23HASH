@@ -21,7 +21,7 @@ public class LetterResponseDto {
     private String fileUrl;
     private LocalDateTime createAt;
     private Long receiverId;
-    private Boolean read;
+    private Boolean isRead;
     private String hintContent;
 
     public static LetterResponseDto toDto(Letter letter){
@@ -33,7 +33,7 @@ public class LetterResponseDto {
                 .fileUrl(letter.getFileUrl())
                 .createAt(letter.getCreateAt())
                 .receiverId(letter.getReceiverId())
-                .read(letter.getRead())
+                .isRead(letter.getIsRead())
                 .hintContent(letter.getHintContent())
                 .build();
     }

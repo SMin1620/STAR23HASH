@@ -40,7 +40,7 @@ public class Letter {
     private Long receiverId;
 
     @Column(nullable = false)
-    private Boolean read;
+    private Boolean isRead;
 
     private String hintContent;
 
@@ -54,7 +54,7 @@ public class Letter {
                 .fileUrl(letterRequestDto.getFileUrl())
                 .createAt(LocalDateTime.now())
                 .receiverId(receiverId)
-                .read(false)
+                .isRead(false)
                 .hintContent(letterRequestDto.getHintContent())
                 .store(false)
                 .build();
