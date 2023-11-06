@@ -218,12 +218,12 @@ public class MemberService {
     /**
      * 작성 여부 체크
      */
+    @Transactional
     public Boolean writeCheck(HttpServletRequest request) {
-        // 요청 헤더에서 멤버 유니크 변수로 저장
-        String phone = request.getHeader("Member-Authorization-Phone");
-        System.out.println("phone >>> " + phone);
+        Member member = memberRepository.findByPhone(
+                jwtTokenProvider.getUserPhone(
+                        jwtTokenProvider.resolveToken(request))).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        if (memberRepository.findByPhoneAndIsWriteFalse(phone).isEmpty()) return true;
-        return false;
+        return member.getIsWrite();
     }
 }
