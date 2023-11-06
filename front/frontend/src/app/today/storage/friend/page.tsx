@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { Float, OrbitControls, SpotLight, Stars } from '@react-three/drei'
 import UfoModel from '../../../../component/today/todayStorage/link/ufoModel/ufoModel'
 import PlanetModel from '../../../../component/today/todayStorage/link/planetModel/planetModel'
-import AstronautModel from '../../../../component/today/todayStorage/link/astronautModel/astronautModel'
+import AstronautModel from '../../../../component/today/todayStorage/friend/astronautModel/astronautModel'
 import GradientBackground from '../../../../component/Three/three.styled'
 import {
   Position,
@@ -13,6 +13,7 @@ import {
 import Light from '@/component/today/todayStorage/light/light'
 import { useRouter } from 'next/navigation'
 import friendListGet from '@/app/utils/todayStorage/friend/friendListGet'
+import { friendDetailGet } from '@/app/utils/todayStorage/friend/friendDetailGet'
 
 export default function TodayFriendStorage() {
   const totalAmount = 5
@@ -48,6 +49,14 @@ export default function TodayFriendStorage() {
     }
     handleListApi()
   }, [])
+
+  const handleDetailApi = async (id: number) => {
+    const response = await friendDetailGet(id)
+    console.log(response)
+
+    setLetterDetail(response)
+    router.push(`/storage/friend/${response.id}`)
+  }
 
   return (
     <Canvas
@@ -88,7 +97,7 @@ export default function TodayFriendStorage() {
         />
         {letterList &&
           letterList.map((item: any, index: number) => (
-            <Float key={index} speed={1} floatIntensity={0.1}>
+            <Float key={item.id} speed={1} floatIntensity={0.1}>
               <AstronautModel
                 url={`/assets/astronaut${(index % 4) + 1}.glb`}
                 scale={[0.3, 0.3, 0.3]}
@@ -97,6 +106,7 @@ export default function TodayFriendStorage() {
                   Math.random() * 3 - 2,
                   Math.random() * 3 - 2,
                 ]}
+                onClick={() => handleDetailApi(item.id)}
               />
             </Float>
           ))}
