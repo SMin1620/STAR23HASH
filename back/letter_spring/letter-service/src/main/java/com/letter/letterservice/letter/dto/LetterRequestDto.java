@@ -11,7 +11,7 @@ public class LetterRequestDto {
 
     private String content;
 
-    private String type;
+    private int type;
 
     private String fileUrl;
 
