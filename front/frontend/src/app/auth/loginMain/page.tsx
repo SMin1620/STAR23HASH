@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Logincomponent from '../../../component/Three/login'
+import LoginAstronaut from '../../../component/Three/loginAstronaut'
 import Modal from '../../../component/login/modal'
 import PhoneStore from '@/store/phone'
 import { loginAxios } from '@/app/utils/loginAxios'
@@ -17,6 +18,7 @@ export default function LoginMain() {
   async function phoneCheck(inputValue: string) {
     try {
       const data = await loginAxios(inputValue)
+      console.log(data)
       return data.data
     } catch (error) {
       console.error(error)
@@ -56,9 +58,9 @@ export default function LoginMain() {
             style={{ marginTop: '650px' }}
             className="flex flex-col items-center justify-center"
           >
-            <div className="pb-10 text-4xl text-white">별이삼샵</div>
-            <div className="mb-9">
-              <img src="/assets/Astronaut-4.png" style={{ width: '230px' }} />
+            <div className="pb-5 text-4xl text-white">별이삼샵</div>
+            <div style={{ width: '300px', height: '300px' }}>
+              <LoginAstronaut style={{ width: '100%', height: '100%' }} />
             </div>
             <m.inputStyle
               placeholder="전화번호를 입력해 주세요"
@@ -67,6 +69,9 @@ export default function LoginMain() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             ></m.inputStyle>
+            <div className="text-l mb-3">
+              -없이 입력해주세요. ex.01012345678
+            </div>
             <m.Button onClick={loginClick}>로그인</m.Button>
             {showModal && (
               <Modal
