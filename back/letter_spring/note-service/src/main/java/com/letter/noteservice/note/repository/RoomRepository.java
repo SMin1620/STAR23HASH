@@ -21,7 +21,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     /**
      * 쪽지 방 목록 조회
      */
-    @Query(value = "select r from Room r where r.senderId = :memberId or r.receiverId = :memberId")
+    @Query(value = "select r from Room r where r.senderId = :memberId or r.receiverId = :memberId order by r.createdAt")
     List<Room> findAllByRoom(Long memberId);
     List<Room> findAllByReceiverIdOrSenderId(Long receiverId, Long senderId);
 
