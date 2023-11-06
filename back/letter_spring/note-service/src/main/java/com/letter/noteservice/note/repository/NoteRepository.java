@@ -23,7 +23,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     /**
      * 쪽지 방의 쪽지 목록 조회
      */
-    @Query(value = "select n from Note n where n.room.id =:roomId")
+    @Query(value = "select n from Note n where n.room.id =:roomId order by n.createdAt desc")
     List<Note> findAllByNote(Long roomId);
 
     /**
@@ -37,6 +37,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 //    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId order by n.id desc")
 //    Optional<Note> findByPreNote(Long roomId, Long memberId);
     Optional<Note> findTopByRoomIdAndReceiverIdOrSenderIdOrderByCreatedAtDesc(Long roomId, Long receiverId, Long senderId);
+    Optional<Note> findTopByRoomIdOrderByCreatedAtDesc(Long roomId);
 
     /**
      * 오늘 온 쪽지 방 목록 조회
