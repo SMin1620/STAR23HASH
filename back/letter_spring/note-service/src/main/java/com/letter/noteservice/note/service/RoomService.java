@@ -45,6 +45,7 @@ public class RoomService {
         List<Room> roomList = roomRepository.findAllByRoom(memberId);
         List<RoomDto.RoomListResDto> roomListResDtos = new ArrayList<>();
         for (Room room : roomList) {
+
             RoomDto.RoomListResDto roomDto = RoomDto.RoomListResDto.builder()
                     .id(room.getId())
                     .senderId(room.getSenderId())
@@ -56,7 +57,7 @@ public class RoomService {
 
 
             // 쪽지 읽음 여부 처리
-            Optional<Note> readNote = noteRepository.findTopByRoomIdAndReceiverIdAndIsReadTrueOrderByCreatedAtDesc(room.getId(), memberId);
+            Optional<Note> readNote = noteRepository.findTopByRoomIdAndReceiverIdAndIsReadTrueAndIsStoreTrueOrderByCreatedAtDesc(room.getId(), memberId);
             if (readNote.isPresent()) roomDto.setIsRead(true);
             else roomDto.setIsRead(false);
 
@@ -83,8 +84,11 @@ public class RoomService {
         Long memberId = authFeignClient.findMemberId(phone);
         
         // 현재 날짜 2023-11-03
-        LocalDateTime start = LocalDateTime.parse(LocalDateTime.now().toString().substring(0, 10) + "T00:00:00");
-        LocalDateTime end = LocalDateTime.now();
+//        LocalDateTime start = LocalDateTime.parse(LocalDateTime.now().toString().substring(0, 10) + "T00:00:00");
+//        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime start = now.minusDays(1).withHour(18).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.withHour(18).withMinute(0).withSecond(59).withNano(0);
 
         System.out.println("Data >>> " + start + " " + end);
 
@@ -94,7 +98,7 @@ public class RoomService {
         List<RoomDto.RoomListResDto> roomListResDtos = new ArrayList<>();
         for (Room room : roomList) {
             // 각 쪽지 방에서 최신 쪽지가 오늘 왔는지 확인
-            Optional<Note> note = noteRepository.findAllByReceiverIdAndIsReadFalseAndCreatedAtBetween(memberId, start, end);
+            Optional<Note> note = noteRepository.findAllByReceiverIdAndIsReadFalseAndIsStoreTrueAndCreatedAtBetween(memberId, start, end);
             if (note.isEmpty()) continue;
 
             RoomDto.RoomListResDto roomDto = RoomDto.RoomListResDto.builder()
@@ -108,7 +112,7 @@ public class RoomService {
 
 
             // 쪽지 읽음 여부 처리
-            Optional<Note> readNote = noteRepository.findTopByRoomIdAndReceiverIdAndIsReadTrueOrderByCreatedAtDesc(room.getId(), memberId);
+            Optional<Note> readNote = noteRepository.findTopByRoomIdAndReceiverIdAndIsReadTrueAndIsStoreTrueOrderByCreatedAtDesc(room.getId(), memberId);
             if (readNote.isPresent()) roomDto.setIsRead(true);
             else roomDto.setIsRead(false);
 

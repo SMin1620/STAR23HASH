@@ -44,6 +44,8 @@ public class Note {
     @Column(nullable = false, name = "is_reply")
     private Boolean isReply;
 
+    private Boolean isStore;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "room_id")
     private Room room;
