@@ -7,7 +7,7 @@ export const checkNote = async (): Promise<AxiosResponse> => {
   try {
     const res: AxiosResponse = await AuthAxios({
       method: 'get',
-      url: `${DOMAIN}/api/notes/write`,
+      url: `${DOMAIN}/write/check`,
     })
 
     if (!res || res.status !== 200) {

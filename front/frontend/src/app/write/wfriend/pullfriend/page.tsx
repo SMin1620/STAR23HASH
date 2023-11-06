@@ -31,9 +31,7 @@ export default function WriteFriend() {
     { name: '조은정14', phone: '01012341234' },
   ]
   const handleSendClick = async () => {
-    const contactsString = JSON.stringify(contacts)
-    const res = await pullContacts(contactsString)
-    console.log(res)
+    await pullContacts(contacts)
     router.push(`/write/wfriend/getfriend`)
   }
   return (
