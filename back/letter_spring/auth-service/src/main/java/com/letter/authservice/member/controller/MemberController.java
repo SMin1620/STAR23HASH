@@ -142,4 +142,14 @@ public class MemberController {
     ) {
         return new BaseResponse(HttpStatus.OK, "폰 번호 중복 검사", memberService.checkPhone(phone));
     }
+
+    /**
+     * 사용자 랜덤 쪽지 작성 여부 체크
+     */
+    @GetMapping("/write/check")
+    public BaseResponse writeCheck(
+            HttpServletRequest request
+    ) {
+        return new BaseResponse(HttpStatus.OK, "작성 가능", memberService.writeCheck(request));
+    }
 }
