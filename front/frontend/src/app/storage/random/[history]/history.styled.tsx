@@ -27,7 +27,7 @@ export const Title = styled.p`
 
 export const LetterLogContainer = styled.div`
   width: 100%;
-
+  padding-bottom: 1rem;
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 1);
   overflow-y: scroll;

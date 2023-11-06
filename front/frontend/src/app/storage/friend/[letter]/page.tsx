@@ -1,14 +1,42 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import * as l from './letter.styled'
 import { useRouter } from 'next/navigation'
+import { Letter } from '@/app/types/storage/types'
+import { getLetter } from '@/app/utils/storage/getLetter'
 
-export default function Letter() {
+type Props = {
+  params: {
+    letter: number
+  }
+}
+
+export default function Letter({ params }: Props) {
   // api요청 데이터 취득.
   const router = useRouter()
-  const [content, setContent] = useState<string>()
+  const [letterInfo, setLetterInfo] = useState<Letter>()
+
+  useEffect(() => {
+    const getLetterInfo = async () => {
+      try {
+        const response = await getLetter(params.letter)
+        setLetterInfo(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    getLetterInfo()
+  }, [])
+
+  const getFormattedDate = (fullDate: string): string => {
+    const givenDate = new Date(fullDate)
+
+    const formattedDate = givenDate.toISOString().split('T')[0]
+    return formattedDate
+  }
 
   const handleClick = () => {
     router.back()
@@ -25,21 +53,47 @@ export default function Letter() {
           </l.DecoBottonWrapper>
 
           {/* other type image...sound..video.. */}
-          <l.MediaWrapper>
-            {/* image */}
-            <l.CustomImage
-              className="aspect-auto"
-              src="/icons/planets/Planet-1.svg"
-            />
-            {/* video */}
-            {/* sound */}
-          </l.MediaWrapper>
+          {letterInfo && letterInfo?.type !== 3 ? (
+            <l.MediaWrapper>
+              {/* image */}
+
+              {letterInfo?.type === 2 ? (
+                <l.PreviewImg
+                  className="aspect-auto"
+                  src={letterInfo.fileUrl}
+                  alt="미리보기"
+                />
+              ) : letterInfo?.type === 1 ? (
+                <l.PreviewMovie className="aspect-auto" controls>
+                  <source src={letterInfo.fileUrl} type={'video'} />
+                </l.PreviewMovie>
+              ) : letterInfo?.type === 0 ? (
+                <l.PreviewAudio className="aspect-auto" controls>
+                  <source src={letterInfo.fileUrl} type={'audio'} />
+                </l.PreviewAudio>
+              ) : null}
+
+              {/* video */}
+              {/* sound */}
+            </l.MediaWrapper>
+          ) : null}
 
           <l.LetterContent>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis
-            ratione.
+            {letterInfo?.content}
+
+            <br />
+            <br />
+            <hr />
+            <l.Date>
+              {letterInfo?.createAt !== undefined
+                ? getFormattedDate(letterInfo.createAt)
+                : '날짜정보가 없습니다'}
+            </l.Date>
+            {letterInfo && letterInfo?.hintContent !== '' ? (
+              <l.Hint>힌트 : {letterInfo?.hintContent}</l.Hint>
+            ) : null}
           </l.LetterContent>
+          <div></div>
 
           <l.CloseBotton onClick={handleClick}>닫기</l.CloseBotton>
         </l.LetterContainer>

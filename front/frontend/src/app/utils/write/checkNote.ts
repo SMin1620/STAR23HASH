@@ -7,13 +7,12 @@ export const checkNote = async (): Promise<AxiosResponse> => {
   try {
     const res: AxiosResponse = await AuthAxios({
       method: 'get',
-      url: `${DOMAIN}/write/check`,
+      url: `${DOMAIN}/api/notes/write/check`,
     })
 
     if (!res || res.status !== 200) {
       throw new Error('에러')
     }
-    console.log(res)
     return res.data
   } catch (error) {
     throw new Error('네트워크 오류')
