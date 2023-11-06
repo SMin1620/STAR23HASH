@@ -1,5 +1,4 @@
 'use client'
-import Link from 'next/link'
 import * as r from './random.styled'
 
 import BackButton from '@/component/storage/BackButton'
@@ -106,21 +105,6 @@ export default function Ramdom() {
               date="2020.02.02"
               state="written"
             /> */}
-
-            <PlanetCard
-              id={1}
-              planetNumber={1}
-              name="김감자"
-              date="2020.02.02"
-              state={true}
-            />
-            <PlanetCard
-              id={Math.floor(Math.random() * 15) + 1}
-              planetNumber={Math.floor(Math.random() * 15) + 1}
-              name="김김자"
-              date="2020.02.02"
-              state={true}
-            />
 
             {/* card component end */}
           </r.RandomCardWrapper>

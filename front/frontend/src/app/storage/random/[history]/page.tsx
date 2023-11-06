@@ -13,9 +13,12 @@ type Props = {
   params: {
     history: number
   }
+  searchParams: {
+    planetNumber: number
+  }
 }
 
-export default function History({ params }: Props) {
+export default function History({ params, searchParams }: Props) {
   const router = useRouter()
   const [notes, setNotes] = useState<Note[]>()
 
@@ -33,9 +36,6 @@ export default function History({ params }: Props) {
     getRooms()
   }, [])
 
-  const content: string =
-    'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.'
-
   return (
     <>
       <h.HistoryPage className="absolute h-screen w-screen">
@@ -43,10 +43,10 @@ export default function History({ params }: Props) {
 
         <h.TitleWrapper className="mb-6">
           <h.CustomImage
-            src="/icons/planets/Planet-1.svg"
+            src={`/icons/planets/Planet-${searchParams.planetNumber}.svg`}
             className="h-40 w-40"
           />
-          <h.Title>풍성한 크리링</h.Title>
+          <h.Title>{notes && notes[0].senderName}</h.Title>
         </h.TitleWrapper>
 
         <h.LetterLogContainer className="h-screen ">
@@ -76,20 +76,6 @@ export default function History({ params }: Props) {
                 ),
               )}
 
-            {/* <ReceivedLetter
-              id={2}
-              name="풍성한 크리링"
-              date="2023.10.11"
-              content={content}
-              isNew={true}
-            />
-
-            <SentLetter
-              id={1}
-              name="풍성한 크리링"
-              date="2023.10.11"
-              content={content}
-            /> */}
             {/* Letter component end */}
           </h.LetterLogWrapper>
         </h.LetterLogContainer>
