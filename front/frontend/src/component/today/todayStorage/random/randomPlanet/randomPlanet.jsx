@@ -25,7 +25,6 @@ export default function RandomPlanet({ url, scale, position, mesh, onClick }) {
   randomPlanet.position.set(...position)
 
   const handleClick = (e) => {
-    console.log('clicked')
     if (onClick) {
       onClick(e)
     }
