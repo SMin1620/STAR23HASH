@@ -1,19 +1,17 @@
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 
 import AuthAxios from './AuthAxios'
 
-export interface Response {
-  status: string
-  message: string
-  data: boolean
-}
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || ''
 export const authAxiosTest = async (): Promise<any> => {
   try {
     const response: AxiosResponse = await AuthAxios({
-      method: 'get',
-      url: `${DOMAIN}/api/notes/room`,
+      method: 'post',
+      url: `${DOMAIN}/api/notes`,
+      data: {
+        content: 'hello',
+      },
     })
 
     if (!response || response.status !== 200) {
