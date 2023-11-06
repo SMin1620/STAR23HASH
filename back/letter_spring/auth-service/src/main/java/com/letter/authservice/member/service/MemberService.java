@@ -218,12 +218,12 @@ public class MemberService {
     /**
      * 작성 여부 체크
      */
-    @Transactional
     public Boolean writeCheck(HttpServletRequest request) {
         Member member = memberRepository.findByPhone(
                 jwtTokenProvider.getUserPhone(
                         jwtTokenProvider.resolveToken(request))).orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
+        System.out.println("member >>> " + member.getIsWrite() );
         return member.getIsWrite();
     }
 }

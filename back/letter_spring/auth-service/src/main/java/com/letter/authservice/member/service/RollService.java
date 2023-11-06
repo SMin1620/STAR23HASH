@@ -71,8 +71,11 @@ public class RollService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
 
         // 현재 날짜 2023-11-03
-        LocalDateTime start = LocalDateTime.parse(LocalDateTime.now().toString().substring(0, 10) + "T00:00:00");
-        LocalDateTime end = LocalDateTime.now();
+//        LocalDateTime start = LocalDateTime.parse(LocalDateTime.now().toString().substring(0, 10) + "T00:00:00");
+//        LocalDateTime end = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime start = now.minusDays(1).withHour(18).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.withHour(18).withMinute(0).withSecond(0).withNano(0);
 
         List<Paper> paperList = paperRepository.findAllByRollIdAndIsReadFalseAndCreatedAtBetween(rollId, start, end);
         List<RollDto.PaperListResDto> paperListResDtos = new ArrayList<>();
