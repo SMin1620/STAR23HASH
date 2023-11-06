@@ -23,6 +23,7 @@ export const loginAxios = async (phone: string): Promise<Response> => {
 
     return res.data
   } catch (error) {
+    console.log(error)
     throw new Error('네트워크 오류')
   }
 }
