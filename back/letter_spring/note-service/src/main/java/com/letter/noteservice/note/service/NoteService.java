@@ -80,6 +80,7 @@ public class NoteService {
                 .createdAt(LocalDateTime.now())
                 .isRead(false)
                 .isReply(false)
+                .isStore(false)
                 .room(room)
                 .build();
         noteRepository.save(note);
@@ -123,6 +124,7 @@ public class NoteService {
                 .createdAt(LocalDateTime.now())
                 .isRead(false)
                 .isReply(false)
+                .isStore(false)
                 .room(room)
                 .build();
 
