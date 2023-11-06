@@ -1,17 +1,7 @@
 // import TokenStore from '@/store/token'
 import axios, { AxiosResponse } from 'axios'
-import { setAccesstokentoServer } from './serverTokenHandler'
-interface ResponseData {
-  status: string
-  message: string
-  data: Data
-}
 
-interface Data {
-  accessToken: string
-  refreshToken: string
-  memberId: number
-}
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 const axiosInstance = axios.create({
   withCredentials: true,
@@ -24,11 +14,9 @@ const setCookieValue = (
 ): void => {
   if (typeof window !== 'undefined') {
     const cookieOptions = {
-      // 기본 쿠키 옵션들 (추가 옵션을 필요에 맞게 설정할 수 있습니다)
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 만료 기간: 7일 (예시)
-      path: '/', // 쿠키의 경로
-      sameSite: 'strict', // 동일 출처 정책
-      // secure: process.env.NODE_ENV === 'production', // HTTPS에서만 쿠키 전송
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      path: '/',
+      sameSite: 'strict',
       ...options,
     }
 
@@ -54,8 +42,6 @@ const getCookieValue = (name: string): string | null => {
   return null
 }
 
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN || ''
-
 const userTest = async (): Promise<any> => {
   console.log(DOMAIN)
 
@@ -63,8 +49,8 @@ const userTest = async (): Promise<any> => {
     const response: AxiosResponse = await axiosInstance.post(
       `${DOMAIN}/api/members/login`,
       {
-        phone: '12345',
-        password: '12345',
+        phone: '12',
+        password: '12',
       },
     )
 
@@ -73,6 +59,7 @@ const userTest = async (): Promise<any> => {
     }
 
     setCookieValue('accessToken', `Bearer ${response.data.data.accessToken}`)
+    setCookieValue('refreshToken', `Bearer ${response.data.data.refreshToken}`)
 
     console.log(response)
 
