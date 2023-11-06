@@ -47,4 +47,14 @@ public class LetterController {
         return new BaseResponse(HttpStatus.OK, "연락처 리스트", letterService.getContact(request));
     }
 
+    @GetMapping("/detail/{id}")
+    public BaseResponse getDetailLetter(@PathVariable("id") Long id){
+        return BaseResponse.response(HttpStatus.OK,letterService.getDetailLetter(id));
+    }
+
+    @GetMapping("/today")
+    public BaseResponse getTodayLetter(HttpServletRequest request){
+        return BaseResponse.response(HttpStatus.OK,letterService.getTodayLetter(request));
+    }
+
 }
