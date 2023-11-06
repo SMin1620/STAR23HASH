@@ -11,9 +11,15 @@ import {
   checkMinDistance,
 } from '../../../../component/today/todayStorage/checkPosition/checkPosition'
 import Light from '@/component/today/todayStorage/light/light'
+import { useRouter } from 'next/navigation'
+import friendListGet from '@/app/utils/todayStorage/friend/friendListGet'
 
 export default function TodayFriendStorage() {
   const totalAmount = 5
+  const [letterList, setLetterList] = useState<null | any>(null)
+  const [letterDetail, setLetterDetail] = useState<null | any>(null)
+
+  const router = useRouter()
   // const minDistance = 2
   // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
 
@@ -32,6 +38,16 @@ export default function TodayFriendStorage() {
   //   }
   //   setAstronautPostions(positions)
   // }, [])
+
+  useEffect(() => {
+    const handleListApi = async () => {
+      const response = await friendListGet()
+      console.log(response.data.data)
+
+      setLetterList(response.data.data)
+    }
+    handleListApi()
+  }, [])
 
   return (
     <Canvas
@@ -70,6 +86,20 @@ export default function TodayFriendStorage() {
           anglePower={3}
           position={[0, 3.1, 0]}
         />
+        {letterList &&
+          letterList.map((item: any, index: number) => (
+            <Float key={index} speed={1} floatIntensity={0.1}>
+              <AstronautModel
+                url={`/assets/astronaut${(index % 4) + 1}.glb`}
+                scale={[0.3, 0.3, 0.3]}
+                position={[
+                  Math.random() * 2 - 1,
+                  Math.random() * 3 - 2,
+                  Math.random() * 3 - 2,
+                ]}
+              />
+            </Float>
+          ))}
 
         <PlanetModel
           url="/assets/planet-1.glb"
