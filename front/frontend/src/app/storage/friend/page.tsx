@@ -48,10 +48,10 @@ export default function Friend() {
                   isRead={letter.isRead}
                 />
               ))}
-            <LetterCard id={0} type={0} isRead={true} />
+            {/* <LetterCard id={0} type={0} isRead={true} />
             <LetterCard id={1} type={1} isRead={true} />
             <LetterCard id={2} type={2} isRead={false} />
-            <LetterCard id={3} type={3} isRead={true} />
+            <LetterCard id={3} type={3} isRead={true} /> */}
             {/* LetterCard component end */}
           </f.LetterItemWrapper>
         </f.LetterItemContainer>

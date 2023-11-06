@@ -53,7 +53,7 @@ export default function Letter({ params }: Props) {
           </l.DecoBottonWrapper>
 
           {/* other type image...sound..video.. */}
-          {letterInfo?.type !== 3 ? (
+          {letterInfo && letterInfo?.type !== 3 ? (
             <l.MediaWrapper>
               {/* image */}
 
@@ -89,7 +89,9 @@ export default function Letter({ params }: Props) {
                 ? getFormattedDate(letterInfo.createAt)
                 : '날짜정보가 없습니다'}
             </l.Date>
-            <l.Hint>힌트 : 123{letterInfo?.hintContent}</l.Hint>
+            {letterInfo && letterInfo?.hintContent !== '' ? (
+              <l.Hint>힌트 : {letterInfo?.hintContent}</l.Hint>
+            ) : null}
           </l.LetterContent>
           <div></div>
 
