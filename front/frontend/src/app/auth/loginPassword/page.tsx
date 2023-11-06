@@ -1,5 +1,6 @@
 'use client'
 import Logincomponent from '../../../component/Three/login'
+import LoginAstronaut from '../../../component/Three/loginAstronaut'
 import { useState } from 'react'
 import PhoneStore from '@/store/phone'
 import { useRouter } from 'next/navigation'
@@ -32,13 +33,17 @@ export default function LoginPassword() {
       <div className="flex items-center justify-center">
         <div className="absolute z-10">
           <div
-            style={{ marginTop: '790px' }}
+            style={{ marginTop: '720px' }}
             className="flex flex-col items-center justify-center"
           >
-            <div className="pb-10 text-4xl text-white">별이삼샵</div>
-            <div className="mb-9">
+            <div className="pb-5 text-4xl text-white">별이삼샵</div>
+            {/* <div className="mb-9">
               <img src="/assets/Astronaut-4.png" style={{ width: '230px' }} />
+            </div> */}
+            <div style={{ width: '300px', height: '300px' }}>
+              <LoginAstronaut style={{ width: '100%', height: '100%' }} />
             </div>
+            <div className=" text-white">전화번호</div>
             <div className="text-4xl text-white">{phone}</div>
             <p.inputStyle
               placeholder="비밀번호를 입력해주세요"

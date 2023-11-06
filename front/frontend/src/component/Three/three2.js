@@ -17,6 +17,11 @@ function Planet1() {
   // gltf.scene.rotation.y = -0.8
   gltf.scene.rotation.x = 0.25
 
+  // useFrame((state) => {
+  //   gltf.scene.rotation.x += 0.025
+  //   gltf.scene.rotation.y += 0.01 // 이 값을 조절하여 회전 속도를 변경할 수 있습니다.
+  // })
+
   return <primitive object={gltf.scene} />
 }
 
