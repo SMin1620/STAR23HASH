@@ -25,7 +25,6 @@ export default function WriteFriend() {
   const router = useRouter()
 
   const selectContact = (index: number) => {
-    console.log(contacts[index].name, contacts[index].phone)
     setPhone(contacts[index].phone)
     setSelectedContactIndex(index)
   }

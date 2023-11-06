@@ -22,9 +22,7 @@ export default function Write() {
   const closeModal = () => {
     setRes(!res)
   }
-  useEffect(() => {
-    console.log('res : ', res)
-  }, [res])
+  useEffect(() => {}, [res])
   return (
     <>
       <GlobalStyle />

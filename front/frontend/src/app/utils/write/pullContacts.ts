@@ -2,9 +2,12 @@ import axios, { AxiosResponse } from 'axios'
 import AuthAxios from '../storage/AuthAxios'
 
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL
-
+type Contact = {
+  name: string
+  phone: string
+}
 export const pullContacts = async (
-  contacts: string,
+  contacts: Contact[],
 ): Promise<AxiosResponse> => {
   console.log(contacts)
   try {

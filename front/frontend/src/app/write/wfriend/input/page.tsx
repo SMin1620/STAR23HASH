@@ -30,7 +30,7 @@ export default function WriteFriend({ searchParams }: Props) {
   const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_PW
   const REGION = process.env.NEXT_PUBLIC_AWS_S3_REGION
   const BUCKET = process.env.NEXT_PUBLIC_AWS_S3_BUCKET || 'default-bucket-name'
-  console.log('phone : ', phone)
+
   AWS.config.update({
     accessKeyId: ACCESS_KEY,
     secretAccessKey: SECRET_ACCESS_KEY,
@@ -84,7 +84,6 @@ export default function WriteFriend({ searchParams }: Props) {
         const S3Url = await handleImageUrlFromS3(params.Key)
         if (S3Url !== null) {
           setMediaUrl(S3Url)
-          console.log('mediaUrl', S3Url)
         }
       } catch (error) {
         console.log(error)
@@ -99,7 +98,6 @@ export default function WriteFriend({ searchParams }: Props) {
   }
 
   const handleInputText = (text: string) => {
-    console.log('Input Text from Modal:', text)
     setHint(text)
     setShowModal(false)
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
@@ -119,7 +117,6 @@ export default function WriteFriend({ searchParams }: Props) {
   }
 
   const handleInputMedia = (inputmedia: File) => {
-    console.log('medialink', inputmedia)
     MediaSave(inputmedia)
     setInputModal(false)
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
@@ -135,25 +132,13 @@ export default function WriteFriend({ searchParams }: Props) {
   }
 
   const handleSendClick = async () => {
-    let type: string = 'text'
-    switch (contentType) {
-      case 0:
-        type = 'audio'
-        break
-      case 1:
-        type = 'movie'
-        break
-      case 2:
-        type = 'picture'
-        break
-      default:
-        break
+    const res = await createLetter(content, contentType, mediaUrl, hint, phone)
+    console.log(res.status)
+    if (res.status.toString() === 'OK') {
+      router.push(`/write/send?isSuccess=true`)
+    } else {
+      router.push(`/write/send?isSuccess=false`)
     }
-
-    const res = createLetter(content, type, mediaUrl, hint, phone)
-    console.log(res)
-
-    //router.push(`/write/send?isSuccess=true`)
   }
   return (
     <>

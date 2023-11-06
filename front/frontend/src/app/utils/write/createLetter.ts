@@ -5,23 +5,11 @@ const DOMAIN = process.env.NEXT_PUBLIC_API_URL
 
 export const createLetter = async (
   content: string,
-  type: string,
+  type: number,
   fileUrl: string,
   hintContent: string,
   phone: string,
 ): Promise<AxiosResponse> => {
-  console.log(
-    'content : ',
-    content,
-    '  type : ',
-    type,
-    '  fileUrl : ',
-    fileUrl,
-    '  hintContent : ',
-    hintContent,
-    '  phone : ',
-    phone,
-  )
   try {
     const res: AxiosResponse = await AuthAxios({
       method: 'post',
@@ -38,6 +26,7 @@ export const createLetter = async (
     if (!res || res.status !== 200) {
       throw new Error('에러')
     }
+    console.log(res.data)
     return res.data
   } catch (error) {
     throw new Error('네트워크 오류')

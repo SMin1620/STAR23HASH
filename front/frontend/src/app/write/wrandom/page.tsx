@@ -19,7 +19,6 @@ export default function WriteFriend() {
 
     try {
       const res = await createNote(content)
-      console.log(res.status)
       if (res.status.toString() === 'CREATED') {
         router.push(`/write/send?isSuccess=true`)
       } else {
