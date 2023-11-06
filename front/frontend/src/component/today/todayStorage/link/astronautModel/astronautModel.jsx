@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three-stdlib'
 
-export default function AstronautModel({ url, scale, position }) {
+export default function AstronautModel({ url, scale, position, onClick }) {
   const [astronaut, setAstronaut] = useState(null)
 
   useEffect(() => {
@@ -22,12 +22,12 @@ export default function AstronautModel({ url, scale, position }) {
 
   if (!astronaut) return null
   astronaut.position.set(...position)
-  return (
-    <primitive
-      object={astronaut}
-      onClick={(e) => {
-        console.log('Astronuat', url)
-      }}
-    />
-  )
+
+  const handleClick = (e) => {
+    console.log('clicked')
+    if (onClick) {
+      onClick(e)
+    }
+  }
+  return <primitive object={astronaut} onClick={handleClick} />
 }
