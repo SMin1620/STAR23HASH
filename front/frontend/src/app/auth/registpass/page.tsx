@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import * as r from './registpass.styled'
 import LoginComponent from '@/component/Three/login'
+import LoginAstronaut from '../../../component/Three/loginAstronaut'
 import './registpass.styled'
 
 export default function RegistPass() {
@@ -15,7 +16,7 @@ export default function RegistPass() {
 
   // 암호
   const onChangeName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const passwordRegex = /^[A-Za-z\d]{4,}$/
+    const passwordRegex = /^[A-Za-z\d]{4}$/
     const passCurrent = e.target.value
     setPassword(passCurrent)
     if (!passwordRegex.test(passCurrent)) {
@@ -53,6 +54,9 @@ export default function RegistPass() {
             className="flex flex-col items-center justify-center"
           >
             <div className="pb-10 text-4xl text-white">별이삼샵</div>
+            {/* <div style={{ width: '300px', height: '300px' }}>
+              <LoginAstronaut style={{ width: '100%', height: '100%' }} />
+            </div> */}
             <div className="text-4xl text-white"></div>
             <r.inputStyle
               placeholder="비밀번호를 입력해주세요"

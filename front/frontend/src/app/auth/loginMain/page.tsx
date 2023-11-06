@@ -69,6 +69,9 @@ export default function LoginMain() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             ></m.inputStyle>
+            <div className="text-l mb-3">
+              -없이 입력해주세요. ex.01012345678
+            </div>
             <m.Button onClick={loginClick}>로그인</m.Button>
             {showModal && (
               <Modal
