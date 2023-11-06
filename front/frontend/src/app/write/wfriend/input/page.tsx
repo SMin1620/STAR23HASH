@@ -133,7 +133,6 @@ export default function WriteFriend({ searchParams }: Props) {
 
   const handleSendClick = async () => {
     const res = await createLetter(content, contentType, mediaUrl, hint, phone)
-    console.log(res.status)
     if (res.status.toString() === 'OK') {
       router.push(`/write/send?isSuccess=true`)
     } else {
@@ -161,7 +160,7 @@ export default function WriteFriend({ searchParams }: Props) {
             <st.Hint>
               <st.HintCheck
                 type="checkbox"
-                checked={showModal}
+                checked={hint !== ''}
                 onChange={() => openModal()}
               />
               <st.HintCheckCustom />
@@ -193,7 +192,7 @@ export default function WriteFriend({ searchParams }: Props) {
           </stt.EmptyDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
-      {showModal && <Modal onConfirm={handleInputText} />}
+      {showModal && <Modal hint={hint} closeState={handleInputText} />}
       {inputModal && (
         <InputModal
           contentType={contentType}
