@@ -17,13 +17,13 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
 
 //    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId and n.isRead = false order by n.id desc")
 //    Optional<Note> findRoomByNote(Long roomId, Long memberId);
-    Optional<Note> findTopByRoomIdAndReceiverIdAndIsReadTrueOrderByCreatedAtDesc(Long roomId, Long memberId);
+    Optional<Note> findTopByRoomIdAndReceiverIdAndIsReadTrueAndIsStoreTrueOrderByCreatedAtDesc(Long roomId, Long memberId);
 
 
     /**
      * 쪽지 방의 쪽지 목록 조회
      */
-    @Query(value = "select n from Note n where n.room.id =:roomId order by n.createdAt desc")
+    @Query(value = "select n from Note n where n.room.id =:roomId and n.isStore = true order by n.createdAt desc")
     List<Note> findAllByNote(Long roomId);
 
     /**
@@ -42,5 +42,5 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     /**
      * 오늘 온 쪽지 방 목록 조회
      */
-    Optional<Note> findAllByReceiverIdAndIsReadFalseAndCreatedAtBetween(Long memberId, LocalDateTime start, LocalDateTime end);
+    Optional<Note> findAllByReceiverIdAndIsReadFalseAndIsStoreTrueAndCreatedAtBetween(Long memberId, LocalDateTime start, LocalDateTime end);
 }
