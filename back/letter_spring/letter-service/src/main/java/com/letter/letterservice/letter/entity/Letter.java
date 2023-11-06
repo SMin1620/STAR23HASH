@@ -26,7 +26,7 @@ public class Letter {
     private String content;
 
     @Column(nullable = false)
-    private String type;
+    private int type;
 
     private String fileUrl;
 
