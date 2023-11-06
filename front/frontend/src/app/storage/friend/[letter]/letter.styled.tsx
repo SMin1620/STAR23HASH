@@ -81,6 +81,15 @@ export const LetterContent = styled.div`
   padding: 1rem;
   border-radius: 0.5rem;
 `
+export const Hint = styled.p`
+  font-weight: bold;
+  color: #ff6045;
+`
+export const Date = styled.p`
+  font-size: 1rem;
+  text-align: end;
+  color: #6a6a6a;
+`
 
 export const CloseBotton = styled.button`
   box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);

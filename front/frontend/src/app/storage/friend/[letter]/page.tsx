@@ -31,6 +31,13 @@ export default function Letter({ params }: Props) {
     getLetterInfo()
   }, [])
 
+  const getFormattedDate = (fullDate: string): string => {
+    const givenDate = new Date(fullDate)
+
+    const formattedDate = givenDate.toISOString().split('T')[0]
+    return formattedDate
+  }
+
   const handleClick = () => {
     router.back()
   }
@@ -46,21 +53,32 @@ export default function Letter({ params }: Props) {
           </l.DecoBottonWrapper>
 
           {/* other type image...sound..video.. */}
-          <l.MediaWrapper>
-            {/* image */}
-            <l.CustomImage
-              className="aspect-auto"
-              src="/icons/planets/Planet-1.svg"
-            />
-            {/* video */}
-            {/* sound */}
-          </l.MediaWrapper>
+          {letterInfo?.type !== 3 ? (
+            <l.MediaWrapper>
+              {/* image */}
+              <l.CustomImage
+                className="aspect-auto"
+                src="/icons/planets/Planet-1.svg"
+              />
+              {/* video */}
+              {/* sound */}
+            </l.MediaWrapper>
+          ) : null}
 
           <l.LetterContent>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-            impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis
-            ratione.
+            {letterInfo?.content}
+
+            <br />
+            <br />
+            <hr />
+            <l.Date>
+              {letterInfo?.createAt !== undefined
+                ? getFormattedDate(letterInfo.createAt)
+                : '날짜정보가 없습니다'}
+            </l.Date>
+            <l.Hint>힌트 : 123{letterInfo?.hintContent}</l.Hint>
           </l.LetterContent>
+          <div></div>
 
           <l.CloseBotton onClick={handleClick}>닫기</l.CloseBotton>
         </l.LetterContainer>
