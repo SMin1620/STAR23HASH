@@ -10,68 +10,82 @@ import * as THREE from 'three'
 import RandomPlanet from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
 import { useGesture } from '@use-gesture/react'
 import Light from '@/component/today/todayStorage/light/light'
-import RandomListGet from '@/app/utils/todayStorage/randomListGet'
-
-const totalAmount = 30
+import RandomListGet from '@/app/utils/todayStorage/random/randomListGet'
+import { randomDetailGet } from '@/app/utils/todayStorage/random/randomDetailGet'
+import { useRouter } from 'next/navigation'
 
 export default function TodayRandomStorage() {
-  const [noteList, setNoteList] = useState(null)
+  const [noteList, setNoteList] = useState<null | any>(null)
+  const [detail, setDetail] = useState<null | any>(null)
+
+  const router = useRouter()
 
   useEffect(() => {
     const handleListApi = async () => {
       const response = await RandomListGet()
-      console.log(response)
+      console.log(response.data.data)
 
-      setNoteList(response.data)
+      setNoteList(response.data.data)
     }
     handleListApi()
   }, [])
 
-  const Data = () => {
-    return [
-      {
-        id: 1,
-        senderId: 1,
-        senderName: '빛나는 북극토끼',
-        receiverId: 33,
-        receiverName: '졸린 봉황',
-        content: '어쩔티비',
-        createdAt: '2023-11-02T09:57:51.124853',
-        send: true,
-        read: true,
-      },
-      {
-        id: 6,
-        senderId: 33,
-        senderName: '졸린 봉황',
-        receiverId: 1,
-        receiverName: '빛나는 북극토끼',
-        content: '저쩔티비',
-        createdAt: '2023-11-02T09:57:51.093082',
-        send: false,
-        read: true,
-      },
-    ]
+  const handleDetailApi = async (id: number) => {
+    const response = await randomDetailGet(id)
+    console.log(response)
+
+    setDetail(response)
+    router.push(`/storage/random/${response.id}`)
   }
+
+  // const Data = () => {
+  //   return [
+  //     {
+  //       id: 1,
+  //       senderId: 1,
+  //       senderName: '빛나는 북극토끼',
+  //       receiverId: 33,
+  //       receiverName: '졸린 봉황',
+  //       content: '어쩔티비',
+  //       createdAt: '2023-11-02T09:57:51.124853',
+  //       send: true,
+  //       read: true,
+  //     },
+  //     {
+  //       id: 6,
+  //       senderId: 33,
+  //       senderName: '졸린 봉황',
+  //       receiverId: 1,
+  //       receiverName: '빛나는 북극토끼',
+  //       content: '저쩔티비',
+  //       createdAt: '2023-11-02T09:57:51.093082',
+  //       send: false,
+  //       read: true,
+  //     },
+  //   ]
+  // }
+
+  const totalAmount = noteList?.count || 0
+  console.log(totalAmount)
 
   const planeRefs = Array(totalAmount)
     .fill(null)
     .map(() => ({ current: null as THREE.Object3D | null }))
 
   const bind = useGesture({
-    onDrag: ({ offset: [x, y], direction, movement: [mx, my] }) => {
-      console.log(direction)
+    onDrag: ({ offset: [x, y], direction: [mx, my] }) => {
+      const absoluteY = Math.abs(y)
+      console.log('direction', mx, my)
       console.log('offset', x, y)
-      console.log('movement', x, y)
 
       planeRefs.forEach((ref) => {
         if (ref.current) {
           if (my > 0) {
-            ref.current.position.y += y * -0.0001
-            ref.current.position.z += y * -0.0012
+            ref.current.position.y += absoluteY * -0.0001
+            ref.current.position.z += absoluteY * -0.0012
           } else if (my < 0) {
-            ref.current.position.y += y * 0.0001
-            ref.current.position.z += y * 0.0012
+            ref.current.position.y += absoluteY * 0.0001
+            ref.current.position.z += absoluteY * 0.0012
           }
           // ref.current.position.x += x * 0.05
         }
@@ -89,7 +103,7 @@ export default function TodayRandomStorage() {
         }}
         {...bind()}
       >
-        <Stars
+        {/* <Stars
           radius={100}
           depth={25}
           count={6000}
@@ -97,28 +111,33 @@ export default function TodayRandomStorage() {
           saturation={1}
           fade
           speed={2}
-        />
+        /> */}
         <Light />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          {Array.from({ length: totalAmount }).map((_, index) => {
-            const model = Models[index % Models.length]
-            const startPostion = [-3, -20, -63]
-            const position = [
-              startPostion[0],
-              startPostion[1] + 10 * index,
-              startPostion[2] + 120 * index,
-            ]
-            return (
-              <RandomPlanet
-                key={index}
-                url={model.url}
-                scale={model.scale}
-                position={position}
-                mesh={planeRefs[index]}
-              />
-            )
-          })}
+          {noteList?.roomListResDtoList &&
+            noteList.roomListResDtoList.map((item: any, index: number) => {
+              console.log('item', item.id)
+
+              const randomIndex = Math.floor(Math.random() * Models.length)
+              const model = Models[randomIndex % Models.length]
+              const startPostion = [-3, -20, -63]
+              const position = [
+                startPostion[0],
+                startPostion[1] + 10 * index,
+                startPostion[2] + 120 * index,
+              ]
+              return (
+                <RandomPlanet
+                  key={item.id}
+                  url={model.url}
+                  scale={model.scale}
+                  position={position}
+                  mesh={planeRefs[index]}
+                  onClick={() => handleDetailApi(item.id)}
+                />
+              )
+            })}
           <RocketModel
             url="/assets/rocket-1.glb"
             scale={[10, 10, 10]}
