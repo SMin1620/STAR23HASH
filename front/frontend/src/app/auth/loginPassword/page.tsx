@@ -31,18 +31,12 @@ export default function LoginPassword() {
   return (
     <div>
       <div className="flex items-center justify-center">
-        <div className="absolute z-10">
-          <div
-            style={{ marginTop: '720px' }}
-            className="flex flex-col items-center justify-center"
-          >
+        <p.ContentBox>
+          <div className="flex flex-col items-center justify-center">
             <div className="pb-5 text-4xl text-white">별이삼샵</div>
-            {/* <div className="mb-9">
-              <img src="/assets/Astronaut-4.png" style={{ width: '230px' }} />
-            </div> */}
-            <div style={{ width: '300px', height: '300px' }}>
+            <p.AstronauntDiv>
               <LoginAstronaut style={{ width: '100%', height: '100%' }} />
-            </div>
+            </p.AstronauntDiv>
             <div className=" text-white">전화번호</div>
             <div className="text-4xl text-white">{phone}</div>
             <p.inputStyle
@@ -54,7 +48,7 @@ export default function LoginPassword() {
             ></p.inputStyle>
             <p.Button onClick={passwordClick}>확인</p.Button>
           </div>
-        </div>
+        </p.ContentBox>
       </div>
       <Logincomponent
         style={{ position: 'absolute', width: '100%', height: '100%' }}
