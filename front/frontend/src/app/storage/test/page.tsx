@@ -4,12 +4,10 @@ import LoginButton from './LoginButton'
 import RegisterButton from './RegisterButton'
 import * as st from './storage.styled'
 
-import { getDataTest } from '@/app/utils/storage/getDataTest'
 import TestPlanetCard from './testcomponent/TestPlanetCard'
 import userTest from '@/app/utils/storage/userTest'
 
 export default async function Test() {
-  const test = await getDataTest()
   // const test2 = await userTest()
   // console.log(test2)
 

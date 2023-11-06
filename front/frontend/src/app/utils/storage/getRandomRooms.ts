@@ -1,18 +1,7 @@
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import AuthAxios from './AuthAxios'
 
-interface Response {
-  id: number
-  senderId: number
-  senderName: string
-  receiverId: number
-  receiverName: string
-  createdAt: string
-  read: boolean
-  store: any
-}
-
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 export const getRandomRooms = async (): Promise<any> => {
   console.log('DOMAIN : ', DOMAIN)
@@ -30,7 +19,7 @@ export const getRandomRooms = async (): Promise<any> => {
     console.log('getrandom out', response)
 
     return response.data
-  } catch (error: AxiosError) {
+  } catch (error: any) {
     console.log(error.response)
     // throw new Error('네트워크 오류')
   }

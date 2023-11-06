@@ -3,16 +3,18 @@ import AuthAxios from './AuthAxios'
 
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
-export const getNote = async (noteId: number): Promise<any> => {
+export const getLetters = async (): Promise<any> => {
   try {
     const response: AxiosResponse = await AuthAxios({
       method: 'get',
-      url: `${DOMAIN}/api/notes/${noteId}`,
+      url: `${DOMAIN}/api/letters`,
     })
 
     if (!response || response.status !== 200) {
       throw new Error('에러')
     }
+
+    console.log(response.data.data)
 
     return response.data
   } catch (error) {

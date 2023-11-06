@@ -1,14 +1,35 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import * as l from './letter.styled'
 import { useRouter } from 'next/navigation'
+import { Letter } from '@/app/types/storage/types'
+import { getLetter } from '@/app/utils/storage/getLetter'
 
-export default function Letter() {
+type Props = {
+  params: {
+    letter: number
+  }
+}
+
+export default function Letter({ params }: Props) {
   // api요청 데이터 취득.
   const router = useRouter()
-  const [content, setContent] = useState<string>()
+  const [letterInfo, setLetterInfo] = useState<Letter>()
+
+  useEffect(() => {
+    const getLetterInfo = async () => {
+      try {
+        const response = await getLetter(params.letter)
+        setLetterInfo(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    getLetterInfo()
+  }, [])
 
   const handleClick = () => {
     router.back()
