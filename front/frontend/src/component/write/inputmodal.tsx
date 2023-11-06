@@ -75,9 +75,15 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
           <div>
             {file.type.startsWith('image') ? (
               <img src={previewURL} alt="미리보기" />
-            ) : (
-              <p>파일 이름: {file.name}</p>
-            )}
+            ) : file.type.startsWith('video') ? (
+              <video controls>
+                <source src={previewURL} type="video/mp4" />
+              </video>
+            ) : file.type.startsWith('audio') ? (
+              <M.AudioFile controls>
+                <source src={previewURL} type={file.type} />
+              </M.AudioFile>
+            ) : null}
           </div>
         )}
         {!errorMessage && (
