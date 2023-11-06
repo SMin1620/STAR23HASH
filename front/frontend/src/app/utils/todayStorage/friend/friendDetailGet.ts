@@ -7,7 +7,7 @@ export const friendDetailGet = async (id: number): Promise<any> => {
   try {
     const response: AxiosResponse = await AuthAxios({
       method: 'get',
-      url: `${DOMAIN}/api/notes/${id}`,
+      url: `${DOMAIN}/api/letters/detail/${id}`,
     })
   } catch (error) {
     console.error(error)
