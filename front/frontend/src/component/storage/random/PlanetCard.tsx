@@ -21,7 +21,7 @@ export default function PlanetCard({
   const router = useRouter()
 
   const handleClick = () => {
-    router.push(`/storage/random/${id}`)
+    router.push(`/storage/random/${id}?planetNumber=${planetNumber}`)
   }
 
   return (
