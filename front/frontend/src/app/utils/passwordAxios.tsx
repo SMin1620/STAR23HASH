@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios'
 
-const DOMAIN = process.env.NEXT_PUBLIC_TEST2
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL
 
 const axiosInstance = axios.create({
   withCredentials: true,
