@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation'
 import * as c from '../storageComponent.styled'
 
 enum LetterType {
-  'Text',
-  'Picture',
-  'Video',
   'Sound',
+  'Video',
+  'Picture',
+  'Text',
 }
 
 type Props = {

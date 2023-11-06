@@ -1,40 +1,40 @@
-export interface item {
-  userId: number
-  id: number
-  title: string
-  body: string
-}
+// export interface item {
+//   userId: number
+//   id: number
+//   title: string
+//   body: string
+// }
 
-export interface member {
-  id: string
-  password?: string
-}
+// export interface member {
+//   id: string
+//   password?: string
+// }
 
-export interface note {
-  id: number
-  senderId: string
-  senderNickname: string
-  date: string
-  content: string
-  isNew: boolean
-  isSender: boolean
-}
+// export interface note {
+//   id: number
+//   senderId: string
+//   senderNickname: string
+//   date: string
+//   content: string
+//   isNew: boolean
+//   isSender: boolean
+// }
 
-export interface letter {
-  id: number
-  userId: number
-  sender: string
-  date: string
-  isNew: boolean
-}
+// export interface letter {
+//   id: number
+//   userId: number
+//   sender: string
+//   date: string
+//   isNew: boolean
+// }
 
-export interface letterInfo extends letter {
-  content: string
-  type: number
-  fileUrl?: string
-  nickname: string
-  hint?: string
-}
+// export interface letterInfo extends letter {
+//   content: string
+//   type: number
+//   fileUrl?: string
+//   nickname: string
+//   hint?: string
+// }
 
 export interface Room {
   id: number
@@ -57,4 +57,16 @@ export interface Note {
   createdAt: string
   send: boolean
   isRead: boolean
+}
+
+export interface Letter {
+  id: number
+  senderId: number
+  content: string
+  type: number
+  fileUrl: string
+  createAt: string
+  receiverId: number
+  isRead: boolean
+  hintContent: string
 }

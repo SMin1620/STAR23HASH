@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import AuthAxios from './AuthAxios'
 
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 export const getNotes = async (roomId: number): Promise<any> => {
   try {
