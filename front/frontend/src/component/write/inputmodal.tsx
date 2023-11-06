@@ -70,21 +70,23 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
         <M.ModalText>{ContentType[contentType]}을 골라주세요!</M.ModalText>
         <M.XButton onClick={closeState}>X</M.XButton>
         <M.FileInput type="file" onChange={handleFileInputChange} />
-        {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+        {errorMessage && (
+          <M.errMessage style={{ color: 'red' }}>{errorMessage}</M.errMessage>
+        )}
         {previewURL && file != undefined && (
-          <div>
+          <M.EmptyDiv>
             {file.type.startsWith('image') ? (
-              <img src={previewURL} alt="미리보기" />
+              <M.PreviewImg src={previewURL} alt="미리보기" />
             ) : file.type.startsWith('video') ? (
-              <video controls>
-                <source src={previewURL} type="video/mp4" />
-              </video>
-            ) : file.type.startsWith('audio') ? (
-              <M.AudioFile controls>
+              <M.PreviewMovie controls>
                 <source src={previewURL} type={file.type} />
-              </M.AudioFile>
+              </M.PreviewMovie>
+            ) : file.type.startsWith('audio') ? (
+              <M.PreviewAudio controls>
+                <source src={previewURL} type={file.type} />
+              </M.PreviewAudio>
             ) : null}
-          </div>
+          </M.EmptyDiv>
         )}
         {!errorMessage && (
           <M.CloseButton onClick={handleConfirmClick}>확인</M.CloseButton>
