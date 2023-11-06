@@ -13,6 +13,7 @@ public enum ExceptionCode {
     ROOM_ALREADY_EXISTS(409, "Room Already Exists"),
     ROOM_NOT_FOUND(404, "Room Not Found"),
     NOTE_NOT_FOUND(404, "Note Not Found"),
+    NOTE_ALREADY_REPLY(409, "Note Already Reply"),
 
 
     FAILED_TO_UPDATE_MEMBER(500, "Failed Update Member"),
