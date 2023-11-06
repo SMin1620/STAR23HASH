@@ -17,7 +17,7 @@ public class LetterResponseDto {
     private Long id;
     private Long senderId;
     private String content;
-    private String type;
+    private int type;
     private String fileUrl;
     private LocalDateTime createAt;
     private Long receiverId;
