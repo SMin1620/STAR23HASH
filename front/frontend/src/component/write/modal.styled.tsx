@@ -91,3 +91,7 @@ export const XButton = styled.button`
   top: 15px;
   left: 250px;
 `
+
+export const AudioFile = styled.audio`
+  width: 100%;
+`
