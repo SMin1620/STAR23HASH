@@ -58,7 +58,7 @@ export default function LoginMain() {
             style={{ marginTop: '650px' }}
             className="flex flex-col items-center justify-center"
           >
-            <div className="pb-10 text-4xl text-white">별이삼샵</div>
+            <div className="pb-5 text-4xl text-white">별이삼샵</div>
             <div style={{ width: '300px', height: '300px' }}>
               <LoginAstronaut style={{ width: '100%', height: '100%' }} />
             </div>
