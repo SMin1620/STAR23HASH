@@ -56,10 +56,23 @@ export default function Letter({ params }: Props) {
           {letterInfo?.type !== 3 ? (
             <l.MediaWrapper>
               {/* image */}
-              <l.CustomImage
-                className="aspect-auto"
-                src="/icons/planets/Planet-1.svg"
-              />
+
+              {letterInfo?.type === 2 ? (
+                <l.PreviewImg
+                  className="aspect-auto"
+                  src={letterInfo.fileUrl}
+                  alt="미리보기"
+                />
+              ) : letterInfo?.type === 1 ? (
+                <l.PreviewMovie className="aspect-auto" controls>
+                  <source src={letterInfo.fileUrl} type={'video'} />
+                </l.PreviewMovie>
+              ) : letterInfo?.type === 0 ? (
+                <l.PreviewAudio className="aspect-auto" controls>
+                  <source src={letterInfo.fileUrl} type={'audio'} />
+                </l.PreviewAudio>
+              ) : null}
+
               {/* video */}
               {/* sound */}
             </l.MediaWrapper>
