@@ -60,4 +60,8 @@ public class Letter {
                 .build();
     }
 
+    public void updateRead(){
+        this.isRead = true;
+    }
+
 }
