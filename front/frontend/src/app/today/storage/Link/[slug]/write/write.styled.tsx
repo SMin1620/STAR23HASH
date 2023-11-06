@@ -24,9 +24,34 @@ export const AstronautImages = styled.div`
   margin-top: 90px;
   display: flex;
 `
+export const AstronautBox = styled.div`
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    border: 2px solid #3e3d83;
+  }
+  &:active {
+    border: 2px solid #3e3d83;
+  }
+`
 
 export const AstronautImg = styled.img`
-  margin-left: 10px;
   width: 80px;
   height: 80px;
+  margin: 0 5px;
+`
+export const BtnContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+`
+
+export const Btn = styled.button`
+  background-color: #3e3d83;
+  border-radius: 20px;
+  color: white;
+  width: 80px;
+  height: 35px;
+  margin: 0 7px;
 `

@@ -5,7 +5,10 @@ import {
   AstronautContainer,
   AstronautImages,
   AstronautImg,
+  Btn,
+  BtnContainer,
   SendBox,
+  AstronautBox,
 } from './write.styled'
 // import styled from 'styled-components'
 
@@ -43,16 +46,28 @@ export default function LinkWrite() {
           </stt.InnerCircle>
           <AstronautContainer>
             <AstronautImages>
-              <AstronautImg src="/link/Astronaut-1.png" alt="Astronaut1" />
-              <AstronautImg src="/link/Astronaut-2.png" alt="Astronaut2" />
-              <AstronautImg src="/link/Astronaut-3.png" alt="Astronaut3" />
-              <AstronautImg src="/link/Astronaut-4.png" alt="Astronaut4" />
+              <AstronautBox>
+                <AstronautImg src="/link/Astronaut-1.png" alt="Astronaut1" />
+              </AstronautBox>
+              <AstronautBox>
+                <AstronautImg src="/link/Astronaut-2.png" alt="Astronaut2" />
+              </AstronautBox>
+              <AstronautBox>
+                <AstronautImg src="/link/Astronaut-3.png" alt="Astronaut3" />
+              </AstronautBox>
+              <AstronautBox>
+                <AstronautImg src="/link/Astronaut-4.png" alt="Astronaut4" />
+              </AstronautBox>
             </AstronautImages>
           </AstronautContainer>
 
           <st.ContentBox>
             <st.InputContent placeholder="내용을 입력하세요" />
           </st.ContentBox>
+          <BtnContainer>
+            <Btn>돌아가기</Btn>
+            <Btn>전송하기</Btn>
+          </BtnContainer>
         </SendBox>
       </div>
     </>
