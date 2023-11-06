@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-const DOMAIN = process.env.NEXT_PUBLIC_TEST2
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL
 
 interface Response {
   status: string
@@ -23,6 +23,7 @@ export const loginAxios = async (phone: string): Promise<Response> => {
 
     return res.data
   } catch (error) {
+    console.log(error)
     throw new Error('네트워크 오류')
   }
 }
