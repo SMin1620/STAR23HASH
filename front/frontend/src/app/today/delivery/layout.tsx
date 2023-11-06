@@ -1,5 +1,6 @@
 import DeliveryThree from '../../../component/Three/delivery'
 import BackButton from '@/component/storage/BackButton'
+import DeliveryUfo from '@/component/Three/deliveryUfo'
 export default function Delivery({ children }: { children: React.ReactNode }) {
   return (
     <div>
@@ -9,17 +10,15 @@ export default function Delivery({ children }: { children: React.ReactNode }) {
             <BackButton />
           </div>
           <div
-            style={{ marginTop: '300px' }}
-            className="mt-20 flex items-center justify-center pt-20 text-2xl text-white"
+            style={{ marginTop: '600px' }}
+            className=" flex items-center justify-center text-2xl text-white"
           >
             편지 배달하는 중...
           </div>
-        </div>
-        <div className="absolute z-10">
-          <div
-            style={{ marginTop: '850px' }}
-            className="mt-20 flex items-center justify-center pt-20 text-2xl text-white"
-          >
+          <div style={{ width: '100%', height: '200px' }}>
+            <DeliveryUfo style={{ width: '100%', height: '100%' }} />
+          </div>
+          <div className=" flex items-center justify-center text-2xl text-white">
             남은 시간
           </div>
           <div>{children}</div>

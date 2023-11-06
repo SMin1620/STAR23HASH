@@ -4,24 +4,24 @@ import { useGLTF } from '@react-three/drei'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
-function Ufo() {
-  const ref = useRef()
-  const gltf = useGLTF('/assets/ufo.glb')
+// function Ufo() {
+//   const ref = useRef()
+//   const gltf = useGLTF('/assets/ufo.glb')
 
-  gltf.scene.position.set(0, 0.5, 0)
-  const scale = 1
-  gltf.scene.scale.set(scale, scale, scale)
-  gltf.scene.rotation.x = 0.3
-  gltf.scene.rotation.z = 0.1
-  gltf.scene.rotation.y = Math.PI / 2
+//   gltf.scene.position.set(0, 0.5, 0)
+//   const scale = 1
+//   gltf.scene.scale.set(scale, scale, scale)
+//   gltf.scene.rotation.x = 0.3
+//   gltf.scene.rotation.z = 0.1
+//   gltf.scene.rotation.y = Math.PI / 2
 
-  useFrame(({ clock }) => {
-    // 매 프레임마다 y축으로 조금씩 회전
-    ref.current.rotation.y += 0.02
-  })
+//   useFrame(({ clock }) => {
+//     // 매 프레임마다 y축으로 조금씩 회전
+//     ref.current.rotation.y += 0.02
+//   })
 
-  return <primitive object={gltf.scene} ref={ref} />
-}
+//   return <primitive object={gltf.scene} ref={ref} />
+// }
 
 function Planet1() {
   const ref = useRef()
@@ -91,7 +91,7 @@ function Scene() {
     <>
       <Planet1 />
       <Planet2 />
-      <Ufo />
+      {/* <Ufo /> */}
     </>
   )
 }
