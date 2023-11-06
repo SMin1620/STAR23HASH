@@ -12,7 +12,7 @@ export default function Write() {
   const router = useRouter()
   const handleRandom = async () => {
     const result = await checkNote()
-    if (result.status.toString() === '200') {
+    if (result.status.toString() === 'OK') {
       setRes(true)
       router.push(`/write/wrandom`)
     } else {
