@@ -18,17 +18,17 @@ export default function yes() {
         className="flex items-center justify-center text-2xl"
       >
         <a.arriveButton>
-          <Link href="/today/tstorage/todayLinkStorage">
+          <Link href="/today/storage/friend">
             <a.arriveLink> 친구</a.arriveLink>
           </Link>
         </a.arriveButton>
         <a.arriveButton>
-          <Link href="/today/tstorage/todayLinkStorage">
+          <Link href="/today/storage/Random">
             <a.arriveLink>랜덤</a.arriveLink>
           </Link>
         </a.arriveButton>
         <a.arriveButton>
-          <Link href="/today/tstorage/todayLinkStorage">
+          <Link href="/today/storage/Link">
             <a.arriveLink>링크</a.arriveLink>
           </Link>
         </a.arriveButton>
