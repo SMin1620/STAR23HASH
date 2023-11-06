@@ -92,6 +92,15 @@ export const XButton = styled.button`
   left: 250px;
 `
 
-export const AudioFile = styled.audio`
+export const errMessage = styled.div`
+  color: red;
+`
+
+export const PreviewImg = styled.img``
+
+export const PreviewMovie = styled.video``
+
+export const PreviewAudio = styled.audio`
   width: 100%;
 `
+export const EmptyDiv = styled.div``
