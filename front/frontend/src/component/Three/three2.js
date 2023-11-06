@@ -155,6 +155,7 @@ function Scene() {
   const friendRef = useRef()
   const randomRef = useRef()
   const ufoRef = useRef()
+  const tl = gsap.timeline()
 
   useEffect(() => {
     // 빛1
@@ -173,9 +174,6 @@ function Scene() {
     const AmbientLigthtight = new THREE.AmbientLight('white', 1.5)
     AmbientLigthtight.position.z = 2
     scene.add(AmbientLigthtight)
-
-    // const lightHelper = new THREE.DirectionalLightHelper(light, 5)
-    // scene.add(lightHelper)
   }, [])
 
   const [cameraPosition, setCameraPosition] = useState('far')
@@ -187,7 +185,7 @@ function Scene() {
   useEffect(() => {
     const raycaster = new THREE.Raycaster()
     const mouse = new THREE.Vector2()
-    const initialPosition = new THREE.Vector3().copy(camera.position)
+    const initialPosition = new THREE.Vector3(0, 0, 5)
 
     function tableClick(e) {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1
@@ -196,23 +194,17 @@ function Scene() {
       const intersects = raycaster.intersectObjects([tableRef.current])
       if (intersects.length) {
         let newPosition
+        let newCamera
         if (cameraPosition === 'far') {
           // fbx.position.set(0.8, -1.43, -3)
-          newPosition = new THREE.Vector3(1, 0.4, -1.3)
+          newPosition = new THREE.Vector3(0.95, -1.43, -2)
+          newCamera = new THREE.Vector3(-0.9, 0.1, 0)
           setCameraPosition('near')
         } else {
           newPosition = initialPosition
+          newCamera = new THREE.Vector3(0, 0, 0)
           setCameraPosition('far')
         }
-
-        // 카메라가 바라보고자 하는 방향을 계산합니다.
-        const direction = new THREE.Vector3()
-          .subVectors(newPosition, camera.position)
-          .normalize()
-
-        // Timeline 생성
-        const tl = gsap.timeline()
-
         tl.to(
           camera.position,
           {
@@ -235,14 +227,14 @@ function Scene() {
           },
           0,
         )
-        // 카메라의 방향을 변경하는 애니메이션을 추가합니다.
+        // 카메라 방향 변경
         tl.to(
           camera.rotation,
           {
             duration: 2,
-            x: -1.0,
-            y: 0.1,
-            z: 0,
+            x: newCamera.x,
+            y: newCamera.y,
+            z: newCamera.z,
             onUpdate: () => {
               camera.updateProjectionMatrix()
             },
@@ -250,7 +242,7 @@ function Scene() {
           0,
         )
       }
-      console.log(`Mouse coordinates: x=${mouse.x}, y=${mouse.y}`)
+      // console.log(`Mouse coordinates: x=${mouse.x}, y=${mouse.y}`)
     }
 
     function storageClick(e) {
@@ -261,39 +253,48 @@ function Scene() {
 
       if (intersects.length) {
         let newPosition
-
+        let newCamera
         console.log(showStorage)
         if (cameraPosition === 'far') {
           //gltf.scene.position.set(-1.5, -1.6, -3.9)
           newPosition = new THREE.Vector3(-2.2, 0, 0)
+          newCamera = new THREE.Vector3(-0.2, 0, 0)
           setCameraPosition('near')
         } else {
           newPosition = initialPosition
+          newCamera = new THREE.Vector3(0, 0, 0)
           setCameraPosition('far')
         }
-        gsap.to(camera.position, {
-          duration: 2,
-          x: newPosition.x,
-          y: newPosition.y,
-          z: newPosition.z,
-          onUpdate: () => {
-            camera.updateProjectionMatrix()
-            if (cameraPosition === 'far') {
-              //camera.lookAt(1, -1.43, -3) // 카메라가 테이블을 바라보게 함
-              camera.lookAt(-2.2, 0, -2)
-            }
-            if (cameraPosition === 'near') {
-              camera.lookAt(new THREE.Vector3(0, 0, -5))
-            }
-          },
-          onComplete: () => {
-            setShowRandom((prevShowRandom) => !prevShowRandom)
-            setShowStorage((prevShowStorage) => !prevShowStorage)
-            setShowFriend((prevShowFriend) => !prevShowFriend)
+        tl.to(
+          camera.position,
+          {
+            duration: 2,
+            x: newPosition.x,
+            y: newPosition.y,
+            z: newPosition.z,
+            onComplete: () => {
+              setShowRandom((prevShowRandom) => !prevShowRandom)
+              setShowStorage((prevShowStorage) => !prevShowStorage)
+              setShowFriend((prevShowFriend) => !prevShowFriend)
 
-            // setShowStorage(!showStorage) // 추가된 부분
+              // setShowStorage(!showStorage) // 추가된 부분
+            },
           },
-        })
+          0,
+        )
+        tl.to(
+          camera.rotation,
+          {
+            duration: 2,
+            x: newCamera.x,
+            y: newCamera.y,
+            z: newCamera.z,
+            onUpdate: () => {
+              camera.updateProjectionMatrix()
+            },
+          },
+          0,
+        )
       }
     }
 
@@ -309,47 +310,64 @@ function Scene() {
         // UFO 위치에 따른 적절한 카메라 위치 계산
         const newPosition = new THREE.Vector3(1.8, 3, -7)
 
-        gsap.to(camera.position, {
-          duration: 1.5,
-          x: newPosition.x,
-          y: newPosition.y,
-          z: newPosition.z,
-          onUpdate: () => {
-            camera.updateProjectionMatrix()
-            // camera.lookAt(ufoRef.current.position)
-            const fadeOutDiv = document.getElementById('fade-out-div')
-            // gsap.to(fadeOutDiv.style, {
-            //   duration: 1.0,
-            //   opacity: 1,
-            //   onComplete: () => {
-            //     console.log(currentHour)
-            //   },
-            //   onComplete: () => {
-            //     if (currentHour >= 16 || currentHour <= 6) {
-            //       // window.location.href = '/today/arrive'
-            //       router.push('/today/arrive')
-            //     } else {
-            //       // window.location.href = '/today/delivery'
-            //       router.push('/today/delivery')
-            //     }
-            //   },
-            // })
-            if (fadeOutDiv) {
-              gsap.to(fadeOutDiv.style, {
-                duration: 1.0,
-                opacity: 1,
-                onComplete: () => {
-                  console.log(currentHour)
-                  if (currentHour >= 16 || currentHour <= 6) {
-                    router.push('/today/arrive')
-                  } else {
-                    router.push('/today/delivery')
-                  }
-                },
-              })
-            }
+        tl.to(
+          camera.position,
+          {
+            duration: 1.5,
+            x: newPosition.x,
+            y: newPosition.y,
+            z: newPosition.z,
+            onUpdate: () => {
+              camera.updateProjectionMatrix()
+              // camera.lookAt(ufoRef.current.position)
+              const fadeOutDiv = document.getElementById('fade-out-div')
+              // gsap.to(fadeOutDiv.style, {
+              //   duration: 1.0,
+              //   opacity: 1,
+              //   onComplete: () => {
+              //     console.log(currentHour)
+              //   },
+              //   onComplete: () => {
+              //     if (currentHour >= 16 || currentHour <= 6) {
+              //       // window.location.href = '/today/arrive'
+              //       router.push('/today/arrive')
+              //     } else {
+              //       // window.location.href = '/today/delivery'
+              //       router.push('/today/delivery')
+              //     }
+              //   },
+              // })
+              if (fadeOutDiv) {
+                gsap.to(fadeOutDiv.style, {
+                  duration: 1.0,
+                  opacity: 1,
+                  onComplete: () => {
+                    console.log(currentHour)
+                    if (currentHour >= 16 || currentHour <= 6) {
+                      router.push('/today/arrive')
+                    } else {
+                      router.push('/today/delivery')
+                    }
+                  },
+                })
+              }
+            },
           },
-        })
+          0,
+        )
+        tl.to(
+          camera.rotation,
+          {
+            duration: 2,
+            x: 0.3,
+            y: 0,
+            z: 0,
+            onUpdate: () => {
+              camera.updateProjectionMatrix()
+            },
+          },
+          0,
+        )
       }
     }
 
@@ -427,8 +445,6 @@ function Scene() {
 }
 
 function ThreeComponent({ style }) {
-  // 로딩 완료 알림
-
   return (
     <div style={style}>
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Logincomponent from '../../../component/Three/login'
+import LoginAstronaut from '../../../component/Three/loginAstronaut'
 import Modal from '../../../component/login/modal'
 import PhoneStore from '@/store/phone'
 import { loginAxios } from '@/app/utils/loginAxios'
@@ -17,6 +18,7 @@ export default function LoginMain() {
   async function phoneCheck(inputValue: string) {
     try {
       const data = await loginAxios(inputValue)
+      console.log(data)
       return data.data
     } catch (error) {
       console.error(error)
@@ -57,8 +59,8 @@ export default function LoginMain() {
             className="flex flex-col items-center justify-center"
           >
             <div className="pb-10 text-4xl text-white">별이삼샵</div>
-            <div className="mb-9">
-              <img src="/assets/Astronaut-4.png" style={{ width: '230px' }} />
+            <div style={{ width: '300px', height: '300px' }}>
+              <LoginAstronaut style={{ width: '100%', height: '100%' }} />
             </div>
             <m.inputStyle
               placeholder="전화번호를 입력해 주세요"

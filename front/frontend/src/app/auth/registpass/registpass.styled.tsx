@@ -1,6 +1,18 @@
 import styled from 'styled-components'
 
-export const inputStyle = styled.input`
+interface InputProps {
+  isValid?: boolean
+  isMatch?: boolean
+}
+export const inputStyle = styled.input<InputProps>`
+  border: ${(props) => {
+    if (props.isMatch !== undefined) {
+      return props.isMatch ? '4px solid #65F662' : '4px solid #FF4A4A'
+    }
+    if (props.isValid !== undefined) {
+      return props.isValid ? '4px solid #65F662' : '4px solid #FF4A4A'
+    }
+  }};
   width: 240px;
   height: 45px;
   margin-bottom: 15px;
