@@ -10,6 +10,8 @@ import * as THREE from 'three'
 function Planet1() {
   const gltf = useGLTF('/assets/glb/planet-5.glb')
 
+  const modelRef = useRef()
+
   gltf.scene.position.set(-5, 4.5, -13)
   const scale = 3.5
   gltf.scene.scale.set(scale, scale, scale)
@@ -22,11 +24,20 @@ function Planet1() {
   //   gltf.scene.rotation.y += 0.01 // 이 값을 조절하여 회전 속도를 변경할 수 있습니다.
   // })
 
-  return <primitive object={gltf.scene} />
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.x += 0.0002
+      modelRef.current.rotation.y += 0.0002
+    }
+  })
+
+  return <primitive object={gltf.scene} ref={modelRef} />
 }
 
 function Planet2() {
   const gltf = useGLTF('/assets/glb/planet-3.glb')
+
+  const modelRef = useRef()
 
   gltf.scene.position.set(9, 0.5, -23)
   const scale = 3.5
@@ -34,7 +45,14 @@ function Planet2() {
   gltf.scene.rotation.x = 0.4
   gltf.scene.rotation.y = -0.3
 
-  return <primitive object={gltf.scene} />
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.x += 0.003
+      modelRef.current.rotation.y += 0.002
+    }
+  })
+
+  return <primitive object={gltf.scene} ref={modelRef} />
 }
 
 function Planet3() {
@@ -83,7 +101,7 @@ function SpaceShip({ forwardedRef }) {
 
 function StorageComponent() {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/storage.png')
+  const texture = textureLoader.load('/main/storageButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
@@ -97,7 +115,7 @@ function StorageComponent() {
 
 function RandomComponent({ forwardedRef }) {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/random.png')
+  const texture = textureLoader.load('/main/randomButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
@@ -111,7 +129,7 @@ function RandomComponent({ forwardedRef }) {
 
 function FriendComponent({ forwardedRef }) {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/friend.png')
+  const texture = textureLoader.load('/main/friendButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
@@ -125,7 +143,7 @@ function FriendComponent({ forwardedRef }) {
 
 function TodayComponent() {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/todayletter.png')
+  const texture = textureLoader.load('/main/todayLetterButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
@@ -139,7 +157,7 @@ function TodayComponent() {
 
 function WriteComponent() {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/write.png')
+  const texture = textureLoader.load('/main/writeButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
