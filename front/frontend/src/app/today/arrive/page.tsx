@@ -12,11 +12,10 @@ export default function Arrive() {
   const [state, setState] = useState(false)
 
   useEffect(() => {
-    // 도착한 편지가 있는지 없는지 확인하는 비동기 작업을 수행합니다.
-    // 이 예제에서는 setTimeout을 사용하여 비동기 작업을 시뮬레이션합니다.
+    // 도착한 편지가 있는지 없는지 확인 (비동기)
     setTimeout(() => {
-      setState(true) // 비동기 작업의 결과에 따라 state를 설정합니다.
-      setLoading(false) // 비동기 작업이 끝났음을 나타내기 위해 loading을 false로 설정합니다.
+      setState(true) // 비동기 작업의 결과에 따라 state를 설정
+      setLoading(false) // 비동기 작업이 끝났음
     }, 1000)
   }, [])
 
