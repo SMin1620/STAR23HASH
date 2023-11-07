@@ -44,7 +44,7 @@ export default function Letter({ params }: Props) {
       console.error('Error ', error)
     }
 
-    // router.replace(`/storage/random`)
+    router.replace(`/storage/random`)
   }
   const handleBackBtnClick = () => {
     router.back()
@@ -56,8 +56,8 @@ export default function Letter({ params }: Props) {
   }
   return (
     <>
-      <r.LetterBoard className="absolute h-screen w-screen">
-        <r.LetterContainer className="h-3/4 w-80 md:w-2/3 lg:w-2/3">
+      <r.LetterBoard className="absolute h-screen w-screen ">
+        <r.LetterContainer className=" h-3/4  md:w-2/3 lg:w-2/3">
           <r.DecoBottonWrapper>
             <r.RedDecoBotton />
             <r.YellowDecoBotton />

@@ -16,9 +16,9 @@ export default function WriteFriend() {
   const contacts: Contact[] = [
     { name: '김은정0', phone: '1234' },
     { name: '이은정1', phone: '12345' },
-    { name: '박은정2', phone: '01012341234' },
-    { name: '최은정3', phone: '01012341234' },
-    { name: '조은정4', phone: '01012341234' },
+    { name: '박은정2', phone: '99' },
+    { name: '권은정3', phone: '999' },
+    { name: '조은정4', phone: '9999' },
     { name: '권은정5', phone: '01012341234' },
     { name: '조은정6', phone: '01012341234' },
     { name: '조은정7', phone: '01012341234' },
@@ -32,7 +32,7 @@ export default function WriteFriend() {
   ]
   const handleSendClick = async () => {
     await pullContacts(contacts)
-    router.push(`/write/wfriend/getfriend`)
+    router.replace(`/write/wfriend/getfriend`)
   }
   return (
     <>

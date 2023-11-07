@@ -12,7 +12,7 @@ export default function Write() {
   const router = useRouter()
   const handleRandom = async () => {
     const result = await checkNote()
-    if (result.status.toString() === 'OK') {
+    if (result.data.toString() === 'false') {
       setRes(true)
       router.push(`/write/wrandom`)
     } else {
@@ -22,6 +22,7 @@ export default function Write() {
   const closeModal = () => {
     setRes(!res)
   }
+  // 페이지에 진입했을 때 히스토리 스택 초기화
   useEffect(() => {}, [res])
   return (
     <>
@@ -49,6 +50,15 @@ export default function Write() {
               </button>
             </st.SendObject>
           </st.ContentBox>
+          <stt.EmptyDiv>
+            <st.button
+              onClick={() => {
+                router.back()
+              }}
+            >
+              메인으로
+            </st.button>
+          </stt.EmptyDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
       {!res && <Modal onConfirm={closeModal} />}

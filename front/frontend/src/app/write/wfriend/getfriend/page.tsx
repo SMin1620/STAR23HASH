@@ -33,7 +33,7 @@ export default function WriteFriend() {
     if (phone === '') {
       alert('보낼 사람을 선택해주세요!')
     } else {
-      router.push(`/write/wfriend/input?phone=${phone}`)
+      router.replace(`/write/wfriend/input?phone=${phone}`)
     }
   }
 

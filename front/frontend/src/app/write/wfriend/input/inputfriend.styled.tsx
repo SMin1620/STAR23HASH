@@ -29,9 +29,9 @@ export const InputContent = styled.textarea`
     white,
     white 34px,
     lightgray 34px,
-    lightgray 35px
+    lightgray 36px
   );
-  line-height: 35px;
+  line-height: 36px;
   padding: 8px 10px;
   outline: none;
 `
