@@ -34,18 +34,6 @@ public class RollController {
             HttpServletRequest request,
             @RequestBody RollDto.RollCreateReqDto dto
     ) {
-        //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
-        String token = jwtTokenProvider.resolveToken(request);
-        jwtTokenProvider.validateToken(token);
-
-        System.out.println("token >>> " + token);
-
-        Authentication authentication = jwtTokenProvider.getAuthentication(token);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        String memberEmail = userDetails.getUsername();
-
-        Member member = memberService.memberInfo(memberEmail);
 
         RollDto.RollCreateResDto rollCreateResDto = rollService.rollCreate(dto);
         return new BaseResponse(HttpStatus.CREATED, "롤링페이퍼 작성 성공", rollCreateResDto);
@@ -54,24 +42,25 @@ public class RollController {
     /**
      * 롤링페이퍼 조회
      */
-    @GetMapping("")
+    @GetMapping("/{rollId}")
     public BaseResponse rollList(
-            HttpServletRequest request
+            HttpServletRequest request,
+            @PathVariable("rollId") Long rollId
     ) {
-        //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
-        String token = jwtTokenProvider.resolveToken(request);
-        jwtTokenProvider.validateToken(token);
+//        //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
+//        String token = jwtTokenProvider.resolveToken(request);
+//        jwtTokenProvider.validateToken(token);
+//
+//        System.out.println("token >>> " + token);
+//
+//        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+//
+//        String memberEmail = userDetails.getUsername();
+//
+//        Member member = memberService.memberInfo(memberEmail);
 
-        System.out.println("token >>> " + token);
-
-        Authentication authentication = jwtTokenProvider.getAuthentication(token);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        String memberEmail = userDetails.getUsername();
-
-        Member member = memberService.memberInfo(memberEmail);
-
-        RollDto.RollPaperListResDto rollPaperListResDto = rollService.rollList(request, member.getId());
+        RollDto.RollPaperListResDto rollPaperListResDto = rollService.rollList(rollId);
         return new BaseResponse(HttpStatus.OK, "롤링페이퍼 목록 조회 성공", rollPaperListResDto);
     }
 
@@ -83,7 +72,19 @@ public class RollController {
             HttpServletRequest request,
             @PathVariable("paperId") Long paperId
     ) {
-        return new BaseResponse(HttpStatus.OK, "쪽지 상세 조회 성공", rollService.paperDetail(request, paperId));
+        //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        System.out.println("token >>> " + token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String memberEmail = userDetails.getUsername();
+
+        Member member = memberService.memberInfo(memberEmail);
+        return new BaseResponse(HttpStatus.OK, "쪽지 상세 조회 성공", rollService.paperDetail(request, paperId, member.getId()));
     }
 
     /**
