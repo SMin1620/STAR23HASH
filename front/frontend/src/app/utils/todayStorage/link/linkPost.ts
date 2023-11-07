@@ -6,16 +6,15 @@ const axiosInstance = axios.create({
 })
 
 export const linkPost = async (
-  id: number,
   content: string,
-  iconUrl: string,
+  icon: number,
 ): Promise<AxiosResponse> => {
   try {
     const response: AxiosResponse = await axiosInstance.post(
-      `${DOMAIN}/api/rolls/${id}`,
+      `${DOMAIN}/api/rolls/`,
       {
         content: content,
-        iconUrl: iconUrl,
+        icon: icon,
       },
     )
     if (!response || response.status !== 200) {

@@ -26,13 +26,13 @@ export default function TodayLinkStorage({ params }: Props) {
   const [rollDetail, setRollDetail] = useState<null | any>(null)
 
   useEffect(() => {
-    const handleListApi = async (id: number) => {
-      const response = await LinkListGet(id)
+    const handleListApi = async () => {
+      const response = await LinkListGet()
       console.log(response)
 
       setRollList(response)
     }
-    handleListApi(params.slug)
+    handleListApi()
   }, [])
 
   const handleDetailApi = async (id: number) => {
