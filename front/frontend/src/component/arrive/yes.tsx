@@ -1,9 +1,9 @@
 import { useRouter } from 'next/navigation'
 import DeliveryUfo from '../Three/deliveryUfo'
 import * as a from './arrive.styled'
-export default function yes() {
-  const router = useRouter()
 
+export default function Yes() {
+  const router = useRouter()
   const handleClick = (url: string) => {
     router.push(url)
   }
