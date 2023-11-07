@@ -119,4 +119,16 @@ public class RollService {
                 .isRead(paper.getIsRead())
                 .build();
     }
+
+    /**
+     * 롤링페이퍼 링크 생성
+     */
+    public RollDto.RollLinkDto rollLink(Long memberId) {
+        Roll roll = rollRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
+
+        return RollDto.RollLinkDto.builder()
+                .rollId(roll.getId())
+                .build();
+    }
 }

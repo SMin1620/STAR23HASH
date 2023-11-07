@@ -69,4 +69,16 @@ public class RollDto {
         @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
     }
+
+    /**
+     * 링크 생성
+     */
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class RollLinkDto {
+        private Long rollId;
+    }
 }
