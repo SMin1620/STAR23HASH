@@ -6,8 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface PaperRepository extends JpaRepository<Paper, Long> {
     List<Paper> findAllByRollId(Long rollId);
     List<Paper> findAllByRollIdAndIsReadFalseAndCreatedAtBetween(Long rollId, LocalDateTime start, LocalDateTime end);
+
+    Optional<Paper> findTopByRollIdAndIsReadFalseAndCreatedAtBetween(Long rollId, LocalDateTime start, LocalDateTime end);
 }
