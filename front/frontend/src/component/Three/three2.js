@@ -229,46 +229,6 @@ function Scene() {
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
       const intersects = raycaster.intersectObjects([tableRef.current])
-      // if (intersects.length) {
-      //   let newPosition
-      //   let newCamera
-      //   if (cameraPosition === 'far') {
-      //     // fbx.position.set(0.8, -1.43, -3)
-      //     newPosition = new THREE.Vector3(0.95, -1.43, -2)
-      //     newCamera = new THREE.Vector3(-0.9, 0.1, 0)
-      //     setCameraPosition('near')
-      //   } else {
-      //     newPosition = initialPosition
-      //     newCamera = new THREE.Vector3(0, 0, 0)
-      //     setCameraPosition('far')
-      //   }
-      //   tl.to(
-      //     camera.position,
-      //     {
-      //       duration: 2,
-      //       x: newPosition.x,
-      //       y: newPosition.y,
-      //       z: newPosition.z,
-      //       onUpdate: () => {
-      //       },
-      //     },
-      //     0,
-      //   )
-      //   // 카메라 방향 변경
-      //   tl.to(
-      //     camera.rotation,
-      //     {
-      //       duration: 2,
-      //       x: newCamera.x,
-      //       y: newCamera.y,
-      //       z: newCamera.z,
-      //       onUpdate: () => {
-      //         camera.updateProjectionMatrix()
-      //       },
-      //     },
-      //     0,
-      //   )
-      // }
       if (intersects.length > 0) {
         // UFO 위치에 따른 적절한 카메라 위치 계산
         const newPosition = new THREE.Vector3(0.95, -1.43, -2)
@@ -321,7 +281,7 @@ function Scene() {
       if (intersects.length) {
         let newPosition
         let newCamera
-        console.log(showStorage)
+        // console.log(showStorage)
         if (cameraPosition === 'far') {
           //gltf.scene.position.set(-1.5, -1.6, -3.9)
           newPosition = new THREE.Vector3(-2.2, 0, 0)
@@ -367,7 +327,7 @@ function Scene() {
 
     function ufoClick(e) {
       const currentHour = new Date().getHours()
-      console.log(currentHour)
+      // console.log(currentHour)
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
@@ -392,7 +352,7 @@ function Scene() {
                   duration: 1.0,
                   opacity: 1,
                   onComplete: () => {
-                    console.log(currentHour)
+                    // console.log(currentHour)
                     if (currentHour >= 15 || currentHour <= 6) {
                       router.push('/today/arrive')
                     } else {

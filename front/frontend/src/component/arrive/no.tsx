@@ -1,13 +1,15 @@
-import Link from 'next/link'
+import * as a from './arrive.styled'
+import DeliveryUfo from '../Three/deliveryUfo'
+
 export default function no() {
   return (
     <div>
-      <div
-        style={{ marginTop: '780px' }}
-        className="mt-20 flex items-center justify-center pt-20 text-2xl text-white"
-      >
+      <div className="flex items-center justify-center pb-10 text-2xl text-white">
         오늘은 도착한 편지가 없어요
       </div>
+      <a.UfoStyle>
+        <DeliveryUfo style={{ width: '100%', height: '100%' }} />
+      </a.UfoStyle>
     </div>
   )
 }
