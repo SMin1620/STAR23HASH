@@ -20,7 +20,7 @@ export default function LetterCard({ id, type, isRead }: Props) {
   const router = useRouter()
 
   const handleClick = () => {
-    router.push(`/storage/friend/${id}`)
+    router.replace(`/storage/friend/${id}`)
   }
 
   return (

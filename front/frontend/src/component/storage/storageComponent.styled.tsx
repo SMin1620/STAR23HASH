@@ -59,6 +59,7 @@ export const SentLetterHeader = styled(LetterHeader)`
 `
 
 export const LetterName = styled.h1`
+  font-weight: 700;
   color: #111827;
   font-size: 1rem;
 `
