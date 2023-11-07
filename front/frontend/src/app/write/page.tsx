@@ -37,13 +37,17 @@ export default function Write() {
           <st.ContentBox>
             <st.WhoSend>누구에게 편지를 보낼까요?</st.WhoSend>
             <st.SendObject>
-              <Link href={'/write/wfriend/pullfriend'}>
+              <button
+                onClick={() => {
+                  router.push(`/write/wfriend/pullfriend`)
+                }}
+              >
                 <st.SendImg
                   src="/write/Solar System.svg"
                   alt="친구에게 보내기"
                 ></st.SendImg>
                 <st.SendText>친구</st.SendText>
-              </Link>
+              </button>
               <button onClick={handleRandom}>
                 <st.SendImg src="/write/Rocket-2.svg" alt="랜덤친구 사귀기" />
                 <st.SendText>랜덤</st.SendText>
