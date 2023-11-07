@@ -47,7 +47,7 @@ public class RollController {
 
         Member member = memberService.memberInfo(memberEmail);
 
-        RollDto.RollCreateResDto rollCreateResDto = rollService.rollCreate(request, dto, member.getId());
+        RollDto.RollCreateResDto rollCreateResDto = rollService.rollCreate(dto);
         return new BaseResponse(HttpStatus.CREATED, "롤링페이퍼 작성 성공", rollCreateResDto);
     }
 

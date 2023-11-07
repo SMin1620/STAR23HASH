@@ -16,6 +16,7 @@ public class RollDto {
     public static class RollCreateReqDto {
         private String content;
         private Integer icon;
+        private Long rollId;
     }
     @Getter
     @Setter
