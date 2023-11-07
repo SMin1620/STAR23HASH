@@ -21,4 +21,5 @@ public interface LetterRepository extends JpaRepository<Letter, Long> {
 
    List<Letter> findAllByStoreFalse();
 
+   Optional<Letter> findTopByReceiverIdAndStoreTrueAndCreateAtBetween(Long memberId, LocalDateTime start, LocalDateTime end);
 }
