@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import * as M from './modal.styled'
 
@@ -29,6 +29,7 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
   const [file, setFile] = useState<File | undefined>()
   const [previewURL, setPreviewURL] = useState<string | undefined>()
   const [errorMessage, setErrorMessage] = useState<string | undefined>()
+  const fileInputRef = useRef<HTMLInputElement>(null)
   if (typeof window === 'undefined') return null
 
   const handleFileInputChange = (
@@ -69,7 +70,6 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
       <M.ModalContent>
         <M.ModalText>{ContentType[contentType]}을 골라주세요!</M.ModalText>
         <M.XButton onClick={closeState}>X</M.XButton>
-        <M.FileInput type="file" onChange={handleFileInputChange} />
         {errorMessage && (
           <M.errMessage style={{ color: 'red' }}>{errorMessage}</M.errMessage>
         )}
@@ -88,8 +88,21 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
             ) : null}
           </M.EmptyDiv>
         )}
-        {!errorMessage && (
-          <M.CloseButton onClick={handleConfirmClick}>확인</M.CloseButton>
+        {file === undefined ? (
+          <M.EmptyDiv>
+            <M.CloseButton onClick={() => fileInputRef.current?.click()}>
+              파일 선택하기
+            </M.CloseButton>
+            <M.FileInput
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileInputChange}
+            />
+          </M.EmptyDiv>
+        ) : (
+          !errorMessage && (
+            <M.CloseButton onClick={handleConfirmClick}>확인</M.CloseButton>
+          )
         )}
       </M.ModalContent>
     </M.ModalOverlay>,

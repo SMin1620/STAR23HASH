@@ -4,7 +4,8 @@ export const arriveButton = styled.div`
   background-color: #ffe189;
   border-radius: 10px;
   color: black;
-  width: 120px;
+  width: 200px;
+
   height: 45px;
   text-align: center;
   margin-bottom: 15px;

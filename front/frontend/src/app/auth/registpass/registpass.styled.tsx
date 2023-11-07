@@ -4,15 +4,7 @@ interface InputProps {
   isValid?: boolean
   isMatch?: boolean
 }
-export const inputStyle = styled.input<InputProps>`
-  border: ${(props) => {
-    if (props.isMatch !== undefined) {
-      return props.isMatch ? '4px solid #65F662' : '4px solid #FF4A4A'
-    }
-    if (props.isValid !== undefined) {
-      return props.isValid ? '4px solid #65F662' : '4px solid #FF4A4A'
-    }
-  }};
+export const InputStyle = styled.input<InputProps>`
   width: 240px;
   height: 45px;
   margin-bottom: 15px;
@@ -21,22 +13,6 @@ export const inputStyle = styled.input<InputProps>`
   text-align: center;
   background-color: rgb(203 213 225);
   font-size: 15pt;
-
-  ::placeholder {
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: red; /* 색상을 변경하고 싶은 색상으로 바꿔주세요 */
-    opacity: 1; /* Firefox */
-  }
-
-  :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: red;
-  }
-
-  ::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: red;
-  }
 `
 
 export const Button = styled.div`
@@ -51,4 +27,17 @@ export const Button = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 17pt;
+`
+
+export const ContentBox = styled.div`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+`
+
+export const AstronauntDiv = styled.div`
+  width: 300px;
+  height: 300px;
 `
