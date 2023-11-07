@@ -3,17 +3,18 @@
 import styled from 'styled-components'
 
 export const LetterBoard = styled.div`
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 export const LetterContainer = styled.div`
-  display: grid;
-
+  display: flex;
+  flex-direction: column;
   position: relative;
   box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 1);
 
-  min-height: 20rem;
+  // min-height: 20rem;
 
   border-radius: 0.625rem;
   padding: 1rem;
@@ -68,20 +69,38 @@ export const MediaWrapper = styled.div`
 export const CustomImage = styled.img``
 
 export const LetterContent = styled.div`
+  width: 100%;
   margin-top: 0.5rem;
   // background-image: url('/icons/RandomLetterBG.svg');
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
+
   background-color: rgba(
     250.00000029802322,
     247.00000047683716,
     240.00000089406967,
     1
   );
+  height: 100%;
+  max-height: 12rem;
+  overflow-y: scroll;
 
-  padding: 1rem;
+  word-wrap: break-word;
+
+  // background-image: repeating-linear-gradient(
+  //   rgba(250.00000029802322, 247.00000047683716, 240.00000089406967, 1),
+  //   rgba(250.00000029802322, 247.00000047683716, 240.00000089406967, 1) 34px,
+  //   lightgray 34px,
+  //   lightgray 36px
+  // );
+  line-height: 36px;
+  padding: 8px 10px;
+  outline: none;
+
+  // padding: 1rem;
   border-radius: 0.5rem;
 `
 export const Hint = styled.p`
+  margin-top: 0.5rem;
   font-weight: bold;
   color: #ff6045;
 `

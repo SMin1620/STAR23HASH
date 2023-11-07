@@ -43,3 +43,15 @@ export const LoadingText = styled.div`
   font-size: 16px;
   font-weight: bold;
 `
+
+export const button = styled.button`
+  box-shadow: 0px 4px 2px
+    rgba(113.9000129699707, 97.38451838493347, 98.1026342511177, 1);
+  background-color: #947d7e;
+  width: 80%;
+  margin-bottom: 20px;
+  height: 2rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 16px;
+`

@@ -18,13 +18,12 @@ export const ContentBox = styled.div`
 
 export const InputContent = styled.textarea`
   width: 80%;
-  height: 250px;
+  height: 350px;
   padding: 10px;
 
   font-size: 16px;
   resize: none;
   white-space: pre-wrap;
-
   background-attachment: local;
   background-image: repeating-linear-gradient(
     white,
