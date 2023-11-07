@@ -1,6 +1,4 @@
 'use client'
-
-import { idCheckTest } from '@/app/utils/storage/idCheckTest'
 import { authAxiosTest } from '@/app/utils/storage/authAxiosTest'
 export default function IdChkButton() {
   const handleClick = () => {
@@ -9,7 +7,7 @@ export default function IdChkButton() {
 
   return (
     <>
-      <button onClick={handleClick}>아이디 체크</button>
+      <button onClick={handleClick}>[Axios 실행]</button>
     </>
   )
 }

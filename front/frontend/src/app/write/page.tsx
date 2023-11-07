@@ -6,15 +6,15 @@ import GlobalStyle from './GlobalStyles'
 import * as st from './write.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 import Modal from '@/component/write/failmodal'
-
+import { checkNote } from '@/app/utils/write/checkNote'
 export default function Write() {
   const [res, setRes] = useState(true)
   const router = useRouter()
   const handleRandom = async () => {
-    // 대충 api 요청하는 부분
-    if (res) {
-      //router.push(`/write/wrandom`)
-      setRes(false)
+    const result = await checkNote()
+    if (result.data.toString() === 'false') {
+      setRes(true)
+      router.push(`/write/wrandom`)
     } else {
       setRes(false)
     }
@@ -22,9 +22,7 @@ export default function Write() {
   const closeModal = () => {
     setRes(!res)
   }
-  useEffect(() => {
-    console.log('res : ', res)
-  }, [res])
+  useEffect(() => {}, [res])
   return (
     <>
       <GlobalStyle />
@@ -38,7 +36,7 @@ export default function Write() {
           <st.ContentBox>
             <st.WhoSend>누구에게 편지를 보낼까요?</st.WhoSend>
             <st.SendObject>
-              <Link href={'/write/wfriend/getfriend'}>
+              <Link href={'/write/wfriend/pullfriend'}>
                 <st.SendImg
                   src="/write/Solar System.svg"
                   alt="친구에게 보내기"
@@ -51,6 +49,16 @@ export default function Write() {
               </button>
             </st.SendObject>
           </st.ContentBox>
+          <stt.EmptyDiv>
+            <st.button
+              onClick={() => {
+                router.replace('/main')
+                console.log('here')
+              }}
+            >
+              메인으로
+            </st.button>
+          </stt.EmptyDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
       {!res && <Modal onConfirm={closeModal} />}

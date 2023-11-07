@@ -3,95 +3,92 @@ import { Canvas, useThree, useFrame } from '@react-three/fiber'
 import { PlaneGeometry, MeshBasicMaterial, Mesh, TextureLoader } from 'three'
 import { useFBX, useGLTF } from '@react-three/drei'
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import * as THREE from 'three'
 
 function Planet1() {
-  const fbx = useFBX('/assets/Planet-5.fbx')
+  const gltf = useGLTF('/assets/glb/planet-5.glb')
 
-  fbx.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true
-      child.receiveShadow = true
+  const modelRef = useRef()
+
+  gltf.scene.position.set(-5, 4.5, -13)
+  const scale = 3.5
+  gltf.scene.scale.set(scale, scale, scale)
+  // gltf.scene.rotation.z = 0.4
+  // gltf.scene.rotation.y = -0.8
+  gltf.scene.rotation.x = 0.25
+
+  // useFrame((state) => {
+  //   gltf.scene.rotation.x += 0.025
+  //   gltf.scene.rotation.y += 0.01 // 이 값을 조절하여 회전 속도를 변경할 수 있습니다.
+  // })
+
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.x += 0.0002
+      modelRef.current.rotation.y += 0.0002
     }
   })
 
-  fbx.position.set(-5, 4.5, -13)
-  const scale = 0.028
-  fbx.scale.set(scale, scale, scale)
-  fbx.rotation.x = 0.25
-
-  return <primitive object={fbx} />
+  return <primitive object={gltf.scene} ref={modelRef} />
 }
 
 function Planet2() {
-  const fbx = useFBX('/assets/Planet-3.fbx')
+  const gltf = useGLTF('/assets/glb/planet-3.glb')
 
-  fbx.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true
-      child.receiveShadow = true
+  const modelRef = useRef()
+
+  gltf.scene.position.set(9, 0.5, -23)
+  const scale = 3.5
+  gltf.scene.scale.set(scale, scale, scale)
+  gltf.scene.rotation.x = 0.4
+  gltf.scene.rotation.y = -0.3
+
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.x += 0.003
+      modelRef.current.rotation.y += 0.002
     }
   })
 
-  fbx.position.set(9, 0.5, -23)
-  const scale = 0.028
-  fbx.scale.set(scale, scale, scale)
-  fbx.rotation.x = 0.4
-  fbx.rotation.y = -0.3
-
-  return <primitive object={fbx} />
+  return <primitive object={gltf.scene} ref={modelRef} />
 }
 
 function Planet3() {
-  const fbx = useFBX('/assets/Planet-1.fbx')
+  const gltf = useGLTF('/assets/glb/planet-1.glb')
 
-  fbx.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true
-      child.receiveShadow = true
-    }
-  })
+  gltf.scene.position.set(-0.05, -6.5, -3)
+  const scale = 4.5
+  gltf.scene.scale.set(scale, scale, scale)
+  gltf.scene.rotation.x = 0.4
+  gltf.scene.rotation.y = -0.3
 
-  fbx.position.set(-0.05, -6.5, -3)
-  const scale = 0.05
-  fbx.scale.set(scale, scale, scale)
-  fbx.rotation.x = 0.4
-  fbx.rotation.y = -0.3
-
-  return <primitive object={fbx} />
+  return <primitive object={gltf.scene} />
 }
 
 function Ufo({ forwardedRef }) {
-  //const ufoRef = useRef()
-  const fbx = useFBX('/assets/UFO.fbx')
+  const gltf = useGLTF('/assets/glb/UFO.glb')
 
-  fbx.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true
-      child.receiveShadow = true
-    }
-  })
-
-  fbx.position.set(1.8, 3, -8)
-  const scale = 0.008
-  fbx.scale.set(scale, scale, scale)
-  fbx.rotation.x = -0.01
-  fbx.rotation.z = 0.3
+  gltf.scene.position.set(1.8, 3, -8)
+  const scale = 1.2
+  gltf.scene.scale.set(scale, scale, scale)
+  gltf.scene.rotation.x = 0.1
+  gltf.scene.rotation.z = 0.15
 
   useFrame(({ clock }) => {
     forwardedRef.current.position.y +=
       Math.sin(clock.getElapsedTime() * 3) * 0.003
   })
 
-  return <primitive object={fbx} ref={forwardedRef} />
+  return <primitive object={gltf.scene} ref={forwardedRef} />
 }
 
 function SpaceShip({ forwardedRef }) {
   const gltf = useGLTF('/assets/Rover.glb')
-  console.log(gltf.scene)
+  // console.log(gltf.scene)
 
-  gltf.scene.position.set(-1.5, -2.6, -3.9)
+  gltf.scene.position.set(-1.5, -3.0, -3.9)
   const scale = 0.3
   gltf.scene.scale.set(scale, scale, scale)
   gltf.scene.rotation.z = 0.4
@@ -104,21 +101,21 @@ function SpaceShip({ forwardedRef }) {
 
 function StorageComponent() {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/storage.png')
+  const texture = textureLoader.load('/main/storageButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
-  mesh.position.set(-2.2, -0.6, -3.9) // Set your coordinates
+  mesh.position.set(-2.2, -1, -3.9) // Set your coordinates
   const scale = 1.9
   mesh.scale.set(scale, scale, scale)
-  mesh.rotation.z = -0.2
+  // mesh.rotation.z = -0.2
 
   return <primitive object={mesh} />
 }
 
 function RandomComponent({ forwardedRef }) {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/random.png')
+  const texture = textureLoader.load('/main/randomButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
@@ -132,7 +129,7 @@ function RandomComponent({ forwardedRef }) {
 
 function FriendComponent({ forwardedRef }) {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/friend.png')
+  const texture = textureLoader.load('/main/friendButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
@@ -146,11 +143,25 @@ function FriendComponent({ forwardedRef }) {
 
 function TodayComponent() {
   const textureLoader = new TextureLoader()
-  const texture = textureLoader.load('/main/todayletter.png')
+  const texture = textureLoader.load('/main/todayLetterButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
-  mesh.position.set(2, 4.1, -5.9) // Set your coordinates
+  mesh.position.set(2.4, 4.8, -7.5) // Set your coordinates
+  const scale = 1.9
+  mesh.scale.set(scale, scale, scale)
+  // mesh.rotation.z = -0.2
+
+  return <primitive object={mesh} />
+}
+
+function WriteComponent() {
+  const textureLoader = new TextureLoader()
+  const texture = textureLoader.load('/main/writeButton.svg')
+  const geometry = new PlaneGeometry(1, 1)
+  const material = new MeshBasicMaterial({ map: texture, transparent: true })
+  const mesh = new Mesh(geometry, material)
+  mesh.position.set(2, -1.5, -5) // Set your coordinates
   const scale = 1.9
   mesh.scale.set(scale, scale, scale)
   // mesh.rotation.z = -0.2
@@ -159,52 +170,47 @@ function TodayComponent() {
 }
 
 function Table({ forwardedRef }) {
-  const fbx = useFBX('/assets/table.fbx')
+  const gltf = useGLTF('/assets/table.glb')
+  // console.log(gltf.scene)
 
-  fbx.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true
-      child.receiveShadow = true
-    }
-  })
-
-  fbx.position.set(0.8, -2.43, -3)
-  const scale = 0.006
-  fbx.scale.set(scale, scale, scale)
-  fbx.rotation.z = 0.8
-  fbx.rotation.y = 0.12
+  gltf.scene.position.set(0.8, -2.9, -3)
+  const scale = 0.5
+  gltf.scene.scale.set(scale, scale, scale)
+  // gltf.scene.rotation.z = 0.8
+  gltf.scene.rotation.y = 0.8
   const ref = useRef()
-  return <primitive ref={forwardedRef} object={fbx} />
+  // gltf.scene.rotation.x = 0.5
+
+  return <primitive ref={forwardedRef} object={gltf.scene} />
 }
 
 function Scene() {
   const { scene, camera, gl } = useThree()
+  const router = useRouter()
   const tableRef = useRef()
   const spaceshipRef = useRef()
   const friendRef = useRef()
   const randomRef = useRef()
   const ufoRef = useRef()
+  const tl = gsap.timeline()
 
   useEffect(() => {
     // 빛1
-    const light = new THREE.DirectionalLight('white', 1.8)
+    const light = new THREE.DirectionalLight('white', 3)
     light.position.y = 10
     light.position.x = 5
     light.position.z = 4
     scene.add(light)
     // 빛2
-    const light2 = new THREE.DirectionalLight('white', 0.5)
+    const light2 = new THREE.DirectionalLight('white', 1)
     light2.position.y = 7
     light2.position.x = -5
     light2.position.z = 4
     scene.add(light2)
     // 빛3
-    const AmbientLigthtight = new THREE.AmbientLight('white', 0.6)
+    const AmbientLigthtight = new THREE.AmbientLight('white', 1.5)
     AmbientLigthtight.position.z = 2
     scene.add(AmbientLigthtight)
-
-    // const lightHelper = new THREE.DirectionalLightHelper(light, 5)
-    // scene.add(lightHelper)
   }, [])
 
   const [cameraPosition, setCameraPosition] = useState('far')
@@ -216,43 +222,94 @@ function Scene() {
   useEffect(() => {
     const raycaster = new THREE.Raycaster()
     const mouse = new THREE.Vector2()
-    const initialPosition = new THREE.Vector3().copy(camera.position)
+    const initialPosition = new THREE.Vector3(0, 0, 5)
 
     function tableClick(e) {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
       const intersects = raycaster.intersectObjects([tableRef.current])
-      if (intersects.length) {
-        let newPosition
-        if (cameraPosition === 'far') {
-          // fbx.position.set(0.8, -1.43, -3)
-          newPosition = new THREE.Vector3(1, 0.4, -1.3)
-          setCameraPosition('near')
-        } else {
-          newPosition = initialPosition
-          setCameraPosition('far')
-        }
-        gsap.to(camera.position, {
-          duration: 2,
-          x: newPosition.x,
-          y: newPosition.y,
-          z: newPosition.z,
-          onUpdate: () => {
-            camera.updateProjectionMatrix()
-            if (cameraPosition === 'far') {
-              camera.lookAt(1, -1.43, -3) // 카메라가 테이블을 바라보게 함
-            }
-            if (cameraPosition === 'near') {
-              camera.lookAt(new THREE.Vector3(0, 0, -5)) // 카메라가 정면을 바라보게 함
-            }
-            // camera.position.y = initialPosition.y // y 위치 고정
-            // camera.position.z = initialPosition.z // z 위치 고정
-            // camera.position.x = initialPosition.x // z 위치 고정
+      // if (intersects.length) {
+      //   let newPosition
+      //   let newCamera
+      //   if (cameraPosition === 'far') {
+      //     // fbx.position.set(0.8, -1.43, -3)
+      //     newPosition = new THREE.Vector3(0.95, -1.43, -2)
+      //     newCamera = new THREE.Vector3(-0.9, 0.1, 0)
+      //     setCameraPosition('near')
+      //   } else {
+      //     newPosition = initialPosition
+      //     newCamera = new THREE.Vector3(0, 0, 0)
+      //     setCameraPosition('far')
+      //   }
+      //   tl.to(
+      //     camera.position,
+      //     {
+      //       duration: 2,
+      //       x: newPosition.x,
+      //       y: newPosition.y,
+      //       z: newPosition.z,
+      //       onUpdate: () => {
+      //       },
+      //     },
+      //     0,
+      //   )
+      //   // 카메라 방향 변경
+      //   tl.to(
+      //     camera.rotation,
+      //     {
+      //       duration: 2,
+      //       x: newCamera.x,
+      //       y: newCamera.y,
+      //       z: newCamera.z,
+      //       onUpdate: () => {
+      //         camera.updateProjectionMatrix()
+      //       },
+      //     },
+      //     0,
+      //   )
+      // }
+      if (intersects.length > 0) {
+        // UFO 위치에 따른 적절한 카메라 위치 계산
+        const newPosition = new THREE.Vector3(0.95, -1.43, -2)
+
+        tl.to(
+          camera.position,
+          {
+            duration: 2,
+            x: newPosition.x,
+            y: newPosition.y,
+            z: newPosition.z,
+            onUpdate: () => {
+              camera.updateProjectionMatrix()
+              const fadeOutDiv = document.getElementById('fade-out-div')
+              if (fadeOutDiv) {
+                gsap.to(fadeOutDiv.style, {
+                  duration: 2,
+                  opacity: 1,
+                  onComplete: () => {
+                    router.push('/write')
+                  },
+                })
+              }
+            },
           },
-        })
+          0,
+        )
+        tl.to(
+          camera.rotation,
+          {
+            duration: 3,
+            x: -0.8,
+            y: 0,
+            z: 0,
+            onUpdate: () => {
+              camera.updateProjectionMatrix()
+            },
+          },
+          0,
+        )
       }
-      console.log(`Mouse coordinates: x=${mouse.x}, y=${mouse.y}`)
     }
 
     function storageClick(e) {
@@ -263,39 +320,48 @@ function Scene() {
 
       if (intersects.length) {
         let newPosition
-
+        let newCamera
         console.log(showStorage)
         if (cameraPosition === 'far') {
           //gltf.scene.position.set(-1.5, -1.6, -3.9)
           newPosition = new THREE.Vector3(-2.2, 0, 0)
+          newCamera = new THREE.Vector3(-0.2, 0, 0)
           setCameraPosition('near')
         } else {
           newPosition = initialPosition
+          newCamera = new THREE.Vector3(0, 0, 0)
           setCameraPosition('far')
         }
-        gsap.to(camera.position, {
-          duration: 2,
-          x: newPosition.x,
-          y: newPosition.y,
-          z: newPosition.z,
-          onUpdate: () => {
-            camera.updateProjectionMatrix()
-            if (cameraPosition === 'far') {
-              //camera.lookAt(1, -1.43, -3) // 카메라가 테이블을 바라보게 함
-              camera.lookAt(-2.2, 0, -2)
-            }
-            if (cameraPosition === 'near') {
-              camera.lookAt(new THREE.Vector3(0, 0, -5))
-            }
-          },
-          onComplete: () => {
-            setShowRandom((prevShowRandom) => !prevShowRandom)
-            setShowStorage((prevShowStorage) => !prevShowStorage)
-            setShowFriend((prevShowFriend) => !prevShowFriend)
+        tl.to(
+          camera.position,
+          {
+            duration: 2,
+            x: newPosition.x,
+            y: newPosition.y,
+            z: newPosition.z,
+            onComplete: () => {
+              setShowRandom((prevShowRandom) => !prevShowRandom)
+              setShowStorage((prevShowStorage) => !prevShowStorage)
+              setShowFriend((prevShowFriend) => !prevShowFriend)
 
-            // setShowStorage(!showStorage) // 추가된 부분
+              // setShowStorage(!showStorage) // 추가된 부분
+            },
           },
-        })
+          0,
+        )
+        tl.to(
+          camera.rotation,
+          {
+            duration: 2,
+            x: newCamera.x,
+            y: newCamera.y,
+            z: newCamera.z,
+            onUpdate: () => {
+              camera.updateProjectionMatrix()
+            },
+          },
+          0,
+        )
       }
     }
 
@@ -311,29 +377,47 @@ function Scene() {
         // UFO 위치에 따른 적절한 카메라 위치 계산
         const newPosition = new THREE.Vector3(1.8, 3, -7)
 
-        gsap.to(camera.position, {
-          duration: 1.5,
-          x: newPosition.x,
-          y: newPosition.y,
-          z: newPosition.z,
-          onUpdate: () => {
-            camera.updateProjectionMatrix()
-            camera.lookAt(ufoRef.current.position)
-            const fadeOutDiv = document.getElementById('fade-out-div')
-            gsap.to(fadeOutDiv.style, {
-              duration: 1.0,
-              opacity: 1,
-              onComplete: () => {
-                console.log(currentHour)
-                if (currentHour >= 12 || currentHour <= 6) {
-                  window.location.href = '/today/arrive'
-                } else {
-                  window.location.href = '/today/delivery'
-                }
-              },
-            })
+        tl.to(
+          camera.position,
+          {
+            duration: 1.5,
+            x: newPosition.x,
+            y: newPosition.y,
+            z: newPosition.z,
+            onUpdate: () => {
+              camera.updateProjectionMatrix()
+              const fadeOutDiv = document.getElementById('fade-out-div')
+              if (fadeOutDiv) {
+                gsap.to(fadeOutDiv.style, {
+                  duration: 1.0,
+                  opacity: 1,
+                  onComplete: () => {
+                    console.log(currentHour)
+                    if (currentHour >= 15 || currentHour <= 6) {
+                      router.push('/today/arrive')
+                    } else {
+                      router.push('/today/delivery')
+                    }
+                  },
+                })
+              }
+            },
           },
-        })
+          0,
+        )
+        tl.to(
+          camera.rotation,
+          {
+            duration: 2,
+            x: 0.3,
+            y: 0,
+            z: 0,
+            onUpdate: () => {
+              camera.updateProjectionMatrix()
+            },
+          },
+          0,
+        )
       }
     }
 
@@ -400,6 +484,7 @@ function Scene() {
       <Planet3 />
       <SpaceShip forwardedRef={spaceshipRef} />
       <TodayComponent />
+      <WriteComponent />
       {showStorage && <StorageComponent />}
       {showRandom && <RandomComponent forwardedRef={randomRef} />}
       {showFriend && <FriendComponent forwardedRef={friendRef} />}

@@ -11,12 +11,6 @@ function Planet1({ planetNum }) {
 
   useEffect(() => {
     if (nodes) {
-      // nodes.traverse((child) => {
-      //   if (child.isMesh) {
-      //     child.castShadow = true
-      //     child.receiveShadow = true
-      //   }
-      // })
       nodes.scene.position.set(0, 0, -13)
       const scale = 5
       nodes.scene.scale.set(scale, scale, scale)

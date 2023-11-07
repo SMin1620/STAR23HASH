@@ -13,15 +13,6 @@ type Props = {
 }
 
 export default function SendResult({ searchParams }: Props) {
-  // if(searchParams.isSuccess){
-  //   console.log('bool');
-
-  // }
-  // else{
-  //   console.log(typeof(searchParams.isSuccess));
-
-  // }
-
   return (
     <>
       <GlobalStyle />

@@ -8,7 +8,38 @@ export const ContentBox = styled.div`
   align-items: center;
   text-align: center;
 `
+export const ContactBox = styled.div`
+  margin-top: 70px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: auto;
+  height: 35rem;
+  overflow: auto;
+  border: 1px solid lightgray;
+  border-radius: 0.5rem;
+  box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
+`
 
+export const ContactObject = styled.div<{ $isSelected: boolean }>`
+  height: 4rem;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid lightgray;
+  background-color: ${(props) => (props.$isSelected ? 'lightgray' : 'white')};
+`
+
+export const ContactName = styled.div`
+  padding-top: 10px;
+  margin-bottom: 7px;
+  margin-left: 10px;
+  font-size: 1.5rem;
+`
+
+export const ContactPhone = styled.div`
+  margin-left: 15px;
+  font-size: 0.8rem;
+  color: gray;
+`
 export const WhoSend = styled.div`
   font-size: 20px;
   font-weight: bold;

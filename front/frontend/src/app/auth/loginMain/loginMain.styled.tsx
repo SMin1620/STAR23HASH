@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const inputStyle = styled.input`
   width: 240px;
   height: 45px;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   border-radius: 10px;
   opacity: 0.8;
   text-align: center;
@@ -23,4 +23,15 @@ export const Button = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 17pt;
+`
+export const ContentBox = styled.div`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+`
+export const AstronauntDiv = styled.div`
+  width: 300px;
+  height: 300px;
 `

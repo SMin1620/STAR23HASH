@@ -1,12 +1,15 @@
 'use client'
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-// import styled from 'styled-components'
-// import { ModalOverlay, ModalContent, CloseButton } from './modal.styled'
 import * as M from './modal.styled'
 
-function Modal({ onConfirm }: { onConfirm: (text: string) => void }) {
-  const [inputText, setInputText] = useState('') // State to store input text
+type Props = {
+  hint: string
+  closeState: (text: string) => void
+}
+
+function Modal({ hint, closeState }: Props) {
+  const [inputText, setInputText] = useState(hint) // State to store input text
 
   if (typeof window === 'undefined') return null
 
@@ -26,7 +29,9 @@ function Modal({ onConfirm }: { onConfirm: (text: string) => void }) {
           ></M.ModalInput>
           {/* <M.ModalInputTextLimit>/50</M.ModalInputTextLimit> */}
         </M.ModalInputDiv>
-        <M.CloseButton onClick={() => onConfirm(inputText)}>확인</M.CloseButton>
+        <M.CloseButton onClick={() => closeState(inputText)}>
+          확인
+        </M.CloseButton>
       </M.ModalContent>
     </M.ModalOverlay>,
     modalRoot,
