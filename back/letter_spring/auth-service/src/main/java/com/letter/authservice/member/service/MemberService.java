@@ -8,10 +8,12 @@ import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
+import com.letter.authservice.member.entity.Paper;
 import com.letter.authservice.member.entity.Roll;
 import com.letter.authservice.member.feign.LetterFeign;
 import com.letter.authservice.member.feign.NoteFeign;
 import com.letter.authservice.member.repository.MemberRepository;
+import com.letter.authservice.member.repository.PaperRepository;
 import com.letter.authservice.member.repository.RollRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -46,6 +48,7 @@ public class MemberService {
     private final NoteFeign noteFeign;
     private final LetterFeign letterFeign;
     private final RollRepository rollRepository;
+    private final PaperRepository paperRepository;
 
 
     public TokenDto memberLogin(HttpServletResponse response, MemberDto.MemberLoginRequestDto requestBody) {
@@ -247,8 +250,13 @@ public class MemberService {
 
         // 롤링페이퍼가 왔는지
         System.out.println("롤링페이퍼 까지 왔다.");
-        Optional<Member> member = memberRepository.findByIdAndCreateAtBetween(memberId, start, end);
-        if (member.isPresent()) return true;
+        memberRepository.findById(memberId)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        Roll roll = rollRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
+        Optional<Paper> paper = paperRepository.findTopByRollIdAndIsReadFalseAndCreatedAtBetween(roll.getId(), start, end);
+
+        if (paper.isPresent()) return true;
         
         // 쪽지가 있는지
         System.out.println("롤링페이퍼, 쪽지 까지 왔다.");
