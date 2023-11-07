@@ -37,10 +37,16 @@ import { useRouter } from 'next/navigation'
 //   SendBoxDiv,
 // } from '@/component/common/write_layout/write_layout.styled'
 
-export default function LinkWrite() {
+type Props = {
+  params: {
+    slug: number
+  }
+}
+
+export default function LinkWrite({ params }: Props) {
   const [content, setContent] = useState('')
   const [icon, setIcon] = useState(0)
-  const [rollsId, setRollsId] = useState(0)
+  const [rollId, setRollId] = useState(params.slug)
   const router = useRouter()
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -53,9 +59,10 @@ export default function LinkWrite() {
   }
 
   const handleSendApi = async () => {
-    const response = await linkPost(content, icon, rollsId)
-    console.log(response)
-    // if (response.status.toString() === 'OK') {
+    const response = await linkPost(content, icon, rollId)
+    const res = response.data.data
+    console.log(res)
+    // if (res.status.toString() === 'OK') {
     //   router.push(`/write/send?isSuccess=true`)
     // } else {
     //   router.push(`/write/send?isSuccess=false`)
