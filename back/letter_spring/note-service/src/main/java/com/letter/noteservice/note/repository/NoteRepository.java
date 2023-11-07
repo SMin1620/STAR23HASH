@@ -36,7 +36,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     // 답장시 이전 받은 메시지 답장 여부 처리
 //    @Query(value = "select n from Note n where n.room.id =:roomId and n.receiverId =:memberId order by n.id desc")
 //    Optional<Note> findByPreNote(Long roomId, Long memberId);
-    Optional<Note> findTopByRoomIdAndReceiverIdOrSenderIdOrderByCreatedAtDesc(Long roomId, Long receiverId, Long senderId);
+    Optional<Note> findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(Long roomId, Long receiverId);
     Optional<Note> findTopByRoomIdOrderByCreatedAtDesc(Long roomId);
 
     /**

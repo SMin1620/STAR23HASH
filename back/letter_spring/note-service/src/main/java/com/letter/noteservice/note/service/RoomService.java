@@ -62,7 +62,7 @@ public class RoomService {
             else roomDto.setIsRead(false);
 
             // 쪽지 답장 여부 처리
-            Note replyNote = noteRepository.findTopByRoomIdAndReceiverIdOrSenderIdOrderByCreatedAtDesc(room.getId(), memberId, memberId).get();
+            Note replyNote = noteRepository.findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(room.getId(), memberId).get();
             if (replyNote.getReceiverId() == memberId && replyNote.getIsRead()) roomDto.setIsReply(true);
             else roomDto.setIsReply(false);
 
@@ -117,7 +117,7 @@ public class RoomService {
             else roomDto.setIsRead(false);
 
             // 쪽지 답장 여부 처리
-            Note replyNote = noteRepository.findTopByRoomIdAndReceiverIdOrSenderIdOrderByCreatedAtDesc(room.getId(), memberId, memberId).get();
+            Note replyNote = noteRepository.findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(room.getId(), memberId).get();
             if (replyNote.getReceiverId() == memberId && replyNote.getIsRead()) roomDto.setIsReply(true);
             else roomDto.setIsReply(false);
 
