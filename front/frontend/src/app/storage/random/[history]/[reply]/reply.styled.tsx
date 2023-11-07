@@ -6,17 +6,21 @@ export const LetterBoard = styled.div`
   // background-image: url('/icons/SolarSystem.svg');
   // background-repeat: no-repeat;
 
-  display: grid;
-  place-items: center;
+  // display: flex;
+  // place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 export const LetterContainer = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   position: relative;
   box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 1);
 
   min-height: 20rem;
-
+  width: 95%;
   border-radius: 0.625rem;
   padding: 1rem;
 `
@@ -57,10 +61,13 @@ export const GreenDecoBotton = styled(LetterDecoBotton)`
 `
 
 export const LetterContent = styled.div`
+  max-height: 10rem;
   margin-top: 0.5rem;
+  word-wrap: break-word;
+  overflow-y: scroll;
 `
 export const LetterInput = styled.textarea`
-  height: 12rem;
+  height: 100%;
 
   //   background-image: url('/icons/RandomLetterBG.svg');
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
@@ -75,6 +82,17 @@ export const LetterInput = styled.textarea`
   resize: none;
 
   padding: 1rem;
+
+  background-attachment: local;
+  background-image: repeating-linear-gradient(
+    rgba(250.00000029802322, 247.00000047683716, 240.00000089406967, 1),
+    rgba(250.00000029802322, 247.00000047683716, 240.00000089406967, 1) 34px,
+    lightgray 34px,
+    lightgray 35px
+  );
+  line-height: 35px;
+  padding: 8px 10px;
+  outline: none;
 `
 
 export const LetterReceived = styled.div`
@@ -107,6 +125,11 @@ export const WarningText = styled.p`
   font-size: 0.8rem;
   color: #e95a42;
   font-weight: bold;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 
   word-wrap: break-word;
   white-space: nowrap;
