@@ -82,18 +82,17 @@ export default function Letter({ params }: Props) {
             {letterInfo?.content}
 
             <br />
-            <br />
             <hr />
             <l.Date>
               {letterInfo?.createAt !== undefined
                 ? getFormattedDate(letterInfo.createAt)
                 : '날짜정보가 없습니다'}
             </l.Date>
-            {letterInfo && letterInfo?.hintContent !== '' ? (
-              <l.Hint>힌트 : {letterInfo?.hintContent}</l.Hint>
-            ) : null}
           </l.LetterContent>
-          <div></div>
+          {letterInfo && letterInfo?.hintContent !== '' ? (
+            <l.Hint>힌트 : {letterInfo?.hintContent}</l.Hint>
+          ) : null}
+          <l.Hint>힌트 : {letterInfo?.hintContent}</l.Hint>
 
           <l.CloseBotton onClick={handleClick}>닫기</l.CloseBotton>
         </l.LetterContainer>
