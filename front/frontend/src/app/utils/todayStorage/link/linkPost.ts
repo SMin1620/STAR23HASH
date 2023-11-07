@@ -1,27 +1,25 @@
 import axios, { AxiosResponse } from 'axios'
-import AuthAxios from '../../storage/AuthAxios'
-
-const DOMAIN = process.env.NEXT_PUBLIC_API_URL
+import api from '../../api'
 
 export const linkPost = async (
   content: string,
   icon: number,
-  rollsId: number,
+  rollId: number,
 ): Promise<AxiosResponse> => {
   try {
-    const response: AxiosResponse = await AuthAxios({
+    const response = await api({
       method: 'post',
-      url: `${DOMAIN}/api/rolls`,
+      url: `/rolls`,
       data: {
         content: content,
         icon: icon,
-        rollsId: rollsId,
+        rollId: rollId,
       },
     })
     if (!response || response.status !== 200) {
       throw new Error('에러')
     }
-    return response.data
+    return response
   } catch (error) {
     throw new Error('네트워크 오류')
   }
