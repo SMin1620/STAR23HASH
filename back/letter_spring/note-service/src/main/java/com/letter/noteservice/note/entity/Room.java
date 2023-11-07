@@ -43,6 +43,9 @@ public class Room {
     @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
+    @Column(name = "recent_at")
+    private LocalDateTime recentAt;
+
     @ColumnDefault("false")
     private Boolean store;
 
