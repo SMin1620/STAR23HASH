@@ -8,9 +8,11 @@ import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
+import com.letter.authservice.member.entity.Roll;
 import com.letter.authservice.member.feign.LetterFeign;
 import com.letter.authservice.member.feign.NoteFeign;
 import com.letter.authservice.member.repository.MemberRepository;
+import com.letter.authservice.member.repository.RollRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +50,7 @@ public class MemberService {
     private final Environment env;
     private final NoteFeign noteFeign;
     private final LetterFeign letterFeign;
+    private final RollRepository rollRepository;
 
 
     public TokenDto memberLogin(HttpServletResponse response, MemberDto.MemberLoginRequestDto requestBody) {
@@ -92,6 +95,12 @@ public class MemberService {
                 .build();
 
         memberRepository.save(member);
+
+        Roll roll = Roll.builder()
+                .member(member)
+                .build();
+
+        rollRepository.save(roll);
         return member;
 
     }
