@@ -28,9 +28,9 @@ export const ModalContent = styled.div`
 `
 
 export const ModalText = styled.div`
-  margin-bottom: 0.5rem;
-  font-size: 16px;
-  font-weight: bold;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
 `
 
 export const ModalInputDiv = styled.div`
@@ -53,6 +53,7 @@ export const ModalInput = styled.textarea`
   font-size: 13px;
   padding: 1rem;
   line-height: 1.5;
+  resize: none;
 `
 
 export const ModalInputTextLimit = styled.div`
@@ -68,6 +69,16 @@ export const CloseButton = styled.button`
   color: white;
   font-size: 13px;
   border-radius: 10px;
+  margin-top: 0.5rem;
+`
+export const Button = styled.button`
+  width: 110px;
+  height: 30px;
+  background-color: #947d7e;
+  color: white;
+  font-size: 13px;
+  border-radius: 10px;
+  margin: 5px;
 `
 
 export const CloseButton2 = styled.button`
@@ -75,12 +86,12 @@ export const CloseButton2 = styled.button`
   height: 30px;
   background-color: #ffe189;
   font-size: 16px;
-  font-weight: bold;
   border-radius: 10px;
 `
 
 export const FileInput = styled.input`
   height: 40px;
+  display: none;
 `
 export const FileInputWrapper = styled.div``
 
@@ -96,11 +107,16 @@ export const errMessage = styled.div`
   color: red;
 `
 
-export const PreviewImg = styled.img``
+export const PreviewImg = styled.img`
+  margin-bottom: 0.5rem;
+`
 
-export const PreviewMovie = styled.video``
+export const PreviewMovie = styled.video`
+  margin-bottom: 0.5rem;
+`
 
 export const PreviewAudio = styled.audio`
   width: 100%;
+  margin-bottom: 0.5rem;
 `
 export const EmptyDiv = styled.div``
