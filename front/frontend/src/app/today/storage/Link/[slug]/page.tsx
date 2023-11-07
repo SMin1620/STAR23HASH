@@ -13,6 +13,8 @@ import {
 import Light from '@/component/today/todayStorage/light/light'
 import LinkListGet from '@/app/utils/todayStorage/link/linkListGet'
 import { LinkDetailGet } from '@/app/utils/todayStorage/link/linkDetailGet'
+import ShareButton from '@/component/today/todayStorage/link/shareButton/shareButton'
+import WriteButton from '@/component/today/todayStorage/link/writeButton/writeButton'
 
 type Props = {
   params: {
@@ -24,7 +26,7 @@ export default function TodayLinkStorage({ params }: Props) {
   const totalAmount = 5
   const [rollList, setRollList] = useState<null | any>(null)
   const [rollDetail, setRollDetail] = useState<null | any>(null)
-
+  const isUser = useState(true)
   useEffect(() => {
     const handleListApi = async () => {
       const response = await LinkListGet()
@@ -88,20 +90,22 @@ export default function TodayLinkStorage({ params }: Props) {
           anglePower={3}
           position={[0, 3.1, 0]}
         />
-        {Array.from({ length: totalAmount }).map((item: any, index: number) => (
-          <Float key={index} speed={1} floatIntensity={0.1}>
-            <AstronautModel
-              url={`/assets/astronaut${(index % 4) + 1}.glb`}
-              scale={[0.3, 0.3, 0.3]}
-              position={[
-                Math.random() * 2 - 1,
-                Math.random() * 3 - 2,
-                Math.random() * 3 - 2,
-              ]}
-              onClick={() => handleDetailApi(item.id)}
-            />
-          </Float>
-        ))}
+        {rollList?.paperList &&
+          rollList.paperList.map((item: any, index: number) => (
+            <Float key={index} speed={1} floatIntensity={0.1}>
+              <AstronautModel
+                url={`/assets/astronaut${(index % 4) + 1}.glb`}
+                scale={[0.3, 0.3, 0.3]}
+                position={[
+                  Math.random() * 2 - 1,
+                  Math.random() * 3 - 2,
+                  Math.random() * 3 - 2,
+                ]}
+                onClick={() => handleDetailApi(item.id)}
+              />
+            </Float>
+          ))}
+        {isUser ? <ShareButton /> : <WriteButton />}
         <PlanetModel
           url="/assets/planet-1.glb"
           scale={[4, 4, 4]}
