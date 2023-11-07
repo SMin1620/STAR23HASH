@@ -86,6 +86,7 @@ public class RollService {
                     .id(paper.getId())
                     .rollId(rollId)
                     .content(paper.getContent())
+                    .icon(paper.getIcon())
                     .createdAt(paper.getCreatedAt())
                     .isRead(paper.getIsRead())
                     .build();
@@ -115,6 +116,7 @@ public class RollService {
                 .id(paperId)
                 .rollId(paper.getRoll().getId())
                 .content(paper.getContent())
+                .icon(paper.getIcon())
                 .createdAt(paper.getCreatedAt())
                 .isRead(paper.getIsRead())
                 .build();
