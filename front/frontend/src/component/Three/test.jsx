@@ -9,13 +9,13 @@ function Scene() {
   return (
     <>
       <Stars
-        radius={180}
+        radius={120}
         depth={25}
         count={5000}
         factor={8}
-        saturation={2}
+        saturation={1}
         fade
-        speed={2}
+        speed={3}
       />
     </>
   )
