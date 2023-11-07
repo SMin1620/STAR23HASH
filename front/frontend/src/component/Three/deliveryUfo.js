@@ -9,7 +9,7 @@ function Ufo() {
   const gltf = useGLTF('/assets/glb/UFO.glb')
 
   gltf.scene.position.set(0, 0, 0)
-  const scale = 3.1
+  const scale = 3.5
   gltf.scene.scale.set(scale, scale, scale)
   gltf.scene.rotation.x = 0.3
   gltf.scene.rotation.z = -0.1
