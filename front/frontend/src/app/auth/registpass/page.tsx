@@ -3,9 +3,15 @@ import React, { useState, useEffect, useCallback } from 'react'
 import * as r from './registpass.styled'
 import LoginComponent from '@/component/Three/login'
 import LoginAstronaut from '../../../component/Three/loginAstronaut'
+import { registAxios } from '@/app/utils/registAxios'
+import { passwordAxios } from '@/app/utils/passwordAxios'
+import { useRouter } from 'next/navigation'
 import './registpass.styled'
+import PhoneStore from '@/store/phone'
 
 export default function RegistPass() {
+  const router = useRouter()
+  const { phone } = PhoneStore()
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [passMessage, setPassMessage] = useState('')
@@ -45,28 +51,56 @@ export default function RegistPass() {
     [password],
   )
 
+  // 회원가입
+  async function registClick() {
+    if (isValid) {
+      if (isMatch) {
+        console.log(phone + ' ' + password)
+        const check = await registAxios(phone, password)
+        console.log(check)
+        if (check.data.message === '회원가입 성공') {
+          alert('회원가입 성공하셨습니다!')
+          const a = await passwordAxios(phone, password)
+          if (a.data.message == '로그인 성공') {
+            router.push('/main')
+          }
+        } else {
+          alert('회원가입에 실패하였습니다ㅜㅜ')
+        }
+      }
+    }
+  }
+
   return (
     <div>
       <div className="flex items-center justify-center">
-        <div className="absolute z-10">
-          <div
-            style={{ marginTop: '790px' }}
-            className="flex flex-col items-center justify-center"
-          >
+        <r.ContentBox>
+          <div className="flex flex-col items-center justify-center">
             <div className="pb-10 text-4xl text-white">별이삼샵</div>
-            {/* <div style={{ width: '300px', height: '300px' }}>
+            <r.AstronauntDiv>
               <LoginAstronaut style={{ width: '100%', height: '100%' }} />
-            </div> */}
+            </r.AstronauntDiv>
             <div className="text-4xl text-white"></div>
-            <r.inputStyle
+            <input
               placeholder="비밀번호를 입력해주세요"
               name="phone"
               type="password"
               value={password}
               onChange={onChangeName}
               // onBlur={handlePasswordBlur}
-              isValid={isValid}
-            ></r.inputStyle>
+              // isValid={isValid}
+              style={{
+                width: '240px',
+                height: '45px',
+                marginBottom: '15px',
+                borderRadius: '10px',
+                opacity: '0.7',
+                textAlign: 'center',
+                backgroundColor: 'rgb(203 213 225)',
+                fontSize: '15px',
+                border: isValid ? '4px solid #65F662' : '4px solid #FF4A4A',
+              }}
+            ></input>
             <span
               className={`message ${
                 isValid ? 'success' : 'error'
@@ -74,15 +108,24 @@ export default function RegistPass() {
             >
               {passMessage}
             </span>
-
-            <r.inputStyle
+            <input
               placeholder="비밀번호를 확인해주세요"
               name="phone"
               type="password"
               value={confirmPassword}
               onChange={onChangePasswordConfirm}
-              isMatch={isMatch}
-            ></r.inputStyle>
+              style={{
+                width: '240px',
+                height: '45px',
+                marginBottom: '15px',
+                borderRadius: '10px',
+                opacity: '0.7',
+                textAlign: 'center',
+                backgroundColor: 'rgb(203 213 225)',
+                fontSize: '15px',
+                border: isMatch ? '4px solid #65F662' : '4px solid #FF4A4A',
+              }}
+            ></input>
             <span
               className={`message ${
                 isMatch ? 'success' : 'error'
@@ -90,9 +133,9 @@ export default function RegistPass() {
             >
               {confirmPassMessage}
             </span>
-            <r.Button>확인</r.Button>
+            <r.Button onClick={registClick}>확인</r.Button>
           </div>
-        </div>
+        </r.ContentBox>
       </div>
       <LoginComponent
         style={{ position: 'absolute', width: '100%', height: '100%' }}
