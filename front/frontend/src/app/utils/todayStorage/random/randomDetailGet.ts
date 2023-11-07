@@ -9,6 +9,11 @@ export const randomDetailGet = async (id: number): Promise<any> => {
       method: 'get',
       url: `${DOMAIN}/api/notes/${id}`,
     })
+
+    if (!response || response.status !== 200) {
+      throw new Error('에러')
+    }
+    return response.data.data
   } catch (error) {
     console.error(error)
   }

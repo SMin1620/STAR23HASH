@@ -26,7 +26,6 @@ export const createLetter = async (
     if (!res || res.status !== 200) {
       throw new Error('에러')
     }
-    console.log(res.data)
     return res.data
   } catch (error) {
     throw new Error('네트워크 오류')

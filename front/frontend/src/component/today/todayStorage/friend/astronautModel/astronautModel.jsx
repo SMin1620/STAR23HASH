@@ -29,5 +29,6 @@ export default function AstronautModel({ url, scale, position, onClick }) {
       onClick(e)
     }
   }
+
   return <primitive object={astronaut} onClick={handleClick} />
 }

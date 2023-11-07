@@ -9,7 +9,6 @@ type Contact = {
 export const pullContacts = async (
   contacts: Contact[],
 ): Promise<AxiosResponse> => {
-  console.log(contacts)
   try {
     const res: AxiosResponse = await AuthAxios({
       method: 'post',
