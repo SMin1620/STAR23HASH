@@ -152,4 +152,27 @@ public class MemberController {
     ) {
         return new BaseResponse(HttpStatus.OK, "작성 가능", memberService.writeCheck(request));
     }
+
+    /**
+     * 사용자 선물이 왔는지 여부 체크
+     */
+    @GetMapping("/alarm")
+    public BaseResponse alarmCheck(
+            HttpServletRequest request
+    ) {
+        //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
+        String token = jwtTokenProvider.resolveToken(request);
+        jwtTokenProvider.validateToken(token);
+
+        System.out.println("token >>> " + token);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(token);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String memberEmail = userDetails.getUsername();
+
+        Member member = memberService.memberInfo(memberEmail);
+
+        return new BaseResponse(HttpStatus.OK, "찡긋", memberService.alarmCheck(member.getId()));
+    }
 }

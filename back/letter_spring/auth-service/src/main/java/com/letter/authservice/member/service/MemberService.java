@@ -8,6 +8,8 @@ import com.letter.authservice.member.dto.ContactRequestDto;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.TokenDto;
 import com.letter.authservice.member.entity.Member;
+import com.letter.authservice.member.feign.LetterFeign;
+import com.letter.authservice.member.feign.NoteFeign;
 import com.letter.authservice.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,7 +46,8 @@ public class MemberService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
     private final Environment env;
-//    private final RestTemplate restTemplate;
+    private final NoteFeign noteFeign;
+    private final LetterFeign letterFeign;
 
 
     public TokenDto memberLogin(HttpServletResponse response, MemberDto.MemberLoginRequestDto requestBody) {
@@ -225,5 +228,32 @@ public class MemberService {
 
         System.out.println("member >>> " + member.getIsWrite() );
         return member.getIsWrite();
+    }
+
+
+    /**
+     * 알람 체크
+     */
+    public Boolean alarmCheck(Long memberId) {
+
+        // 날짜 계산
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime start = now.minusDays(1).withHour(18).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.withHour(17).withMinute(59).withSecond(59).withNano(0);
+
+        // 롤링페이퍼가 왔는지
+        System.out.println("롤링페이퍼 까지 왔다.");
+        Optional<Member> member = memberRepository.findByIdAndCreateAtBetween(memberId, start, end);
+        if (member.isPresent()) return true;
+        
+        // 쪽지가 있는지
+        System.out.println("롤링페이퍼, 쪽지 까지 왔다.");
+        if (noteFeign.findNote(memberId)) return true;
+        
+        // 편지가 있는지
+        System.out.println("롤링페이퍼, 쪽지, 편지 까지 왔다.");
+        if (letterFeign.findLetter(memberId)) return true;
+
+        return false;
     }
 }
