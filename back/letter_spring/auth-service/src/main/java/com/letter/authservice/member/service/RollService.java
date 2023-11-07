@@ -66,15 +66,19 @@ public class RollService {
     /**
      * 롤링페이퍼 조회
      */
-    public RollDto.RollPaperListResDto rollList(HttpServletRequest request, Long memberId) {
-
-        Roll roll = rollRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
+    public RollDto.RollPaperListResDto rollList(Long rollId) {
 
         // 날짜 계산
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime start = now.minusDays(1).withHour(18).withMinute(0).withSecond(0).withNano(0);
         LocalDateTime end = now.withHour(17).withMinute(59).withSecond(59).withNano(0);
+
+        System.out.println("날짜 >>> " + start + " " + end);
+
+        Roll roll = rollRepository.findById(rollId)
+                .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
+
+
 
         List<Paper> paperList = paperRepository.findAllByRollIdAndIsReadFalseAndCreatedAtBetween(roll.getId(), start, end);
         List<RollDto.PaperListResDto> paperListResDtos = new ArrayList<>();
@@ -103,9 +107,11 @@ public class RollService {
      * 페이퍼 상세 조회
      * -> 읽음 처리
      */
-    public RollDto.PaperDetailResDto paperDetail(HttpServletRequest request, Long paperId) {
+    public RollDto.PaperDetailResDto paperDetail(HttpServletRequest request, Long paperId, Long memberId) {
         Paper paper = paperRepository.findById(paperId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.PAPER_NOT_FOUND));
+
+        if (paper.getRoll().getMember().getId() != memberId) throw new BusinessLogicException(ExceptionCode.PAPER_MEMBER_DIFFERENT);
 
         paper.setIsRead(true);
 

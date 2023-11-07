@@ -16,6 +16,7 @@ public enum ExceptionCode {
     // ROLL PAPER
     ROLL_NOT_FOUND(404, "Roll Not Found"),
     PAPER_NOT_FOUND(404, "Paper Not Found"),
+    PAPER_MEMBER_DIFFERENT(409, "Paper And Member Different"),
 
 
     FAILED_TO_UPDATE_MEMBER(500, "Failed Update Member"),

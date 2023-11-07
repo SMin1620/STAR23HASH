@@ -58,7 +58,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests((req) -> req
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/members/register")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/members/login")).permitAll()
-                                .requestMatchers(mvcMatcherBuilder.pattern("/api/rolls")).authenticated()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/api/rolls")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/rolls/**")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/members/check/{phone}")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/members/refresh")).permitAll()
