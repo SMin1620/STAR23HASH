@@ -49,6 +49,16 @@ export default function Write() {
               </button>
             </st.SendObject>
           </st.ContentBox>
+          <stt.EmptyDiv>
+            <st.button
+              onClick={() => {
+                router.replace('/main')
+                console.log('here')
+              }}
+            >
+              메인으로
+            </st.button>
+          </stt.EmptyDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
       {!res && <Modal onConfirm={closeModal} />}

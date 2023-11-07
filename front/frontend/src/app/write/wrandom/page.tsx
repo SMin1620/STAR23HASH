@@ -15,7 +15,7 @@ export default function WriteFriend() {
   }
 
   const handleSend = async () => {
-    // const reset = await createNotereset() //쪽지보낸거 리셋
+    //const reset = await createNotereset() //쪽지보낸거 리셋
 
     try {
       const res = await createNote(content)
