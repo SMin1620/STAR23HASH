@@ -123,6 +123,7 @@ export default function WriteFriend({ searchParams }: Props) {
   }
   const closeInputModal = () => {
     setInputModal(false)
+    setContentType(3)
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
   }
 
@@ -173,16 +174,25 @@ export default function WriteFriend({ searchParams }: Props) {
                   onClick={voiceinput}
                   src="/write/voice.svg"
                   alt="voice"
+                  style={{
+                    backgroundColor: contentType === 0 ? 'lightgray' : 'white',
+                  }}
                 ></st.Media>
                 <st.Media
                   onClick={videoinput}
                   src="/write/video.svg"
                   alt="video"
+                  style={{
+                    backgroundColor: contentType === 1 ? 'lightgray' : 'white',
+                  }}
                 ></st.Media>
                 <st.Media
                   onClick={pictureinput}
                   src="/write/picture.svg"
                   alt="picture"
+                  style={{
+                    backgroundColor: contentType === 2 ? 'lightgray' : 'white',
+                  }}
                 ></st.Media>
               </st.Medias>
             </st.AddContent>
