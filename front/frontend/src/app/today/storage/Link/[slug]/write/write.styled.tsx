@@ -37,9 +37,8 @@ export const AstronautBox = styled.div`
 `
 
 export const AstronautImg = styled.img`
-  width: 80px;
-  height: 80px;
-  margin: 0 5px;
+  width: 70px;
+  height: 70px;
 `
 export const BtnContainer = styled.div`
   display: flex;
