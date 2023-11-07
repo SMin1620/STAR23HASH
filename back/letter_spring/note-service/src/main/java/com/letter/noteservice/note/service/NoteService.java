@@ -67,6 +67,7 @@ public class NoteService {
                 .isReply(false)
                 .store(false)
                 .createdAt(LocalDateTime.now())
+                .recentAt(LocalDateTime.now())
                 .build();
         roomRepository.save(room);
 
@@ -129,6 +130,7 @@ public class NoteService {
                 .build();
 
         noteRepository.save(note);
+        room.setRecentAt(LocalDateTime.now());
 
         // 이전 쪽지 답장 여부 처리
         Note preNote = noteRepository.findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(roomId, memberId)
