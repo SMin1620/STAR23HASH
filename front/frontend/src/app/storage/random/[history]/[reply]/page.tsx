@@ -44,7 +44,7 @@ export default function Letter({ params }: Props) {
       console.error('Error ', error)
     }
 
-    // router.replace(`/storage/random`)
+    router.replace(`/storage/random`)
   }
   const handleBackBtnClick = () => {
     router.back()
