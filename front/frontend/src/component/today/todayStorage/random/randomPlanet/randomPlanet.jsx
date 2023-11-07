@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three-stdlib'
 import { useGesture } from '@use-gesture/react'
 
-export default function RandomPlanet({ url, scale, position, mesh }) {
+export default function RandomPlanet({ url, scale, position, mesh, onClick }) {
   const [randomPlanet, setRandomPlanet] = useState(null)
 
   useEffect(() => {
@@ -23,5 +23,12 @@ export default function RandomPlanet({ url, scale, position, mesh }) {
 
   if (!randomPlanet) return null
   randomPlanet.position.set(...position)
-  return <primitive object={randomPlanet} ref={mesh} />
+
+  const handleClick = (e) => {
+    if (onClick) {
+      onClick(e)
+    }
+  }
+
+  return <primitive object={randomPlanet} ref={mesh} onClick={handleClick} />
 }

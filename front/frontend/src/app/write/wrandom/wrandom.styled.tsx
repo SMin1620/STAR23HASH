@@ -18,7 +18,7 @@ export const ContentBox = styled.div`
 
 export const InputContent = styled.textarea`
   width: 80%;
-  height: 250px;
+  height: 350px;
   padding: 10px;
 
   font-size: 16px;

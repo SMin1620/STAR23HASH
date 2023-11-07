@@ -1,57 +1,73 @@
+// import TokenStore from '@/store/token'
 import axios, { AxiosResponse } from 'axios'
 
-interface Response {
-  status: string
-  message: string
-  data: Data
-}
-
-interface Data {
-  accessToken: string
-  refreshToken: string
-  memberId: number
-}
-
-const DOMAIN = process.env.NEXT_PUBLIC_TEST2
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 const axiosInstance = axios.create({
   withCredentials: true,
 })
 
-const setLocalStorageValue = (key: string, value: any): void => {
+const setCookieValue = (
+  name: string,
+  value: string,
+  options: any = {},
+): void => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem(key, `Bearer ${value}`)
+    const cookieOptions = {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      path: '/',
+      sameSite: 'strict',
+      ...options,
+    }
+
+    document.cookie = `${name}=${value}; ${Object.keys(cookieOptions)
+      .map((key) => `${key}=${cookieOptions[key]}`)
+      .join('; ')}`
   }
 }
 
-const getLocalStorageValue = <T>(key: string): T | null => {
+const getCookieValue = (name: string): string | null => {
   if (typeof window !== 'undefined') {
-    const storedValue = localStorage.getItem(key)
-    console.log('token : ', storedValue)
+    const cookieName = name + '='
+    const decodedCookie = decodeURIComponent(document.cookie)
+    const cookieArray = decodedCookie.split(';')
 
-    return storedValue ? JSON.parse(storedValue) : null
+    for (let i = 0; i < cookieArray.length; i++) {
+      const cookie = cookieArray[i].trim()
+      if (cookie.indexOf(cookieName) === 0) {
+        return cookie.substring(cookieName.length, cookie.length)
+      }
+    }
   }
   return null
 }
 
-export const userTest = async (): Promise<AxiosResponse> => {
+const userTest = async (): Promise<any> => {
+  console.log(DOMAIN)
+
   try {
-    const res: AxiosResponse = await axiosInstance.post(
+    const response: AxiosResponse = await axiosInstance.post(
       `${DOMAIN}/api/members/login`,
       {
-        phone: '1234',
-        password: '1234',
+        phone: '12',
+        password: '12',
       },
     )
 
-    if (!res || res.status !== 200) {
+    if (!response || response.status !== 200) {
       throw new Error('에러')
     }
 
-    console.log(res)
-    setLocalStorageValue('token', res.data.data.accessToken)
-    return res.data
+    setCookieValue('accessToken', `Bearer ${response.data.data.accessToken}`)
+    setCookieValue('refreshToken', `Bearer ${response.data.data.refreshToken}`)
+
+    console.log(response)
+
+    return response.data
   } catch (error) {
+    console.log(error)
     throw new Error('네트워크 오류')
   }
 }
+
+export default userTest

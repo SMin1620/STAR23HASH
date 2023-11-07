@@ -33,6 +33,53 @@ function Planet2() {
   gltf.scene.scale.set(scale, scale, scale)
   gltf.scene.rotation.z = -0.5
   gltf.scene.rotation.y = -0.8
+  useFrame(({ clock }) => {
+    // y축으로 조금씩 이동
+    ref.current.position.y += Math.sin(clock.getElapsedTime() + 1) * 0.004
+  })
+
+  return <primitive object={gltf.scene} ref={ref} />
+}
+
+function Asteroid() {
+  const ref = useRef()
+  const gltf = useGLTF('/assets/glb/asteroid2.glb')
+
+  const scale = 0.5
+  gltf.scene.scale.set(scale, scale, scale)
+  gltf.scene.rotation.x = 1
+  gltf.scene.rotation.z = 6.5
+  gltf.scene.rotation.y = -1
+
+  const startX = -1
+  const targetX = -12
+  const startY = 24 // 시작 y 위치
+  const targetY = -15 // 도착 y 위치
+  const startZ = -25
+  const targetZ = 0
+  const duration = 2.5 // 애니메이션 지속 시간 (초)
+
+  useFrame(({ clock }) => {
+    const elapsedTime = clock.getElapsedTime()
+    let t = elapsedTime / duration // 시간 비율
+
+    // 애니메이션 반복
+    if (t >= 1) {
+      t -= Math.floor(t) // 소수 부분만 남기고 버립니다.
+    }
+
+    // 도착위치.
+    ref.current.position.x = startX + (targetX - startX) * t
+    ref.current.position.y = startY + (targetY - startY) * t
+    ref.current.position.z = startZ + (targetZ - startZ) * t
+
+    if (t >= 1) {
+      // 애니메이션이 종료되면 초기 위치로
+      ref.current.position.x = startX
+      ref.current.position.y = startY
+      ref.current.position.z = startZ
+    }
+  })
 
   return <primitive object={gltf.scene} ref={ref} />
 }
@@ -73,16 +120,17 @@ function Scene() {
       />
       <Planet1 />
       <Planet2 />
+      <Asteroid />
     </>
   )
 }
 function LoginComponent({ style }) {
   return (
-    <GradientBackground style={style}>
+    <div style={style}>
       <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
         <Scene />
       </Canvas>
-    </GradientBackground>
+    </div>
   )
 }
 
