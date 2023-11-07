@@ -39,9 +39,9 @@ export default function TodayLinkStorage({ params }: Props) {
 
   const handleDetailApi = async (id: number) => {
     const response = await LinkDetailGet(id)
-    console.log(response)
+    console.log(response.data.data)
 
-    setRollDetail(response)
+    setRollDetail(response.data.data)
   }
   // const minDistance = 2
   // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
