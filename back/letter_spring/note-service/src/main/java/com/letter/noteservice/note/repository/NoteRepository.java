@@ -2,6 +2,7 @@ package com.letter.noteservice.note.repository;
 
 import com.letter.noteservice.note.entity.Note;
 import com.letter.noteservice.note.entity.Room;
+import org.aspectj.weaver.Member;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -48,4 +49,9 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
      * 쪽지 보내기 스케줄러
      */
     List<Note> findAllByIsStoreFalse();
+
+    /**
+     * 쪽지 알람 체크
+     */
+    Optional<Note> findTopByReceiverIdAndIsStoreTrueAndCreatedAtBetween(Long memberId, LocalDateTime start, LocalDateTime end);
 }
