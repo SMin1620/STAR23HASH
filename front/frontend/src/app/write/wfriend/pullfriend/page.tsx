@@ -13,27 +13,27 @@ type Contact = {
 export default function WriteFriend() {
   const router = useRouter()
 
-  const contacts: Contact[] = [
-    { name: '김은정0', phone: '1234' },
-    { name: '이은정1', phone: '12345' },
-    { name: '박은정2', phone: '99' },
-    { name: '권은정3', phone: '999' },
-    { name: '조은정4', phone: '9999' },
-    { name: '권은정5', phone: '01012341234' },
-    { name: '조은정6', phone: '01012341234' },
-    { name: '조은정7', phone: '01012341234' },
-    { name: '조은정8', phone: '01012341234' },
-    { name: '조은정9', phone: '01012341234' },
-    { name: '조은정10', phone: '01012341234' },
-    { name: '조은정11', phone: '01012341234' },
-    { name: '조은정12', phone: '01012341234' },
-    { name: '조은정13', phone: '01012341234' },
-    { name: '조은정14', phone: '01012341234' },
-  ]
-  const handleSendClick = async () => {
-    await pullContacts(contacts)
-    router.replace(`/write/wfriend/getfriend`)
-  }
+  // const contacts: Contact[] = [
+  //   { name: '김은정0', phone: '1234' },
+  //   { name: '이은정1', phone: '12345' },
+  //   { name: '박은정2', phone: '99' },
+  //   { name: '권은정3', phone: '999' },
+  //   { name: '조은정4', phone: '9999' },
+  //   { name: '권은정5', phone: '01012341234' },
+  //   { name: '조은정6', phone: '01012341234' },
+  //   { name: '조은정7', phone: '01012341234' },
+  //   { name: '조은정8', phone: '01012341234' },
+  //   { name: '조은정9', phone: '01012341234' },
+  //   { name: '조은정10', phone: '01012341234' },
+  //   { name: '조은정11', phone: '01012341234' },
+  //   { name: '조은정12', phone: '01012341234' },
+  //   { name: '조은정13', phone: '01012341234' },
+  //   { name: '조은정14', phone: '01012341234' },
+  // ]
+  // const handleSendClick = async () => {
+  //   await pullContacts(contacts)
+  //   router.replace(`/write/wfriend/getfriend`)
+  // }
   return (
     <>
       <GlobalStyle />
@@ -48,9 +48,9 @@ export default function WriteFriend() {
             <st.WhoSend>연락처를 가져와야 해요! </st.WhoSend>
             <st.WhoSend>연락처 접근 권한을 허용해주세요 </st.WhoSend>
           </st.ContentBox>
-          <stt.EmptyDiv>
+          {/* <stt.EmptyDiv>
             <stt.button onClick={handleSendClick}>전송</stt.button>
-          </stt.EmptyDiv>
+          </stt.EmptyDiv> */}
         </stt.SendBox>
       </stt.SendBoxDiv>
     </>
