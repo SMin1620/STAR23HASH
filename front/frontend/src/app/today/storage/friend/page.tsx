@@ -16,7 +16,6 @@ import friendListGet from '@/app/utils/todayStorage/friend/friendListGet'
 import { friendDetailGet } from '@/app/utils/todayStorage/friend/friendDetailGet'
 
 export default function TodayFriendStorage() {
-  const totalAmount = 5
   const [letterList, setLetterList] = useState<null | any>(null)
   const [letterDetail, setLetterDetail] = useState<null | any>(null)
 
@@ -51,11 +50,15 @@ export default function TodayFriendStorage() {
   }, [])
 
   const handleDetailApi = async (id: number) => {
-    const response = await friendDetailGet(id)
-    console.log(response)
+    console.log('id', id)
 
-    setLetterDetail(response)
-    router.push(`/storage/friend/${response.id}`)
+    const response = await friendDetailGet(id)
+    console.log(response.data.data)
+
+    setLetterDetail(response.data.data)
+    console.log(letterDetail)
+
+    router.push(`/storage/friend/${letterDetail.id}`)
   }
 
   return (
