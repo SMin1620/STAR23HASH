@@ -45,6 +45,7 @@ public class RollService {
                 .roll(roll)
                 .content(dto.getContent())
                 .createdAt(LocalDateTime.now())
+                .icon(dto.getIcon())
                 .isRead(false)
                 .build();
         paperRepository.save(paper);
@@ -57,6 +58,7 @@ public class RollService {
                         .content(paper.getContent())
                         .createdAt(paper.getCreatedAt())
                         .rollId(roll.getId())
+                        .icon(paper.getIcon())
                         .isRead(false)
                         .build())
                 .build();
@@ -84,6 +86,7 @@ public class RollService {
                     .id(paper.getId())
                     .rollId(rollId)
                     .content(paper.getContent())
+                    .icon(paper.getIcon())
                     .createdAt(paper.getCreatedAt())
                     .isRead(paper.getIsRead())
                     .build();
@@ -113,6 +116,7 @@ public class RollService {
                 .id(paperId)
                 .rollId(paper.getRoll().getId())
                 .content(paper.getContent())
+                .icon(paper.getIcon())
                 .createdAt(paper.getCreatedAt())
                 .isRead(paper.getIsRead())
                 .build();

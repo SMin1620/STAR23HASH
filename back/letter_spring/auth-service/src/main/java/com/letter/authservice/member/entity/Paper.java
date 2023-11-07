@@ -26,6 +26,8 @@ public class Paper {
     @Column(nullable = false, length = 100)
     private String content;
 
+    private String icon;
+
     private Boolean isRead;
 
     private LocalDateTime createdAt;
