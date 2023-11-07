@@ -2,6 +2,7 @@ package com.letter.authservice.member.service;
 
 import com.letter.authservice.exception.BusinessLogicException;
 import com.letter.authservice.exception.ExceptionCode;
+import com.letter.authservice.jwt.JwtTokenProvider;
 import com.letter.authservice.member.dto.MemberDto;
 import com.letter.authservice.member.dto.RollDto;
 import com.letter.authservice.member.entity.Member;
@@ -28,17 +29,16 @@ public class RollService {
     private final MemberRepository memberRepository;
     private final RollRepository rollRepository;
     private final PaperRepository paperRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     /**
      * 롤링페이퍼 생성
      */
     public RollDto.RollCreateResDto rollCreate(HttpServletRequest request,
                                                RollDto.RollCreateReqDto dto,
-                                               Long rollId)
+                                               Long memberId)
     {
-
-//        Roll roll = rollRepository.findRollByMemberId(member.getId()).orElse(null);
-        Roll roll = rollRepository.findById(rollId)
+        Roll roll = rollRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
 
         Paper paper = Paper.builder()
@@ -67,24 +67,22 @@ public class RollService {
     /**
      * 롤링페이퍼 조회
      */
-    public RollDto.RollPaperListResDto rollList(HttpServletRequest request, Long rollId) {
+    public RollDto.RollPaperListResDto rollList(HttpServletRequest request, Long memberId) {
 
-        Roll roll = rollRepository.findById(rollId)
+        Roll roll = rollRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
 
-        // 현재 날짜 2023-11-03
-//        LocalDateTime start = LocalDateTime.parse(LocalDateTime.now().toString().substring(0, 10) + "T00:00:00");
-//        LocalDateTime end = LocalDateTime.now();
+        // 날짜 계산
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime start = now.minusDays(1).withHour(18).withMinute(0).withSecond(0).withNano(0);
-        LocalDateTime end = now.withHour(18).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.withHour(17).withMinute(59).withSecond(59).withNano(0);
 
-        List<Paper> paperList = paperRepository.findAllByRollIdAndIsReadFalseAndCreatedAtBetween(rollId, start, end);
+        List<Paper> paperList = paperRepository.findAllByRollIdAndIsReadFalseAndCreatedAtBetween(roll.getId(), start, end);
         List<RollDto.PaperListResDto> paperListResDtos = new ArrayList<>();
         for (Paper paper : paperList) {
             RollDto.PaperListResDto paperListResDto = RollDto.PaperListResDto.builder()
                     .id(paper.getId())
-                    .rollId(rollId)
+                    .rollId(roll.getId())
                     .content(paper.getContent())
                     .icon(paper.getIcon())
                     .createdAt(paper.getCreatedAt())
@@ -95,7 +93,7 @@ public class RollService {
         }
 
         return RollDto.RollPaperListResDto.builder()
-                .rollId(rollId)
+                .rollId(roll.getId())
                 .member(MemberDto.MemberResDto.builder().id(roll.getMember().getId()).phone(roll.getMember().getPhone()).build())
                 .paperList(paperListResDtos)
                 .build();
