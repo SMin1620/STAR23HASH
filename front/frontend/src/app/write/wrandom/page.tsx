@@ -15,17 +15,17 @@ export default function WriteFriend() {
   }
 
   const handleSend = async () => {
-    //const reset = await createNotereset() //쪽지보낸거 리셋
+    // const reset = await createNotereset() //쪽지보낸거 리셋
 
     try {
       const res = await createNote(content)
       if (res.status.toString() === 'CREATED') {
-        router.push(`/write/send?isSuccess=true`)
+        router.replace(`/write/send?isSuccess=true`)
       } else {
         throw new Error('에러')
       }
     } catch (error) {
-      router.push(`/write/send?isSuccess=false`)
+      router.replace(`/write/send?isSuccess=false`)
     }
   }
   return (
