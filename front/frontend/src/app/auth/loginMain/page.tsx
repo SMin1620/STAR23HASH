@@ -38,10 +38,6 @@ export default function LoginMain() {
       setPhone(inputValue)
       router.push('/auth/loginPassword')
     }
-
-    // setLoginSuccess(true)
-    // setPhone(inputValue)
-    // router.push('/auth/loginPassword')
   }
 
   // 모달 창 닫을때 input 창 비우는 함수
@@ -53,15 +49,12 @@ export default function LoginMain() {
   return (
     <div>
       <div className="flex items-center justify-center">
-        <div className="absolute z-10">
-          <div
-            style={{ marginTop: '650px' }}
-            className="flex flex-col items-center justify-center"
-          >
+        <m.ContentBox>
+          <div className="flex flex-col items-center justify-center">
             <div className="pb-5 text-4xl text-white">별이삼샵</div>
-            <div style={{ width: '300px', height: '300px' }}>
+            <m.AstronauntDiv>
               <LoginAstronaut style={{ width: '100%', height: '100%' }} />
-            </div>
+            </m.AstronauntDiv>
             <m.inputStyle
               placeholder="전화번호를 입력해 주세요"
               name="phone"
@@ -80,7 +73,7 @@ export default function LoginMain() {
               />
             )}
           </div>
-        </div>
+        </m.ContentBox>
       </div>
       <Logincomponent
         style={{ position: 'absolute', width: '100%', height: '100%' }}

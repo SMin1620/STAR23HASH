@@ -5,6 +5,7 @@ import No from '@/component/arrive/no'
 import DeliveryThree from '../../../component/Three/delivery'
 import BackButton from '@/component/storage/BackButton'
 import Loading from './loading'
+import { Translate } from 'aws-sdk'
 
 export default function Arrive() {
   const [loading, setLoading] = useState(true)
@@ -27,7 +28,17 @@ export default function Arrive() {
   return (
     <div>
       <div className="flex items-center justify-center">
-        <div className="absolute z-10">
+        <div
+          className="absolute z-10"
+          style={{
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          <div className="fixed left-0 top-0">
+            <BackButton />
+          </div>
           {loading ? <></> : state ? <Yes /> : <No />}
         </div>
       </div>

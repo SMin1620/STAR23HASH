@@ -7,7 +7,7 @@ const friendListGet = async (): Promise<any> => {
   try {
     const response: AxiosResponse = await AuthAxios({
       method: 'get',
-      url: `${DOMAIN}/api/notes/room/today`,
+      url: `${DOMAIN}/api/letters/today`,
     })
     return response
   } catch (error) {
