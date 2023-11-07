@@ -15,7 +15,7 @@ public class RollDto {
     @Builder
     public static class RollCreateReqDto {
         private String content;
-        private String icon;
+        private Integer icon;
     }
     @Getter
     @Setter
@@ -49,7 +49,7 @@ public class RollDto {
         private Long id;
         private String content;
         private Long rollId;
-        private String icon;
+        private Integer icon;
         private Boolean isRead;
         @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;
@@ -64,7 +64,7 @@ public class RollDto {
         private Long id;
         private String content;
         private Long rollId;
-        private String icon;
+        private Integer icon;
         private Boolean isRead;
         @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDateTime createdAt;

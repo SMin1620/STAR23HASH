@@ -26,7 +26,7 @@ public class Paper {
     @Column(nullable = false, length = 100)
     private String content;
 
-    private String icon;
+    private Integer icon;
 
     private Boolean isRead;
 
