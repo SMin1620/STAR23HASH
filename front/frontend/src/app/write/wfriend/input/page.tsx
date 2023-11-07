@@ -135,9 +135,9 @@ export default function WriteFriend({ searchParams }: Props) {
   const handleSendClick = async () => {
     const res = await createLetter(content, contentType, mediaUrl, hint, phone)
     if (res.status.toString() === 'OK') {
-      router.push(`/write/send?isSuccess=true`)
+      router.replace(`/write/send?isSuccess=true`)
     } else {
-      router.push(`/write/send?isSuccess=false`)
+      router.replace(`/write/send?isSuccess=false`)
     }
   }
   return (
