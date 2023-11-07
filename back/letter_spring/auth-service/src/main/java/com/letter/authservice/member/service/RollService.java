@@ -34,11 +34,10 @@ public class RollService {
     /**
      * 롤링페이퍼 생성
      */
-    public RollDto.RollCreateResDto rollCreate(HttpServletRequest request,
-                                               RollDto.RollCreateReqDto dto,
-                                               Long memberId)
-    {
-        Roll roll = rollRepository.findByMemberId(memberId)
+    public RollDto.RollCreateResDto rollCreate(
+            RollDto.RollCreateReqDto dto
+    ) {
+        Roll roll = rollRepository.findById(dto.getRollId())
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
 
         Paper paper = Paper.builder()
