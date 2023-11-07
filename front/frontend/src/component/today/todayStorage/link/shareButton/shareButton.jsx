@@ -12,6 +12,7 @@ export default function ShareButton(onClick) {
   const scale = 0.5
   mesh.scale.set(scale, scale, scale)
 
+  //링크 복사
   const handleOnClick = () => {
     let currentUrl = window.document.location.href
     console.log(currentUrl)
