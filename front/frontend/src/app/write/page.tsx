@@ -22,6 +22,7 @@ export default function Write() {
   const closeModal = () => {
     setRes(!res)
   }
+  // 페이지에 진입했을 때 히스토리 스택 초기화
   useEffect(() => {}, [res])
   return (
     <>
@@ -52,7 +53,7 @@ export default function Write() {
           <stt.EmptyDiv>
             <st.button
               onClick={() => {
-                router.replace('/main')
+                router.back()
               }}
             >
               메인으로

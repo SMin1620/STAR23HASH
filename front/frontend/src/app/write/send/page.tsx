@@ -1,10 +1,11 @@
+'use client'
 import Link from 'next/link'
 import GlobalStyle from '../GlobalStyles'
 import * as st from './sendresult.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 import Success from './component/success'
 import Fail from './component/fail'
-import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   searchParams: {
@@ -13,6 +14,7 @@ type Props = {
 }
 
 export default function SendResult({ searchParams }: Props) {
+  const router = useRouter()
   return (
     <>
       <GlobalStyle />
@@ -28,18 +30,30 @@ export default function SendResult({ searchParams }: Props) {
               <st.ContentBox>
                 <Success />
               </st.ContentBox>
-              <Link href="/write">
-                <stt.button>확인</stt.button>
-              </Link>
+              <stt.EmptyDiv>
+                <stt.button
+                  onClick={() => {
+                    router.back()
+                  }}
+                >
+                  확인
+                </stt.button>
+              </stt.EmptyDiv>
             </>
           ) : (
             <>
               <st.ContentBox>
                 <Fail />
               </st.ContentBox>
-              <Link href="/write">
-                <stt.button>돌아가기</stt.button>
-              </Link>
+              <stt.EmptyDiv>
+                <stt.button
+                  onClick={() => {
+                    router.back()
+                  }}
+                >
+                  돌아가기
+                </stt.button>
+              </stt.EmptyDiv>
             </>
           )}
         </stt.SendBox>

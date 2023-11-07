@@ -32,7 +32,7 @@ export default function WriteFriend() {
   ]
   const handleSendClick = async () => {
     await pullContacts(contacts)
-    router.push(`/write/wfriend/getfriend`)
+    router.replace(`/write/wfriend/getfriend`)
   }
   return (
     <>
