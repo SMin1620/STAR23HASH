@@ -53,7 +53,6 @@ export default function Write() {
             <st.button
               onClick={() => {
                 router.replace('/main')
-                console.log('here')
               }}
             >
               메인으로

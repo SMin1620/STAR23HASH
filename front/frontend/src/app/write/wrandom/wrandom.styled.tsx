@@ -24,7 +24,6 @@ export const InputContent = styled.textarea`
   font-size: 16px;
   resize: none;
   white-space: pre-wrap;
-
   background-attachment: local;
   background-image: repeating-linear-gradient(
     white,
