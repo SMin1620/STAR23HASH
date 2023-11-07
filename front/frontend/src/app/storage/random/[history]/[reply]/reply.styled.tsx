@@ -88,9 +88,9 @@ export const LetterInput = styled.textarea`
     rgba(250.00000029802322, 247.00000047683716, 240.00000089406967, 1),
     rgba(250.00000029802322, 247.00000047683716, 240.00000089406967, 1) 34px,
     lightgray 34px,
-    lightgray 35px
+    lightgray 36px
   );
-  line-height: 35px;
+  line-height: 36px;
   padding: 8px 10px;
   outline: none;
 `
