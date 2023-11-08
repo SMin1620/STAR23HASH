@@ -254,7 +254,7 @@ public class MemberService {
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
         Roll roll = rollRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.ROLL_NOT_FOUND));
-        Optional<Paper> paper = paperRepository.findTopByRollIdAndIsReadFalseAndCreatedAtBetween(roll.getId(), start, end);
+        Optional<Paper> paper = paperRepository.findTopByRollIdAndCreatedAtBetween(roll.getId(), start, end);
 
         if (paper.isPresent()) return true;
         

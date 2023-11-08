@@ -12,5 +12,5 @@ public interface PaperRepository extends JpaRepository<Paper, Long> {
     List<Paper> findAllByRollId(Long rollId);
     List<Paper> findAllByRollIdAndCreatedAtBetween(Long rollId, LocalDateTime start, LocalDateTime end);
 
-    Optional<Paper> findTopByRollIdAndIsReadFalseAndCreatedAtBetween(Long rollId, LocalDateTime start, LocalDateTime end);
+    Optional<Paper> findTopByRollIdAndCreatedAtBetween(Long rollId, LocalDateTime start, LocalDateTime end);
 }
