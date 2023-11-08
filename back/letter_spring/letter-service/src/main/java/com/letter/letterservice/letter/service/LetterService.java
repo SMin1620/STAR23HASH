@@ -62,6 +62,9 @@ public class LetterService {
     @Transactional
     public Boolean createContact(HttpServletRequest request, ContactRequestDto contactRequestDto){
 
+
+        System.out.println("contacts : "+contactRequestDto.getContacts().toString());
+
         Long id = authFeignClient.getId(request.getHeader("Authorization"));
         /**
          * 전화번호 리스트를 만들기 전에 지우고 새로 만듦
