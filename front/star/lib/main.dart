@@ -109,9 +109,13 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
 
 void sendContactsToServer(List<Contact> contacts) async {
   List<Map<String, String>> contactList = contacts.map((contact) {
+    String name = contact.displayName ?? '';
+    String phoneNumber = contact.phones?.first.value ?? '';
+    // 숫자만 포함된 문자열로 변환
+    phoneNumber = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
     return {
-      'name': contact.displayName ?? '',
-      'phone': contact.phones?.first.value ?? '',
+      'name': name,
+      'phone': phoneNumber,
     };
   }).toList();
 
