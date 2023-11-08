@@ -8,7 +8,7 @@ import { gsap } from 'gsap'
 import * as THREE from 'three'
 
 function Planet1() {
-  const gltf = useGLTF('/assets/glb/planet-5.glb')
+  const gltf = useGLTF('/assets/planet/planet-5.glb')
 
   const modelRef = useRef()
 
@@ -30,7 +30,7 @@ function Planet1() {
 }
 
 function Planet2() {
-  const gltf = useGLTF('/assets/glb/planet-3.glb')
+  const gltf = useGLTF('/assets/planet/planet-3.glb')
 
   const modelRef = useRef()
 
@@ -51,7 +51,7 @@ function Planet2() {
 }
 
 function Planet3() {
-  const gltf = useGLTF('/assets/glb/planet-1.glb')
+  const gltf = useGLTF('/assets/planet/planet-1.glb')
 
   gltf.scene.position.set(-0.05, -6.5, -3)
   const scale = 4.5
