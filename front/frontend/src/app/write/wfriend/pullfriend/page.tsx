@@ -10,7 +10,7 @@ type Contact = {
   phone: string
 }
 
-export default function FullFriend() {
+export default function PullFriend() {
   const router = useRouter()
 
   // const contacts: Contact[] = [
