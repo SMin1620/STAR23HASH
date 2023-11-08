@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import GlobalStyle from '../../GlobalStyles'
+import GlobalStyle from '../write/GlobalStyles'
 import * as st from './pullfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 import { pullContacts } from '@/app/utils/write/pullContacts'
