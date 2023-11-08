@@ -30,6 +30,7 @@ export default function TodayLinkStorage({ params }: Props) {
   const [rollList, setRollList] = useState<null | any>(null)
   const [rollDetail, setRollDetail] = useState<null | any>(null)
   const [isUser, setIsUser] = useState(false)
+  const [positions, setPositions] = useState<Position[]>([])
   const router = useRouter()
   useEffect(() => {
     const handleListApi = async (id: number) => {
@@ -40,6 +41,11 @@ export default function TodayLinkStorage({ params }: Props) {
     }
     handleListApi(params.slug)
   }, [])
+
+  // useEffect(() => {
+  //   const newPositions: Position[] = []
+  //   for (let i = 0; i < )
+  // })
 
   const handleDetailApi = async (id: number) => {
     const response = await LinkDetailGet(id)
@@ -93,6 +99,22 @@ export default function TodayLinkStorage({ params }: Props) {
       check()
     }
   }, [])
+
+  useEffect(() => {
+    if (rollList) {
+      const totalAmount = rollList.paperList.length
+      const newPositions: Position[] = []
+      for (let i = 0; i < totalAmount; i++) {
+        newPositions.push([
+          Math.random() * 2 - 1,
+          Math.random() * 3 - 2,
+          Math.random() * 3 - 2,
+        ])
+      }
+      setPositions(newPositions)
+      console.log(totalAmount)
+    }
+  }, [rollList])
 
   const handleShare = () => {
     const currentUrl = window.document.location.href
@@ -169,11 +191,7 @@ export default function TodayLinkStorage({ params }: Props) {
                 <AstronautModel
                   url={`/assets/astronaut${(index % 4) + 1}.glb`}
                   scale={[0.3, 0.3, 0.3]}
-                  position={[
-                    Math.random() * 2 - 1,
-                    Math.random() * 3 - 2,
-                    Math.random() * 3 - 2,
-                  ]}
+                  position={positions[index]}
                   onClick={() => handleDetailApi(item.id)}
                 />
               </Float>
