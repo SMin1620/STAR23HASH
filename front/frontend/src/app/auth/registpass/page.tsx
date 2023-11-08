@@ -1,8 +1,6 @@
 'use client'
 import React, { useState, useEffect, useCallback } from 'react'
 import * as r from './registpass.styled'
-import LoginComponent from '@/component/Three/login'
-import LoginAstronaut from '../../../component/Three/loginAstronaut'
 import { registAxios } from '@/app/utils/registAxios'
 import { passwordAxios } from '@/app/utils/passwordAxios'
 import { useRouter } from 'next/navigation'
@@ -68,78 +66,60 @@ export default function RegistPass() {
           alert('회원가입에 실패하였습니다ㅜㅜ')
         }
       }
+    } else {
+      alert('회원가입에 실패하였습니다ㅜㅜ 비밀번호를 확인해주세요')
     }
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-center">
-        <r.ContentBox>
-          <div className="flex flex-col items-center justify-center">
-            <div className="pb-10 text-4xl text-white">별이삼샵</div>
-            <r.AstronauntDiv>
-              <LoginAstronaut style={{ width: '100%', height: '100%' }} />
-            </r.AstronauntDiv>
-            <div className="text-4xl text-white"></div>
-            <input
-              placeholder="비밀번호를 입력해주세요"
-              name="phone"
-              type="password"
-              value={password}
-              onChange={onChangeName}
-              // onBlur={handlePasswordBlur}
-              // isValid={isValid}
-              style={{
-                width: '240px',
-                height: '45px',
-                marginBottom: '15px',
-                borderRadius: '10px',
-                opacity: '0.7',
-                textAlign: 'center',
-                backgroundColor: 'rgb(203 213 225)',
-                fontSize: '15px',
-                border: isValid ? '4px solid #65F662' : '4px solid #FF4A4A',
-              }}
-            ></input>
-            <span
-              className={`message ${
-                isValid ? 'success' : 'error'
-              } mb-3 text-white`}
-            >
-              {passMessage}
-            </span>
-            <input
-              placeholder="비밀번호를 확인해주세요"
-              name="phone"
-              type="password"
-              value={confirmPassword}
-              onChange={onChangePasswordConfirm}
-              style={{
-                width: '240px',
-                height: '45px',
-                marginBottom: '15px',
-                borderRadius: '10px',
-                opacity: '0.7',
-                textAlign: 'center',
-                backgroundColor: 'rgb(203 213 225)',
-                fontSize: '15px',
-                border: isMatch ? '4px solid #65F662' : '4px solid #FF4A4A',
-              }}
-            ></input>
-            <span
-              className={`message ${
-                isMatch ? 'success' : 'error'
-              } mb-3 text-white`}
-            >
-              {confirmPassMessage}
-            </span>
-            <r.Button onClick={registClick}>확인</r.Button>
-          </div>
-        </r.ContentBox>
-      </div>
-      <LoginComponent
-        style={{ position: 'absolute', width: '100%', height: '100%' }}
-      />
+    <div className="flex flex-col items-center justify-center">
+      <input
+        placeholder="비밀번호를 입력해주세요"
+        name="phone"
+        type="password"
+        value={password}
+        onChange={onChangeName}
+        style={{
+          width: '240px',
+          height: '45px',
+          marginBottom: '15px',
+          borderRadius: '10px',
+          opacity: '0.7',
+          textAlign: 'center',
+          backgroundColor: 'rgb(203 213 225)',
+          fontSize: '15px',
+          border: isValid ? '4px solid #65F662' : '4px solid #FF4A4A',
+        }}
+      ></input>
+      <span
+        className={`message ${isValid ? 'success' : 'error'} mb-3 text-white`}
+      >
+        {passMessage}
+      </span>
+      <input
+        placeholder="비밀번호를 확인해주세요"
+        name="phone"
+        type="password"
+        value={confirmPassword}
+        onChange={onChangePasswordConfirm}
+        style={{
+          width: '240px',
+          height: '45px',
+          marginBottom: '15px',
+          borderRadius: '10px',
+          opacity: '0.7',
+          textAlign: 'center',
+          backgroundColor: 'rgb(203 213 225)',
+          fontSize: '15px',
+          border: isMatch ? '4px solid #65F662' : '4px solid #FF4A4A',
+        }}
+      ></input>
+      <span
+        className={`message ${isMatch ? 'success' : 'error'} mb-3 text-white`}
+      >
+        {confirmPassMessage}
+      </span>
+      <r.Button onClick={registClick}>확인</r.Button>
     </div>
   )
 }
