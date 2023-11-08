@@ -1,0 +1,26 @@
+apm-server:
+  host: "0.0.0.0:8200"
+  rum:
+    enabled: true
+  kibana:
+    enabled: true
+    host: "kibana:5601"
+    #    protocol: "http"
+    username: "elastic"
+    password: "elasticpassword"
+
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  username: elastic
+  password: elasticpassword
+
+
+monitoring.enabled: true
+monitoring.elasticsearch:
+  username: "elastic"
+  password: "elasticpassword"
+  hosts: ["elasticsearch:9200"]
+
+setup.kibana:
+  host: 'kibana:5601'
