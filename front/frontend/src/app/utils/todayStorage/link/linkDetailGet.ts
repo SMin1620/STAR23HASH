@@ -10,6 +10,7 @@ export const LinkDetailGet = async (id: number): Promise<any> => {
       method: 'get',
       url: `${DOMAIN}/api/rolls/paper/${id}`,
     })
+    return response
   } catch (error) {
     console.error(error)
   }
