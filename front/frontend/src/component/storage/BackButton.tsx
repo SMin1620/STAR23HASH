@@ -7,6 +7,8 @@ export default function BackButton() {
   const router = useRouter()
 
   const handleClick = () => {
+    console.log('여기')
+
     router.back()
   }
 
