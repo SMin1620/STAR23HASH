@@ -39,7 +39,7 @@ export default function Write() {
             <st.SendObject>
               <button
                 onClick={() => {
-                  router.push(`/write/wfriend/pullfriend`)
+                  router.push(`/pullfriend`)
                 }}
               >
                 <st.SendImg
