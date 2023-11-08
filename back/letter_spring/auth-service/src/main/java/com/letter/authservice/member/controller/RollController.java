@@ -47,18 +47,6 @@ public class RollController {
             HttpServletRequest request,
             @PathVariable("rollId") Long rollId
     ) {
-//        //////////////////////// 토큰으로 인가된 사용자 정보 처리하는 로직
-//        String token = jwtTokenProvider.resolveToken(request);
-//        jwtTokenProvider.validateToken(token);
-//
-//        System.out.println("token >>> " + token);
-//
-//        Authentication authentication = jwtTokenProvider.getAuthentication(token);
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//
-//        String memberEmail = userDetails.getUsername();
-//
-//        Member member = memberService.memberInfo(memberEmail);
 
         RollDto.RollPaperListResDto rollPaperListResDto = rollService.rollList(rollId);
         return new BaseResponse(HttpStatus.OK, "롤링페이퍼 목록 조회 성공", rollPaperListResDto);
