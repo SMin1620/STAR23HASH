@@ -9,6 +9,7 @@ export const friendDetailGet = async (id: number): Promise<any> => {
       method: 'get',
       url: `${DOMAIN}/api/letters/detail/${id}`,
     })
+    return response
   } catch (error) {
     console.error(error)
   }
