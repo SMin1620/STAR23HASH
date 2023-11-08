@@ -13,7 +13,6 @@ export default function Arrive() {
 
   useEffect(() => {
     // 도착한 편지가 있는지 없는지 확인 (비동기)
-
     async function click() {
       const check = await TodayAlarm()
       console.log('요기')
@@ -25,32 +24,25 @@ export default function Arrive() {
       const check = await click()
       setTimeout(() => {
         if (check) {
-          setState(check) // 비동기 작업의 결과에 따라 state를 설정
-          setLoading(false) // 비동기 작업이 끝났음
+          setState(check)
+          setLoading(false)
         } else {
-          setState(check) // 비동기 작업의 결과에 따라 state를 설정
-          setLoading(false) // 비동기 작업이 끝났음
+          setState(check)
+          setLoading(false)
         }
       }, 1000)
     })()
   }, [])
 
-  // useEffect(() => {
-  //   // todayAlarm api로 확인하는 부분
-  //   // 도착한 편지 있는지 없는지 확인하는 로직
-  //   setState(false)
-  // }, [])
-
-  return (
+  return loading ? (
+    <></>
+  ) : (
     <div>
       <div className="flex items-center justify-center">
-        <div className="fixed left-0 top-0">
+        <div className="fixed left-0 top-0 z-10">
           <BackButton />
         </div>
-
-        <a.ContentBox>
-          {loading ? <></> : state ? <Yes /> : <No />}
-        </a.ContentBox>
+        <a.ContentBox>{state ? <Yes /> : <No />}</a.ContentBox>
       </div>
       <DeliveryThree
         style={{ position: 'absolute', width: '100%', height: '100%' }}

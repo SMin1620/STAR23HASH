@@ -85,7 +85,7 @@ function Ufo({ forwardedRef }) {
 }
 
 function SpaceShip({ forwardedRef }) {
-  const gltf = useGLTF('/assets/Rover.glb')
+  const gltf = useGLTF('/assets/glb/rover.glb')
   // console.log(gltf.scene)
 
   gltf.scene.position.set(-1.5, -3.0, -3.9)

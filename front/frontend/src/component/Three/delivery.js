@@ -22,6 +22,23 @@ import * as THREE from 'three'
 
 //   return <primitive object={gltf.scene} ref={ref} />
 // }
+function Satellite() {
+  const ref = useRef()
+  const gltf = useGLTF('/assets/glb/satellite.glb')
+
+  gltf.scene.position.set(1.5, 3, 0)
+  const scale = 0.15
+  gltf.scene.scale.set(scale, scale, scale)
+  gltf.scene.rotation.z = -0.5
+  gltf.scene.rotation.y = -0.8
+
+  useFrame(({ clock }) => {
+    // 매 프레임마다 y축으로 조금씩 이동
+    ref.current.position.y += Math.sin(clock.getElapsedTime()) * 0.001
+  })
+
+  return <primitive object={gltf.scene} ref={ref} />
+}
 
 function Planet1() {
   const ref = useRef()
@@ -89,6 +106,7 @@ function Scene() {
 
   return (
     <>
+      <Satellite />
       <Planet1 />
       <Planet2 />
       {/* <Ufo /> */}
