@@ -15,6 +15,10 @@ import LinkListGet from '@/app/utils/todayStorage/link/linkListGet'
 import { LinkDetailGet } from '@/app/utils/todayStorage/link/linkDetailGet'
 import ShareButton from '@/component/today/todayStorage/link/shareButton/shareButton'
 import WriteButton from '@/component/today/todayStorage/link/writeButton/writeButton'
+import { HtmlContainer, LinkContainer, LinkButton } from './link.styled'
+import { useRouter } from 'next/navigation'
+import { check } from 'prettier'
+import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
 
 type Props = {
   params: {
@@ -23,10 +27,10 @@ type Props = {
 }
 
 export default function TodayLinkStorage({ params }: Props) {
-  const totalAmount = 5
   const [rollList, setRollList] = useState<null | any>(null)
   const [rollDetail, setRollDetail] = useState<null | any>(null)
-  const isUser = useState(true)
+  const [isUser, setIsUser] = useState(false)
+  const router = useRouter()
   useEffect(() => {
     const handleListApi = async (id: number) => {
       const response = await LinkListGet(id)
@@ -42,6 +46,69 @@ export default function TodayLinkStorage({ params }: Props) {
     console.log(response.data.data)
 
     setRollDetail(response.data.data)
+    router.push(`/today/storage/Link/${params.slug}/${id}`)
+  }
+
+  const getCookieValue = (name: string): string | null => {
+    if (typeof window !== 'undefined') {
+      const cookieName = name + '='
+      const decodedCookie = decodeURIComponent(document.cookie)
+      const cookieArray = decodedCookie.split(',')
+
+      for (let i = 0; i < cookieArray.length; i++) {
+        const cookie = cookieArray[i].trim()
+        if (cookie.indexOf(cookieName) === 0) {
+          return cookie.substring(cookieName.length, cookie.length)
+        }
+      }
+    }
+    return null
+  }
+
+  useEffect(() => {
+    const accessToken = getCookieValue('accessToken')
+    // 토큰 없으면 바로 비회원
+    if (accessToken === null) {
+      setIsUser(false)
+    } else {
+      // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
+      // 맞는지 다른지 확인
+      setIsUser(true)
+      const check = async () => {
+        const checkRoll = await MakeLinkAxios()
+        //일치함
+
+        if (checkRoll.data.rollId == params.slug) {
+          const handleListApi = async (id: number) => {
+            const response = await LinkListGet(id)
+            setRollList(response.data.data)
+          }
+          handleListApi(params.slug)
+        }
+        //다름
+        else {
+          setIsUser(false)
+        }
+      }
+      check()
+    }
+  }, [])
+
+  const handleShare = () => {
+    const currentUrl = window.document.location.href
+    console.log(currentUrl)
+    const t = document.createElement('textarea')
+    document.body.appendChild(t)
+    t.value = currentUrl
+    t.select()
+    document.execCommand('copy')
+    document.body.removeChild(t)
+
+    alert('링크가 복사되었습니다!')
+  }
+
+  const goWrite = () => {
+    router.push(`/today/storage/Link/${params.slug}/write`)
   }
   // const minDistance = 2
   // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
@@ -63,56 +130,69 @@ export default function TodayLinkStorage({ params }: Props) {
   // }, [])
 
   return (
-    <Canvas
-      style={{ width: '100%', height: '100%', position: 'absolute' }}
-      camera={{ position: [0, 2.2, 5], fov: 70 }}
-    >
-      <Light />
-      <Suspense fallback={null}>
-        <ambientLight intensity={0.8} />
-        <Float
-          speed={6}
-          rotationIntensity={0}
-          floatIntensity={1}
-          floatingRange={[0, 0.1]}
-        >
-          <UfoModel
-            url="/assets/ufo.glb"
-            scale={[1.6, 1.6, 1.6]}
-            position={[0, 2.5, 0]}
+    <LinkContainer>
+      <Canvas
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+          zIndex: '1',
+        }}
+        camera={{ position: [0, 2.2, 5], fov: 70 }}
+      >
+        <Light />
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.8} />
+          <Float
+            speed={6}
+            rotationIntensity={0}
+            floatIntensity={1}
+            floatingRange={[0, 0.1]}
+          >
+            <UfoModel
+              url="/assets/ufo.glb"
+              scale={[1.6, 1.6, 1.6]}
+              position={[0, 2.5, 0]}
+            />
+          </Float>
+          <SpotLight
+            color="#feff16"
+            distance={10}
+            angle={0.9}
+            attenuation={5}
+            anglePower={3}
+            position={[0, 3.1, 0]}
           />
-        </Float>
-        <SpotLight
-          color="#feff16"
-          distance={10}
-          angle={0.9}
-          attenuation={5}
-          anglePower={3}
-          position={[0, 3.1, 0]}
-        />
-        {rollList?.paperList &&
-          rollList.paperList.map((item: any, index: number) => (
-            <Float key={index} speed={1} floatIntensity={0.1}>
-              <AstronautModel
-                url={`/assets/astronaut${(index % 4) + 1}.glb`}
-                scale={[0.3, 0.3, 0.3]}
-                position={[
-                  Math.random() * 2 - 1,
-                  Math.random() * 3 - 2,
-                  Math.random() * 3 - 2,
-                ]}
-                onClick={() => handleDetailApi(item.id)}
-              />
-            </Float>
-          ))}
-        {isUser ? <ShareButton /> : <WriteButton />}
-        <PlanetModel
-          url="/assets/planet-1.glb"
-          scale={[4, 4, 4]}
-          position={[0, -6, 0]}
-        />
-        <OrbitControls />
-      </Suspense>
-    </Canvas>
+          {rollList?.paperList &&
+            rollList.paperList.map((item: any, index: number) => (
+              <Float key={index} speed={1} floatIntensity={0.1}>
+                <AstronautModel
+                  url={`/assets/astronaut${(index % 4) + 1}.glb`}
+                  scale={[0.3, 0.3, 0.3]}
+                  position={[
+                    Math.random() * 2 - 1,
+                    Math.random() * 3 - 2,
+                    Math.random() * 3 - 2,
+                  ]}
+                  onClick={() => handleDetailApi(item.id)}
+                />
+              </Float>
+            ))}
+          <PlanetModel
+            url="/assets/planet-1.glb"
+            scale={[4, 4, 4]}
+            position={[0, -6, 0]}
+          />
+          <OrbitControls />
+        </Suspense>
+      </Canvas>
+      <HtmlContainer>
+        {isUser ? (
+          <LinkButton onClick={() => handleShare()}>공유하기</LinkButton>
+        ) : (
+          <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
+        )}
+      </HtmlContainer>
+    </LinkContainer>
   )
 }
