@@ -1,17 +1,19 @@
 import styled from 'styled-components'
 
 export const arriveButton = styled.div`
-  background-color: #ffe189;
+  background-color: #ffd27a;
   border-radius: 10px;
   color: black;
   width: 90px;
-
   height: 45px;
   text-align: center;
   margin-bottom: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow:
+    2px 2px 5px rgba(0, 0, 0, 0.2),
+    -2px -2px 5px #612f69; // 그림자 효과를 추가하여 입체감을 높입니다
 `
 
 export const arriveLink = styled.div`
