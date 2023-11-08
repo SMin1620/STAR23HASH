@@ -19,11 +19,6 @@ function Planet1() {
   // gltf.scene.rotation.y = -0.8
   gltf.scene.rotation.x = 0.25
 
-  // useFrame((state) => {
-  //   gltf.scene.rotation.x += 0.025
-  //   gltf.scene.rotation.y += 0.01 // 이 값을 조절하여 회전 속도를 변경할 수 있습니다.
-  // })
-
   useFrame(() => {
     if (modelRef.current) {
       modelRef.current.rotation.x += 0.0002
@@ -99,7 +94,7 @@ function SpaceShip({ forwardedRef }) {
   return <primitive ref={forwardedRef} object={gltf.scene} />
 }
 
-function StorageComponent() {
+function StorageComponent({ forwardedRef }) {
   const textureLoader = new TextureLoader()
   const texture = textureLoader.load('/main/storageButton.svg')
   const geometry = new PlaneGeometry(1, 1)
@@ -110,7 +105,7 @@ function StorageComponent() {
   mesh.scale.set(scale, scale, scale)
   // mesh.rotation.z = -0.2
 
-  return <primitive object={mesh} />
+  return <primitive object={mesh} ref={forwardedRef} />
 }
 
 function RandomComponent({ forwardedRef }) {
@@ -141,7 +136,7 @@ function FriendComponent({ forwardedRef }) {
   return <primitive object={mesh} ref={forwardedRef} />
 }
 
-function TodayComponent() {
+function TodayComponent({ forwardedRef }) {
   const textureLoader = new TextureLoader()
   const texture = textureLoader.load('/main/todayLetterButton.svg')
   const geometry = new PlaneGeometry(1, 1)
@@ -152,21 +147,21 @@ function TodayComponent() {
   mesh.scale.set(scale, scale, scale)
   // mesh.rotation.z = -0.2
 
-  return <primitive object={mesh} />
+  return <primitive object={mesh} ref={forwardedRef} />
 }
 
-function WriteComponent() {
+function WriteComponent({ forwardedRef }) {
   const textureLoader = new TextureLoader()
   const texture = textureLoader.load('/main/writeButton.svg')
   const geometry = new PlaneGeometry(1, 1)
   const material = new MeshBasicMaterial({ map: texture, transparent: true })
   const mesh = new Mesh(geometry, material)
-  mesh.position.set(2, -1.5, -5) // Set your coordinates
-  const scale = 1.9
+  mesh.position.set(2, -1.5, -4) // Set your coordinates
+  const scale = 1.7
   mesh.scale.set(scale, scale, scale)
   // mesh.rotation.z = -0.2
 
-  return <primitive object={mesh} />
+  return <primitive object={mesh} ref={forwardedRef} />
 }
 
 function Table({ forwardedRef }) {
@@ -192,6 +187,9 @@ function Scene() {
   const friendRef = useRef()
   const randomRef = useRef()
   const ufoRef = useRef()
+  const todayRef = useRef()
+  const storageRef = useRef()
+  const writeRef = useRef()
   const tl = gsap.timeline()
 
   useEffect(() => {
@@ -228,8 +226,9 @@ function Scene() {
       mouse.x = (e.clientX / window.innerWidth) * 2 - 1
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
-      const intersects = raycaster.intersectObjects([tableRef.current])
-      if (intersects.length > 0) {
+      const intersects = raycaster.intersectObject(tableRef.current)
+      const intersects2 = raycaster.intersectObject(writeRef.current)
+      if (intersects.length > 0 || intersects2.length > 0) {
         // UFO 위치에 따른 적절한 카메라 위치 계산
         const newPosition = new THREE.Vector3(0.95, -1.43, -2)
 
@@ -277,8 +276,12 @@ function Scene() {
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
       const intersects = raycaster.intersectObject(spaceshipRef.current)
+      let intersects2
+      if (storageRef.current != null) {
+        intersects2 = raycaster.intersectObject(storageRef.current)
+      }
 
-      if (intersects.length) {
+      if (intersects.length || intersects2.length) {
         let newPosition
         let newCamera
         // console.log(showStorage)
@@ -332,8 +335,9 @@ function Scene() {
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
       const intersects = raycaster.intersectObject(ufoRef.current)
+      const intersects2 = raycaster.intersectObject(todayRef.current)
 
-      if (intersects.length > 0) {
+      if (intersects.length > 0 || intersects2.length > 0) {
         // UFO 위치에 따른 적절한 카메라 위치 계산
         const newPosition = new THREE.Vector3(1.8, 3, -7)
 
@@ -353,7 +357,7 @@ function Scene() {
                   opacity: 1,
                   onComplete: () => {
                     // console.log(currentHour)
-                    if (currentHour >= 15 || currentHour <= 6) {
+                    if (currentHour >= 11 || currentHour <= 6) {
                       router.push('/today/arrive')
                     } else {
                       router.push('/today/delivery')
@@ -443,9 +447,9 @@ function Scene() {
       <Planet2 />
       <Planet3 />
       <SpaceShip forwardedRef={spaceshipRef} />
-      <TodayComponent />
-      <WriteComponent />
-      {showStorage && <StorageComponent />}
+      <TodayComponent forwardedRef={todayRef} />
+      <WriteComponent forwardedRef={writeRef} />
+      {showStorage && <StorageComponent forwardedRef={storageRef} />}
       {showRandom && <RandomComponent forwardedRef={randomRef} />}
       {showFriend && <FriendComponent forwardedRef={friendRef} />}
       {/* <StorageComponent /> */}
