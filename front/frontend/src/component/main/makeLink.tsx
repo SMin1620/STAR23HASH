@@ -19,7 +19,7 @@ export default function MakeLink() {
   }
 
   async function clickLink() {
-    let t = document.createElement('textarea')
+    const t = document.createElement('textarea')
     document.body.appendChild(t)
     t.value = value
     t.select()
