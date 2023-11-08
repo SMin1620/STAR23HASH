@@ -7,6 +7,8 @@ services:
     container_name: eureka-server
     volumes:
       - ./:/app/server/letter/eureka-server/
+    environment:
+      TZ: "Asia/Seoul"  # timezone 설정 부분
     ports:
       - 8761:8761
     expose:
@@ -25,6 +27,7 @@ services:
       - 9000
     environment:
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
+      TZ: "Asia/Seoul"  # timezone 설정 부분
     depends_on:
       - eureka-server
       - auth-service
@@ -44,6 +47,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ssafy106
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
+      TZ: "Asia/Seoul"  # timezone 설정 부분
     depends_on:
       - eureka-server
       - mysql
@@ -61,6 +65,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ssafy106
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
+      TZ: "Asia/Seoul"  # timezone 설정 부분
     depends_on:
       - eureka-server
       - mysql
@@ -77,6 +82,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ssafy106
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka/
+      TZ: "Asia/Seoul"  # timezone 설정 부분
     depends_on:
       - eureka-server
       - mysql
@@ -89,6 +95,7 @@ services:
     environment:
       MYSQL_DATABASE: free
       MYSQL_ROOT_PASSWORD: ssafy106
+      TZ: "Asia/Seoul"  # timezone 설정 부분
     ports:
       - "3306:3306"
     command:
@@ -103,3 +110,16 @@ services:
     ports:
       - 6379:6379
     restart: always
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./conf/:/etc/nginx/conf.d
+    environment:
+      TZ: "Asia/Seoul"  # timezone 설정 부분
+    ports:
+      - 80:80
+    depends_on:
+      - gateway-server
