@@ -70,31 +70,31 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                       );
                     },
                     onLoadStop: (controller, url) async {
-                      print("url");
-                      print(url);
-                      if (url.toString() == "http://k9e106.p.ssafy.io:3000/write") {
-                        List<Contact> contacts = [];
-                        PermissionStatus status = await Permission.contacts.request();
-                        if (status.isGranted) {
-                          try {
-                            Iterable<Contact> contactList = await ContactsService.getContacts();
-                            setState(() {
-                              contacts = contactList.toList();
-                              print("contact");
-                              print(contacts);
+                      Uri? currentUrl = await _webViewController.getUrl();
+                      print(currentUrl.toString());
 
-                              sendContactsToServer(contacts);
-                            });
-                          } on PlatformException catch (e) {
-                            print('Error: ${e.message}');
-                          }
-                        }
-
-                        controller.loadUrl(
-                          urlRequest: URLRequest(
-                            url: Uri.parse("http://k9e106.p.ssafy.io:3000/write/wfriend/getfriend"),
-                          ),
-                        );
+                      if (url.toString() == "http://k9e106.p.ssafy.io:3000/write/wfriend/pullfriend") {
+                        // List<Contact> contacts = [];
+                        // PermissionStatus status = await Permission.contacts.request();
+                        // if (status.isGranted) {
+                        //   try {
+                        //     Iterable<Contact> contactList = await ContactsService.getContacts();
+                        //     setState(() {
+                        //       contacts = contactList.toList();
+                        //       print("contact");
+                        //       print(contacts);
+                        //
+                        //       sendContactsToServer(contacts);
+                        //     });
+                        //   } on PlatformException catch (e) {
+                        //     print('Error: ${e.message}');
+                        //   }
+                        // }
+                        // controller.loadUrl(
+                        //   urlRequest: URLRequest(
+                        //     url: Uri.parse("http://k9e106.p.ssafy.io:3000/write/wfriend/getfriend"),
+                        //   ),
+                        // );
                       }
                     }
                 ),
@@ -111,27 +111,22 @@ void sendContactsToServer(List<Contact> contacts) async {
   List<Map<String, String>> contactList = contacts.map((contact) {
     String name = contact.displayName ?? '';
     String phoneNumber = contact.phones?.first.value ?? '';
-    // 숫자만 포함된 문자열로 변환
     phoneNumber = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
     return {
       'name': name,
       'phone': phoneNumber,
     };
   }).toList();
-
-  print(contactList);
   var cookieManager = CookieManager.instance();
   var accessToken = await cookieManager.getCookie(url: Uri.parse("http://k9e106.p.ssafy.io:3000/write"), name: "accessToken");
   if (accessToken != null) {
     var accessTokenValue = accessToken.value;
-    print(accessTokenValue);
     var dio = Dio();
-      dio.options.headers['Authorization'] = '$accessTokenValue';
-      dio.options.headers['Cookie'] = accessToken.toString();
-
-      try {
-        var response = await dio.post(
-          'http://k9e106.p.ssafy.io:9000/api/letters/contact',
+    dio.options.headers['Authorization'] = '$accessTokenValue';
+    dio.options.headers['Cookie'] = accessToken.toString();
+    try {
+      var response = await dio.post(
+        'http://k9e106.p.ssafy.io:9000/api/letters/contact',
         data: {'contacts': contactList},
       );
       if (response.statusCode == 200) {
@@ -146,7 +141,4 @@ void sendContactsToServer(List<Contact> contacts) async {
   } else {
     print('accessToken이 없습니다.');
   }
-
 }
-
-// 연락처 리스트를 JSON 형식으로 변환하는 함수
