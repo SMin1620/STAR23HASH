@@ -80,7 +80,7 @@ public class RollService {
 
 
 
-        List<Paper> paperList = paperRepository.findAllByRollIdAndIsReadFalseAndCreatedAtBetween(roll.getId(), start, end);
+        List<Paper> paperList = paperRepository.findAllByRollIdAndCreatedAtBetween(roll.getId(), start, end);
         List<RollDto.PaperListResDto> paperListResDtos = new ArrayList<>();
         for (Paper paper : paperList) {
             RollDto.PaperListResDto paperListResDto = RollDto.PaperListResDto.builder()
