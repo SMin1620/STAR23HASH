@@ -11,7 +11,7 @@ type Contact = {
   phone: string
 }
 
-export default function WriteFriend() {
+export default function GetFriend() {
   const [phone, setPhone] = useState('')
   const [contacts, setContacts] = useState<Contact[]>([])
   const [selectedContactIndex, setSelectedContactIndex] = useState(-1)
