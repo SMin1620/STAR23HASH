@@ -18,6 +18,17 @@ export default function MakeLink() {
     setShowLink(true)
   }
 
+  async function clickLink() {
+    let t = document.createElement('textarea')
+    document.body.appendChild(t)
+    t.value = value
+    t.select()
+    document.execCommand('copy')
+    document.body.removeChild(t)
+
+    alert('링크가 복사되었습니다!')
+  }
+
   return (
     <div
       style={{
@@ -33,9 +44,9 @@ export default function MakeLink() {
       </button>
       {showLink && (
         <div>
-          <CopyToClipboard text={value} onCopy={() => setCopied(true)}>
-            <span className=" text-white">{value}</span>
-          </CopyToClipboard>
+          <span onClick={clickLink} className=" text-white">
+            {value}
+          </span>
         </div>
       )}
       {copied ? <span style={{ color: 'red' }}>복사되었습니다!</span> : null}
