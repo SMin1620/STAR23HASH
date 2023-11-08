@@ -55,6 +55,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webflux-ui
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webflux-ui', version: '2.2.0'
 	testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
+
+	// https://mvnrepository.com/artifact/co.elastic.apm/elastic-apm-agent
+	implementation group: 'co.elastic.apm', name: 'elastic-apm-agent', version: '1.36.0'
+
 }
 
 // swagger

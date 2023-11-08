@@ -47,6 +47,9 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 
+	// https://mvnrepository.com/artifact/co.elastic.apm/elastic-apm-agent
+	implementation group: 'co.elastic.apm', name: 'elastic-apm-agent', version: '1.36.0'
+
 }
 
 dependencyManagement {
