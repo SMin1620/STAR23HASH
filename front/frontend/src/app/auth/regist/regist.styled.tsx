@@ -17,7 +17,7 @@ export const RegistButton = styled.button`
   width: 220px;
   background-color: #d9d9d9;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 8px;
