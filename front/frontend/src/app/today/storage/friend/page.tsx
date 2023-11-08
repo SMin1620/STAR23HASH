@@ -53,13 +53,15 @@ export default function TodayFriendStorage() {
     console.log('id', id)
 
     const response = await friendDetailGet(id)
-    console.log(response.data.data)
 
     setLetterDetail(response.data.data)
-    console.log(letterDetail)
 
-    router.push(`/storage/friend/${letterDetail.id}`)
+    router.push(`/storage/friend/${id}`)
   }
+
+  useEffect(() => {
+    console.log(letterDetail, 'letter')
+  }, [letterDetail])
 
   return (
     <Canvas
