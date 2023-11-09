@@ -56,42 +56,41 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
     const response = await api(config)
     return response
   } catch (error: any) {
-    if (error.response?.status === 403 || error.response?.status === 401) {
-      try {
-        const refreshToken = getCookieValue('refreshToken')
-        const reissueResponse = await axios.post(
-          `${DOMAIN}/api/members/refresh`,
-          {
-            withCredentials: true, // withCredentials 설정
-            headers: {
-              Authorization: refreshToken,
-            },
-          },
-        )
+    console.error(error)
 
-        console.log('재발급 완료')
+    // if (error.response?.status === 403 || error.response?.status === 401) {
+    //   try {
+    //     const refreshToken = getCookieValue('refreshToken')
+    //     const reissueResponse = await axios.post(
+    //       `${DOMAIN}/api/members/refresh`,
+    //       {
+    //         withCredentials: true, // withCredentials 설정
+    //         headers: {
+    //           Authorization: refreshToken,
+    //         },
+    //       },
+    //     )
 
-        const reissuedToken = reissueResponse.headers.authorization
-        setCookieValue('accessToken', `Bearer ${reissuedToken}`)
+    //     console.log('재발급 완료')
 
-        config.headers = {
-          Authorization: reissuedToken,
-        }
+    //     const reissuedToken = reissueResponse.headers.authorization
+    //     setCookieValue('accessToken', `Bearer ${reissuedToken}`)
 
-        const retryResponse = await api(config)
+    //     config.headers = {
+    //       Authorization: reissuedToken,
+    //     }
 
-        return retryResponse
-      } catch (error) {
-        console.log('재발급 실패', error)
-        throw error
-      }
-      console.log('안됨')
-    } else {
-      console.log('재발급 시도조차 못함', error)
-      throw error
-    }
+    //     const retryResponse = await api(config)
 
-    console.log(error)
+    //     return retryResponse
+    //   } catch (error) {
+    //     console.log('재발급 실패', error)
+    //     throw error
+    //   }
+    // } else {
+    //   console.log('재발급 시도조차 못함', error)
+    //   throw error
+    // }
   }
 }
 

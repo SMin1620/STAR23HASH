@@ -8,7 +8,8 @@ type Props = {
   planetNumber: number
   name: string
   date: string
-  state?: boolean
+  isRead?: boolean
+  isReply?: boolean
 }
 
 export default function PlanetCard({
@@ -16,18 +17,21 @@ export default function PlanetCard({
   planetNumber,
   name,
   date,
-  state,
+  isRead,
+  isReply,
 }: Props) {
   const router = useRouter()
 
   const handleClick = () => {
-    router.replace(`/storage/random/${id}?planetNumber=${planetNumber}`)
+    router.push(
+      `/storage/random/${id}?planetNumber=${planetNumber}&senderName=${name}`,
+    )
   }
 
   return (
     <c.Card className="group" onClick={handleClick}>
       <c.CardImageWrapper className=" aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full group-hover:opacity-75">
-        {state ? (
+        {isReply ? (
           <c.CardStateImage
             className="w-1/3"
             src="/icons/Check.svg"

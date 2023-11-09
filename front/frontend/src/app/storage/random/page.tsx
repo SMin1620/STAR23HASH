@@ -3,7 +3,7 @@ import * as r from './random.styled'
 
 import BackButton from '@/component/storage/BackButton'
 import PlanetCard from '@/component/storage/random/PlanetCard'
-import TestPlanetCard from '../test/testcomponent/TestPlanetCard'
+// import TestPlanetCard from '../test/testcomponent/TestPlanetCard'
 import { getRandomRooms } from '@/app/utils/storage/getRandomRooms'
 import { Room } from '@/app/types/storage/types'
 import { useEffect, useState } from 'react'
@@ -15,7 +15,6 @@ export default function Ramdom() {
       try {
         const resopnse = await getRandomRooms()
         setRandomRoomList(resopnse.data)
-        console.log('randomRooms : ', resopnse.data)
       } catch (error) {
         console.error('Error fetching random rooms:', error)
       }
@@ -46,7 +45,7 @@ export default function Ramdom() {
                   planetNumber={Math.floor(Math.random() * 15) + 1}
                   name={room.senderName}
                   date={room.createdAt}
-                  state={room.read}
+                  isReply={room.read}
                 />
               ))}
 
