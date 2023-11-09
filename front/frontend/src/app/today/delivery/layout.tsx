@@ -23,7 +23,7 @@ export default function Delivery({ children }: { children: React.ReactNode }) {
           </div>
           <div>{children}</div>
           <div className=" flex items-center justify-center text-xl text-white">
-            남았어요 ෆ⸒⸒⸜( ˶'ᵕ'˶)⸝
+            남았어요 ෆ⸒⸒⸜( ˶&#39;ᵕ&#39;˶)⸝
           </div>
         </div>
       </div>
