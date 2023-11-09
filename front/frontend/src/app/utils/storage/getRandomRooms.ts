@@ -16,11 +16,8 @@ export const getRandomRooms = async (): Promise<any> => {
       throw new Error('에러')
     }
 
-    console.log('getrandom out', response)
-
     return response.data
   } catch (error: any) {
     console.log(error.response)
-    // throw new Error('네트워크 오류')
   }
 }

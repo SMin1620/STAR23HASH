@@ -15,6 +15,7 @@ type Props = {
   }
   searchParams: {
     planetNumber: number
+    senderName: string
   }
 }
 
@@ -46,9 +47,7 @@ export default function History({ params, searchParams }: Props) {
             src={`/icons/planets/Planet-${searchParams.planetNumber}.svg`}
             className="h-40 w-40"
           />
-          {/* <h.Title>
-            {notes && notes[0].senderName ? notes[0].senderName : '익명행성'}
-          </h.Title> */}
+          <h.Title>{searchParams.senderName}</h.Title>
         </h.TitleWrapper>
 
         <h.LetterLogContainer className="h-screen ">
