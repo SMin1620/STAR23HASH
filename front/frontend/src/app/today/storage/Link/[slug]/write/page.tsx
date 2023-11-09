@@ -13,29 +13,6 @@ import {
 import { linkPost } from '@/app/utils/todayStorage/link/linkPost'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-// import styled from 'styled-components'
-
-// export const Wbutton = styled.button`
-//   box-shadow: 0px 4px 2px
-//     rgba(113.9000129699707, 97.38451838493347, 98.1026342511177, 1);
-//   background-color: #947d7e;
-//   width: 80%;
-//   margin-bottom: 20px;
-//   height: 45px;
-//   border-radius: 20px;
-//   color: white;
-//   font-size: 16px;
-//   font-weight: bold;
-// `
-
-// import {
-//   InnerCircle,
-//   InnerCircle1,
-//   InnerCircle2,
-//   InnerCircle3,
-//   SendBox,
-//   SendBoxDiv,
-// } from '@/component/common/write_layout/write_layout.styled'
 
 type Props = {
   params: {
@@ -47,6 +24,7 @@ export default function LinkWrite({ params }: Props) {
   const [content, setContent] = useState('')
   const [icon, setIcon] = useState(0)
   const [rollId, setRollId] = useState(params.slug)
+  const [activeIcon, setActiveIcon] = useState(-1)
   const router = useRouter()
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -56,12 +34,20 @@ export default function LinkWrite({ params }: Props) {
 
   const handleIcon = (iconId: number) => {
     setIcon(iconId)
+    setActiveIcon(iconId)
   }
 
   const handleSendApi = async () => {
-    const response = await linkPost(content, icon, rollId)
-    const res = response.data.data
-    console.log(res)
+    try {
+      const response = await linkPost(content, icon, rollId)
+      const res = response.data.data
+      console.log(res)
+      alert('전송이 완료되었습니다!')
+      router.push(`/today/storage/Link/${params.slug}`)
+    } catch (error) {
+      console.error(error)
+      alert('전송에 실패하였습니다.')
+    }
     // if (res.status.toString() === 'OK') {
     //   router.push(`/write/send?isSuccess=true`)
     // } else {
@@ -84,31 +70,43 @@ export default function LinkWrite({ params }: Props) {
           </stt.InnerCircle>
           <AstronautContainer>
             <AstronautImages>
-              <AstronautBox>
+              <AstronautBox
+                className={activeIcon === 1 ? 'active' : ''}
+                onClick={() => handleIcon(1)}
+              >
                 <AstronautImg
                   src="/link/Astronaut-1.png"
                   alt="Astronaut1"
                   onClick={() => handleIcon(1)}
                 />
               </AstronautBox>
-              <AstronautBox>
+              <AstronautBox
+                className={activeIcon === 2 ? 'active' : ''}
+                onClick={() => handleIcon(2)}
+              >
                 <AstronautImg
                   src="/link/Astronaut-2.png"
                   alt="Astronaut2"
                   onClick={() => handleIcon(2)}
                 />
               </AstronautBox>
-              <AstronautBox>
-                <AstronautImg
-                  src="/link/Astronaut-3.png"
-                  alt="Astronaut3"
-                  onClick={() => handleIcon(3)}
-                />
-              </AstronautBox>
-              <AstronautBox>
+              <AstronautBox
+                className={activeIcon === 3 ? 'active' : ''}
+                onClick={() => handleIcon(3)}
+              >
                 <AstronautImg
                   src="/link/Astronaut-4.png"
                   alt="Astronaut4"
+                  onClick={() => handleIcon(3)}
+                />
+              </AstronautBox>
+              <AstronautBox
+                className={activeIcon === 4 ? 'active' : ''}
+                onClick={() => handleIcon(4)}
+              >
+                <AstronautImg
+                  src="/link/Astronaut-3.png"
+                  alt="Astronaut3"
                   onClick={() => handleIcon(4)}
                 />
               </AstronautBox>
