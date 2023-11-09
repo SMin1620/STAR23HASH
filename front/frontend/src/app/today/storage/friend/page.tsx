@@ -14,6 +14,7 @@ import Light from '@/component/today/todayStorage/light/light'
 import { useRouter } from 'next/navigation'
 import friendListGet from '@/app/utils/todayStorage/friend/friendListGet'
 import { friendDetailGet } from '@/app/utils/todayStorage/friend/friendDetailGet'
+import { BackButton, FriendContainer, HtmlContainer } from './friend.styled'
 
 export default function TodayFriendStorage() {
   const [letterList, setLetterList] = useState<null | any>(null)
@@ -63,12 +64,22 @@ export default function TodayFriendStorage() {
     console.log(letterDetail, 'letter')
   }, [letterDetail])
 
+  const goBack = () => {
+    router.back()
+  }
+
   return (
-    <Canvas
-      style={{ width: '100%', height: '100%', position: 'absolute' }}
-      camera={{ position: [0, 2.2, 5], fov: 70 }}
-    >
-      {/* <Stars
+    <FriendContainer>
+      <Canvas
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+          zIndex: '1',
+        }}
+        camera={{ position: [0, 2.2, 5], fov: 70 }}
+      >
+        {/* <Stars
         radius={100}
         depth={25}
         count={6000}
@@ -77,52 +88,56 @@ export default function TodayFriendStorage() {
         fade
         speed={1}
       /> */}
-      <Light />
-      <Suspense fallback={null}>
-        <ambientLight intensity={0.8} />
-        <Float
-          speed={6}
-          rotationIntensity={0}
-          floatIntensity={1}
-          floatingRange={[0, 0.1]}
-        >
-          <UfoModel
-            url="/assets/ufo.glb"
-            scale={[1.6, 1.6, 1.6]}
-            position={[0, 2.5, 0]}
+        <Light />
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.8} />
+          <Float
+            speed={6}
+            rotationIntensity={0}
+            floatIntensity={1}
+            floatingRange={[0, 0.1]}
+          >
+            <UfoModel
+              url="/assets/ufo.glb"
+              scale={[1.6, 1.6, 1.6]}
+              position={[0, 2.5, 0]}
+            />
+          </Float>
+          <SpotLight
+            color="#feff16"
+            distance={10}
+            angle={0.9}
+            attenuation={5}
+            anglePower={3}
+            position={[0, 3.1, 0]}
           />
-        </Float>
-        <SpotLight
-          color="#feff16"
-          distance={10}
-          angle={0.9}
-          attenuation={5}
-          anglePower={3}
-          position={[0, 3.1, 0]}
-        />
-        {letterList &&
-          letterList.map((item: any, index: number) => (
-            <Float key={item.id} speed={1} floatIntensity={0.1}>
-              <AstronautModel
-                url={`/assets/astronaut${(index % 4) + 1}.glb`}
-                scale={[0.3, 0.3, 0.3]}
-                position={[
-                  Math.random() * 2 - 1,
-                  Math.random() * 3 - 2,
-                  Math.random() * 3 - 2,
-                ]}
-                onClick={() => handleDetailApi(item.id)}
-              />
-            </Float>
-          ))}
+          {letterList &&
+            letterList.map((item: any, index: number) => (
+              <Float key={item.id} speed={1} floatIntensity={0.1}>
+                <AstronautModel
+                  url={`/assets/astronaut${(index % 4) + 1}.glb`}
+                  scale={[0.3, 0.3, 0.3]}
+                  position={[
+                    Math.random() * 2 - 1,
+                    Math.random() * 3 - 2,
+                    Math.random() * 3 - 2,
+                  ]}
+                  onClick={() => handleDetailApi(item.id)}
+                />
+              </Float>
+            ))}
 
-        <PlanetModel
-          url="/assets/planet-1.glb"
-          scale={[4, 4, 4]}
-          position={[0, -6, 0]}
-        />
-        <OrbitControls />
-      </Suspense>
-    </Canvas>
+          <PlanetModel
+            url="/assets/planet-1.glb"
+            scale={[4, 4, 4]}
+            position={[0, -6, 0]}
+          />
+          <OrbitControls />
+        </Suspense>
+      </Canvas>
+      <HtmlContainer>
+        <BackButton onClick={() => goBack()}>뒤로가기</BackButton>
+      </HtmlContainer>
+    </FriendContainer>
   )
 }
