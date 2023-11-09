@@ -16,16 +16,19 @@ export default function WriteFriend() {
 
   const handleSend = async () => {
     // const reset = await createNotereset() //쪽지보낸거 리셋
-
-    try {
-      const res = await createNote(content)
-      if (res.status.toString() === 'CREATED') {
-        router.replace(`/write/send?isSuccess=true`)
-      } else {
-        throw new Error('에러')
+    if (content === '') {
+      alert('내용을 입력해 주세요!')
+    } else {
+      try {
+        const res = await createNote(content)
+        if (res.status.toString() === 'CREATED') {
+          router.replace(`/write/send?isSuccess=true`)
+        } else {
+          throw new Error('에러')
+        }
+      } catch (error) {
+        router.replace(`/write/send?isSuccess=false`)
       }
-    } catch (error) {
-      router.replace(`/write/send?isSuccess=false`)
     }
   }
   return (
