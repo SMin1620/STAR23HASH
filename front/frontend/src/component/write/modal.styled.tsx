@@ -9,7 +9,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 20px;
+  // border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.5);
 `
 
@@ -97,10 +97,11 @@ export const FileInputWrapper = styled.div``
 
 export const FileInputLabel = styled.label``
 
-export const XButton = styled.button`
+export const XButton = styled.img`
   position: absolute;
+  width: 17px;
   top: 15px;
-  left: 250px;
+  left: 245px;
 `
 
 export const errMessage = styled.div`
@@ -120,3 +121,8 @@ export const PreviewAudio = styled.audio`
   margin-bottom: 0.5rem;
 `
 export const EmptyDiv = styled.div``
+
+export const RepairImg = styled.img`
+  width: 120px;
+  margin: auto;
+`
