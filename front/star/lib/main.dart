@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:dio/dio.dart';
-
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -69,34 +68,33 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                         action: PermissionRequestResponseAction.GRANT,
                       );
                     },
-                    onLoadStop: (controller, url) async {
+                    onProgressChanged: (InAppWebViewController controller, int progress) async {
                       Uri? currentUrl = await _webViewController.getUrl();
-                      print(currentUrl.toString());
+                      print(currentUrl);
+                      if (currentUrl.toString() == "http://k9e106.p.ssafy.io:3000/pullfriend") {
+                        List<Contact> contacts = [];
+                        PermissionStatus status = await Permission.contacts.request();
+                        if (status.isGranted) {
+                          try {
+                            Iterable<Contact> contactList = await ContactsService.getContacts();
+                            setState(() {
+                              contacts = contactList.toList();
+                              print("contact");
 
-                      if (url.toString() == "http://k9e106.p.ssafy.io:3000/write/wfriend/pullfriend") {
-                        // List<Contact> contacts = [];
-                        // PermissionStatus status = await Permission.contacts.request();
-                        // if (status.isGranted) {
-                        //   try {
-                        //     Iterable<Contact> contactList = await ContactsService.getContacts();
-                        //     setState(() {
-                        //       contacts = contactList.toList();
-                        //       print("contact");
-                        //       print(contacts);
-                        //
-                        //       sendContactsToServer(contacts);
-                        //     });
-                        //   } on PlatformException catch (e) {
-                        //     print('Error: ${e.message}');
-                        //   }
-                        // }
-                        // controller.loadUrl(
-                        //   urlRequest: URLRequest(
-                        //     url: Uri.parse("http://k9e106.p.ssafy.io:3000/write/wfriend/getfriend"),
-                        //   ),
-                        // );
+                              sendContactsToServer(contacts);
+                            });
+                          } on PlatformException catch (e) {
+                            print('Error: ${e.message}');
+                          }
+                        }
+                        controller.loadUrl(
+                          urlRequest: URLRequest(
+                            url: Uri.parse("http://k9e106.p.ssafy.io:3000/write/wfriend/getfriend"),
+                          ),
+                        );
                       }
-                    }
+                    },
+
                 ),
               ),
             ),
@@ -117,6 +115,7 @@ void sendContactsToServer(List<Contact> contacts) async {
       'phone': phoneNumber,
     };
   }).toList();
+  print(contactList.toString());
   var cookieManager = CookieManager.instance();
   var accessToken = await cookieManager.getCookie(url: Uri.parse("http://k9e106.p.ssafy.io:3000/write"), name: "accessToken");
   if (accessToken != null) {
