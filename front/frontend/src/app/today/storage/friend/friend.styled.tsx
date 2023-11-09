@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const RandomContainer = styled.div`
+export const FriendContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;

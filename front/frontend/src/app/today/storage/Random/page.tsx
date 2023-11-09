@@ -13,6 +13,7 @@ import Light from '@/component/today/todayStorage/light/light'
 import RandomListGet from '@/app/utils/todayStorage/random/randomListGet'
 import { randomDetailGet } from '@/app/utils/todayStorage/random/randomDetailGet'
 import { useRouter } from 'next/navigation'
+import { BackButton, HtmlContainer, RandomContainer } from './random.styled'
 
 export default function TodayRandomStorage() {
   const [noteList, setNoteList] = useState<null | any>(null)
@@ -30,12 +31,24 @@ export default function TodayRandomStorage() {
     handleListApi()
   }, [])
 
-  const handleDetailApi = async (id: number) => {
+  const handleDetailApi = async (
+    id: number,
+    modelIndex: number,
+    senderName: string,
+  ) => {
     const response = await randomDetailGet(id)
     console.log(response)
 
     setDetail(response)
-    router.push(`/storage/random/${response.id}`)
+
+    // router.push(`/storage/random/{roomID}?planetNumber={number}&senderName={string}`)
+    router.push(
+      `/storage/random/${response.id}?planetNumber=${modelIndex}&senderName=${senderName}`,
+    )
+  }
+
+  const goBack = () => {
+    router.back()
   }
 
   // const Data = () => {
@@ -93,9 +106,15 @@ export default function TodayRandomStorage() {
     },
   })
   return (
-    <GradientBackground style={{ touchAction: 'none' }}>
+    <RandomContainer>
       <Canvas
-        style={{ width: '100%', height: '100%' }}
+        style={{
+          touchAction: 'none',
+          width: '100vw',
+          height: '100vh',
+          position: 'relative',
+          zIndex: '1',
+        }}
         camera={{
           position: [-22, 50, -100],
           // rotation: [0, Math.PI / 8, 0],
@@ -120,7 +139,8 @@ export default function TodayRandomStorage() {
               console.log('item', item.id)
 
               const randomIndex = Math.floor(Math.random() * Models.length)
-              const model = Models[randomIndex % Models.length]
+              const modelIndex = randomIndex % Models.length
+              const model = Models[modelIndex]
               const startPostion = [-3, -20, -63]
               const position = [
                 startPostion[0],
@@ -134,7 +154,9 @@ export default function TodayRandomStorage() {
                   scale={model.scale}
                   position={position}
                   mesh={planeRefs[index]}
-                  onClick={() => handleDetailApi(item.id)}
+                  onClick={() =>
+                    handleDetailApi(item.id, modelIndex, item.senderName)
+                  }
                 />
               )
             })}
@@ -147,6 +169,9 @@ export default function TodayRandomStorage() {
         </Suspense>
         {/* <OrbitControls /> */}
       </Canvas>
-    </GradientBackground>
+      <HtmlContainer>
+        <BackButton onClick={() => goBack()}>뒤로가기</BackButton>
+      </HtmlContainer>
+    </RandomContainer>
   )
 }

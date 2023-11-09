@@ -15,7 +15,13 @@ import LinkListGet from '@/app/utils/todayStorage/link/linkListGet'
 import { LinkDetailGet } from '@/app/utils/todayStorage/link/linkDetailGet'
 import ShareButton from '@/component/today/todayStorage/link/shareButton/shareButton'
 import WriteButton from '@/component/today/todayStorage/link/writeButton/writeButton'
-import { HtmlContainer, LinkContainer, LinkButton } from './link.styled'
+import {
+  HtmlContainer,
+  LinkContainer,
+  LinkButton,
+  BackButton,
+  Guide,
+} from './link.styled'
 import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
 import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
@@ -30,6 +36,7 @@ export default function TodayLinkStorage({ params }: Props) {
   const [rollList, setRollList] = useState<null | any>(null)
   const [rollDetail, setRollDetail] = useState<null | any>(null)
   const [isUser, setIsUser] = useState(false)
+  const [positions, setPositions] = useState<Position[]>([])
   const router = useRouter()
   useEffect(() => {
     const handleListApi = async (id: number) => {
@@ -40,6 +47,11 @@ export default function TodayLinkStorage({ params }: Props) {
     }
     handleListApi(params.slug)
   }, [])
+
+  // useEffect(() => {
+  //   const newPositions: Position[] = []
+  //   for (let i = 0; i < )
+  // })
 
   const handleDetailApi = async (id: number) => {
     const response = await LinkDetailGet(id)
@@ -94,6 +106,22 @@ export default function TodayLinkStorage({ params }: Props) {
     }
   }, [])
 
+  useEffect(() => {
+    if (rollList) {
+      const totalAmount = rollList.paperList.length
+      const newPositions: Position[] = []
+      for (let i = 0; i < totalAmount; i++) {
+        newPositions.push([
+          Math.random() * 2 - 1,
+          Math.random() * 3 - 2,
+          Math.random() * 3 - 2,
+        ])
+      }
+      setPositions(newPositions)
+      console.log(totalAmount)
+    }
+  }, [rollList])
+
   const handleShare = () => {
     const currentUrl = window.document.location.href
     console.log(currentUrl)
@@ -109,6 +137,10 @@ export default function TodayLinkStorage({ params }: Props) {
 
   const goWrite = () => {
     router.push(`/today/storage/Link/${params.slug}/write`)
+  }
+
+  const goBack = () => {
+    router.back()
   }
   // const minDistance = 2
   // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
@@ -164,22 +196,21 @@ export default function TodayLinkStorage({ params }: Props) {
             position={[0, 3.1, 0]}
           />
           {rollList?.paperList &&
-            rollList.paperList.map((item: any, index: number) => (
-              <Float key={index} speed={1} floatIntensity={0.1}>
-                <AstronautModel
-                  url={`/assets/astronaut${(index % 4) + 1}.glb`}
-                  scale={[0.3, 0.3, 0.3]}
-                  position={[
-                    Math.random() * 2 - 1,
-                    Math.random() * 3 - 2,
-                    Math.random() * 3 - 2,
-                  ]}
-                  onClick={() => handleDetailApi(item.id)}
-                />
-              </Float>
-            ))}
+            rollList.paperList.map(
+              (item: any, index: number) =>
+                !item.isRead && (
+                  <Float key={index} speed={1} floatIntensity={0.1}>
+                    <AstronautModel
+                      url={`/assets/astronaut${item.icon}.glb`}
+                      scale={[0.3, 0.3, 0.3]}
+                      position={positions[index]}
+                      onClick={() => handleDetailApi(item.id)}
+                    />
+                  </Float>
+                ),
+            )}
           <PlanetModel
-            url="/assets/planet-1.glb"
+            url="/assets/planet/planet-1.glb"
             scale={[4, 4, 4]}
             position={[0, -6, 0]}
           />
@@ -192,6 +223,9 @@ export default function TodayLinkStorage({ params }: Props) {
         ) : (
           <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
         )}
+        {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
+        {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
+        <Guide>화면을 움직일 수 있어요!</Guide>
       </HtmlContainer>
     </LinkContainer>
   )
