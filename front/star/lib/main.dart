@@ -78,11 +78,13 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                         action: PermissionRequestResponseAction.GRANT,
                       );
                     },
-                    onLoadStop: (InAppWebViewController controller,url) async {
+                    onProgressChanged: (InAppWebViewController controller,
+                        int progress) async {
                       Uri? currentUrl = await _webViewController.getUrl();
                       print(currentUrl);
+                      print(progress);
                       if (currentUrl.toString() ==
-                          "http://k9e106.p.ssafy.io:3000/pullfriend") {
+                          "http://k9e106.p.ssafy.io:3000/pullfriend" && progress == 100) {
                         List<Contact> contacts = [];
                         PermissionStatus status =
                             await Permission.contacts.request();

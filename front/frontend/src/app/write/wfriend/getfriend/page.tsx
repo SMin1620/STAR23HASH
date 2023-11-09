@@ -22,7 +22,7 @@ export default function GetFriend() {
       console.log('received contacts', res.data)
     }
     getData()
-  }, [contacts])
+  }, [])
   const router = useRouter()
 
   const selectContact = (index: number) => {
