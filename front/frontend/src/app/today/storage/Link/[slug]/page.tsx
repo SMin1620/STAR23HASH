@@ -20,6 +20,7 @@ import {
   LinkContainer,
   LinkButton,
   BackButton,
+  Guide,
 } from './link.styled'
 import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
@@ -224,6 +225,7 @@ export default function TodayLinkStorage({ params }: Props) {
         )}
         {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
         {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
+        <Guide>화면을 움직일 수 있어요!</Guide>
       </HtmlContainer>
     </LinkContainer>
   )
