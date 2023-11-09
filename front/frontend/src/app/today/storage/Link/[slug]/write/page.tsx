@@ -38,7 +38,7 @@ export default function LinkWrite({ params }: Props) {
   }
 
   const handleSendApi = async () => {
-    let str = content.replace(/\s/g, '')
+    const str = content.replace(/\s/g, '')
     if (str.length <= 1) {
       alert('한글자는 너무했지..?')
     } else {
