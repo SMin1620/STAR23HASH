@@ -103,7 +103,7 @@ export default function TodayLinkStorage({ params }: Props) {
       }
       check()
     }
-  }, [isUser])
+  }, [])
 
   useEffect(() => {
     if (rollList) {
@@ -222,7 +222,8 @@ export default function TodayLinkStorage({ params }: Props) {
         ) : (
           <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
         )}
-        <BackButton onClick={() => goBack()}>뒤로가기</BackButton>
+        {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
+        {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
       </HtmlContainer>
     </LinkContainer>
   )
