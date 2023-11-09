@@ -29,3 +29,12 @@ export const HtmlContainer = styled.div`
   z-index: 3;
   pointer-events: none;
 `
+
+export const BackButton = styled.div`
+  position: absolute;
+  bottom: 15px;
+  left: 17px;
+  color: white;
+  pointer-events: auto;
+  font-size: 18px;
+`
