@@ -39,7 +39,7 @@ const Delivery: React.FC = () => {
   }, [])
 
   return (
-    <div className="flex items-center justify-center text-2xl text-white">
+    <div className="flex items-center justify-center text-3xl text-white">
       {remainingTime}
     </div>
   )

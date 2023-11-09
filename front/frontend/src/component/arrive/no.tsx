@@ -5,7 +5,7 @@ export default function no() {
   return (
     <div>
       <div className="flex items-center justify-center pb-10 text-2xl text-white">
-        오늘은 도착한 편지가 없어요
+        오늘은 도착한 편지가 없어요 ( ˃̣̣̥‸˂̣̣̥)
       </div>
       <a.UfoStyle>
         <DeliveryUfo style={{ width: '100%', height: '100%' }} />

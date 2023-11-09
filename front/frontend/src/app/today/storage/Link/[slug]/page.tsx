@@ -87,9 +87,9 @@ export default function TodayLinkStorage({ params }: Props) {
     } else {
       // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
       // 맞는지 다른지 확인
-      setIsUser(true)
       const check = async () => {
         const checkRoll = await MakeLinkAxios()
+        setIsUser(true)
         //일치함
 
         if (checkRoll.data.rollId == params.slug) {
