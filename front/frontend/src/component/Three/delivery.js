@@ -24,7 +24,7 @@ function Satellite() {
 
 function Planet1() {
   const ref = useRef()
-  const gltf = useGLTF('/assets/glb/planet-4.glb')
+  const gltf = useGLTF('/assets/planet/planet-4.glb')
 
   gltf.scene.position.set(-1.6, -1.5, 0)
   const scale = 0.75
@@ -42,7 +42,7 @@ function Planet1() {
 
 function Planet2() {
   const ref = useRef()
-  const gltf = useGLTF('/assets/Planet-10.glb')
+  const gltf = useGLTF('/assets/planet/planet-10.glb')
 
   gltf.scene.position.set(2, -3.0, -2)
   const scale = 0.9

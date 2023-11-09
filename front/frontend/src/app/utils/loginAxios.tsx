@@ -18,12 +18,13 @@ export const loginAxios = async (phone: string): Promise<Response> => {
     )
 
     if (!res || res.status !== 200) {
+      alert('에러')
       throw new Error('에러')
     }
 
     return res.data
   } catch (error) {
-    console.log(error)
+    alert('에러')
     throw new Error('네트워크 오류')
   }
 }
