@@ -96,6 +96,7 @@ export default function TodayLinkStorage({ params }: Props) {
           const handleListApi = async (id: number) => {
             const response = await LinkListGet(id)
             setRollList(response.data.data)
+            console.log('RollList ', response.data.data)
           }
           handleListApi(params.slug)
         }
