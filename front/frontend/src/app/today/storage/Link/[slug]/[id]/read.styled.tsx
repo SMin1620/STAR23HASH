@@ -83,7 +83,7 @@ export const ContentBox = styled.div`
   width: 100%;
 `
 export const GuideBox = styled.div`
-  bottom: 100px;
+  bottom: 10%;
   color: white;
   text-align: center;
   position: absolute;
