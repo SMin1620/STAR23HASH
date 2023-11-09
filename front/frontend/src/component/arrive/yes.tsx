@@ -26,7 +26,7 @@ export default function Yes() {
   return (
     <div>
       <div className="flex items-center justify-center pb-10 text-2xl text-white">
-        편지가 도착했어요~ - ̗̀( ˶'ᵕ'˶) ̖́-
+        편지가 도착했어요~(｡•̀ᴗ-)✧
       </div>
       <a.UfoStyle>
         <DeliveryUfo style={{ width: '100%', height: '100%' }} />
