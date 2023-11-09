@@ -128,7 +128,7 @@ export default function TodayFriendStorage() {
             ))}
 
           <PlanetModel
-            url="/assets/planet-1.glb"
+            url="/assets/planet/planet-1.glb"
             scale={[4, 4, 4]}
             position={[0, -6, 0]}
           />
