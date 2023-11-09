@@ -209,7 +209,7 @@ export default function TodayLinkStorage({ params }: Props) {
                 ),
             )}
           <PlanetModel
-            url="/assets/planet-1.glb"
+            url="/assets/planet/planet-1.glb"
             scale={[4, 4, 4]}
             position={[0, -6, 0]}
           />
