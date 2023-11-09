@@ -14,7 +14,7 @@ export const getLetter = async (letterId: number): Promise<any> => {
     //   throw new Error('에러')
     // }
 
-    console.log(response.data.data)
+    // console.log(response.data.data)
 
     return response.data
   } catch (error) {
