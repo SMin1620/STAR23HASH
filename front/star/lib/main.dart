@@ -17,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late InAppWebViewController _webViewController;
+  bool _logicExecuted = false; // 로직 실행 여부를 저장하는 변수
 
   @override
   void initState() {
@@ -38,6 +39,7 @@ class InAppWebViewPage extends StatefulWidget {
 
 class _InAppWebViewPageState extends State<InAppWebViewPage> {
   late InAppWebViewController _webViewController;
+  bool _logicExecuted = false; // 로직 실행 여부를 저장하는 변수
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +86,9 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                       print(currentUrl);
                       print(progress);
                       if (currentUrl.toString() ==
-                          "http://k9e106.p.ssafy.io:3000/pullfriend" && progress == 100) {
+                              "http://k9e106.p.ssafy.io:3000/pullfriend" &&
+                          !_logicExecuted) {
+                        _logicExecuted = true; // 로직 실행 여부를 표시
                         List<Contact> contacts = [];
                         PermissionStatus status =
                             await Permission.contacts.request();
@@ -95,21 +99,23 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                             setState(() {
                               contacts = contactList.toList();
                             });
-                              if(await sendContactsToServer(contacts)) {
-
-                                controller.goBack();
-                                controller.loadUrl(
-                                  urlRequest: URLRequest(
-                                    url: Uri.parse(
-                                        "http://k9e106.p.ssafy.io:3000/write/wfriend/getfriend"),
-                                  ),
-                                );
-                              }
+                            if (await sendContactsToServer(contacts)) {
+                              controller.goBack();
+                              controller.loadUrl(
+                                urlRequest: URLRequest(
+                                  url: Uri.parse(
+                                      "http://k9e106.p.ssafy.io:3000/write/wfriend/getfriend"),
+                                ),
+                              );
+                            }
                           } on PlatformException catch (e) {
                             print('Error: ${e.message}');
                           }
-                        }
-                        else {
+                        } else if (currentUrl.toString().contains("/write/send")) {
+                          {
+                            _logicExecuted = false;
+                          }
+                        } else {
                           controller.goBack();
                         }
                       }
@@ -126,7 +132,9 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
 }
 
 Future<bool> sendContactsToServer(List<Contact> contacts) async {
-  List<Map<String, String>> contactList = contacts.where((contact) => contact.phones?.isNotEmpty ?? false).map((contact) {
+  List<Map<String, String>> contactList = contacts
+      .where((contact) => contact.phones?.isNotEmpty ?? false)
+      .map((contact) {
     String name = contact.displayName ?? '';
     String phoneNumber = contact.phones!.first.value!;
     phoneNumber = phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
