@@ -36,6 +36,8 @@ export default function TodayRandomStorage() {
     console.log(response)
 
     setDetail(response)
+
+    // router.push(`/storage/random/{roomID}?planetNumber={number}&senderName={string}`)
     router.push(`/storage/random/${response.id}`)
   }
 
