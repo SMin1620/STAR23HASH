@@ -16,8 +16,8 @@ export default function Yes() {
   useEffect(() => {
     async function click() {
       const check = await MakeLinkAxios()
-      console.log('요기')
-      console.log(check.data)
+      // console.log('요기')
+      // console.log(check.data)
       setRollId(check.data.rollId)
     }
     click()
@@ -26,7 +26,7 @@ export default function Yes() {
   return (
     <div>
       <div className="flex items-center justify-center pb-10 text-2xl text-white">
-        편지가 도착했어요~
+        편지가 도착했어요~ - ̗̀( ˶'ᵕ'˶) ̖́-
       </div>
       <a.UfoStyle>
         <DeliveryUfo style={{ width: '100%', height: '100%' }} />
