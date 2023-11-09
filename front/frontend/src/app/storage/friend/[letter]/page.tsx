@@ -92,7 +92,6 @@ export default function Letter({ params }: Props) {
           {letterInfo && letterInfo?.hintContent !== '' ? (
             <l.Hint>힌트 : {letterInfo?.hintContent}</l.Hint>
           ) : null}
-          <l.Hint>힌트 : {letterInfo?.hintContent}</l.Hint>
 
           <l.CloseBotton onClick={handleClick}>닫기</l.CloseBotton>
         </l.LetterContainer>
