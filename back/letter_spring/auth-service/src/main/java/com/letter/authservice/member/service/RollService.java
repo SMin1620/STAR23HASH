@@ -111,7 +111,7 @@ public class RollService {
         Paper paper = paperRepository.findById(paperId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.PAPER_NOT_FOUND));
 
-        if (paper.getRoll().getMember().getId() != memberId) throw new BusinessLogicException(ExceptionCode.PAPER_MEMBER_DIFFERENT);
+        if (!paper.getRoll().getMember().getId().equals(memberId)) throw new BusinessLogicException(ExceptionCode.PAPER_MEMBER_DIFFERENT);
 
         paper.setIsRead(true);
 
