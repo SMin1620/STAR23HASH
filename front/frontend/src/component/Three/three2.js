@@ -276,7 +276,7 @@ function Scene() {
       mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       raycaster.setFromCamera(mouse, camera)
       const intersects = raycaster.intersectObject(spaceshipRef.current)
-      let intersects2
+      let intersects2 = []
       if (storageRef.current != null) {
         intersects2 = raycaster.intersectObject(storageRef.current)
       }
