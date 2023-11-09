@@ -14,7 +14,9 @@ export default function MakeLink() {
     console.log('요기')
     console.log(check.data)
     setRoolId(check.data.rollId)
-    setValue(`http://localhost:3000/today/storage/Link/${check.data.rollId}`)
+    setValue(
+      `http://k9e106.p.ssafy.io:3000/today/storage/Link/${check.data.rollId}`,
+    )
     setShowLink(true)
   }
 
