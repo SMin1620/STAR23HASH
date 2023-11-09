@@ -15,8 +15,7 @@ export default function Loading() {
         backgroundColor: 'rgba(0, 0, 0, 0.5)', // 배경색을 검은색으로 설정하고, 약간 투명하게 설정
       }}
     >
-      <h2 className="text-white">Loading</h2>
-      <p>악</p>
+      <h2 className="text-2xl text-white">Loading</h2>
     </div>
   )
 }
