@@ -9,6 +9,7 @@ import {
   SendBoxDiv,
   Content,
   ContentBox,
+  GuideBox,
 } from './read.styled'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -48,6 +49,7 @@ export default function LinkRead({ params }: Props) {
   const router = useRouter()
 
   const handleBack = () => {
+    alert('편지가 사라져요ㅜㅡㅜ')
     router.back()
   }
 
@@ -89,6 +91,7 @@ export default function LinkRead({ params }: Props) {
           </Btn>
         </BtnContainer>
       </SendBox>
+      <GuideBox>롤링페이퍼는 한번 읽으면 사라져요 ㅜㅡㅜ</GuideBox>
       {/* </div> */}
     </SendBoxDiv>
   )

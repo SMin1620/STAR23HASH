@@ -82,3 +82,10 @@ export const ContentBox = styled.div`
   align-items: center;
   width: 100%;
 `
+export const GuideBox = styled.div`
+  bottom: 100px;
+  color: white;
+  text-align: center;
+  position: absolute;
+  font-size: 20px;
+`

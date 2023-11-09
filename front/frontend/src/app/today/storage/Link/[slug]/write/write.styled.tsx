@@ -31,7 +31,7 @@ export const AstronautBox = styled.div`
   &:hover {
     border: 2px solid #3e3d83;
   }
-  &:active {
+  &.active {
     border: 2px solid #3e3d83;
   }
 `
