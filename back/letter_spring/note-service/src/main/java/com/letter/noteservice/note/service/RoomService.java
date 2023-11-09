@@ -55,6 +55,12 @@ public class RoomService {
                     .createdAt(room.getCreatedAt())
                     .build();
 
+            // 보낸 사람은 store 가 false 라도 볼수 있고, 받는 사람은 보이면 안된다.
+
+            Optional<Note> lastNote = noteRepository.findTopByRoomIdAndReceiverIdOrRoomIdAndSenderIdOrderByCreatedAtDesc(room.getId(), memberId, room.getId(), memberId);
+            System.out.println("lastNote >>> " + " " + room.getId() + " " +  lastNote.get().getSenderId() + " " + lastNote.get().getSenderName() + " " + lastNote.get().getIsStore() + " " + lastNote.get().getRoom().getId());
+            if (lastNote.isEmpty()) continue;
+            else if (room.getIsFirst() && !lastNote.get().getSenderId().equals(memberId) && !lastNote.get().getIsStore()) continue;
 
             // 쪽지 읽음 여부 처리
             Optional<Note> readNote = noteRepository.findTopByRoomIdAndReceiverIdAndIsReadTrueAndIsStoreTrueOrderByCreatedAtDesc(room.getId(), memberId);
@@ -83,10 +89,7 @@ public class RoomService {
 
         // 인증 서버에서 유저 id 가져오기
         Long memberId = authFeignClient.findMemberId(phone);
-        
-        // 현재 날짜 2023-11-03
-//        LocalDateTime start = LocalDateTime.parse(LocalDateTime.now().toString().substring(0, 10) + "T00:00:00");
-//        LocalDateTime end = LocalDateTime.now();
+
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime start = now.minusDays(1).withHour(18).withMinute(0).withSecond(0).withNano(0);
         LocalDateTime end = now.withHour(17).withMinute(59).withSecond(59).withNano(0);

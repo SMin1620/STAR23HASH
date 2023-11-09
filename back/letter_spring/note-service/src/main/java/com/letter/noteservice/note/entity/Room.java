@@ -49,5 +49,7 @@ public class Room {
     @ColumnDefault("false")
     private Boolean store;
 
+    private Boolean isFirst;
+
     private String sendStatus;
 }
