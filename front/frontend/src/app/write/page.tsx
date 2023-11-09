@@ -57,7 +57,7 @@ export default function Write() {
           <stt.EmptyDiv>
             <st.button
               onClick={() => {
-                router.push(`/main`)
+                router.back()
               }}
             >
               메인으로

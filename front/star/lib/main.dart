@@ -78,11 +78,9 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                         action: PermissionRequestResponseAction.GRANT,
                       );
                     },
-                    onProgressChanged: (InAppWebViewController controller,
-                        int progress) async {
+                    onLoadStop: (InAppWebViewController controller,url) async {
                       Uri? currentUrl = await _webViewController.getUrl();
                       print(currentUrl);
-                      print(progress);
                       if (currentUrl.toString() ==
                           "http://k9e106.p.ssafy.io:3000/pullfriend") {
                         List<Contact> contacts = [];
@@ -96,6 +94,8 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                               contacts = contactList.toList();
                             });
                               if(await sendContactsToServer(contacts)) {
+
+                                controller.goBack();
                                 controller.loadUrl(
                                   urlRequest: URLRequest(
                                     url: Uri.parse(
@@ -108,14 +108,8 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                           }
                         }
                         else {
-                          controller.loadUrl(
-                            urlRequest: URLRequest(
-                              url: Uri.parse(
-                                  "http://k9e106.p.ssafy.io:3000/write"),
-                            ),
-                          );
+                          controller.goBack();
                         }
-
                       }
                     },
                   ),
