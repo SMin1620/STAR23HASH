@@ -19,9 +19,10 @@ export default function GetFriend() {
     const getData = async () => {
       const res = await getContacts()
       setContacts(res.data)
+      console.log('received contacts', res.data)
     }
     getData()
-  }, [])
+  }, [contacts])
   const router = useRouter()
 
   const selectContact = (index: number) => {

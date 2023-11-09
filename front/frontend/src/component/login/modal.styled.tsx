@@ -9,7 +9,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: 20px;
+  // border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.5);
 `
 

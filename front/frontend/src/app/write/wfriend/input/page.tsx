@@ -6,6 +6,7 @@ import * as st from './inputfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 import Modal from '@/component/write/modal'
 import InputModal from '@/component/write/inputmodal'
+import RepairModal from '@/component/write/repair'
 import { useRouter, useSearchParams } from 'next/navigation'
 import uuid from 'react-uuid'
 import AWS from 'aws-sdk'
@@ -24,6 +25,7 @@ export default function WriteFriend({ searchParams }: Props) {
   const [hint, setHint] = useState('')
   const [contentType, setContentType] = useState(3) //기본 text 타입으로 설정
   const [mediaUrl, setMediaUrl] = useState('')
+  const [repairModal, setRepairModal] = useState(false)
   const [phone, setPhone] = useState(searchParams.phone)
   const router = useRouter()
   const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_ID
@@ -103,6 +105,13 @@ export default function WriteFriend({ searchParams }: Props) {
     // 상위 컴포넌트에서 inputText를 처리하는 로직을 추가해주세요.
   }
 
+  const repModal = () => {
+    setRepairModal(true)
+  }
+
+  const closeModal = () => {
+    setRepairModal(!repairModal)
+  }
   const voiceinput = () => {
     setContentType(0)
     setInputModal(true)
@@ -169,9 +178,9 @@ export default function WriteFriend({ searchParams }: Props) {
             </st.Hint>
             <st.AddContent>
               <st.ContentInfoText>어떤걸 추가 해볼까?</st.ContentInfoText>
-              <st.Medias>
+              <st.Medias onClick={repModal}>
                 <st.Media
-                  onClick={voiceinput}
+                  // onClick={voiceinput}
                   src="/write/voice.svg"
                   alt="voice"
                   style={{
@@ -179,7 +188,7 @@ export default function WriteFriend({ searchParams }: Props) {
                   }}
                 ></st.Media>
                 <st.Media
-                  onClick={videoinput}
+                  // onClick={videoinput}
                   src="/write/video.svg"
                   alt="video"
                   style={{
@@ -187,7 +196,7 @@ export default function WriteFriend({ searchParams }: Props) {
                   }}
                 ></st.Media>
                 <st.Media
-                  onClick={pictureinput}
+                  // onClick={pictureinput}
                   src="/write/picture.svg"
                   alt="picture"
                   style={{
@@ -210,6 +219,7 @@ export default function WriteFriend({ searchParams }: Props) {
           closeState={closeInputModal}
         />
       )}
+      {repairModal && <RepairModal onConfirm={closeModal} />}
     </>
   )
 }
