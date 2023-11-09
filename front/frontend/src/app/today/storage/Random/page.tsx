@@ -31,14 +31,20 @@ export default function TodayRandomStorage() {
     handleListApi()
   }, [])
 
-  const handleDetailApi = async (id: number) => {
+  const handleDetailApi = async (
+    id: number,
+    modelIndex: number,
+    senderName: string,
+  ) => {
     const response = await randomDetailGet(id)
     console.log(response)
 
     setDetail(response)
 
     // router.push(`/storage/random/{roomID}?planetNumber={number}&senderName={string}`)
-    router.push(`/storage/random/${response.id}`)
+    router.push(
+      `/storage/random/${response.id}?planetNumber=${modelIndex}&senderName=${senderName}`,
+    )
   }
 
   const goBack = () => {
@@ -133,7 +139,8 @@ export default function TodayRandomStorage() {
               console.log('item', item.id)
 
               const randomIndex = Math.floor(Math.random() * Models.length)
-              const model = Models[randomIndex % Models.length]
+              const modelIndex = randomIndex % Models.length
+              const model = Models[modelIndex]
               const startPostion = [-3, -20, -63]
               const position = [
                 startPostion[0],
@@ -147,7 +154,9 @@ export default function TodayRandomStorage() {
                   scale={model.scale}
                   position={position}
                   mesh={planeRefs[index]}
-                  onClick={() => handleDetailApi(item.id)}
+                  onClick={() =>
+                    handleDetailApi(item.id, modelIndex, item.senderName)
+                  }
                 />
               )
             })}
