@@ -142,11 +142,21 @@ export default function WriteFriend({ searchParams }: Props) {
   }
 
   const handleSendClick = async () => {
-    const res = await createLetter(content, contentType, mediaUrl, hint, phone)
-    if (res.status.toString() === 'OK') {
-      router.replace(`/write/send?isSuccess=true`)
+    if (content === '') {
+      alert('내용을 입력해주세요')
     } else {
-      router.replace(`/write/send?isSuccess=false`)
+      const res = await createLetter(
+        content,
+        contentType,
+        mediaUrl,
+        hint,
+        phone,
+      )
+      if (res.status.toString() === 'OK') {
+        router.replace(`/write/send?isSuccess=true`)
+      } else {
+        router.replace(`/write/send?isSuccess=false`)
+      }
     }
   }
   return (
