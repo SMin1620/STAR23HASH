@@ -18,7 +18,7 @@ export const metadata = {
 }
 declare global {
   interface Window {
-    kakao: any
+    Kakao: any
   }
 }
 
@@ -44,6 +44,7 @@ export default function RootLayout({
           }}
         />
       </body>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" async />
     </html>
   )
 }
