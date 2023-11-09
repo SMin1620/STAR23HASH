@@ -1,5 +1,4 @@
 'use client'
-import Link from 'next/link'
 import * as h from './history.styled'
 import BackButton from '@/component/storage/BackButton'
 import ReceivedLetter from '@/component/storage/random/ReceivedLetter'
