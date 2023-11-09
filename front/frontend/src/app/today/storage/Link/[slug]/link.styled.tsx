@@ -40,3 +40,13 @@ export const BackButton = styled.div`
   font-size: 22px;
   font-weight: 500;
 `
+export const Guide = styled.div`
+  position: absolute;
+  color: white;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  font-size: 18px;
+`
