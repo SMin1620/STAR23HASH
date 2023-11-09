@@ -16,8 +16,6 @@ export const replyNote = async (
       },
     })
 
-    console.log(response)
-
     // if (!response || response.status !== 200) {
     //   throw new Error('에러')
     // }
