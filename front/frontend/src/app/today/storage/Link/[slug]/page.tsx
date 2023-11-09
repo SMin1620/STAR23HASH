@@ -25,6 +25,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
 import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
+import KaKaoShareButton from '@/component/common/write_layout/kakaoShareButton'
 
 type Props = {
   params: {
@@ -233,6 +234,7 @@ export default function TodayLinkStorage({ params }: Props) {
         )}
         {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
         {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
+        <KaKaoShareButton />
         <Guide>화면을 움직일 수 있어요!</Guide>
       </HtmlContainer>
     </LinkContainer>
