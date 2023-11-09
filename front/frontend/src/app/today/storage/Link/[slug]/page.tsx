@@ -37,7 +37,9 @@ export default function TodayLinkStorage({ params }: Props) {
   const [rollDetail, setRollDetail] = useState<null | any>(null)
   const [isUser, setIsUser] = useState(false)
   const [positions, setPositions] = useState<Position[]>([])
+  const [positionSet, setPositionSet] = useState(false)
   const router = useRouter()
+
   useEffect(() => {
     const handleListApi = async (id: number) => {
       const response = await LinkListGet(id)
@@ -107,7 +109,11 @@ export default function TodayLinkStorage({ params }: Props) {
   }, [])
 
   useEffect(() => {
-    if (rollList) {
+    console.log(isUser)
+  }, [isUser])
+
+  useEffect(() => {
+    if (rollList && !positionSet) {
       const totalAmount = rollList.paperList.length
       const newPositions: Position[] = []
       for (let i = 0; i < totalAmount; i++) {
@@ -118,6 +124,7 @@ export default function TodayLinkStorage({ params }: Props) {
         ])
       }
       setPositions(newPositions)
+      setPositionSet(true)
       console.log(totalAmount)
     }
   }, [rollList])
