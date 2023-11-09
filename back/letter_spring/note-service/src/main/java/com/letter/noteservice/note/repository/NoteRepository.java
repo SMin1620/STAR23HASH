@@ -24,12 +24,13 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     /**
      * 쪽지 방의 쪽지 목록 조회
      */
-    @Query(value = "select n from Note n where n.room.id =:roomId and n.isStore = true order by n.createdAt desc")
+    @Query(value = "select n from Note n where n.room.id =:roomId order by n.createdAt desc")
     List<Note> findAllByNote(Long roomId);
 
     /**
      * 오늘 온 쪽지 방 목록 조회
      */
+    Optional<Note> findTopByRoomIdAndReceiverIdOrRoomIdAndSenderIdOrderByCreatedAtDesc(Long roomId1, Long receiverId, Long roomId2, Long senderId);
 
     /**
      * 쪽지 답장

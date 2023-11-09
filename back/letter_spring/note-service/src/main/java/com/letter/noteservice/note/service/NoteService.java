@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -68,6 +69,7 @@ public class NoteService {
                 .store(false)
                 .createdAt(LocalDateTime.now())
                 .recentAt(LocalDateTime.now())
+                .isFirst(true)
                 .build();
         roomRepository.save(room);
 
@@ -131,6 +133,7 @@ public class NoteService {
 
         noteRepository.save(note);
         room.setRecentAt(LocalDateTime.now());
+        room.setIsFirst(false);
 
         // 이전 쪽지 답장 여부 처리
         Note preNote = noteRepository.findTopByRoomIdAndReceiverIdOrderByCreatedAtDesc(roomId, memberId)
@@ -156,6 +159,7 @@ public class NoteService {
 
         // 각 쪽지의 읽음 여부 처리 확인
         List<Note> noteList = noteRepository.findAllByNote(roomId);
+
         List<NoteDto.NoteListResDto> noteListResDtos = new ArrayList<>();
         for (Note note : noteList) {
             NoteDto.NoteListResDto dto = NoteDto.NoteListResDto.builder()
@@ -167,6 +171,8 @@ public class NoteService {
                     .content(note.getContent())
                     .createdAt(note.getCreatedAt())
                     .build();
+
+            if (note.getSenderId() != memberId && !note.getIsStore()) continue;
 
             if (note.getSenderId() == memberId) dto.setSend(true);
             else dto.setSend(false);
