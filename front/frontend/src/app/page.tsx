@@ -40,8 +40,6 @@ export default function LoginMain() {
   }
 
   async function loginClick() {
-    console.log('잉?')
-
     const isNumeric = /^[0-9]*$/.test(inputValue)
     const numberlength = inputValue.length === 11
     if (!isNumeric) {
