@@ -13,8 +13,8 @@
   "dependencies": {
     "@react-spring/three": "^9.7.3",
     "@react-spring/web": "^9.7.3",
-    "@react-three/drei": "^9.88.7",
-    "@react-three/fiber": "^8.15.8",
+    "@react-three/drei": "^9.88.12",
+    "@react-three/fiber": "^8.15.10",
     "@react-three/gltfjsx": "^4.3.4",
     "@types/styled-components": "^5.1.29",
     "@types/three": "^0.157.2",
@@ -30,7 +30,7 @@
     "react-uuid": "^2.0.0",
     "styled-components": "^6.1.0",
     "styled-reset": "^4.5.1",
-    "three": "^0.157.0",
+    "three": "^0.158.0",
     "three-stdlib": "^2.28.3",
     "zustand": "^4.4.4"
   },

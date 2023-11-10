@@ -43,7 +43,7 @@ export default function Write() {
                 }}
               >
                 <st.SendImg
-                  src="/write/Solar System.png"
+                  src="/icons/SolarSystem.png"
                   alt="친구에게 보내기"
                 ></st.SendImg>
                 <st.SendText>친구</st.SendText>
