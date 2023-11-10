@@ -29,7 +29,7 @@ export default function Ramdom() {
         <BackButton />
 
         <r.TitleWrapper>
-          <r.CustomImage src="/icons/SolarSystem.svg" />
+          <r.CustomImage src="/icons/SolarSystem.png" />
           <r.Title>랜덤메시지</r.Title>
         </r.TitleWrapper>
 

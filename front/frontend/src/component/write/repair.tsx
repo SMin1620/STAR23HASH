@@ -12,8 +12,8 @@ function RepairModal({ onConfirm }: { onConfirm: () => void }) {
   return ReactDOM.createPortal(
     <M.ModalOverlay>
       <M.ModalContent>
-        <M.XButton src="/icons/xicon.svg" onClick={onConfirm} />
-        <M.RepairImg src="/icons/Preparing.svg" />
+        <M.XButton src="/icons/xicon.png" onClick={onConfirm} />
+        <M.RepairImg src="/icons/Preparing.png" />
         <M.ModalText>아직 준비중이에용...</M.ModalText>
       </M.ModalContent>
     </M.ModalOverlay>,
