@@ -26,10 +26,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RollService {
 
-    private final MemberRepository memberRepository;
     private final RollRepository rollRepository;
     private final PaperRepository paperRepository;
-    private final JwtTokenProvider jwtTokenProvider;
 
     /**
      * 롤링페이퍼 생성
