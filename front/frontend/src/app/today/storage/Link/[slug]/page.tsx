@@ -25,7 +25,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
 import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
-import KaKaoShareButton from '@/component/common/write_layout/kakaoShareButton'
+import KaKaoShareButton from '@/component/common/kakaoShareButton/kakaoShareButton'
 
 type Props = {
   params: {
@@ -141,7 +141,7 @@ export default function TodayLinkStorage({ params }: Props) {
     document.execCommand('copy')
     document.body.removeChild(t)
 
-    alert('링크가 복사되었습니다!')
+    alert('링크가 복사되었습니당!')
   }
 
   const goWrite = () => {
