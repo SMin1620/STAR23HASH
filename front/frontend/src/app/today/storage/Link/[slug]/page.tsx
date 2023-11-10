@@ -231,7 +231,6 @@ export default function TodayLinkStorage({ params }: Props) {
             <WriteButton onClick={() => goWrite()}>글쓰기</WriteButton>
           )}
           {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
-          {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
           {isUser && <KaKaoShareButton />}
         </BtnContainer>
         <Guide>화면을 움직일 수 있어요!</Guide>
