@@ -19,6 +19,9 @@ public class SchedulerService {
     @Scheduled(cron = "0 0 18 * * ?")
     public void reset() {
         List<Note> noteList = noteRepository.findAllByIsStoreFalse();
-        for (Note note : noteList) note.setIsStore(true);
+        for (Note note : noteList) {
+            note.setIsStore(true);
+            note.getRoom().setRecentAt(note.getRoom().getTemporaryAt());
+        }
     }
 }
