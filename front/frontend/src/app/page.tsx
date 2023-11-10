@@ -40,8 +40,30 @@ export default function LoginMain() {
   }
 
   async function loginClick() {
+    console.log('잉?')
+
+    const isNumeric = /^[0-9]*$/.test(inputValue)
+    const numberlength = inputValue.length === 11
+    if (!isNumeric) {
+      alert('숫자만 입력해주세요')
+      return
+    } else if (!numberlength) {
+      alert('전화번호를 정확하게 입력해주세요 (11자)')
+      return
+    } else {
+      // 사용자에게 전화번호가 올바른지 확인
+      const isConfirmed = window.confirm(
+        `입력하신 번호가 ${inputValue}가 맞을까요?`,
+      )
+
+      // 사용자가 확인을 취소하면 input 창을 비우고 함수를 종료
+      if (!isConfirmed) {
+        setInputValue('') // input 창 초기화
+        return
+      }
+    }
+
     const check = await phoneCheck(inputValue)
-    console.log('체크')
     console.log(check)
     if (check == false) {
       setPhone(inputValue)
