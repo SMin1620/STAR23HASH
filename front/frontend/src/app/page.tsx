@@ -1,11 +1,10 @@
 'use client'
-import Logincomponent from '../component/Three/login'
-import LoginAstronaut from '../component/Three/loginAstronaut'
 import Modal from '../component/login/modal'
 import * as m from './loginMain.styled'
 import { useRouter } from 'next/navigation'
 import PhoneStore from '@/store/phone'
 import { loginAxios } from '@/app/utils/loginAxios'
+import dynamic from 'next/dynamic'
 import React, { useState, useEffect, Suspense } from 'react'
 
 export default function LoginMain() {
@@ -14,6 +13,16 @@ export default function LoginMain() {
   const [inputValue, setInputValue] = useState<string>('')
   const [showModal, setShowModal] = useState(false)
   const [loginSuccess, setLoginSuccess] = useState(false)
+
+  const LoginComponent = dynamic(
+    () => import('../component/Three/login'), // LoginComponent의 실제 경로로 변경해야 합니다.
+    { ssr: false }, // 이 옵션을 통해 서버 사이드 렌더링을 비활성화합니다.
+  )
+
+  const LoginAstronaut = dynamic(
+    () => import('../component/Three/loginAstronaut'), // LoginComponent의 실제 경로로 변경해야 합니다.
+    { ssr: false }, // 이 옵션을 통해 서버 사이드 렌더링을 비활성화합니다.
+  )
 
   async function phoneCheck(inputValue: string) {
     try {
@@ -77,7 +86,7 @@ export default function LoginMain() {
           </div>
         </m.ContentBox>
       </div>
-      <Logincomponent
+      <LoginComponent
         style={{ position: 'absolute', width: '100%', height: '100%' }}
       />
     </div>
