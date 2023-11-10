@@ -122,15 +122,6 @@ export default function TodayRandomStorage() {
         }}
         {...bind()}
       >
-        <Stars
-          radius={100}
-          depth={25}
-          count={6000}
-          factor={8}
-          saturation={1}
-          fade
-          speed={2}
-        />
         <Light />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
