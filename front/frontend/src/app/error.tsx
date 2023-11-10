@@ -1,31 +1,36 @@
-'use client' // 에러 컴포넌트는 클라이언트 컴포넌트로 만들어야합니다.
+'use client'
 
-import { useEffect } from 'react'
-
-export default function Error({
-  error,
-  reset,
-}: {
+import * as e from '@/app/loginMain.styled'
+import { useRouter } from 'next/navigation'
+type Props = {
   error: Error
   reset: () => void
-}) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error)
-  }, [error])
+}
+
+export default function Error({ error, reset }: Props) {
+  const router = useRouter()
 
   return (
-    <div>
-      <h2 className="text-white">에러났지롱 메롱메롱</h2>
-      <button
-        className="text-white"
-        onClick={
-          // 세그먼트를 재 렌더링 하여 복구를 시도합니다.
-          () => reset()
-        }
-      >
-        Try again
-      </button>
-    </div>
+    <>
+      <e.ErrorBoard className="absolute h-screen w-screen ">
+        <e.ErrorContainer className=" w-72   md:w-3/5 lg:w-3/5">
+          <e.CustomImage
+            src="/icons/Preparing.png"
+            alt="prepare image"
+            className="ml-auto mr-auto mt-4 aspect-auto pl-8 pr-8"
+          />
+          <e.ErrorTitle>따흑..</e.ErrorTitle>
+          <e.ErrorContent>문제가 발생했어요..</e.ErrorContent>
+          <e.ErrorCode>E : {error.message}</e.ErrorCode>
+          <e.ReturnButton
+            onClick={() => {
+              router.back()
+            }}
+          >
+            돌아가기
+          </e.ReturnButton>
+        </e.ErrorContainer>
+      </e.ErrorBoard>
+    </>
   )
 }
