@@ -32,7 +32,7 @@ public class Note {
     @Column(nullable = false, name = "receiver_name")
     private String receiverName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 300)
     private String content;
 
     @Column(nullable = false, name = "created_at")
