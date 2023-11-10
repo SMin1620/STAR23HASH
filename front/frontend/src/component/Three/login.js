@@ -46,7 +46,7 @@ function Test() {
   const gltf = useGLTF('/assets/glb/hi.glb')
 
   gltf.scene.position.set(1.5, 1, 0)
-  const scale = 0.75
+  const scale = 0.2
   gltf.scene.scale.set(scale, scale, scale)
   // gltf.scene.rotation.z = -0.5
   // gltf.scene.rotation.y = -0.8
@@ -54,7 +54,7 @@ function Test() {
   useFrame(({ clock }) => {
     // y축으로 조금씩 이동
     ref.current.position.y += Math.sin(clock.getElapsedTime()) * 0.001
-  }, [])
+  })
 
   return <primitive object={gltf.scene} ref={ref} />
 }
@@ -97,7 +97,7 @@ function Asteroid() {
       ref.current.position.y = startY
       ref.current.position.z = startZ
     }
-  }, [])
+  })
 
   return <primitive object={gltf.scene} ref={ref} />
 }
