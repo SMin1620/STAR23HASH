@@ -69,7 +69,6 @@ export default function TodayRandomStorage() {
             ref.current.position.y += absoluteY * 0.0001
             ref.current.position.z += absoluteY * 0.0012
           }
-          // ref.current.position.x += x * 0.05
         }
       })
     },
@@ -95,10 +94,11 @@ export default function TodayRandomStorage() {
           <ambientLight intensity={0.5} />
           {noteList?.roomListResDtoList &&
             noteList.roomListResDtoList.map((item: any, index: number) => {
-              console.log('item', item.id)
-
-              const randomIndex = Math.floor(Math.random() * Models.length)
-              const modelIndex = randomIndex % Models.length
+              let randomIndex, modelIndex: number
+              do {
+                randomIndex = Math.floor(Math.random() * Models.length)
+                modelIndex = randomIndex % Models.length
+              } while (modelIndex === 0)
               const model = Models[modelIndex]
               const startPostion = [-3, -20, -63]
               const position = [
