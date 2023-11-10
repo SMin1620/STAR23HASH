@@ -4,7 +4,14 @@ import DeliveryUfo from '../Three/deliveryUfo'
 export default function no() {
   return (
     <div>
-      <div className="flex items-center justify-center pb-10 text-2xl text-white">
+      <div
+        className="flex items-center justify-center pb-10 text-2xl text-white"
+        style={{
+          wordWrap: 'break-word',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+        }}
+      >
         오늘은 도착한 편지가 없어요 ( ˃̣̣̥‸˂̣̣̥)
       </div>
       <a.UfoStyle>
