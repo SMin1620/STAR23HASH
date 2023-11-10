@@ -31,7 +31,7 @@ export default function LetterCard({ id, type, isRead }: Props) {
       {isRead ? (
         <c.CardStateImage
           className="w-1/3"
-          src="/icons/Check.svg"
+          src="/icons/Check.png"
           alt="state"
         />
       ) : null}

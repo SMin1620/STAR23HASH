@@ -71,7 +71,7 @@ export const CustomImage = styled.img``
 export const LetterContent = styled.div`
   width: 100%;
   margin-top: 0.5rem;
-  // background-image: url('/icons/RandomLetterBG.svg');
+  // background-image: url('/icons/RandomLetterBG.png');
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
 
   background-color: rgba(
