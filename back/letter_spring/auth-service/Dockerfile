@@ -5,6 +5,8 @@ WORKDIR /usr/src/app
 ARG JAR_PATH=./build/libs
 
 # Add this line to copy the Elastic APM agent JAR file
+# Copy the properties file into the image
+COPY ./src/main/resources/properties/env.properties /usr/src/app/properties/env.properties
 COPY ./elastic-apm-agent-1.36.0.jar ./elastic-apm-agent-1.36.0.jar
 COPY ./build/libs/auth-service-0.0.1-SNAPSHOT.jar /build/libs/auth-service-0.0.1-SNAPSHOT.jar
 
@@ -18,6 +20,6 @@ ENTRYPOINT ["java", \
 "-Delastic.apm.environment=dev", \
 "-Dspring.profiles.active=prod", \
 "-Dspring.config.name=env", \
-"-Dspring.config.location=file:classpath:/properties/", \
+"-Dspring.config.location=classpath:/properties/", \
 "-jar", \
 "/build/libs/auth-service-0.0.1-SNAPSHOT.jar"]
