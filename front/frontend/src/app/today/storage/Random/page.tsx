@@ -41,7 +41,6 @@ export default function TodayRandomStorage() {
 
     setDetail(response)
 
-    // router.push(`/storage/random/{roomID}?planetNumber={number}&senderName={string}`)
     router.push(
       `/storage/random/${response.id}?planetNumber=${modelIndex}&senderName=${senderName}`,
     )
@@ -52,7 +51,6 @@ export default function TodayRandomStorage() {
   }
 
   const totalAmount = noteList?.count || 0
-  console.log(totalAmount)
 
   const planeRefs = Array(totalAmount)
     .fill(null)
@@ -61,8 +59,6 @@ export default function TodayRandomStorage() {
   const bind = useGesture({
     onDrag: ({ offset: [x, y], direction: [mx, my] }) => {
       const absoluteY = Math.abs(y)
-      console.log('direction', mx, my)
-      console.log('offset', x, y)
 
       planeRefs.forEach((ref) => {
         if (ref.current) {
