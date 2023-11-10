@@ -14,7 +14,6 @@ import Light from '@/component/today/todayStorage/light/light'
 import LinkListGet from '@/app/utils/todayStorage/link/linkListGet'
 import { LinkDetailGet } from '@/app/utils/todayStorage/link/linkDetailGet'
 import ShareButton from '@/component/today/todayStorage/link/shareButton/shareButton'
-import WriteButton from '@/component/today/todayStorage/link/writeButton/writeButton'
 import {
   HtmlContainer,
   LinkContainer,
@@ -22,6 +21,7 @@ import {
   BackButton,
   Guide,
   BtnContainer,
+  WriteButton,
 } from './link.styled'
 import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
@@ -152,6 +152,10 @@ export default function TodayLinkStorage({ params }: Props) {
   const goBack = () => {
     router.back()
   }
+
+  useEffect(() => {
+    console.log(isUser)
+  }, [isUser])
   // const minDistance = 2
   // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
 
@@ -232,11 +236,11 @@ export default function TodayLinkStorage({ params }: Props) {
           {isUser ? (
             <LinkButton onClick={() => handleShare()}>링크복사</LinkButton>
           ) : (
-            <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
+            <WriteButton onClick={() => goWrite()}>글쓰기</WriteButton>
           )}
           {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
           {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
-          <KaKaoShareButton />
+          {isUser && <KaKaoShareButton />}
         </BtnContainer>
         <Guide>화면을 움직일 수 있어요!</Guide>
       </HtmlContainer>
