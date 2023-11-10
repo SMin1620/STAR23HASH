@@ -98,7 +98,7 @@ export default function TodayFriendStorage() {
             floatingRange={[0, 0.1]}
           >
             <UfoModel
-              url="/assets/ufo.glb"
+              url="/assets/other/ufo.glb"
               scale={[1.6, 1.6, 1.6]}
               position={[0, 2.5, 0]}
             />
