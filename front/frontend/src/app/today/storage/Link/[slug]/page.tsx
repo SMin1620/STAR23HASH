@@ -14,7 +14,6 @@ import Light from '@/component/today/todayStorage/light/light'
 import LinkListGet from '@/app/utils/todayStorage/link/linkListGet'
 import { LinkDetailGet } from '@/app/utils/todayStorage/link/linkDetailGet'
 import ShareButton from '@/component/today/todayStorage/link/shareButton/shareButton'
-import WriteButton from '@/component/today/todayStorage/link/writeButton/writeButton'
 import {
   HtmlContainer,
   LinkContainer,
@@ -22,6 +21,7 @@ import {
   BackButton,
   Guide,
   BtnContainer,
+  WriteButton,
 } from './link.styled'
 import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
@@ -37,7 +37,7 @@ type Props = {
 export default function TodayLinkStorage({ params }: Props) {
   const [rollList, setRollList] = useState<null | any>(null)
   const [rollDetail, setRollDetail] = useState<null | any>(null)
-  const [isUser, setIsUser] = useState(false)
+  const [isUser, setIsUser] = useState(true)
   const [positions, setPositions] = useState<Position[]>([])
   const [positionSet, setPositionSet] = useState(false)
   const router = useRouter()
@@ -51,11 +51,6 @@ export default function TodayLinkStorage({ params }: Props) {
     }
     handleListApi(params.slug)
   }, [])
-
-  // useEffect(() => {
-  //   const newPositions: Position[] = []
-  //   for (let i = 0; i < )
-  // })
 
   const handleDetailApi = async (id: number) => {
     const response = await LinkDetailGet(id)
@@ -81,39 +76,35 @@ export default function TodayLinkStorage({ params }: Props) {
     return null
   }
 
-  useEffect(() => {
-    const accessToken = getCookieValue('accessToken')
-    // 토큰 없으면 바로 비회원
-    if (accessToken === null) {
-      setIsUser(false)
-    } else {
-      // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
-      // 맞는지 다른지 확인
-      const check = async () => {
-        const checkRoll = await MakeLinkAxios()
-        setIsUser(true)
-        //일치함
+  // useEffect(() => {
+  //   const accessToken = getCookieValue('accessToken')
+  //   // 토큰 없으면 바로 비회원
+  //   if (accessToken === null) {
+  //     setIsUser(false)
+  //   } else {
+  //     // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
+  //     // 맞는지 다른지 확인
+  //     const check = async () => {
+  //       const checkRoll = await MakeLinkAxios()
+  //       setIsUser(true)
+  //       //일치함
 
-        if (checkRoll.data.rollId == params.slug) {
-          const handleListApi = async (id: number) => {
-            const response = await LinkListGet(id)
-            setRollList(response.data.data)
-            console.log('RollList ', response.data.data)
-          }
-          handleListApi(params.slug)
-        }
-        //다름
-        else {
-          setIsUser(false)
-        }
-      }
-      check()
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log(isUser)
-  }, [isUser])
+  //       if (checkRoll.data.rollId == params.slug) {
+  //         const handleListApi = async (id: number) => {
+  //           const response = await LinkListGet(id)
+  //           setRollList(response.data.data)
+  //           console.log('RollList ', response.data.data)
+  //         }
+  //         handleListApi(params.slug)
+  //       }
+  //       //다름
+  //       else {
+  //         setIsUser(false)
+  //       }
+  //     }
+  //     check()
+  //   }
+  // }, [])
 
   useEffect(() => {
     if (rollList && !positionSet) {
@@ -152,6 +143,7 @@ export default function TodayLinkStorage({ params }: Props) {
   const goBack = () => {
     router.back()
   }
+
   // const minDistance = 2
   // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
 
@@ -192,7 +184,7 @@ export default function TodayLinkStorage({ params }: Props) {
             floatingRange={[0, 0.1]}
           >
             <UfoModel
-              url="/assets/ufo.glb"
+              url="/assets/other/ufo.glb"
               scale={[1.6, 1.6, 1.6]}
               position={[0, 2.5, 0]}
             />
@@ -232,11 +224,10 @@ export default function TodayLinkStorage({ params }: Props) {
           {isUser ? (
             <LinkButton onClick={() => handleShare()}>링크복사</LinkButton>
           ) : (
-            <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
+            <WriteButton onClick={() => goWrite()}>글쓰기</WriteButton>
           )}
           {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
-          {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
-          <KaKaoShareButton />
+          {isUser && <KaKaoShareButton />}
         </BtnContainer>
         <Guide>화면을 움직일 수 있어요!</Guide>
       </HtmlContainer>
