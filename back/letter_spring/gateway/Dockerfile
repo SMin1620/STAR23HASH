@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 ARG JAR_PATH=./build/libs
 
+# Add this line to copy the Elastic APM agent JAR file
+COPY ./elastic-apm-agent-1.36.0.jar ./elastic-apm-agent-1.36.0.jar
 COPY ./build/libs/gateway-0.0.1-SNAPSHOT.jar /build/libs/gateway-0.0.1-SNAPSHOT.jar
 
 CMD ["java","-jar","/build/libs/gateway-0.0.1-SNAPSHOT.jar"]
