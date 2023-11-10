@@ -169,7 +169,7 @@ export default function WriteFriend({ searchParams }: Props) {
             <stt.InnerCircle2></stt.InnerCircle2>
             <stt.InnerCircle3></stt.InnerCircle3>
           </stt.InnerCircle>
-          <st.SpaceImg src="/write/Solar System.svg" alt="Solar System" />
+          <st.SpaceImg src="/icons/SolarSystem.png" alt="Solar System" />
 
           <st.ContentBox>
             <st.InputContent
@@ -191,7 +191,7 @@ export default function WriteFriend({ searchParams }: Props) {
               <st.Medias onClick={repModal}>
                 <st.Media
                   // onClick={voiceinput}
-                  src="/write/voice.svg"
+                  src="/write/voice.png"
                   alt="voice"
                   style={{
                     backgroundColor: contentType === 0 ? 'lightgray' : 'white',
@@ -199,7 +199,7 @@ export default function WriteFriend({ searchParams }: Props) {
                 ></st.Media>
                 <st.Media
                   // onClick={videoinput}
-                  src="/write/video.svg"
+                  src="/write/video.png"
                   alt="video"
                   style={{
                     backgroundColor: contentType === 1 ? 'lightgray' : 'white',
@@ -207,7 +207,7 @@ export default function WriteFriend({ searchParams }: Props) {
                 ></st.Media>
                 <st.Media
                   // onClick={pictureinput}
-                  src="/write/picture.svg"
+                  src="/write/picture.png"
                   alt="picture"
                   style={{
                     backgroundColor: contentType === 2 ? 'lightgray' : 'white',

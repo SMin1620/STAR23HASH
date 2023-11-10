@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 
 const Main: React.FC = () => {
   const [remainingTime, setRemainingTime] = useState('')
+  const [check, setCheck] = useState(false)
 
   useEffect(() => {
     const calculateRemainingTime = () => {
@@ -16,6 +17,13 @@ const Main: React.FC = () => {
       if (remainingTime < 0) {
         targetTime.setDate(targetTime.getDate() + 1)
         remainingTime = targetTime.getTime() - now.getTime()
+      }
+
+      // 현재 시간이 오후 6시 이후 또는 오전 6시 이전인지 확인
+      if (now.getHours() >= 12 || now.getHours() < 6) {
+        setCheck(true)
+      } else {
+        setCheck(false)
       }
 
       const hours = Math.floor(
@@ -39,9 +47,20 @@ const Main: React.FC = () => {
 
   return (
     <>
-      <div className="ml-1 mt-12 flex text-2xl text-white">6시까지</div>
-      <div className="flex items-center justify-center text-5xl text-white">
-        {remainingTime}
+      <div>
+        {check ? (
+          <div className="ml-1 mt-12 flex text-2xl text-white">
+            오늘의 편지를 확인해보세요 (⩌⩊⩌)
+          </div>
+        ) : (
+          <div>
+            <div className="ml-1 mt-14 flex text-2xl text-white">6시까지</div>
+            <div className="flex items-center justify-center text-5xl text-white">
+              {remainingTime}
+            </div>
+            <div className="ml-1 text-right text-2xl text-white">남았어요</div>
+          </div>
+        )}
       </div>
     </>
   )

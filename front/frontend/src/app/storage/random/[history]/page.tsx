@@ -43,7 +43,7 @@ export default function History({ params, searchParams }: Props) {
 
         <h.TitleWrapper className="mb-6">
           <h.CustomImage
-            src={`/icons/planets/Planet-${searchParams.planetNumber}.svg`}
+            src={`/icons/planets/Planet-${searchParams.planetNumber}.png`}
             className="h-40 w-40"
           />
           <h.Title>{searchParams.senderName}</h.Title>
