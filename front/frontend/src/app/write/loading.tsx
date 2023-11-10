@@ -15,7 +15,7 @@ export default function loading() {
             <stt.InnerCircle3></stt.InnerCircle3>
           </stt.InnerCircle>
           <st.ContentBox>
-            <st.Loading src="/write/Asteroid.svg" alt="loading..."></st.Loading>
+            <st.Loading src="/write/Asteroid.png" alt="loading..."></st.Loading>
             <st.LoadingText>Loading...</st.LoadingText>
           </st.ContentBox>
         </stt.SendBox>

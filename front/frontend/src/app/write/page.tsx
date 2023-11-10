@@ -43,13 +43,13 @@ export default function Write() {
                 }}
               >
                 <st.SendImg
-                  src="/write/Solar System.svg"
+                  src="/write/Solar System.png"
                   alt="친구에게 보내기"
                 ></st.SendImg>
                 <st.SendText>친구</st.SendText>
               </button>
               <button onClick={handleRandom}>
-                <st.SendImg src="/write/Rocket-2.svg" alt="랜덤친구 사귀기" />
+                <st.SendImg src="/write/Rocket-2.png" alt="랜덤친구 사귀기" />
                 <st.SendText>랜덤</st.SendText>
               </button>
             </st.SendObject>

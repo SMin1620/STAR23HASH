@@ -16,7 +16,7 @@ export default function BackButton() {
     <BackBtnWrapper>
       <CustomImage
         className=" m-2 h-7 w-7 object-contain hover:opacity-50"
-        src="/icons/BackBtn.svg"
+        src="/icons/BackBtn.png"
         onClick={handleClick}
       />
     </BackBtnWrapper>

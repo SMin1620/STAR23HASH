@@ -21,7 +21,7 @@ function Modal({ hint, closeState }: Props) {
       <M.ModalContent>
         <M.ModalText>어떤 힌트를 주고싶어요?</M.ModalText>
         <M.ModalInputDiv>
-          <M.ModalImg src="/write/Planet-2.svg" alt="ModalImg" />
+          <M.ModalImg src="/write/Planet-2.png" alt="ModalImg" />
           <M.ModalInput
             value={inputText}
             placeholder="힌트를 적어주세요'v'"

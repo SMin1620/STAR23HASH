@@ -73,10 +73,10 @@ const LetterFormat = styled.li`
   border-radius: 0.5rem;
 `
 export const LetterReceived = styled(LetterFormat)`
-  background-image: url('/icons/RandomLetterBG.svg');
+  background-image: url('/icons/RandomLetterBG.png');
 `
 export const LetterSent = styled(LetterFormat)`
-background-image: url('/icons/RandomLetterBG.svg'); 
+background-image: url('/icons/RandomLetterBG.png'); 
 &::before {
   content: "";
   position: absolute;

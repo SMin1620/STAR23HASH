@@ -34,12 +34,12 @@ export default function PlanetCard({
         {isReply ? (
           <c.CardStateImage
             className="w-1/3"
-            src="/icons/Check.svg"
+            src="/icons/Check.png"
             alt="state"
           />
         ) : null}
         <c.CustomImage
-          src={`/icons/planets/Planet-${planetNumber}.svg`}
+          src={`/icons/planets/Planet-${planetNumber}.png`}
           alt="planet icon."
           className=" h-full w-full object-cover object-center "
         />

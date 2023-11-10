@@ -41,7 +41,7 @@ export default function WriteFriend() {
             <stt.InnerCircle2></stt.InnerCircle2>
             <stt.InnerCircle3></stt.InnerCircle3>
           </stt.InnerCircle>
-          <st.SpaceImg src="/write/Rocket-2.svg" alt="Solar System" />
+          <st.SpaceImg src="/write/Rocket-2.png" alt="Solar System" />
 
           <st.ContentBox>
             <st.InputContent
