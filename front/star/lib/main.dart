@@ -61,7 +61,7 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                   child: InAppWebView(
                     initialUrlRequest: URLRequest(
                       url: Uri.parse(
-                          "http://k9e106.p.ssafy.io:3000/auth/loginMain"),
+                          "http://k9e106.p.ssafy.io/auth/loginMain"),
                     ),
                     initialOptions: InAppWebViewGroupOptions(
                       crossPlatform: InAppWebViewOptions(
@@ -86,8 +86,10 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                       print(currentUrl);
                       print(progress);
                       if (currentUrl.toString() ==
-                              "http://k9e106.p.ssafy.io:3000/pullfriend" &&
+                              "http://k9e106.p.ssafy.io/pullfriend" &&
                           !_logicExecuted) {
+
+                        print('여기 나와야함 ');
                         _logicExecuted = true; // 로직 실행 여부를 표시
                         List<Contact> contacts = [];
                         PermissionStatus status =
@@ -104,7 +106,7 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                               controller.loadUrl(
                                 urlRequest: URLRequest(
                                   url: Uri.parse(
-                                      "http://k9e106.p.ssafy.io:3000/write/wfriend/getfriend"),
+                                      "http://k9e106.p.ssafy.io/write/wfriend/getfriend"),
                                 ),
                               );
                             }
@@ -147,7 +149,7 @@ Future<bool> sendContactsToServer(List<Contact> contacts) async {
   print(contactList.toString());
   var cookieManager = CookieManager.instance();
   var accessToken = await cookieManager.getCookie(
-      url: Uri.parse("http://k9e106.p.ssafy.io:3000/write"),
+      url: Uri.parse("http://k9e106.p.ssafy.io/write"),
       name: "accessToken");
 
   if (accessToken != null) {
@@ -158,7 +160,7 @@ Future<bool> sendContactsToServer(List<Contact> contacts) async {
     dio.options.headers['Cookie'] = accessToken.toString();
     try {
       var response = await dio.post(
-        'http://k9e106.p.ssafy.io:9000/api/letters/contact',
+        'http://k9e106.p.ssafy.io/api/letters/contact',
         data: {'contacts': contactList},
       );
       if (response.statusCode == 200) {
