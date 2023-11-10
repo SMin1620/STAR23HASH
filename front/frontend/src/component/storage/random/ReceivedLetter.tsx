@@ -9,7 +9,7 @@ type Props = {
   name: string
   date: string
   content: string
-  isNew: boolean
+  isReply: boolean
 }
 
 export default function ReceivedLetter({
@@ -18,7 +18,7 @@ export default function ReceivedLetter({
   name,
   date,
   content,
-  isNew,
+  isReply,
 }: Props) {
   const router = useRouter()
 
@@ -28,7 +28,7 @@ export default function ReceivedLetter({
 
   return (
     <c.LetterReceived>
-      {!isNew ? (
+      {!isReply ? (
         <c.IsNewLetterImage
           onClick={handleClick}
           className="w-12"
