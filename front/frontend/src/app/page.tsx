@@ -41,6 +41,7 @@ export default function LoginMain() {
 
   async function loginClick() {
     const check = await phoneCheck(inputValue)
+    console.log('체크')
     console.log(check)
     if (check == false) {
       setPhone(inputValue)
