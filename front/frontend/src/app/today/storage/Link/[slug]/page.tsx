@@ -37,7 +37,7 @@ type Props = {
 export default function TodayLinkStorage({ params }: Props) {
   const [rollList, setRollList] = useState<null | any>(null)
   const [rollDetail, setRollDetail] = useState<null | any>(null)
-  const [isUser, setIsUser] = useState(false)
+  const [isUser, setIsUser] = useState(true)
   const [positions, setPositions] = useState<Position[]>([])
   const [positionSet, setPositionSet] = useState(false)
   const router = useRouter()
@@ -76,39 +76,35 @@ export default function TodayLinkStorage({ params }: Props) {
     return null
   }
 
-  useEffect(() => {
-    const accessToken = getCookieValue('accessToken')
-    // 토큰 없으면 바로 비회원
-    if (accessToken === null) {
-      setIsUser(false)
-    } else {
-      // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
-      // 맞는지 다른지 확인
-      const check = async () => {
-        const checkRoll = await MakeLinkAxios()
-        setIsUser(true)
-        //일치함
+  // useEffect(() => {
+  //   const accessToken = getCookieValue('accessToken')
+  //   // 토큰 없으면 바로 비회원
+  //   if (accessToken === null) {
+  //     setIsUser(false)
+  //   } else {
+  //     // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
+  //     // 맞는지 다른지 확인
+  //     const check = async () => {
+  //       const checkRoll = await MakeLinkAxios()
+  //       setIsUser(true)
+  //       //일치함
 
-        if (checkRoll.data.rollId == params.slug) {
-          const handleListApi = async (id: number) => {
-            const response = await LinkListGet(id)
-            setRollList(response.data.data)
-            console.log('RollList ', response.data.data)
-          }
-          handleListApi(params.slug)
-        }
-        //다름
-        else {
-          setIsUser(false)
-        }
-      }
-      check()
-    }
-  }, [])
-
-  useEffect(() => {
-    console.log(isUser)
-  }, [isUser])
+  //       if (checkRoll.data.rollId == params.slug) {
+  //         const handleListApi = async (id: number) => {
+  //           const response = await LinkListGet(id)
+  //           setRollList(response.data.data)
+  //           console.log('RollList ', response.data.data)
+  //         }
+  //         handleListApi(params.slug)
+  //       }
+  //       //다름
+  //       else {
+  //         setIsUser(false)
+  //       }
+  //     }
+  //     check()
+  //   }
+  // }, [])
 
   useEffect(() => {
     if (rollList && !positionSet) {
