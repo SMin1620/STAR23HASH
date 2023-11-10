@@ -132,7 +132,7 @@ public class NoteService {
                 .build();
 
         noteRepository.save(note);
-        room.setRecentAt(LocalDateTime.now());
+        room.setTemporaryAt(LocalDateTime.now());
         room.setIsFirst(false);
 
         // 이전 쪽지 답장 여부 처리
