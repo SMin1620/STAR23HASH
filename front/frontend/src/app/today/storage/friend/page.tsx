@@ -43,7 +43,6 @@ export default function TodayFriendStorage() {
   useEffect(() => {
     const handleListApi = async () => {
       const response = await friendListGet()
-      console.log(response.data.data)
 
       setLetterList(response.data.data)
     }
@@ -51,8 +50,6 @@ export default function TodayFriendStorage() {
   }, [])
 
   const handleDetailApi = async (id: number) => {
-    console.log('id', id)
-
     const response = await friendDetailGet(id)
 
     setLetterDetail(response.data.data)
@@ -79,15 +76,6 @@ export default function TodayFriendStorage() {
         }}
         camera={{ position: [0, 2.2, 5], fov: 70 }}
       >
-        {/* <Stars
-        radius={100}
-        depth={25}
-        count={6000}
-        factor={7}
-        saturation={1}
-        fade
-        speed={1}
-      /> */}
         <Light />
         <Suspense fallback={null}>
           <ambientLight intensity={0.8} />
