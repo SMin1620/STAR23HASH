@@ -54,7 +54,7 @@ function Test() {
   useFrame(({ clock }) => {
     // y축으로 조금씩 이동
     ref.current.position.y += Math.sin(clock.getElapsedTime()) * 0.001
-  })
+  }, [])
 
   return <primitive object={gltf.scene} ref={ref} />
 }
@@ -97,7 +97,7 @@ function Asteroid() {
       ref.current.position.y = startY
       ref.current.position.z = startZ
     }
-  })
+  }, [])
 
   return <primitive object={gltf.scene} ref={ref} />
 }
