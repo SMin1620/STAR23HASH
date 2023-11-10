@@ -102,7 +102,7 @@ public class RoomService {
         List<RoomDto.RoomListResDto> roomListResDtos = new ArrayList<>();
         for (Room room : roomList) {
             // 각 쪽지 방에서 최신 쪽지가 오늘 왔는지 확인
-            Optional<Note> note = noteRepository.findAllByReceiverIdAndIsReadFalseAndIsStoreTrueAndCreatedAtBetweenOrderByCreatedAt(memberId, start, end);
+            Optional<Note> note = noteRepository.findTopByReceiverIdAndIsReadFalseAndIsStoreTrueAndCreatedAtBetweenOrderByCreatedAtDesc(memberId, start, end);
             if (note.isEmpty()) continue;
 
             RoomDto.RoomListResDto roomDto = RoomDto.RoomListResDto.builder()
