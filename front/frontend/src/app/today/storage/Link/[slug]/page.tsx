@@ -21,6 +21,7 @@ import {
   LinkButton,
   BackButton,
   Guide,
+  BtnContainer,
 } from './link.styled'
 import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
@@ -227,14 +228,16 @@ export default function TodayLinkStorage({ params }: Props) {
         </Suspense>
       </Canvas>
       <HtmlContainer>
-        {isUser ? (
-          <LinkButton onClick={() => handleShare()}>공유하기</LinkButton>
-        ) : (
-          <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
-        )}
-        {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
-        {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
-        <KaKaoShareButton />
+        <BtnContainer>
+          {isUser ? (
+            <LinkButton onClick={() => handleShare()}>링크복사</LinkButton>
+          ) : (
+            <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
+          )}
+          {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
+          {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
+          <KaKaoShareButton />
+        </BtnContainer>
         <Guide>화면을 움직일 수 있어요!</Guide>
       </HtmlContainer>
     </LinkContainer>
