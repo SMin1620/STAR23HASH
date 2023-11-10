@@ -18,6 +18,10 @@ public enum ExceptionCode {
     PAPER_NOT_FOUND(404, "Paper Not Found"),
     PAPER_MEMBER_DIFFERENT(409, "Paper And Member Different"),
 
+    SOLD_OUT_POINT(410, "DO NOT SEND LETTER"),
+
+    NOT_FOUND_NUMBER(411, "NOT FOUND NUMBER"),
+
 
     FAILED_TO_UPDATE_MEMBER(500, "Failed Update Member"),
     FAILED_TO_DELETE_MEMBER(500, "Failed Delete Member"),
