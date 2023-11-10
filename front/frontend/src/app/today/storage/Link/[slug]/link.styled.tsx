@@ -19,6 +19,24 @@ export const LinkButton = styled.button`
 
   pointer-events: auto;
 `
+
+export const WriteButton = styled.button`
+  background-color: #4e2c0e;
+  position: absolute;
+  width: 90px;
+  height: 38px;
+  bottom: 120px;
+  border-radius: 20px;
+  color: white;
+  font-size: 17px;
+  box-shadow: 0px 6px 5px -2px #545454;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  pointer-events: auto;
+`
+
 export const HtmlContainer = styled.div`
   position: absolute;
   top: 0;

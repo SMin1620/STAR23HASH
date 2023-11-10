@@ -50,11 +50,12 @@ export default function KaKaoShareButton() {
   return (
     <>
       <KakaoContainer>
-        <LinkButton>
+        <LinkButton
+          // id를 kakao-link-btn으로 설정
+          id="kakao-link-btn"
+        >
           <ImageBox>
             <Image
-              // id를 kakao-link-btn으로 설정
-              id="kakao-link-btn"
               src="/icons/kakao.png"
               width={20}
               height={10}
