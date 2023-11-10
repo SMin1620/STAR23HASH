@@ -169,7 +169,7 @@ export default function WriteFriend({ searchParams }: Props) {
             <stt.InnerCircle2></stt.InnerCircle2>
             <stt.InnerCircle3></stt.InnerCircle3>
           </stt.InnerCircle>
-          <st.SpaceImg src="/write/Solar System.png" alt="Solar System" />
+          <st.SpaceImg src="/icons/SolarSystem.png" alt="Solar System" />
 
           <st.ContentBox>
             <st.InputContent
