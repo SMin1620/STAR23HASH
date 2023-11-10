@@ -57,6 +57,7 @@ export interface Note {
   createdAt: string
   send: boolean
   isRead: boolean
+  isReply: boolean
 }
 
 export interface Letter {
