@@ -63,7 +63,7 @@ function Planet3() {
 }
 
 function Ufo({ forwardedRef }) {
-  const gltf = useGLTF('/assets/glb/UFO.glb')
+  const gltf = useGLTF('/assets/other/ufo.glb')
 
   gltf.scene.position.set(1.8, 3, -8)
   const scale = 1.2
