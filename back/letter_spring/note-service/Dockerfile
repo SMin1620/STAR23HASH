@@ -16,6 +16,8 @@ ENTRYPOINT ["java", \
 "-Delastic.apm.service_name=note-service", \
 "-Delastic.apm.application_packages=com.letter", \
 "-Delastic.apm.environment=dev", \
-"-Dspring.profiles.active=dev", \
+"-Dspring.profiles.active=prod", \
+"-Dspring.config.name=env", \
+"-Dspring.config.location=file:./properties/", \
 "-jar", \
 "/build/libs/note-servic-0.0.1-SNAPSHOT.jar"]
