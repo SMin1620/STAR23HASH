@@ -52,11 +52,6 @@ export default function TodayLinkStorage({ params }: Props) {
     handleListApi(params.slug)
   }, [])
 
-  // useEffect(() => {
-  //   const newPositions: Position[] = []
-  //   for (let i = 0; i < )
-  // })
-
   const handleDetailApi = async (id: number) => {
     const response = await LinkDetailGet(id)
     console.log(response.data.data)
@@ -153,9 +148,6 @@ export default function TodayLinkStorage({ params }: Props) {
     router.back()
   }
 
-  useEffect(() => {
-    console.log(isUser)
-  }, [isUser])
   // const minDistance = 2
   // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
 
