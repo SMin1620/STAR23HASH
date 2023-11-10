@@ -44,7 +44,7 @@ export default function RootLayout({
           }}
         />
       </body>
-      <Script src="https://developers.kakao.com/sdk/js/kakao.js" async />
+      <script src="https://developers.kakao.com/sdk/js/kakao.js" async />
     </html>
   )
 }
