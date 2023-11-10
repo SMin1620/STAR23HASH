@@ -71,7 +71,7 @@ export default function History({ params, searchParams }: Props) {
                     name={note.senderName}
                     date={note.createdAt}
                     content={note.content}
-                    isNew={note.isRead}
+                    isReply={note.isReply}
                   />
                 ),
               )}
