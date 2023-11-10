@@ -35,7 +35,7 @@ export const NavigationBox = styled.div`
   }
 `
 export const FriendNavBox = styled(NavigationBox)`
-  background-image: url('/icons/FriendStorageBtn.svg');
+  // background-image: url('/icons/FriendStorageBtn.svg');
   background-repeat: no-repeat;
   margin-right: auto;
   margin-left: 25%;

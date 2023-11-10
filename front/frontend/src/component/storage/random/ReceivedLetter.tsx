@@ -32,7 +32,7 @@ export default function ReceivedLetter({
         <c.IsNewLetterImage
           onClick={handleClick}
           className="w-12"
-          src="/icons/ShowAllBtn.svg"
+          src="/icons/ShowAllBtn.png"
         />
       ) : null}
 

@@ -31,7 +31,7 @@ export default function Friend() {
         <BackButton />
 
         <f.TitleWrapper>
-          <f.CustomImage src="/icons/FriendLogo.svg" />
+          <f.CustomImage src="/icons/FriendLogo.png" />
           <f.Title>친구메시지</f.Title>
         </f.TitleWrapper>
 

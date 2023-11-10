@@ -16,7 +16,7 @@ export default function loading() {
           </stt.InnerCircle>
           <st.ContentBox>
             <st.Loading
-              src="/write/Planet & Rocket.svg"
+              src="/write/Planet & Rocket.png"
               alt="loading..."
             ></st.Loading>
             <st.LoadingText>편지를 보내는 중이에요!</st.LoadingText>
