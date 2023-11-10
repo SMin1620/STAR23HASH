@@ -1,6 +1,11 @@
 import { useEffect } from 'react'
 import Image from 'next/image'
-import { KakaoContainer } from './kakaoShareButon.styled'
+import {
+  ImageBox,
+  KakaoContainer,
+  LinkButton,
+  TextBox,
+} from './kakaoShareButon.styled'
 
 export default function KaKaoShareButton() {
   // 현재 페이지 URL 저장, 이는 공유 버튼 클릭시 열리는 페이지의 주소로 사용됨
@@ -45,14 +50,19 @@ export default function KaKaoShareButton() {
   return (
     <>
       <KakaoContainer>
-        <Image
-          // id를 kakao-link-btn으로 설정
-          id="kakao-link-btn"
-          src="/icons/kakao.png"
-          width={60}
-          height={50}
-          alt="카톡 공유 이미지"
-        />
+        <LinkButton>
+          <ImageBox>
+            <Image
+              // id를 kakao-link-btn으로 설정
+              id="kakao-link-btn"
+              src="/icons/kakao.png"
+              width={20}
+              height={10}
+              alt="카톡 공유 이미지"
+            />
+          </ImageBox>
+          <TextBox>공유하기</TextBox>
+        </LinkButton>
       </KakaoContainer>
     </>
   )
