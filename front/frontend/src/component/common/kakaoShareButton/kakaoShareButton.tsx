@@ -12,7 +12,7 @@ export default function KaKaoShareButton() {
   const shareUrl = typeof window !== 'undefined' ? window.location.href : ''
   // useEffect를 이용하여 컴포넌트 렌더링시 카카오 SDK 초기화 및 공유 버튼 생성
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && window.Kakao) {
       const { Kakao } = window
       console.log('clicked kakao')
 
@@ -28,7 +28,7 @@ export default function KaKaoShareButton() {
           title: '별이삼샵',
           description: '나에게 메시지를 적어줄래요?',
           imageUrl:
-            'https://star23shop-bucket.s3.ap-northeast-2.amazonaws.com/image.png',
+            'https://star23shop-bucket.s3.ap-northeast-2.amazonaws.com/Group+48.png',
           link: {
             mobileWebUrl: shareUrl,
             webUrl: shareUrl,
@@ -50,11 +50,12 @@ export default function KaKaoShareButton() {
   return (
     <>
       <KakaoContainer>
-        <LinkButton>
+        <LinkButton
+          // id를 kakao-link-btn으로 설정
+          id="kakao-link-btn"
+        >
           <ImageBox>
             <Image
-              // id를 kakao-link-btn으로 설정
-              id="kakao-link-btn"
               src="/icons/kakao.png"
               width={20}
               height={10}
