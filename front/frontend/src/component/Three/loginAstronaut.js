@@ -23,7 +23,7 @@ function Star() {
     // 원형 경로를 따라 움직이도록 x와 z 좌표를 업데이트
     ref.current.position.x = Math.cos(angle) * radius
     ref.current.position.z = Math.sin(angle) * radius
-  }, [])
+  })
 
   return <primitive object={gltf.scene} ref={ref} />
 }
@@ -41,7 +41,7 @@ function Astronaut() {
   useFrame(({ clock }) => {
     // y축으로 조금씩 이동
     ref.current.position.y += Math.sin(clock.getElapsedTime() + 3) * 0.005
-  }, [])
+  })
 
   return <primitive object={gltf.scene} ref={ref} />
 }
