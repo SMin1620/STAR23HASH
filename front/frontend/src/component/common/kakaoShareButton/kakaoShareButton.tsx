@@ -12,7 +12,7 @@ export default function KaKaoShareButton() {
   const shareUrl = typeof window !== 'undefined' ? window.location.href : ''
   // useEffect를 이용하여 컴포넌트 렌더링시 카카오 SDK 초기화 및 공유 버튼 생성
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && window.Kakao) {
       const { Kakao } = window
       console.log('clicked kakao')
 
