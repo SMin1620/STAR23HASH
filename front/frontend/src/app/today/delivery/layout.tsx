@@ -18,11 +18,13 @@ export default function Delivery({ children }: { children: React.ReactNode }) {
           <div style={{ width: '100%', height: '200px' }}>
             <DeliveryUfo style={{ width: '100%', height: '100%' }} />
           </div>
-          <div className=" flex items-center justify-center text-2xl text-white">
-            남은 시간
+          <div className=" flex items-center justify-center text-xl text-white">
+            편지 도착까지
           </div>
           <div>{children}</div>
-          <div className="flex items-center justify-center text-2xl text-white"></div>
+          <div className=" flex items-center justify-center text-xl text-white">
+            남았어요 ෆ⸒⸒⸜( ˶&#39;ᵕ&#39;˶)⸝
+          </div>
         </div>
       </div>
       <DeliveryThree

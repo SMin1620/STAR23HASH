@@ -63,7 +63,7 @@ function Planet3() {
 }
 
 function Ufo({ forwardedRef }) {
-  const gltf = useGLTF('/assets/glb/UFO.glb')
+  const gltf = useGLTF('/assets/other/ufo.glb')
 
   gltf.scene.position.set(1.8, 3, -8)
   const scale = 1.2
@@ -357,7 +357,7 @@ function Scene() {
                   opacity: 1,
                   onComplete: () => {
                     // console.log(currentHour)
-                    if (currentHour >= 11 || currentHour <= 6) {
+                    if (currentHour >= 12 || currentHour <= 6) {
                       router.push('/today/arrive')
                     } else {
                       router.push('/today/delivery')

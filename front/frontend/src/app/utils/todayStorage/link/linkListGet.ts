@@ -9,6 +9,7 @@ const LinkListGet = async (id: number): Promise<any> => {
       method: 'get',
       url: `${DOMAIN}/api/rolls/${id}`,
     })
+
     return response
   } catch (error) {
     console.error(error)

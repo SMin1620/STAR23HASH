@@ -3,7 +3,7 @@
 import styled from 'styled-components'
 
 export const LetterBoard = styled.div`
-  // background-image: url('/icons/SolarSystem.svg');
+  // background-image: url('/icons/SolarSystem.png');
   // background-repeat: no-repeat;
 
   // display: flex;
@@ -69,7 +69,7 @@ export const LetterContent = styled.div`
 export const LetterInput = styled.textarea`
   height: 100%;
 
-  //   background-image: url('/icons/RandomLetterBG.svg');
+  //   background-image: url('/icons/RandomLetterBG.png');
   box-shadow: inset 0px 4px 1px rgba(0, 0, 0, 0.25);
   background-color: rgba(
     250.00000029802322,

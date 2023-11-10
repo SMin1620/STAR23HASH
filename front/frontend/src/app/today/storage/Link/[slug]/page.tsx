@@ -21,10 +21,12 @@ import {
   LinkButton,
   BackButton,
   Guide,
+  BtnContainer,
 } from './link.styled'
 import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
 import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
+import KaKaoShareButton from '@/component/common/kakaoShareButton/kakaoShareButton'
 
 type Props = {
   params: {
@@ -87,15 +89,16 @@ export default function TodayLinkStorage({ params }: Props) {
     } else {
       // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
       // 맞는지 다른지 확인
-      setIsUser(true)
       const check = async () => {
         const checkRoll = await MakeLinkAxios()
+        setIsUser(true)
         //일치함
 
         if (checkRoll.data.rollId == params.slug) {
           const handleListApi = async (id: number) => {
             const response = await LinkListGet(id)
             setRollList(response.data.data)
+            console.log('RollList ', response.data.data)
           }
           handleListApi(params.slug)
         }
@@ -139,7 +142,7 @@ export default function TodayLinkStorage({ params }: Props) {
     document.execCommand('copy')
     document.body.removeChild(t)
 
-    alert('링크가 복사되었습니다!')
+    alert('링크가 복사되었습니당!')
   }
 
   const goWrite = () => {
@@ -225,13 +228,16 @@ export default function TodayLinkStorage({ params }: Props) {
         </Suspense>
       </Canvas>
       <HtmlContainer>
-        {isUser ? (
-          <LinkButton onClick={() => handleShare()}>공유하기</LinkButton>
-        ) : (
-          <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
-        )}
-        {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
-        {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
+        <BtnContainer>
+          {isUser ? (
+            <LinkButton onClick={() => handleShare()}>링크복사</LinkButton>
+          ) : (
+            <LinkButton onClick={() => goWrite()}>글쓰기</LinkButton>
+          )}
+          {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
+          {/* <BackButton onClick={() => goBack()}>뒤로가기</BackButton> */}
+          <KaKaoShareButton />
+        </BtnContainer>
         <Guide>화면을 움직일 수 있어요!</Guide>
       </HtmlContainer>
     </LinkContainer>

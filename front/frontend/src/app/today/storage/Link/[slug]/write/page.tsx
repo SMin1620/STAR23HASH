@@ -22,9 +22,9 @@ type Props = {
 
 export default function LinkWrite({ params }: Props) {
   const [content, setContent] = useState('')
-  const [icon, setIcon] = useState(0)
+  const [icon, setIcon] = useState<number>(1)
   const [rollId, setRollId] = useState(params.slug)
-  const [activeIcon, setActiveIcon] = useState(-1)
+  const [activeIcon, setActiveIcon] = useState(1)
   const router = useRouter()
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -38,15 +38,20 @@ export default function LinkWrite({ params }: Props) {
   }
 
   const handleSendApi = async () => {
-    try {
-      const response = await linkPost(content, icon, rollId)
-      const res = response.data.data
-      console.log(res)
-      alert('전송이 완료되었습니다!')
-      router.push(`/today/storage/Link/${params.slug}`)
-    } catch (error) {
-      console.error(error)
-      alert('전송에 실패하였습니다.')
+    const str = content.replace(/\s/g, '')
+    if (str.length <= 1) {
+      alert('한글자는 너무했지..?')
+    } else {
+      try {
+        const response = await linkPost(content, icon, rollId)
+        const res = response.data.data
+        // console.log(res)
+        alert('전송이 완료되었습니다!')
+        router.push(`/today/storage/Link/${params.slug}`)
+      } catch (error) {
+        console.error(error)
+        alert('전송에 실패하였습니다.')
+      }
     }
     // if (res.status.toString() === 'OK') {
     //   router.push(`/write/send?isSuccess=true`)
@@ -112,6 +117,7 @@ export default function LinkWrite({ params }: Props) {
               </AstronautBox>
             </AstronautImages>
           </AstronautContainer>
+          <div className="mt-5">마음에 드는 아이콘을 골라보세요!</div>
 
           <st.ContentBox>
             <st.InputContent
