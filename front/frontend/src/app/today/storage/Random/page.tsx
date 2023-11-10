@@ -51,33 +51,6 @@ export default function TodayRandomStorage() {
     router.back()
   }
 
-  // const Data = () => {
-  //   return [
-  //     {
-  //       id: 1,
-  //       senderId: 1,
-  //       senderName: '빛나는 북극토끼',
-  //       receiverId: 33,
-  //       receiverName: '졸린 봉황',
-  //       content: '어쩔티비',
-  //       createdAt: '2023-11-02T09:57:51.124853',
-  //       send: true,
-  //       read: true,
-  //     },
-  //     {
-  //       id: 6,
-  //       senderId: 33,
-  //       senderName: '졸린 봉황',
-  //       receiverId: 1,
-  //       receiverName: '빛나는 북극토끼',
-  //       content: '저쩔티비',
-  //       createdAt: '2023-11-02T09:57:51.093082',
-  //       send: false,
-  //       read: true,
-  //     },
-  //   ]
-  // }
-
   const totalAmount = noteList?.count || 0
   console.log(totalAmount)
 
