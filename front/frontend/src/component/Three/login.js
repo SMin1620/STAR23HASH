@@ -127,15 +127,6 @@ function Scene() {
 
   return (
     <>
-      <Stars
-        radius={100}
-        depth={25}
-        count={6000}
-        factor={5}
-        saturation={2}
-        fade
-        speed={2}
-      />
       <Planet1 />
       <Planet2 />
       <Asteroid />
