@@ -20,6 +20,5 @@ ENTRYPOINT ["java", \
 "-Delastic.apm.environment=dev", \
 "-Dspring.profiles.active=prod", \
 "-Dspring.config.name=env", \
-"-Dspring.config.location=classpath:/properties/", \
 "-jar", \
 "/build/libs/auth-service-0.0.1-SNAPSHOT.jar"]
