@@ -17,7 +17,7 @@ ENTRYPOINT ["java", \
 "-Delastic.apm.server_urls=http://k9e106a.p.ssafy.io:8200", \
 "-Delastic.apm.service_name=auth-service", \
 "-Delastic.apm.application_packages=com.letter", \
-"-Delastic.apm.environment=dev", \
+"-Delastic.apm.environment=prod", \
 "-Dspring.profiles.active=prod", \
 "-Dspring.config.name=env", \
 "-jar", \
