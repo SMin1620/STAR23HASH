@@ -9,5 +9,3 @@ services:
       TZ: "Asia/Seoul"  # timezone 설정 부분
     ports:
       - 80:80
-    depends_on:
-      - gateway-server
