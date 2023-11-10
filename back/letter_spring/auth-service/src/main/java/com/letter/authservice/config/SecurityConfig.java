@@ -60,6 +60,7 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern("/api/members/login")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/rolls")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/rolls/**")).permitAll()
+                                .requestMatchers(mvcMatcherBuilder.pattern("/api/sms/**")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/members/check/{phone}")).permitAll()
                                 .requestMatchers(mvcMatcherBuilder.pattern("/api/members/refresh")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern( "/h2-console/**")).permitAll()
