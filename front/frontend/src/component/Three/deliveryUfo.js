@@ -6,7 +6,7 @@ import * as THREE from 'three'
 
 function Ufo() {
   const ref = useRef()
-  const gltf = useGLTF('/assets/glb/UFO.glb')
+  const gltf = useGLTF('/assets/other/ufo.glb')
 
   gltf.scene.position.set(0, 0, 0)
   const scale = 3.2
@@ -35,13 +35,13 @@ function Scene() {
     scene.add(light)
 
     // 빛2
-    const light2 = new THREE.DirectionalLight('white', 0.5)
+    const light2 = new THREE.DirectionalLight('white', 1)
     light2.position.y = 7
     light2.position.x = -5
     light2.position.z = 4
     scene.add(light2)
 
-    const AmbientLigthtight = new THREE.AmbientLight('white', 0.8)
+    const AmbientLigthtight = new THREE.AmbientLight('white', 1.5)
     AmbientLigthtight.position.z = 2
     scene.add(AmbientLigthtight)
   }, [])
