@@ -23,7 +23,7 @@ public class Paper {
     @JoinColumn(nullable = false, name = "roll_id")
     private Roll roll;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 300)
     private String content;
 
     private Integer icon;
