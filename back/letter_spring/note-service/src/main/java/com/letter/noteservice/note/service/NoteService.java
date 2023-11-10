@@ -174,11 +174,18 @@ public class NoteService {
 
             if (note.getSenderId() != memberId && !note.getIsStore()) continue;
 
+            // 보낸 사람 받는 사람 구분 처리
             if (note.getSenderId() == memberId) dto.setSend(true);
             else dto.setSend(false);
 
+            // 읽음 처리
             if (note.getReceiverId() == memberId && ! note.getIsRead()) dto.setIsRead(false);
             else dto.setIsRead(true);
+
+            // 답정 처리
+            if (note.getSenderId() == memberId) dto.setIsReply(true);
+            else if (note.getIsStore() && note.getReceiverId() == memberId && note.getIsReply()) dto.setIsReply(true);
+            else dto.setIsReply(false);
 
             noteListResDtos.add(dto);
         }

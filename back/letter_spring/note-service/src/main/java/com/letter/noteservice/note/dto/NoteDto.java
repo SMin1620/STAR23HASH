@@ -60,6 +60,7 @@ public class NoteDto {
         private LocalDateTime createdAt;
         private Boolean send;
         private Boolean isRead;
+        private Boolean isReply;
     }
 
     /**
