@@ -86,7 +86,6 @@ export default function TodayRandomStorage() {
         }}
         camera={{
           position: [-22, 50, -100],
-          // rotation: [0, Math.PI / 8, 0],
           near: 0.01,
         }}
         {...bind()}
