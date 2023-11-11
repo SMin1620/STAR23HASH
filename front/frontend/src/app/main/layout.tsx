@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, Suspense } from 'react'
+import React from 'react'
 import Three2 from '../../component/Three/three2'
 import MakeLink from '@/component/main/makeLink'
 
