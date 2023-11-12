@@ -7,9 +7,7 @@ const axiosInstance = axios.create({
   withCredentials: true,
 })
 
-export const sendSmsAxios = async (
-  phone: string,
-): Promise<AxiosResponse> => {
+export const sendSmsAxios = async (phone: string): Promise<AxiosResponse> => {
   try {
     const res: AxiosResponse = await axiosInstance.post(
       `${DOMAIN}/api/sms/sends`,
