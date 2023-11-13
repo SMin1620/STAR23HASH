@@ -27,6 +27,7 @@ import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
 import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
 import KaKaoShareButton from '@/component/common/kakaoShareButton/kakaoShareButton'
+import Error from '@/app/error'
 
 type Props = {
   params: {
@@ -86,13 +87,17 @@ export default function TodayLinkStorage({ params }: Props) {
       // 맞는지 다른지 확인
       const check = async () => {
         const checkRoll = await MakeLinkAxios()
-        setIsUser(true)
+        // setIsUser(true)
         //일치함
         if (checkRoll.data.rollId == params.slug) {
+          setIsUser(true)
           const handleListApi = async (id: number) => {
-            const response = await LinkListGet(id)
-            setRollList(response.data.data)
-            console.log('RollList ', response.data.data)
+            try {
+              const response = await LinkListGet(id)
+              setRollList(response.data.data)
+            } catch (error) {
+              return Error
+            }
           }
           handleListApi(params.slug)
         }
@@ -103,7 +108,7 @@ export default function TodayLinkStorage({ params }: Props) {
       }
       check()
     }
-  }, [])
+  }, [params.slug])
 
   useEffect(() => {
     if (rollList && !positionSet) {
@@ -121,6 +126,10 @@ export default function TodayLinkStorage({ params }: Props) {
       console.log(totalAmount)
     }
   }, [rollList])
+
+  useEffect(() => {
+    console.log(isUser)
+  }, [isUser])
 
   const handleShare = () => {
     const currentUrl = window.document.location.href
@@ -228,7 +237,15 @@ export default function TodayLinkStorage({ params }: Props) {
           {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
           {isUser && <KaKaoShareButton />}
         </BtnContainer>
-        <Guide>화면을 움직일 수 있어요!</Guide>
+        <Guide>
+          화면을 움직일 수 있어요!
+          {isUser && (
+            <>
+              <br />
+              편지는 한번 읽으면 사라져요 ㅜㅜ
+            </>
+          )}
+        </Guide>
       </HtmlContainer>
     </LinkContainer>
   )
