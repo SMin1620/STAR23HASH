@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios'
 import AuthAxios from './AuthAxios'
-import { useRouter } from 'next/navigation'
 
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
@@ -17,6 +16,6 @@ export const getRandomRooms = async (): Promise<any> => {
 
     return response.data
   } catch (error: any) {
-    console.log(error.response)
+    console.log(error)
   }
 }
