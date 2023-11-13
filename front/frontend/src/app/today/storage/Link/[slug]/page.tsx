@@ -47,7 +47,6 @@ export default function TodayLinkStorage({ params }: Props) {
     const handleListApi = async (id: number) => {
       try {
         const response = await LinkListGet(id)
-        console.log(response.data.data)
 
         setRollList(response.data.data)
       } catch (error) {
@@ -59,7 +58,6 @@ export default function TodayLinkStorage({ params }: Props) {
 
   const handleDetailApi = async (id: number) => {
     const response = await LinkDetailGet(id)
-    console.log(response.data.data)
 
     setRollDetail(response.data.data)
     router.push(`/today/storage/Link/${params.slug}/${id}`)
@@ -85,7 +83,6 @@ export default function TodayLinkStorage({ params }: Props) {
     const rollId = getCookieValue('rollId')
     // const accessToken = getCookieValue('accessToken')
     // 토큰 없으면 바로 비회원
-    console.log(rollId)
 
     if (rollId) {
       // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
@@ -99,7 +96,6 @@ export default function TodayLinkStorage({ params }: Props) {
           const handleListApi = async (id: number) => {
             const response = await LinkListGet(id)
             setRollList(response.data.data)
-            console.log('RollList ', response.data.data)
           }
           setIsUser(true)
           handleListApi(params.slug)
@@ -128,13 +124,11 @@ export default function TodayLinkStorage({ params }: Props) {
       }
       setPositions(newPositions)
       setPositionSet(true)
-      console.log(totalAmount)
     }
   }, [rollList])
 
   const handleShare = () => {
     const currentUrl = window.document.location.href
-    console.log(currentUrl)
     const t = document.createElement('textarea')
     document.body.appendChild(t)
     t.value = currentUrl
