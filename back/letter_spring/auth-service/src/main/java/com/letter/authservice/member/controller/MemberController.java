@@ -175,4 +175,5 @@ public class MemberController {
 
         return new BaseResponse(HttpStatus.OK, "찡긋", memberService.alarmCheck(member.getId()));
     }
+
 }
