@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 
-const DOMAIN = process.env.NEXT_PUBLIC_API_URL
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 interface Response {
   status: string

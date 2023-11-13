@@ -41,7 +41,6 @@ export default function TodayLinkStorage({ params }: Props) {
   const [isUser, setIsUser] = useState(false)
   const [positions, setPositions] = useState<Position[]>([])
   const [positionSet, setPositionSet] = useState(false)
-  const { ismember } = IsMember()
   const router = useRouter()
 
   useEffect(() => {
@@ -70,7 +69,7 @@ export default function TodayLinkStorage({ params }: Props) {
     if (typeof window !== 'undefined') {
       const cookieName = name + '='
       const decodedCookie = decodeURIComponent(document.cookie)
-      const cookieArray = decodedCookie.split(',')
+      const cookieArray = decodedCookie.split(';')
 
       for (let i = 0; i < cookieArray.length; i++) {
         const cookie = cookieArray[i].trim()
@@ -83,23 +82,27 @@ export default function TodayLinkStorage({ params }: Props) {
   }
 
   useEffect(() => {
-    const accessToken = getCookieValue('accessToken')
+    const rollId = getCookieValue('rollId')
+    // const accessToken = getCookieValue('accessToken')
     // 토큰 없으면 바로 비회원
-    if (accessToken === null) {
-      setIsUser(false)
-    } else {
+    console.log(rollId)
+
+    if (rollId) {
       // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
       // 맞는지 다른지 확인
+
       const check = async () => {
-        const checkRoll = await MakeLinkAxios()
-        setIsUser(true)
+        // const checkRoll = await MakeLinkAxios()
+        // setIsUser(true)
         //일치함
-        if (checkRoll.data.rollId == params.slug) {
+        if (parseInt(rollId) == params.slug) {
+          console.log('일치함?')
           const handleListApi = async (id: number) => {
             const response = await LinkListGet(id)
             setRollList(response.data.data)
             console.log('RollList ', response.data.data)
           }
+          setIsUser(true)
           handleListApi(params.slug)
         }
         //다름
@@ -108,6 +111,8 @@ export default function TodayLinkStorage({ params }: Props) {
         }
       }
       check()
+    } else {
+      setIsUser(false)
     }
   }, [])
 

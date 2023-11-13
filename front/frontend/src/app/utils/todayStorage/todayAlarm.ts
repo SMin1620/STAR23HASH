@@ -1,7 +1,7 @@
 import AuthAxios from '../storage/AuthAxios'
 import axios, { AxiosResponse } from 'axios'
 
-const DOMAIN = process.env.NEXT_PUBLIC_API_URL
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 export const TodayAlarm = async (): Promise<any> => {
   try {

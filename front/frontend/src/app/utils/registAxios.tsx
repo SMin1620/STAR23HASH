@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosError } from 'axios'
 import { log } from 'console'
 
-const DOMAIN = process.env.NEXT_PUBLIC_API_URL
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 const axiosInstance = axios.create({
   withCredentials: true,
