@@ -56,7 +56,6 @@ export default function LinkRead({ params }: Props) {
   useEffect(() => {
     const handleDetailApi = async (id: number) => {
       const response = await LinkDetailGet(id)
-      console.log(response.data.data)
 
       setRollDetail(response.data.data)
     }
@@ -65,7 +64,6 @@ export default function LinkRead({ params }: Props) {
 
   useEffect(() => {
     // setContent(rollDetail.content)
-    console.log(rollDetail, 'roll')
   }, [rollDetail])
   return (
     <SendBoxDiv>
