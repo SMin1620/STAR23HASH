@@ -30,6 +30,7 @@ export default function History({ params, searchParams }: Props) {
         console.log('randomRooms : ', response.data)
       } catch (error) {
         console.error('Error fetching random rooms:', error)
+        router.replace('/error')
       }
     }
 

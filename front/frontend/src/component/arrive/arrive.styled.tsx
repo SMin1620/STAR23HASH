@@ -11,12 +11,12 @@ export const arriveButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow:
-    2px 2px 5px rgba(0, 0, 0, 0.2),
-    -2px -2px 5px #612f69; // 그림자 효과를 추가하여 입체감을 높입니다
+  cursor: pointer;
+  box-shadow: 0px 4px 0px rgba(174, 153, 93, 1);
 `
 
 export const arriveLink = styled.div`
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;

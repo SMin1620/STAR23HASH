@@ -10,12 +10,6 @@ export const TodayAlarm = async (): Promise<any> => {
       url: `${DOMAIN}/api/members/alarm`,
     })
 
-    if (!response || response.status !== 200) {
-      throw new Error('에러')
-    }
-
-    console.log(response.data.data)
-
     return response.data
   } catch (error) {
     console.log(error)

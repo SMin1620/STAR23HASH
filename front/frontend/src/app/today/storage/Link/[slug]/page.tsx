@@ -27,6 +27,7 @@ import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
 import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
 import KaKaoShareButton from '@/component/common/kakaoShareButton/kakaoShareButton'
+import IsMember from '@/store/member'
 
 type Props = {
   params: {
@@ -40,14 +41,19 @@ export default function TodayLinkStorage({ params }: Props) {
   const [isUser, setIsUser] = useState(false)
   const [positions, setPositions] = useState<Position[]>([])
   const [positionSet, setPositionSet] = useState(false)
+  const { ismember } = IsMember()
   const router = useRouter()
 
   useEffect(() => {
     const handleListApi = async (id: number) => {
-      const response = await LinkListGet(id)
-      console.log(response.data.data)
+      try {
+        const response = await LinkListGet(id)
+        console.log(response.data.data)
 
-      setRollList(response.data.data)
+        setRollList(response.data.data)
+      } catch (error) {
+        router.replace(`/error`)
+      }
     }
     handleListApi(params.slug)
   }, [])
