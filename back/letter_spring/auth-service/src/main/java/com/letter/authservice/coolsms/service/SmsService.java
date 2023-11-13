@@ -98,7 +98,7 @@ public class SmsService {
     public double checkBalance(){
         messageService = NurigoApp.INSTANCE.initialize( coolSmsKey, coolSmsSecret, "https://api.coolsms.co.kr");
         try{
-            return Double.parseDouble(messageService.getBalance().getPoint().toString());
+            return Double.parseDouble(messageService.getBalance().getBalance().toString());
         }catch (Exception e){
             e.printStackTrace();
             return 0;
