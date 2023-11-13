@@ -10,28 +10,28 @@ export default function MakeLink() {
 
   async function click() {
     const check = await MakeLinkAxios()
-    console.log('요기')
-    console.log(check.data)
-    setRoolId(check.data.rollId)
-    setValue(`http://k9e106.p.ssafy.io/today/storage/Link/${check.data.rollId}`)
+    // console.log('요기')
+    // console.log(check.data)
+    // setRoolId(check.data.rollId)
+    // setValue(`http://k9e106.p.ssafy.io/today/storage/Link/${check.data.rollId}`)
     setShowLink(true)
   }
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     try {
-  //       const check = await MakeLinkAxios()
-  //       setRoolId(check.data.rollId)
-  //       setValue(
-  //         `http://k9e106.p.ssafy.io/today/storage/Link/${check.data.rollId}`,
-  //       )
-  //     } catch (error) {
-  //       console.error('Failed to fetch data: ', error)
-  //     }
-  //   }
-  //   fetchData()
-  //   console.log(value)
-  // }, [])
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const check = await MakeLinkAxios()
+        setRoolId(check.data.rollId)
+        setValue(
+          `http://k9e106.p.ssafy.io/today/storage/Link/${check.data.rollId}`,
+        )
+      } catch (error) {
+        console.error('Failed to fetch data: ', error)
+      }
+    }
+    fetchData()
+    console.log(value)
+  }, [])
 
   // 현재 페이지 URL 저장, 이는 공유 버튼 클릭시 열리는 페이지의 주소로 사용됨
   const shareUrl = value
@@ -92,7 +92,9 @@ export default function MakeLink() {
       }}
     >
       <div id="kakao-link-btn">
-        <button>카카오톡 공유하기</button>
+        <button style={{ color: 'white', fontSize: '20px' }}>
+          카카오톡 공유하기
+        </button>
       </div>
       <button onClick={click} style={{ color: 'white', fontSize: '20px' }}>
         롤링페이퍼 링크보기
