@@ -96,7 +96,6 @@ export default function TodayLinkStorage({ params }: Props) {
         // setIsUser(true)
         //일치함
         if (parseInt(rollId) == params.slug) {
-          console.log('일치함?')
           const handleListApi = async (id: number) => {
             const response = await LinkListGet(id)
             setRollList(response.data.data)
@@ -132,10 +131,6 @@ export default function TodayLinkStorage({ params }: Props) {
       console.log(totalAmount)
     }
   }, [rollList])
-
-  useEffect(() => {
-    console.log(isUser)
-  }, [isUser])
 
   const handleShare = () => {
     const currentUrl = window.document.location.href
@@ -220,7 +215,11 @@ export default function TodayLinkStorage({ params }: Props) {
                       url={`/assets/astronaut/astronaut${item.icon}.glb`}
                       scale={[0.3, 0.3, 0.3]}
                       position={positions[index]}
-                      onClick={() => handleDetailApi(item.id)}
+                      onClick={() => {
+                        if (isUser) {
+                          handleDetailApi(item.id)
+                        }
+                      }}
                     />
                   </Float>
                 ),
