@@ -7,10 +7,10 @@ public enum ExceptionCode {
     // Member
     PHONE_ALREADY_EXISTS(409, "Phone Already Exists"),
     MEMBER_ALREADY_WRITE(409, "Member Already Write"),
-    INVALID_REFRESH_TOKEN(400,"Invalid Refresh Token"),
+    INVALID_REFRESH_TOKEN(401,"Invalid Refresh Token"),
     INVALID_ACCESS_TOKEN(401,"Invalid Access Token"),
-    FAILED_CREATE_ACCESS_TOKEN(500, "Failed Create Access Token"),
-    FAILED_CREATE_REFRESH_TOKEN(500, "Failed Create Access Token"),
+    FAILED_CREATE_ACCESS_TOKEN(401, "Failed Create Access Token"),
+    FAILED_CREATE_REFRESH_TOKEN(401, "Failed Create Access Token"),
     MEMBER_NOT_FOUND(404, "Member Not Found"),
 
     // ROLL PAPER
