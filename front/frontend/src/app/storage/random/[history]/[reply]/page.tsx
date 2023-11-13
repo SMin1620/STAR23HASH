@@ -26,7 +26,8 @@ export default function Letter({ params }: Props) {
         setNoteInfo(response.data)
         console.log('note : ', response.data)
       } catch (error) {
-        console.error('Error fetching random rooms:', error)
+        console.error('Error fetching message:', error)
+        router.replace('/error')
       }
     }
 

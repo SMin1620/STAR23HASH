@@ -10,10 +10,6 @@ export const getNotes = async (roomId: number): Promise<any> => {
       url: `${DOMAIN}/api/notes/room/${roomId}`,
     })
 
-    if (!response || response.status !== 200) {
-      throw new Error('에러')
-    }
-
     // console.log(response.data.data)
 
     return response.data

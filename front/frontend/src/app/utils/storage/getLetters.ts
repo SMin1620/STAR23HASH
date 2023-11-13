@@ -10,10 +10,6 @@ export const getLetters = async (): Promise<any> => {
       url: `${DOMAIN}/api/letters`,
     })
 
-    if (!response || response.status !== 200) {
-      throw new Error('에러')
-    }
-
     // console.log(response.data.data)
 
     return response.data
