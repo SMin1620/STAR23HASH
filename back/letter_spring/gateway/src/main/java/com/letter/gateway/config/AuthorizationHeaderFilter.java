@@ -36,7 +36,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
             // Skip filter for /api/members/login path
             if (request.getURI().getPath().equals("/api/members/login") || request.getURI().getPath().equals("/api/members/register")) {
-                System.out.println("통과");
                 return chain.filter(exchange);
             }
 
