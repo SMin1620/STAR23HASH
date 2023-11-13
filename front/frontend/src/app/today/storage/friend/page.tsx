@@ -99,8 +99,8 @@ export default function TodayFriendStorage() {
             letterList.map((item: any, index: number) => (
               <Float key={item.id} speed={1} floatIntensity={0.1}>
                 <AstronautModel
-                  url={`/assets/astronaut/astronaut${(index % 4) + 1}.glb`}
-                  scale={[0.3, 0.3, 0.3]}
+                  url={`/assets/character.glb`}
+                  scale={[0.2, 0.2, 0.2]}
                   position={[
                     Math.random() * 2 - 1,
                     Math.random() * 3 - 2,
