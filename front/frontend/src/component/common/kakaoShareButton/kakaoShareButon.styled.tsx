@@ -13,7 +13,7 @@ export const LinkButton = styled.button`
   position: absolute;
   width: 90px;
   height: 38px;
-  bottom: 120px;
+  bottom: 130px;
   border-radius: 20px;
   color: white;
   font-size: 17px;

@@ -10,7 +10,7 @@ export const LinkButton = styled.button`
   position: absolute;
   width: 90px;
   height: 38px;
-  bottom: 120px;
+  bottom: 130px;
   border-radius: 20px;
   color: white;
   font-size: 17px;
@@ -59,7 +59,7 @@ export const BackButton = styled.div`
 export const Guide = styled.div`
   position: absolute;
   color: white;
-  bottom: 80px;
+  bottom: 65px;
   left: 0;
   right: 0;
   margin: auto;
