@@ -35,6 +35,7 @@ export default function Regist() {
       return
     } else {
       const check = await sendSmsAxios(phone)
+      console.log(check)
       alert('인증번호가 전송되었습니다.')
     }
   }
