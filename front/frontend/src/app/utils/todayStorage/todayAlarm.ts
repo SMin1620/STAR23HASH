@@ -1,7 +1,7 @@
 import AuthAxios from '../storage/AuthAxios'
 import axios, { AxiosResponse } from 'axios'
 
-const DOMAIN = process.env.NEXT_PUBLIC_API_URL
+const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 export const TodayAlarm = async (): Promise<any> => {
   try {
@@ -9,12 +9,6 @@ export const TodayAlarm = async (): Promise<any> => {
       method: 'get',
       url: `${DOMAIN}/api/members/alarm`,
     })
-
-    if (!response || response.status !== 200) {
-      throw new Error('에러')
-    }
-
-    console.log(response.data.data)
 
     return response.data
   } catch (error) {

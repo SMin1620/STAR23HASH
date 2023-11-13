@@ -1,11 +1,10 @@
 import { AxiosResponse } from 'axios'
 import AuthAxios from './AuthAxios'
+import { useRouter } from 'next/navigation'
 
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
 export const getRandomRooms = async (): Promise<any> => {
-  console.log('DOMAIN : ', DOMAIN)
-
   try {
     const response: AxiosResponse = await AuthAxios({
       method: 'get',
