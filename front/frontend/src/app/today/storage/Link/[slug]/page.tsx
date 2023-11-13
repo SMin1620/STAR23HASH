@@ -210,7 +210,7 @@ export default function TodayLinkStorage({ params }: Props) {
                 !item.isRead && (
                   <Float key={index} speed={1} floatIntensity={0.1}>
                     <AstronautModel
-                      url={`/assets/astronaut${item.icon}.glb`}
+                      url={`/assets/astronaut/astronaut${item.icon}.glb`}
                       scale={[0.3, 0.3, 0.3]}
                       position={positions[index]}
                       onClick={() => handleDetailApi(item.id)}
