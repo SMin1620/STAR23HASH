@@ -44,9 +44,9 @@ export const passwordAxios = async (
         password: password,
       },
     )
-    console.log(res)
+    // console.log(res)
     setCookieValue('accessToken', `Bearer ${res.data.data.accessToken}`)
-    setCookieValue('refresh', `Bearer ${res.data.data.accessToken}`)
+    setCookieValue('refreshToken', `Bearer ${res.data.data.refreshToken}`)
     // if (!res || res.status !== 200) {
     //   throw new Error('에러')
     // } else {

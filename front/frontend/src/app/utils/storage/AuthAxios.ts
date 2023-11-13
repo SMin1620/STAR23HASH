@@ -56,30 +56,33 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
     const response = await api(config)
     return response
   } catch (error: any) {
-    console.error(error)
+    console.log('token expired')
 
+    console.error('before resisue', error)
     if (error.response?.status === 403 || error.response?.status === 401) {
       try {
         const refreshToken = getCookieValue('refreshToken')
+        console.log(refreshToken)
+
         const reissueResponse = await axios.post(
           `${DOMAIN}/api/members/refresh`,
+          {},
           {
-            withCredentials: true, // withCredentials 설정
+            withCredentials: true,
             headers: {
-              Authorization: refreshToken,
+              refreshToken: refreshToken,
             },
           },
         )
-        console.log('reissue', reissueResponse)
 
-        console.log('재발급 완료')
+        const reissuedToken = reissueResponse.data.data.accessToken
 
-        const reissuedToken = reissueResponse.headers.authorization
         setCookieValue('accessToken', `Bearer ${reissuedToken}`)
-
         config.headers = {
           Authorization: reissuedToken,
         }
+
+        config.headers = headers
 
         const retryResponse = await api(config)
 
