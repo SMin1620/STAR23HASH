@@ -14,7 +14,7 @@ const setCookieValue = (
   if (typeof window !== 'undefined') {
     const cookieOptions = {
       // 기본 쿠키 옵션들 (추가 옵션을 필요에 맞게 설정할 수 있습니다)
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 만료 기간: 7일 (예시)
+      expires: new Date(Date.now() + 30 * 60 * 1000), // 만료 기간: 7일 (예시)
       path: '/', // 쿠키의 경로
       sameSite: 'strict', // 동일 출처 정책
       // secure: process.env.NODE_ENV === 'production', // HTTPS에서만 쿠키 전송
@@ -58,39 +58,40 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
   } catch (error: any) {
     console.error(error)
 
-    // if (error.response?.status === 403 || error.response?.status === 401) {
-    //   try {
-    //     const refreshToken = getCookieValue('refreshToken')
-    //     const reissueResponse = await axios.post(
-    //       `${DOMAIN}/api/members/refresh`,
-    //       {
-    //         withCredentials: true, // withCredentials 설정
-    //         headers: {
-    //           Authorization: refreshToken,
-    //         },
-    //       },
-    //     )
+    if (error.response?.status === 403 || error.response?.status === 401) {
+      try {
+        const refreshToken = getCookieValue('refreshToken')
+        const reissueResponse = await axios.post(
+          `${DOMAIN}/api/members/refresh`,
+          {
+            withCredentials: true, // withCredentials 설정
+            headers: {
+              Authorization: refreshToken,
+            },
+          },
+        )
+        console.log('reissue', reissueResponse)
 
-    //     console.log('재발급 완료')
+        console.log('재발급 완료')
 
-    //     const reissuedToken = reissueResponse.headers.authorization
-    //     setCookieValue('accessToken', `Bearer ${reissuedToken}`)
+        const reissuedToken = reissueResponse.headers.authorization
+        setCookieValue('accessToken', `Bearer ${reissuedToken}`)
 
-    //     config.headers = {
-    //       Authorization: reissuedToken,
-    //     }
+        config.headers = {
+          Authorization: reissuedToken,
+        }
 
-    //     const retryResponse = await api(config)
+        const retryResponse = await api(config)
 
-    //     return retryResponse
-    //   } catch (error) {
-    //     console.log('재발급 실패', error)
-    //     throw error
-    //   }
-    // } else {
-    //   console.log('재발급 시도조차 못함', error)
-    //   throw error
-    // }
+        return retryResponse
+      } catch (error) {
+        console.log('재발급 실패', error)
+        throw error
+      }
+    } else {
+      console.log('재발급 시도조차 못함', error)
+      throw error
+    }
   }
 }
 

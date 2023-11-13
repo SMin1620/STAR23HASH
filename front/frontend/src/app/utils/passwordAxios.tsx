@@ -14,7 +14,11 @@ const setCookieValue = (
   if (typeof window !== 'undefined') {
     const cookieOptions = {
       // 기본 쿠키 옵션들 (추가 옵션을 필요에 맞게 설정할 수 있습니다)
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 만료 기간: 7일 (예시)
+      expires: new Date(
+        name === 'refreshToken'
+          ? Date.now() + 2 * 60 * 60 * 1000
+          : Date.now() + 30 * 60 * 1000,
+      ), // 만료 기간: 7일 (예시)
       path: '/', // 쿠키의 경로
       sameSite: 'strict', // 동일 출처 정책
       // secure: process.env.NODE_ENV === 'production', // HTTPS에서만 쿠키 전송
@@ -41,13 +45,15 @@ export const passwordAxios = async (
       },
     )
     console.log(res)
-    if (!res || res.status !== 200) {
-      throw new Error('에러')
-    } else {
-      // setLocalStorageValue('token', res.data.data.accessToken)
-      setCookieValue('accessToken', `Bearer ${res.data.data.accessToken}`)
-      return res
-    }
+    setCookieValue('accessToken', `Bearer ${res.data.data.accessToken}`)
+    setCookieValue('refresh', `Bearer ${res.data.data.accessToken}`)
+    // if (!res || res.status !== 200) {
+    //   throw new Error('에러')
+    // } else {
+    //   setLocalStorageValue('token', res.data.data.accessToken)
+    //   return res
+    // }
+    return res
   } catch (error) {
     console.log(error)
 
