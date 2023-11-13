@@ -11,9 +11,9 @@ export default function Regist() {
   const { phone } = PhoneStore()
   const [inputValue, setInputValue] = useState('')
 
-  useEffect(() => {
-    console.log(phone)
-  })
+  // useEffect(() => {
+  //   console.log(phone)
+  // })
 
   // 인증확인 로직
   async function PasswordAuthClick() {
