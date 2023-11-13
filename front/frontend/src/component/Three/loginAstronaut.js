@@ -30,7 +30,7 @@ function Star() {
 
 function Astronaut() {
   const ref = useRef()
-  const gltf = useGLTF('/assets/astronaut3.glb')
+  const gltf = useGLTF('/assets/astronaut/astronaut3.glb')
 
   gltf.scene.position.set(0, -1, 0)
   const scale = 5
