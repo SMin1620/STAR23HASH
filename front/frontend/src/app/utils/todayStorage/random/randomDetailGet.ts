@@ -7,7 +7,7 @@ export const randomDetailGet = async (id: number): Promise<any> => {
   try {
     const response: AxiosResponse = await AuthAxios({
       method: 'get',
-      url: `${DOMAIN}/api/notes/${id}`,
+      url: `${DOMAIN}/api/notes/room/${id}`,
     })
 
     if (!response || response.status !== 200) {
