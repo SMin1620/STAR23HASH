@@ -182,10 +182,10 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         }catch(ExpiredJwtException e){
-            throw new BusinessLogicException(ExceptionCode.INVALID_ACCESS_TOKEN);
+            return false;
         }catch(JwtException e){
             e.printStackTrace();
-            throw new BusinessLogicException(ExceptionCode.INVALID_ACCESS_TOKEN);
+            return false;
         }
     }
 
