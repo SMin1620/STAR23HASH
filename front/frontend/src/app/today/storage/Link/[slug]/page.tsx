@@ -27,7 +27,6 @@ import { useRouter } from 'next/navigation'
 import { check } from 'prettier'
 import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
 import KaKaoShareButton from '@/component/common/kakaoShareButton/kakaoShareButton'
-import Error from '@/app/error'
 
 type Props = {
   params: {
@@ -96,7 +95,7 @@ export default function TodayLinkStorage({ params }: Props) {
               const response = await LinkListGet(id)
               setRollList(response.data.data)
             } catch (error) {
-              return Error
+              return error
             }
           }
           handleListApi(params.slug)
