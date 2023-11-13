@@ -57,10 +57,6 @@ export default function TodayFriendStorage() {
     router.push(`/storage/friend/${id}`)
   }
 
-  useEffect(() => {
-    console.log(letterDetail, 'letter')
-  }, [letterDetail])
-
   const goBack = () => {
     router.back()
   }
