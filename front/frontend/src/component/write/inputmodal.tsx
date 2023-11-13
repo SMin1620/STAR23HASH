@@ -69,7 +69,7 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
     <M.ModalOverlay>
       <M.ModalContent>
         <M.ModalText>{ContentType[contentType]}을 골라주세요!</M.ModalText>
-        <M.XButton onClick={closeState}>X</M.XButton>
+        <M.XButton src="/icons/xicon.png" onClick={closeState} />
         {errorMessage && (
           <M.errMessage style={{ color: 'red' }}>{errorMessage}</M.errMessage>
         )}
