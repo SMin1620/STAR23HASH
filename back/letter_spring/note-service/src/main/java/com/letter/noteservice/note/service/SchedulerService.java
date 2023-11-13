@@ -16,7 +16,7 @@ public class SchedulerService {
     private final NoteRepository noteRepository;
 
     @Transactional
-    @Scheduled(cron = "0 0 18 * * ?")
+    @Scheduled(cron = "0 0 17 * * ?")
     public void reset() {
         List<Note> noteList = noteRepository.findAllByIsStoreFalse();
         for (Note note : noteList) {
