@@ -2,22 +2,23 @@ import { useRouter } from 'next/navigation'
 import DeliveryUfo from '../Three/deliveryUfo'
 import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
 import { useEffect, useState } from 'react'
+import IsMember from '@/store/member'
 
 import * as a from './arrive.styled'
 
 export default function Yes() {
   const router = useRouter()
   const [rollId, setRollId] = useState()
+  const { setIsMember } = IsMember()
 
   const handleClick = (url: string) => {
+    setIsMember(true)
     router.push(url)
   }
 
   useEffect(() => {
     async function click() {
       const check = await MakeLinkAxios()
-      // console.log('요기')
-      // console.log(check.data)
       setRollId(check.data.rollId)
     }
     click()
