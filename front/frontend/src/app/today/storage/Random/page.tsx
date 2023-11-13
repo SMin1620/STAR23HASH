@@ -37,12 +37,10 @@ export default function TodayRandomStorage() {
     senderName: string,
   ) => {
     const response = await randomDetailGet(id)
-    console.log(response)
-
     setDetail(response)
 
     router.push(
-      `/storage/random/${response.id}?planetNumber=${modelIndex}&senderName=${senderName}`,
+      `/storage/random/${id}?planetNumber=${modelIndex}&senderName=${senderName}`,
     )
   }
 
@@ -106,6 +104,7 @@ export default function TodayRandomStorage() {
                 startPostion[1] + 10 * index,
                 startPostion[2] + 120 * index,
               ]
+
               return (
                 <RandomPlanet
                   key={item.id}
