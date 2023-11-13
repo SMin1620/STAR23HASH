@@ -24,7 +24,6 @@ export default function TodayRandomStorage() {
   useEffect(() => {
     const handleListApi = async () => {
       const response = await RandomListGet()
-      console.log(response.data.data)
 
       setNoteList(response.data.data)
     }
