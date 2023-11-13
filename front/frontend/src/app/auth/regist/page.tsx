@@ -8,8 +8,7 @@ import * as r from './regist.styled'
 
 export default function Regist() {
   const router = useRouter()
-  // const { phone } = PhoneStore()
-  const [phone, setPhone] = useState('01048436836')
+  const { phone } = PhoneStore()
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
