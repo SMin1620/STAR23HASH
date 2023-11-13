@@ -53,9 +53,9 @@ export default function RegistPass() {
   async function registClick() {
     if (isValid) {
       if (isMatch) {
-        console.log(phone + ' ' + password)
+        // console.log(phone + ' ' + password)
         const check = await registAxios(phone, password)
-        console.log(check)
+        // console.log(check)
         if (check.data.message === '회원가입 성공') {
           alert('회원가입 성공하셨습니다!')
           const a = await passwordAxios(phone, password)

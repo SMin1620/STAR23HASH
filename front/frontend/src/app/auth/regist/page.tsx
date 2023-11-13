@@ -11,9 +11,9 @@ export default function Regist() {
   const { phone } = PhoneStore()
   const [inputValue, setInputValue] = useState('')
 
-  useEffect(() => {
-    console.log(phone)
-  })
+  // useEffect(() => {
+  //   console.log(phone)
+  // })
 
   // 인증확인 로직
   async function PasswordAuthClick() {
@@ -35,6 +35,7 @@ export default function Regist() {
       return
     } else {
       const check = await sendSmsAxios(phone)
+      console.log(check)
       alert('인증번호가 전송되었습니다.')
     }
   }
