@@ -133,6 +133,10 @@ export default function TodayLinkStorage({ params }: Props) {
     }
   }, [rollList])
 
+  useEffect(() => {
+    console.log(isUser)
+  }, [isUser])
+
   const handleShare = () => {
     const currentUrl = window.document.location.href
     console.log(currentUrl)
@@ -213,7 +217,7 @@ export default function TodayLinkStorage({ params }: Props) {
                 !item.isRead && (
                   <Float key={index} speed={1} floatIntensity={0.1}>
                     <AstronautModel
-                      url={`/assets/astronaut${item.icon}.glb`}
+                      url={`/assets/astronaut/astronaut${item.icon}.glb`}
                       scale={[0.3, 0.3, 0.3]}
                       position={positions[index]}
                       onClick={() => handleDetailApi(item.id)}
@@ -239,7 +243,15 @@ export default function TodayLinkStorage({ params }: Props) {
           {isUser && <BackButton onClick={() => goBack()}>뒤로가기</BackButton>}
           {isUser && <KaKaoShareButton />}
         </BtnContainer>
-        <Guide>화면을 움직일 수 있어요!</Guide>
+        <Guide>
+          화면을 움직일 수 있어요!
+          {isUser && (
+            <>
+              <br />
+              편지는 한번 읽으면 사라져요 ㅜㅜ
+            </>
+          )}
+        </Guide>
       </HtmlContainer>
     </LinkContainer>
   )

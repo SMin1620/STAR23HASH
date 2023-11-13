@@ -14,8 +14,6 @@ export default function KaKaoShareButton() {
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Kakao) {
       const { Kakao } = window
-      console.log('clicked kakao')
-
       if (!Kakao.isInitialized()) {
         // SDK 초기화 부분, 본인의 API_KEY 입력
         Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY)
