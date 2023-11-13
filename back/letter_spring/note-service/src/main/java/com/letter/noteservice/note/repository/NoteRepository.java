@@ -44,8 +44,7 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
     /**
      * 오늘 온 쪽지 방 목록 조회
      */
-    Optional<Note> findTopByReceiverIdAndIsReadFalseAndIsStoreTrueAndCreatedAtBetweenOrderByCreatedAtDesc(Long memberId, LocalDateTime start, LocalDateTime end);
-
+    Optional<Note> findTopByRoomIdAndReceiverIdAndIsReadFalseAndIsStoreTrueAndCreatedAtBetweenOrderByCreatedAtDesc(Long roomId, Long memberId, LocalDateTime start, LocalDateTime end);
     /**
      * 쪽지 보내기 스케줄러
      */
