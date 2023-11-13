@@ -44,10 +44,14 @@ export default function TodayLinkStorage({ params }: Props) {
 
   useEffect(() => {
     const handleListApi = async (id: number) => {
-      const response = await LinkListGet(id)
-      console.log(response.data.data)
+      try {
+        const response = await LinkListGet(id)
+        console.log(response.data.data)
 
-      setRollList(response.data.data)
+        setRollList(response.data.data)
+      } catch (error) {
+        router.replace(`/error`)
+      }
     }
     handleListApi(params.slug)
   }, [])
@@ -77,27 +81,27 @@ export default function TodayLinkStorage({ params }: Props) {
   }
 
   useEffect(() => {
-    const accessToken = getCookieValue('accessToken')
+    const rollId = getCookieValue('rollId')
+    // const accessToken = getCookieValue('accessToken')
     // 토큰 없으면 바로 비회원
-    if (accessToken === null) {
-      setIsUser(false)
-    } else {
+    console.log(rollId)
+
+    if (rollId) {
       // 토큰 있을땐, 현재 토큰이 가진 rollID랑 params.slug랑 비교해서
       // 맞는지 다른지 확인
+
       const check = async () => {
-        const checkRoll = await MakeLinkAxios()
+        // const checkRoll = await MakeLinkAxios()
         // setIsUser(true)
         //일치함
-        if (checkRoll.data.rollId == params.slug) {
-          setIsUser(true)
+        if (parseInt(rollId) == params.slug) {
+          console.log('일치함?')
           const handleListApi = async (id: number) => {
-            try {
-              const response = await LinkListGet(id)
-              setRollList(response.data.data)
-            } catch (error) {
-              return error
-            }
+            const response = await LinkListGet(id)
+            setRollList(response.data.data)
+            console.log('RollList ', response.data.data)
           }
+          setIsUser(true)
           handleListApi(params.slug)
         }
         //다름
@@ -106,8 +110,10 @@ export default function TodayLinkStorage({ params }: Props) {
         }
       }
       check()
+    } else {
+      setIsUser(false)
     }
-  }, [params.slug])
+  }, [])
 
   useEffect(() => {
     if (rollList && !positionSet) {
