@@ -26,10 +26,27 @@ export const ModalContent = styled.div`
   border: 2px solid gray;
   text-align: center;
 `
+export const ModalContent2 = styled.div`
+  z-index: 20;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 280px;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 1rem;
+  border: 2px solid gray;
+  // text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 export const ModalText = styled.div`
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-size: 1.3rem;
 `
 
@@ -125,4 +142,38 @@ export const EmptyDiv = styled.div``
 export const RepairImg = styled.img`
   width: 120px;
   margin: auto;
+`
+
+export const ModalPhone = styled.input`
+  width: 160px;
+  height: 30px;
+  text-align: center;
+  border-bottom: 2px dashed black;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none; /* 기본 포커스 아웃라인 제거 */
+    border-bottom: 2px dashed black;
+  }
+`
+
+export const SearchButton = styled.button`
+  width: 50px;
+  height: 30px;
+  background-color: #ffe189;
+  font-size: 16px;
+  border-radius: 10px;
+`
+
+export const possible = styled.div`
+  font-size: 0.8rem;
+  color: blue;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+`
+export const impossible = styled.div`
+  font-size: 0.8rem;
+  color: red;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
 `

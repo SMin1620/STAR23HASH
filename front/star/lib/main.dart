@@ -61,7 +61,7 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                   child: InAppWebView(
                     initialUrlRequest: URLRequest(
                       url: Uri.parse(
-                          "http://k9e106.p.ssafy.io/auth/loginMain"),
+                          "http://k9e106.p.ssafy.io/"),
                     ),
                     initialOptions: InAppWebViewGroupOptions(
                       crossPlatform: InAppWebViewOptions(
