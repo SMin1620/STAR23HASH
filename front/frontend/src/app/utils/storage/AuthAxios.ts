@@ -56,13 +56,9 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
     const response = await api(config)
     return response
   } catch (error: any) {
-    console.log('token expired')
-
-    console.error('before resisue', error)
     if (error.response?.status === 403 || error.response?.status === 401) {
       try {
         const refreshToken = getCookieValue('refreshToken')
-        console.log(refreshToken)
 
         const reissueResponse = await axios.post(
           `${DOMAIN}/api/members/refresh`,
@@ -78,8 +74,9 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
         const reissuedToken = reissueResponse.data.data.accessToken
 
         setCookieValue('accessToken', `Bearer ${reissuedToken}`)
-        config.headers = {
-          Authorization: reissuedToken,
+
+        const headers = {
+          Authorization: getCookieValue('accessToken'),
         }
 
         config.headers = headers
