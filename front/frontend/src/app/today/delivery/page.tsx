@@ -9,11 +9,11 @@ const Delivery: React.FC = () => {
     const calculateRemainingTime = () => {
       const now = new Date()
       const targetTime = new Date()
-      targetTime.setHours(18, 0, 0) // 오후 6시
+      targetTime.setHours(17, 0, 0) // 오후 5시
 
       let remainingTime = targetTime.getTime() - now.getTime()
 
-      // 만약 현재 시간이 오후 6시 이후라면 다음 날 오후 6시까지 남은 시간을 계산
+      // 만약 현재 시간이 오후 5시 이후라면 다음 날 오후 6시까지 남은 시간을 계산
       if (remainingTime < 0) {
         targetTime.setDate(targetTime.getDate() + 1)
         remainingTime = targetTime.getTime() - now.getTime()
