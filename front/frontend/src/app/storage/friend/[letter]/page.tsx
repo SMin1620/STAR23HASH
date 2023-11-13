@@ -24,7 +24,7 @@ export default function Letter({ params }: Props) {
         const response = await getLetter(params.letter)
         setLetterInfo(response.data)
       } catch (error) {
-        router.replace('/main')
+        router.replace('/error')
       }
     }
 
