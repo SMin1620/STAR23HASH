@@ -5,15 +5,10 @@ import { Float, OrbitControls, SpotLight, Stars } from '@react-three/drei'
 import UfoModel from '../../../../../component/today/todayStorage/link/ufoModel/ufoModel'
 import PlanetModel from '../../../../../component/today/todayStorage/link/planetModel/planetModel'
 import AstronautModel from '../../../../../component/today/todayStorage/link/astronautModel/astronautModel'
-import GradientBackground from '../../../../../component/Three/three.styled'
-import {
-  Position,
-  checkMinDistance,
-} from '../../../../../component/today/todayStorage/checkPosition/checkPosition'
+import { Position } from '../../../../../component/today/todayStorage/checkPosition/checkPosition'
 import Light from '@/component/today/todayStorage/light/light'
 import LinkListGet from '@/app/utils/todayStorage/link/linkListGet'
 import { LinkDetailGet } from '@/app/utils/todayStorage/link/linkDetailGet'
-import ShareButton from '@/component/today/todayStorage/link/shareButton/shareButton'
 import {
   HtmlContainer,
   LinkContainer,
@@ -24,10 +19,7 @@ import {
   WriteButton,
 } from './link.styled'
 import { useRouter } from 'next/navigation'
-import { check } from 'prettier'
-import { MakeLinkAxios } from '@/app/utils/main/makeLinkAxios'
 import KaKaoShareButton from '@/component/common/kakaoShareButton/kakaoShareButton'
-import IsMember from '@/store/member'
 
 type Props = {
   params: {

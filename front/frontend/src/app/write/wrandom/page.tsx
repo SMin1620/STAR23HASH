@@ -1,9 +1,8 @@
 'use client'
-import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import GlobalStyle from '../GlobalStyles'
-import { createNote, createNotereset } from '@/app/utils/write/createNote'
+import { createNote } from '@/app/utils/write/createNote'
 import * as st from './wrandom.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 export default function WriteFriend() {

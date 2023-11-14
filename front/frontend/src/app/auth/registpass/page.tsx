@@ -54,17 +54,29 @@ export default function RegistPass() {
     if (isValid) {
       if (isMatch) {
         // console.log(phone + ' ' + password)
-        const check = await registAxios(phone, password)
-        // console.log(check)
-        if (check.data.message === '회원가입 성공') {
-          alert('회원가입 성공하셨습니다!')
-          const a = await passwordAxios(phone, password)
-          if (a.data.message == '로그인 성공') {
-            router.push('/main')
+        try {
+          const check = await registAxios(phone, password)
+          if (check.data.message === '회원가입 성공') {
+            alert('회원가입 성공하셨습니다!')
+            try {
+              const a = await passwordAxios(phone, password)
+              if (a.data.message === '로그인 성공') {
+                router.replace('/main')
+              } else {
+                throw new Error()
+              }
+            } catch (error) {
+              alert('로그인에 실패했어요ㅜㅜ')
+              router.replace('/')
+            }
+          } else {
+            throw new Error()
           }
-        } else {
+        } catch (error) {
           alert('회원가입에 실패하였습니다ㅜㅜ')
+          router.replace('/')
         }
+        // console.log(check)
       }
     } else {
       alert('회원가입에 실패하였습니다ㅜㅜ 비밀번호를 확인해주세요')

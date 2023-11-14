@@ -12,7 +12,7 @@ export const TodayAlarm = async (): Promise<any> => {
 
     return response.data
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     // throw new Error('네트워크 오류')
   }
 }
