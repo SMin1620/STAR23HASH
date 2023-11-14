@@ -17,9 +17,12 @@ export default function GetFriend() {
   const [selectedContactIndex, setSelectedContactIndex] = useState(-1)
   useEffect(() => {
     const getData = async () => {
-      const res = await getContacts()
-      setContacts(res.data)
-      //console.log('received contacts', res.data)
+      try {
+        const res = await getContacts()
+        setContacts(res.data)
+      } catch (error) {
+        router.push('/error')
+      }
     }
     getData()
   }, [])
