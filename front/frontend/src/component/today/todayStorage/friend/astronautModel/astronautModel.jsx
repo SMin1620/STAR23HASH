@@ -24,7 +24,7 @@ export default function AstronautModel({ url, scale, position, onClick }) {
   astronaut.position.set(...position)
 
   const handleClick = (e) => {
-    console.log('clicked')
+    // console.log('clicked')
     if (onClick) {
       onClick(e)
     }

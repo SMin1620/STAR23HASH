@@ -15,7 +15,7 @@ export default function ShareButton(onClick) {
   //링크 복사
   const handleOnClick = () => {
     let currentUrl = window.document.location.href
-    console.log(currentUrl)
+    // console.log(currentUrl)
     let t = document.createElement('textarea')
     document.body.appendChild(t)
     t.value = currentUrl
