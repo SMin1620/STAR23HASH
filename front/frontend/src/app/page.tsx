@@ -31,11 +31,10 @@ export default function LoginMain() {
   async function phoneCheck(inputValue: string) {
     try {
       const data = await loginAxios(inputValue)
-      console.log(data)
+
       return data.data
     } catch (error) {
-      console.error(error)
-      throw error
+      router.replace('/error')
     }
   }
 
@@ -62,7 +61,6 @@ export default function LoginMain() {
     }
 
     const check = await phoneCheck(inputValue)
-    console.log(check)
     if (check == false) {
       setPhone(inputValue)
       setShowModal(true)

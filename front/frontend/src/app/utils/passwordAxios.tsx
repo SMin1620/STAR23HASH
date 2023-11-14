@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, AxiosError } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
@@ -34,7 +34,7 @@ const setCookieValue = (
 export const passwordAxios = async (
   phone: string,
   password: string,
-): Promise<AxiosResponse> => {
+): Promise<any> => {
   try {
     const res: AxiosResponse = await axiosInstance.post(
       `${DOMAIN}/api/members/login`,
@@ -55,8 +55,6 @@ export const passwordAxios = async (
     // }
     return res
   } catch (error) {
-    console.log(error)
-
-    throw new Error('네트워크 오류')
+    // console.error(error)
   }
 }

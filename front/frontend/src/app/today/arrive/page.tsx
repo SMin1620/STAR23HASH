@@ -15,11 +15,8 @@ export default function Arrive() {
     // 도착한 편지가 있는지 없는지 확인 (비동기)
     async function click() {
       const check = await TodayAlarm()
-      console.log('요기')
-      console.log(check.data)
       return check.data
     }
-
     ;(async () => {
       const check = await click()
       setTimeout(() => {

@@ -26,11 +26,11 @@ export default function MakeLink() {
           `http://k9e106.p.ssafy.io/today/storage/Link/${check.data.rollId}`,
         )
       } catch (error) {
-        console.error('Failed to fetch data: ', error)
+        alert('링크 생성에 실패했어요ㅜㅜ')
+        setValue('링크 생성에 문제가 발생했어요')
       }
     }
     fetchData()
-    console.log(value)
   }, [])
 
   // 현재 페이지 URL 저장, 이는 공유 버튼 클릭시 열리는 페이지의 주소로 사용됨
