@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
@@ -37,6 +39,10 @@ public class MemberFeignController {
         // 램던 쪽지 받는 사람과 보내는 사람 중복을 금지 로직
         Member member = memberRepository.findByPhone(phone)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+
+        // 사용자가 혼자면 예외처리
+        List<Member> memberList = memberRepository.findAll();
+        if (memberList.size() < 2) throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
 
         while (true) {
             member = memberRepository.findByRandom();
