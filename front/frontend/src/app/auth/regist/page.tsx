@@ -11,18 +11,18 @@ export default function Regist() {
   const { phone } = PhoneStore()
   const [inputValue, setInputValue] = useState('')
 
-  // useEffect(() => {
-  //   console.log(phone)
-  // })
-
   // 인증확인 로직
   async function PasswordAuthClick() {
-    const check = await confirmsSmsAxios(phone, inputValue)
-    if (check.data.data) {
-      alert('인증 완료되었습니다!')
-      router.push('/auth/registpass')
-    } else {
-      alert('인증번호가 틀렸어요ㅜㅜ 다시한번 확인해주세요!')
+    try {
+      const check = await confirmsSmsAxios(phone, inputValue)
+      if (check.data.data) {
+        alert('인증 완료되었습니다!')
+        router.push('/auth/registpass')
+      } else {
+        throw new Error()
+      }
+    } catch (error) {
+      alert('문제가 발상했어요ㅜㅜ 다시한번 확인해주세요!')
     }
   }
 
@@ -34,9 +34,16 @@ export default function Regist() {
       router.replace('/')
       return
     } else {
-      const check = await sendSmsAxios(phone)
-      console.log(check)
-      alert('인증번호가 전송되었습니다.')
+      try {
+        const check = await sendSmsAxios(phone)
+        if (check.data.data) {
+          alert('인증번호가 전송되었습니다.')
+        } else {
+          throw new Error()
+        }
+      } catch (error) {
+        alert('인증번호 전송에 실패했습니다. 잠시후 다시 시도해주세요.')
+      }
     }
   }
 

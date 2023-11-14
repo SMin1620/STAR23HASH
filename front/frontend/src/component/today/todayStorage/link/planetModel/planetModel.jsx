@@ -12,7 +12,7 @@ export default function PlanetModel({ url, scale, position }) {
       setPlanetModel(gltf.scene),
         undefined,
         function (error) {
-          console.log(error)
+          // console.log(error)
         }
     })
   }, [url])

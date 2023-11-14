@@ -5,11 +5,7 @@ import { Float, OrbitControls, SpotLight, Stars } from '@react-three/drei'
 import UfoModel from '../../../../component/today/todayStorage/link/ufoModel/ufoModel'
 import PlanetModel from '../../../../component/today/todayStorage/link/planetModel/planetModel'
 import AstronautModel from '../../../../component/today/todayStorage/friend/astronautModel/astronautModel'
-import GradientBackground from '../../../../component/Three/three.styled'
-import {
-  Position,
-  checkMinDistance,
-} from '../../../../component/today/todayStorage/checkPosition/checkPosition'
+
 import Light from '@/component/today/todayStorage/light/light'
 import { useRouter } from 'next/navigation'
 import friendListGet from '@/app/utils/todayStorage/friend/friendListGet'

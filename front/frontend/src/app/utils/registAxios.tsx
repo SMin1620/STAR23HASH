@@ -1,5 +1,4 @@
-import axios, { AxiosResponse, AxiosError } from 'axios'
-import { log } from 'console'
+import axios, { AxiosResponse } from 'axios'
 
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 
@@ -19,9 +18,6 @@ export const registAxios = async (
         password: password,
       },
     )
-    if (!res || res.status !== 200) {
-      throw new Error('에러')
-    }
 
     return res
   } catch (error) {

@@ -1,8 +1,6 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Test from '@/component/Three/test'
-import Script from 'next/script'
 import Head from 'next/head' // 추가됨
 
 import localFont from 'next/font/local'
@@ -24,7 +22,6 @@ declare global {
     Kakao: any
   }
 }
-
 export default function RootLayout({
   children,
 }: {
