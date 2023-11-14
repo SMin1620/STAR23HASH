@@ -16,13 +16,18 @@ export default function LoginPassword() {
       alert('비밀번호를 입력해주세요')
     } else {
       // console.log('번호 :' + phone + '비번 : ' + inputValue)
-      const a = await passwordAxios(phone, inputValue)
-      // console.log(a.data.message)
-      if (a.data.message == '로그인 성공') {
-        router.push('/main')
-      } else {
-        alert('비밀번호가 틀렸습니다.')
+      try {
+        const a = await passwordAxios(phone, inputValue)
+
+        if (a.data.message == '로그인 성공') {
+          router.replace('/main')
+        } else {
+          alert('비밀번호가 틀렸습니다.')
+        }
+      } catch (error) {
+        alert('비밀번호를 다시 확인해주세요.')
       }
+      // console.log(a.data.message)
     }
   }
 
