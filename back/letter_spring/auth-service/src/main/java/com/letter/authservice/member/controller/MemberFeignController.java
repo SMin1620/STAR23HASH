@@ -40,10 +40,6 @@ public class MemberFeignController {
         Member member = memberRepository.findByPhone(phone)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        // 사용자가 혼자면 예외처리
-        List<Member> memberList = memberRepository.findAll();
-        if (memberList.size() < 2) throw new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND);
-
         while (true) {
             member = memberRepository.findByRandom();
             if (! member.getPhone().equals(phone)) break;

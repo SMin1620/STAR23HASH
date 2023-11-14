@@ -46,7 +46,7 @@ public class Room {
     @Column(name = "recent_at")
     private LocalDateTime recentAt;
 
-    @Column(name = "temporary_id")
+    @Column(name = "temporary_at")
     private LocalDateTime temporaryAt;
 
     @ColumnDefault("false")
