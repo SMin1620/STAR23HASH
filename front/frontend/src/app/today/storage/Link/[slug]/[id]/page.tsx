@@ -54,9 +54,13 @@ export default function LinkRead({ params }: Props) {
 
   useEffect(() => {
     const handleDetailApi = async (id: number) => {
-      const response = await LinkDetailGet(id)
+      try {
+        const response = await LinkDetailGet(id)
 
-      setRollDetail(response.data.data)
+        setRollDetail(response.data.data)
+      } catch (error) {
+        router.replace(`/error`)
+      }
     }
     handleDetailApi(params.id)
   }, [])
