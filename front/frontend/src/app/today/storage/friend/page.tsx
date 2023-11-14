@@ -38,19 +38,27 @@ export default function TodayFriendStorage() {
 
   useEffect(() => {
     const handleListApi = async () => {
-      const response = await friendListGet()
+      try {
+        const response = await friendListGet()
 
-      setLetterList(response.data.data)
+        setLetterList(response.data.data)
+      } catch (error) {
+        router.replace(`/error`)
+      }
     }
     handleListApi()
   }, [])
 
   const handleDetailApi = async (id: number) => {
-    const response = await friendDetailGet(id)
+    try {
+      const response = await friendDetailGet(id)
 
-    setLetterDetail(response.data.data)
+      setLetterDetail(response.data.data)
 
-    router.push(`/storage/friend/${id}`)
+      router.push(`/storage/friend/${id}`)
+    } catch (error) {
+      router.replace(`/error`)
+    }
   }
 
   const goBack = () => {

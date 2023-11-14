@@ -49,10 +49,14 @@ export default function TodayLinkStorage({ params }: Props) {
   }, [])
 
   const handleDetailApi = async (id: number) => {
-    const response = await LinkDetailGet(id)
+    try {
+      const response = await LinkDetailGet(id)
 
-    setRollDetail(response.data.data)
-    router.push(`/today/storage/Link/${params.slug}/${id}`)
+      setRollDetail(response.data.data)
+      router.push(`/today/storage/Link/${params.slug}/${id}`)
+    } catch (error) {
+      router.replace(`/error`)
+    }
   }
 
   const getCookieValue = (name: string): string | null => {
