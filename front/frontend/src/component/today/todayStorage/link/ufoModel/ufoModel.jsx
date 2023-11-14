@@ -12,7 +12,7 @@ export default function UfoModel({ url, scale, position }) {
       setUfoModel(gltf.scene),
         undefined,
         function (error) {
-          console.log(error)
+          // console.log(error)
         }
     })
   }, [url])

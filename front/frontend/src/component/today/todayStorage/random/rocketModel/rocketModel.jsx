@@ -12,7 +12,7 @@ export default function RocketModel({ url, scale, position, rotation }) {
       setRocketModel(gltf.scene),
         undefined,
         function (error) {
-          console.log(error)
+          // console.log(error)
         }
     })
   }, [url])

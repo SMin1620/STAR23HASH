@@ -59,7 +59,7 @@ export default function WriteFriend({ searchParams }: Props) {
         return imageUrl
       }
     } catch (error) {
-      console.log(error)
+      //console.log(error)
       return null
     }
   }
@@ -88,10 +88,10 @@ export default function WriteFriend({ searchParams }: Props) {
           setMediaUrl(S3Url)
         }
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
 
