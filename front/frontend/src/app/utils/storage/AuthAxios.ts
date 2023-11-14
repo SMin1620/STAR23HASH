@@ -86,11 +86,11 @@ const AuthAxios = async (config: AxiosRequestConfig): Promise<any> => {
         return retryResponse
       } catch (error) {
         // console.log('재발급 실패', error)
-        throw error
+        throw new Error()
       }
     } else {
       // console.log('재발급 시도조차 못함', error)
-      throw error
+      throw new Error()
     }
   }
 }
