@@ -1,5 +1,5 @@
 import AuthAxios from '../storage/AuthAxios'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL
 

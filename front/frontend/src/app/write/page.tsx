@@ -1,7 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import GlobalStyle from './GlobalStyles'
 import * as st from './write.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'

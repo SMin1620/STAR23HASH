@@ -1,4 +1,3 @@
-// ;/api/llors / paper / { paperId }
 import { AxiosResponse } from 'axios'
 import AuthAxios from '../../storage/AuthAxios'
 
