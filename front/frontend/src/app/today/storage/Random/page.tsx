@@ -21,9 +21,13 @@ export default function TodayRandomStorage() {
 
   useEffect(() => {
     const handleListApi = async () => {
-      const response = await RandomListGet()
+      try {
+        const response = await RandomListGet()
 
-      setNoteList(response.data.data)
+        setNoteList(response.data.data)
+      } catch (error) {
+        router.replace(`/error`)
+      }
     }
     handleListApi()
   }, [])
@@ -33,12 +37,16 @@ export default function TodayRandomStorage() {
     modelIndex: number,
     senderName: string,
   ) => {
-    const response = await randomDetailGet(id)
-    setDetail(response)
+    try {
+      const response = await randomDetailGet(id)
+      setDetail(response)
 
-    router.push(
-      `/storage/random/${id}?planetNumber=${modelIndex}&senderName=${senderName}`,
-    )
+      router.push(
+        `/storage/random/${id}?planetNumber=${modelIndex}&senderName=${senderName}`,
+      )
+    } catch (error) {
+      router.replace(`/error`)
+    }
   }
 
   const goBack = () => {
