@@ -1,10 +1,9 @@
 'use client'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import { useState } from 'react'
 import GlobalStyle from '../write/GlobalStyles'
 import * as st from './pullfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import SearchingModal from '@/component/write/searchingmodal'
 type Contact = {
   name: string

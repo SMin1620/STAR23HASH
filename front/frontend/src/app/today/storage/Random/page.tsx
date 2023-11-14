@@ -1,9 +1,7 @@
 'use client'
-import { Canvas, useThree } from '@react-three/fiber'
-import { Suspense, useEffect, useRef, useState } from 'react'
-import { OrbitControls, Stars } from '@react-three/drei'
-import RandomModel from '../../../../component/today/todayStorage/random/randomPlanet/randomPlanet'
-import GradientBackground from '../../../../component/Three/three.styled'
+import { Canvas } from '@react-three/fiber'
+import { Suspense, useEffect, useState } from 'react'
+
 import { Models } from '@/component/today/todayStorage/random/planetModel/planetModel'
 import RocketModel from '@/component/today/todayStorage/random/rocketModel/rocketModel'
 import * as THREE from 'three'

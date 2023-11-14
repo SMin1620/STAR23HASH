@@ -1,5 +1,4 @@
-import axios, { AxiosResponse, AxiosError } from 'axios'
-import { log } from 'console'
+import axios, { AxiosResponse } from 'axios'
 
 const DOMAIN = process.env.NEXT_PUBLIC_API_URL || ''
 

@@ -10,12 +10,8 @@ export const getRandomRooms = async (): Promise<any> => {
       url: `${DOMAIN}/api/notes/room`,
     })
 
-    if (!response || response.status !== 200) {
-      throw new Error('에러')
-    }
-
     return response.data
   } catch (error: any) {
-    console.log(error)
+    // console.log(error)
   }
 }
