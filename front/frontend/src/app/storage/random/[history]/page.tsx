@@ -27,9 +27,7 @@ export default function History({ params, searchParams }: Props) {
       try {
         const response = await getNotes(params.history)
         setNotes(response.data)
-        console.log('randomRooms : ', response.data)
       } catch (error) {
-        console.error('Error fetching random rooms:', error)
         router.replace('/error')
       }
     }
@@ -52,8 +50,6 @@ export default function History({ params, searchParams }: Props) {
 
         <h.LetterLogContainer className="h-screen ">
           <h.LetterLogWrapper role="list" className="space-y-4">
-            {/* Letter component */}
-
             {notes &&
               notes.map((note) =>
                 note.send ? (
@@ -76,8 +72,6 @@ export default function History({ params, searchParams }: Props) {
                   />
                 ),
               )}
-
-            {/* Letter component end */}
           </h.LetterLogWrapper>
         </h.LetterLogContainer>
       </h.HistoryPage>

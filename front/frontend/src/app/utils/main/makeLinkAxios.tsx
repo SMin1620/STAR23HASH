@@ -10,15 +10,9 @@ export const MakeLinkAxios = async (): Promise<any> => {
       url: `${DOMAIN}/api/rolls/link`,
     })
 
-    if (!response || response.status !== 200) {
-      throw new Error('에러')
-    }
-
-    console.log(response.data.data)
-
     return response.data
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     // throw new Error('네트워크 오류')
   }
 }

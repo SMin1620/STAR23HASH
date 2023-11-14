@@ -19,9 +19,6 @@ export const registAxios = async (
         password: password,
       },
     )
-    if (!res || res.status !== 200) {
-      throw new Error('에러')
-    }
 
     return res
   } catch (error) {
