@@ -16,7 +16,6 @@ type Props = {
 
 export default function Letter({ params }: Props) {
   const router = useRouter()
-  const [receiverId, setReceiverId] = useState<number>()
   const [noteInfo, setNoteInfo] = useState<Note>()
   const [content, setContent] = useState<string>()
   useEffect(() => {
@@ -24,9 +23,7 @@ export default function Letter({ params }: Props) {
       try {
         const response = await getNote(params.reply)
         setNoteInfo(response.data)
-        console.log('note : ', response.data)
       } catch (error) {
-        console.error('Error fetching message:', error)
         router.replace('/error')
       }
     }
@@ -35,17 +32,15 @@ export default function Letter({ params }: Props) {
   }, [])
 
   const handleSend = async () => {
-    // 전송
     try {
       await replyNote(
         params.history,
         content ? content : '아무말도 답장안했답니다~',
       )
+      router.replace(`/storage/random`)
     } catch (error) {
-      console.error('Error ', error)
+      alert('헉.. 전송실패')
     }
-
-    router.replace(`/storage/random`)
   }
   const handleBackBtnClick = () => {
     router.back()
@@ -80,7 +75,7 @@ export default function Letter({ params }: Props) {
             onChange={handleContent}
           />
 
-          <r.WarningText>작성된 편지는 20:00에 일괄 전송됩니다.</r.WarningText>
+          <r.WarningText>작성된 편지는 17:00에 일괄 전송됩니다.</r.WarningText>
           <r.ButtonWrapper>
             <r.Button onClick={handleBackBtnClick}>돌아가기</r.Button>
             <r.Button onClick={handleSend}>답장하기</r.Button>

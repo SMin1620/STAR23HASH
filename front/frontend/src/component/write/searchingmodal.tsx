@@ -27,7 +27,7 @@ function SearchingModal({ contact, closeState }: Props) {
       return
     } else {
       const res = await loginAxios(phone)
-      console.log(res)
+      //console.log(res)
 
       if (res.data.toString() === 'true') {
         setResultMessage('전송할 수 있어요!')

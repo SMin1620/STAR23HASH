@@ -1,5 +1,4 @@
 'use client'
-import * as st from '@/app/write/wfriend/input/inputfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 import {
   AstronautContainer,

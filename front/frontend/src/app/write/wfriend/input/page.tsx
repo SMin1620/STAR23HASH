@@ -1,6 +1,5 @@
 'use client'
-import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import GlobalStyle from '../../GlobalStyles'
 import * as st from './inputfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
@@ -59,7 +58,7 @@ export default function WriteFriend({ searchParams }: Props) {
         return imageUrl
       }
     } catch (error) {
-      console.log(error)
+      //console.log(error)
       return null
     }
   }
@@ -88,10 +87,10 @@ export default function WriteFriend({ searchParams }: Props) {
           setMediaUrl(S3Url)
         }
       } catch (error) {
-        console.log(error)
+        //console.log(error)
       }
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }
 

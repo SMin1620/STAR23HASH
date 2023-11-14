@@ -14,7 +14,6 @@ type Props = {
 }
 
 export default function Letter({ params }: Props) {
-  // api요청 데이터 취득.
   const router = useRouter()
   const [letterInfo, setLetterInfo] = useState<Letter>()
 
@@ -52,11 +51,8 @@ export default function Letter({ params }: Props) {
             <l.GreenDecoBotton />
           </l.DecoBottonWrapper>
 
-          {/* other type image...sound..video.. */}
           {letterInfo && letterInfo?.type !== 3 ? (
             <l.MediaWrapper>
-              {/* image */}
-
               {letterInfo?.type === 2 ? (
                 <l.PreviewImg
                   className="aspect-auto"
@@ -72,9 +68,6 @@ export default function Letter({ params }: Props) {
                   <source src={letterInfo.fileUrl} type={'audio'} />
                 </l.PreviewAudio>
               ) : null}
-
-              {/* video */}
-              {/* sound */}
             </l.MediaWrapper>
           ) : null}
 

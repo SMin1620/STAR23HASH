@@ -1,14 +1,15 @@
 'use client'
 
-import Link from 'next/link'
 import * as f from './friend.styled'
 import BackButton from '@/component/storage/BackButton'
 import LetterCard from '@/component/storage/friend/LetterCard'
 import { useEffect, useState } from 'react'
 import { Letter } from '@/app/types/storage/types'
 import { getLetters } from '@/app/utils/storage/getLetters'
+import { useRouter } from 'next/navigation'
 
 export default function Friend() {
+  const router = useRouter()
   const [letterList, setLetterList] = useState<Letter[]>()
 
   useEffect(() => {
@@ -16,9 +17,8 @@ export default function Friend() {
       try {
         const resopnse = await getLetters()
         setLetterList(resopnse.data)
-        console.log('letterList : ', resopnse.data)
       } catch (error) {
-        console.error('Error fetching random rooms:', error)
+        router.replace('error')
       }
     }
 
