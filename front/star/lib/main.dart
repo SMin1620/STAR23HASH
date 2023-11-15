@@ -65,6 +65,7 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                     ),
                     initialOptions: InAppWebViewGroupOptions(
                       crossPlatform: InAppWebViewOptions(
+                        userAgent: "MyApp", // 여기에 원하는 User-Agent를 설정합니다.
                         mediaPlaybackRequiresUserGesture: false,
                         javaScriptEnabled: true,
                       ),
@@ -89,7 +90,6 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                               "http://k9e106.p.ssafy.io/pullfriend" &&
                           !_logicExecuted) {
 
-                        print('여기 나와야함 ');
                         _logicExecuted = true; // 로직 실행 여부를 표시
                         List<Contact> contacts = [];
                         PermissionStatus status =
