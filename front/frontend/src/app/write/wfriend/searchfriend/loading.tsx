@@ -1,9 +1,9 @@
-'use client'
-import GlobalStyle from '../write/GlobalStyles'
-import * as st from './pullfriend.styled'
+import Link from 'next/link'
+import GlobalStyle from '../../GlobalStyles'
+import * as st from './searchfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
 
-export default function PullFriend() {
+export default function loading() {
   return (
     <>
       <GlobalStyle />
@@ -15,8 +15,8 @@ export default function PullFriend() {
             <stt.InnerCircle3></stt.InnerCircle3>
           </stt.InnerCircle>
           <st.ContentBox>
-            <st.WhoSend>연락처 접근 권한을 허용해주시고, </st.WhoSend>
-            <st.WhoSend>가지고 올 때 까지 잠시 기다려주세요 ✿◡‿◡ </st.WhoSend>
+            <st.Loading src="/write/desk.png" alt="loading..."></st.Loading>
+            <st.LoadingText>Loading...</st.LoadingText>
           </st.ContentBox>
         </stt.SendBox>
       </stt.SendBoxDiv>
