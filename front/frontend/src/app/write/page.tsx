@@ -9,6 +9,7 @@ import { checkNote } from '@/app/utils/write/checkNote'
 export default function Write() {
   const [res, setRes] = useState(true)
   const router = useRouter()
+  const [isFromApp, setIsFromApp] = useState(false)
   const handleRandom = async () => {
     try {
       const result = await checkNote()
@@ -25,8 +26,24 @@ export default function Write() {
   const closeModal = () => {
     setRes(!res)
   }
+
+  const gofriend = () => {
+    if (isFromApp) {
+      router.push('/pullfriend')
+    } else {
+      router.push('/write/wfriend/searchfriend')
+    }
+  }
   // 페이지에 진입했을 때 히스토리 스택 초기화
   useEffect(() => {}, [res])
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent
+    if (userAgent.includes('MyApp')) {
+      setIsFromApp(true)
+    }
+    console.log(isFromApp ? '앱에서 접근' : '웹에서 접근')
+  }, [])
   return (
     <>
       <GlobalStyle />
@@ -40,11 +57,7 @@ export default function Write() {
           <st.ContentBox>
             <st.WhoSend>누구에게 편지를 보낼까요?</st.WhoSend>
             <st.SendObject>
-              <button
-                onClick={() => {
-                  router.push(`/pullfriend`)
-                }}
-              >
+              <button onClick={gofriend}>
                 <st.SendImg
                   src="/icons/SolarSystem.png"
                   alt="친구에게 보내기"
