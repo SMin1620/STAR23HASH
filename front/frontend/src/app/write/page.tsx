@@ -27,6 +27,10 @@ export default function Write() {
     setRes(!res)
   }
 
+  const goHome = () => {
+    router.replace('/main')
+  }
+
   const gofriend = () => {
     if (isFromApp) {
       router.push('/pullfriend')
@@ -70,13 +74,7 @@ export default function Write() {
             </st.SendObject>
           </st.ContentBox>
           <stt.EmptyDiv>
-            <st.button
-              onClick={() => {
-                router.back()
-              }}
-            >
-              메인으로
-            </st.button>
+            <st.button onClick={goHome}>메인으로</st.button>
           </stt.EmptyDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
