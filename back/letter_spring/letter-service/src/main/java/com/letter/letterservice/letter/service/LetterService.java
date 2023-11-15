@@ -99,8 +99,8 @@ public class LetterService {
         Long receiverId = authFeignClient.getId(request.getHeader("Authorization"));
 
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime start = now.minusDays(1).withHour(18).withMinute(0).withSecond(0).withNano(0);
-        LocalDateTime end = now.withHour(17).withMinute(59).withSecond(59).withNano(0);
+        LocalDateTime start = now.minusDays(1).withHour(17).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.withHour(16).withMinute(59).withSecond(59).withNano(0);
 
         List<Letter> letters = letterRepository.findAllByReceiverIdAndIsReadFalseAndStoreTrueAndCreateAtBetween(receiverId, start, end);
 
