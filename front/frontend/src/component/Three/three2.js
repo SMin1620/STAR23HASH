@@ -164,6 +164,20 @@ function WriteComponent({ forwardedRef }) {
   return <primitive object={mesh} ref={forwardedRef} />
 }
 
+// function GuidComponent({ forwardedRef }) {
+//   const textureLoader = new TextureLoader()
+//   const texture = textureLoader.load('/main/guideText.png')
+//   const geometry = new PlaneGeometry(1, 1)
+//   const material = new MeshBasicMaterial({ map: texture, transparent: true })
+//   const mesh = new Mesh(geometry, material)
+//   mesh.position.set(-1.0, -1.2, -4.0)
+//   const scale = 0.8
+//   mesh.scale.set(scale, scale, scale)
+//   // mesh.rotation.z = -0.2
+
+//   return <primitive object={mesh} ref={forwardedRef} />
+// }
+
 function Table({ forwardedRef }) {
   const gltf = useGLTF('/assets/table.glb')
   // console.log(gltf.scene)
@@ -191,6 +205,7 @@ function Scene() {
   const storageRef = useRef()
   const writeRef = useRef()
   const tl = gsap.timeline()
+  const guideRef = useRef()
 
   useEffect(() => {
     // 빛1
@@ -215,6 +230,7 @@ function Scene() {
   const [showStorage, setShowStorage] = useState(true)
   const [showRandom, setShowRandom] = useState(false)
   const [showFriend, setShowFriend] = useState(false)
+  const [showGuid, setShowGuid] = useState(false)
 
   //카메라 이동
   useEffect(() => {
@@ -306,6 +322,7 @@ function Scene() {
               setShowRandom((prevShowRandom) => !prevShowRandom)
               setShowStorage((prevShowStorage) => !prevShowStorage)
               setShowFriend((prevShowFriend) => !prevShowFriend)
+              setShowGuid((prevShowGuid) => !prevShowGuid)
 
               // setShowStorage(!showStorage) // 추가된 부분
             },
@@ -450,6 +467,7 @@ function Scene() {
       <TodayComponent forwardedRef={todayRef} />
       <WriteComponent forwardedRef={writeRef} />
       {showStorage && <StorageComponent forwardedRef={storageRef} />}
+      {/* {showGuid && <GuidComponent forwardedRef={randomRef} />} */}
       {showRandom && <RandomComponent forwardedRef={randomRef} />}
       {showFriend && <FriendComponent forwardedRef={friendRef} />}
       {/* <StorageComponent /> */}
