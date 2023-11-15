@@ -42,7 +42,6 @@ export default function Write() {
     if (userAgent.includes('MyApp')) {
       setIsFromApp(true)
     }
-    console.log(isFromApp ? '앱에서 접근' : '웹에서 접근')
   }, [])
   return (
     <>
