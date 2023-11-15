@@ -25,6 +25,10 @@ export default function Write() {
   const closeModal = () => {
     setRes(!res)
   }
+
+  const goHome = () => {
+    router.replace('/main')
+  }
   // 페이지에 진입했을 때 히스토리 스택 초기화
   useEffect(() => {}, [res])
   return (
@@ -58,13 +62,7 @@ export default function Write() {
             </st.SendObject>
           </st.ContentBox>
           <stt.EmptyDiv>
-            <st.button
-              onClick={() => {
-                router.back()
-              }}
-            >
-              메인으로
-            </st.button>
+            <st.button onClick={() => goHome()}>메인으로</st.button>
           </stt.EmptyDiv>
         </stt.SendBox>
       </stt.SendBoxDiv>
