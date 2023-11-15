@@ -26,7 +26,7 @@ export default function Letter({ params }: Props) {
         const response = await getNote(params.reply)
         setNoteInfo(response.data)
       } catch (error) {
-        // router.replace('/error')
+        router.replace('/error')
       }
     }
 

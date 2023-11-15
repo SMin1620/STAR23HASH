@@ -145,8 +145,9 @@ export const RepairImg = styled.img`
 `
 
 export const ContentLimit = styled.div`
+  position: absolute;
   font-size: 0.8rem;
-  // color: gray;
   text-align: right;
-  margin-right: 2rem;
+  top: 72px;
+  left: 205px;
 `
