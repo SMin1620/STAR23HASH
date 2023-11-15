@@ -8,8 +8,8 @@ import * as r from './regist.styled'
 
 export default function Regist() {
   const router = useRouter()
-  // const { phone } = PhoneStore()
-  const [phone, setPhone] = useState('01048436836')
+  const { phone } = PhoneStore()
+  // const [phone, setPhone] = useState('01048436836')
   const [inputValue, setInputValue] = useState('')
   const [isAuthSent, setAuthSent] = useState(false) // 인증번호 전송 성공 여부 상태
   const [isAuthReceive, setAuthReceive] = useState(false) // 인증번호 전송 성공 여부 상태
