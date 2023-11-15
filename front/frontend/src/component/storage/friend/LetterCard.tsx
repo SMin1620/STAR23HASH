@@ -28,18 +28,19 @@ export default function LetterCard({ id, type, isRead }: Props) {
       onClick={handleClick}
       className="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 group w-full"
     >
-      {isRead ? (
+      {/* {isRead ? (
         <c.CardStateImage
           className="w-1/3"
           src="/icons/Check.png"
           alt="state"
         />
-      ) : null}
+      ) : null} */}
 
       <c.CustomImage
         src={`/icons/${LetterType[type]}.svg`}
         alt="item."
         className=" h-full w-full object-cover object-center group-hover:opacity-75"
+        style={{ width: '100%' }}
       />
     </c.Item>
   )
