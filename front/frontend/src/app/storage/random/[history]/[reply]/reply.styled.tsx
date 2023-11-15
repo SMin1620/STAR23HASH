@@ -159,3 +159,10 @@ export const Button = styled.button`
   color: white;
   font-size: 1.2rem;
 `
+
+export const ContentLimit = styled.div`
+  font-size: 0.8rem;
+  // color: gray;
+  text-align: right;
+  margin-right: 2rem;
+`

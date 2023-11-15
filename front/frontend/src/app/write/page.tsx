@@ -10,12 +10,16 @@ export default function Write() {
   const [res, setRes] = useState(true)
   const router = useRouter()
   const handleRandom = async () => {
-    const result = await checkNote()
-    if (result.data.toString() === 'false') {
-      setRes(true)
-      router.push(`/write/wrandom`)
-    } else {
-      setRes(false)
+    try {
+      const result = await checkNote()
+      if (result.data.toString() === 'false') {
+        setRes(true)
+        router.push(`/write/wrandom`)
+      } else {
+        setRes(false)
+      }
+    } catch (error) {
+      router.push('/error')
     }
   }
   const closeModal = () => {
