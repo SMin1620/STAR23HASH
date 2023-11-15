@@ -91,12 +91,12 @@ export default function TodayLinkStorage({ params }: Props) {
         // setIsUser(true)
         //일치함
         if (parseInt(rollId) == params.slug) {
-          const handleListApi = async (id: number) => {
-            const response = await LinkListGet(id)
-            setRollList(response.data.data)
-          }
+          // const handleListApi = async (id: number) => {
+          //   const response = await LinkListGet(id)
+          //   setRollList(response.data.data)
+          // }
           setIsUser(true)
-          handleListApi(params.slug)
+          // handleListApi(params.slug)
         }
         //다름
         else {
@@ -211,8 +211,11 @@ export default function TodayLinkStorage({ params }: Props) {
                       url={`/assets/astronaut/astronaut${item.icon}.glb`}
                       scale={[0.3, 0.3, 0.3]}
                       position={positions[index]}
-                      onClick={() => {
-                        if (isUser) {
+                      onClick={(event: any) => {
+                        if (
+                          isUser &&
+                          event.intersections[0].object === event.object
+                        ) {
                           handleDetailApi(item.id)
                         }
                       }}
