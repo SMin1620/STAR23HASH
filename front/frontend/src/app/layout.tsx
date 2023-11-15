@@ -3,12 +3,12 @@ import './globals.css'
 import Test from '@/component/Three/test'
 import Head from 'next/head' // 추가됨
 
-import localFont from 'next/font/local'
+// import localFont from 'next/font/local'
 
-const myFont = localFont({
-  src: '../../public/fonts/Dovemayo_gothic.ttf',
-  display: 'swap',
-})
+// const myFont = localFont({
+//   src: '../../public/fonts/Dovemayo_gothic.ttf',
+//   display: 'swap',
+// })
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="kr" className={myFont.className}>
+    <html lang="kr">
       <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
