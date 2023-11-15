@@ -27,7 +27,7 @@ export default function Ramdom() {
 
   return (
     <>
-      <r.RandomPage className="absolute h-screen">
+      <r.RandomPage className="absolute h-screen w-screen">
         <BackButton />
 
         <r.TitleWrapper>

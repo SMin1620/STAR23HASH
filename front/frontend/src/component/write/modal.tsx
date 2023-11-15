@@ -10,6 +10,17 @@ type Props = {
 
 function Modal({ hint, closeState }: Props) {
   const [inputText, setInputText] = useState(hint) // State to store input text
+  const [contentLength, setContentLength] = useState(0)
+
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const inputValue = e.currentTarget.value
+    setInputText(inputValue)
+    if (inputText.length >= 50) {
+      // alert('내용은 300자 이내로 작성해주세요.')
+      setInputText(inputValue.substring(0, 49))
+    }
+    setContentLength(inputValue.length)
+  }
 
   if (typeof window === 'undefined') return null
 
@@ -25,8 +36,13 @@ function Modal({ hint, closeState }: Props) {
           <M.ModalInput
             value={inputText}
             placeholder="힌트를 적어주세요'v'"
-            onChange={(e) => setInputText(e.target.value)}
+            onChange={handleContentChange}
           ></M.ModalInput>
+          <M.ContentLimit
+            className={contentLength >= 50 ? `text-red-500` : `text-gray-400`}
+          >
+            {contentLength}/50
+          </M.ContentLimit>
           {/* <M.ModalInputTextLimit>/50</M.ModalInputTextLimit> */}
         </M.ModalInputDiv>
         <M.CloseButton onClick={() => closeState(inputText)}>

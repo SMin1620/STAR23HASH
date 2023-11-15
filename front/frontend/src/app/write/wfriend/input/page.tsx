@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import GlobalStyle from '../../GlobalStyles'
 import * as st from './inputfriend.styled'
 import * as stt from '@/component/common/write_layout/write_layout.styled'
@@ -31,7 +31,16 @@ export default function WriteFriend({ searchParams }: Props) {
   const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_ACCESS_PW
   const REGION = process.env.NEXT_PUBLIC_AWS_S3_REGION
   const BUCKET = process.env.NEXT_PUBLIC_AWS_S3_BUCKET || 'default-bucket-name'
+  const [isFromApp, setIsFromApp] = useState(false)
+  const [contentLength, setContentLength] = useState(0)
 
+  useEffect(() => {
+    const userAgent = navigator.userAgent
+    if (userAgent.includes('MyApp')) {
+      setIsFromApp(true)
+    }
+    console.log(isFromApp ? '앱에서 접근' : '웹에서 접근')
+  }, [])
   AWS.config.update({
     accessKeyId: ACCESS_KEY,
     secretAccessKey: SECRET_ACCESS_KEY,
@@ -138,11 +147,18 @@ export default function WriteFriend({ searchParams }: Props) {
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.currentTarget.value
     setContent(inputValue)
+    if (content.length >= 300) {
+      // alert('내용은 300자 이내로 작성해주세요.')
+      setContent(inputValue.substring(0, 299))
+    }
+    setContentLength(inputValue.length)
   }
 
   const handleSendClick = async () => {
     if (content === '') {
       alert('내용을 입력해주세요')
+    } else if (content.length >= 300) {
+      alert('내용은 300자 이내로 작성해주세요.')
     } else {
       try {
         const res = await createLetter(
@@ -180,6 +196,13 @@ export default function WriteFriend({ searchParams }: Props) {
               value={content}
               onChange={handleContentChange}
             ></st.InputContent>
+            <st.ContentLimit
+              className={
+                contentLength >= 300 ? `text-red-500` : `text-gray-400`
+              }
+            >
+              {contentLength}/300
+            </st.ContentLimit>
             <st.Hint>
               <st.HintCheck
                 type="checkbox"
@@ -191,32 +214,64 @@ export default function WriteFriend({ searchParams }: Props) {
             </st.Hint>
             <st.AddContent>
               <st.ContentInfoText>어떤걸 추가 해볼까?</st.ContentInfoText>
-              <st.Medias onClick={repModal}>
-                <st.Media
-                  // onClick={voiceinput}
-                  src="/write/voice.png"
-                  alt="voice"
-                  style={{
-                    backgroundColor: contentType === 0 ? 'lightgray' : 'white',
-                  }}
-                ></st.Media>
-                <st.Media
-                  // onClick={videoinput}
-                  src="/write/video.png"
-                  alt="video"
-                  style={{
-                    backgroundColor: contentType === 1 ? 'lightgray' : 'white',
-                  }}
-                ></st.Media>
-                <st.Media
-                  // onClick={pictureinput}
-                  src="/write/picture.png"
-                  alt="picture"
-                  style={{
-                    backgroundColor: contentType === 2 ? 'lightgray' : 'white',
-                  }}
-                ></st.Media>
-              </st.Medias>
+              {isFromApp ? (
+                <st.Medias onClick={repModal}>
+                  <st.Media
+                    src="/write/voice.png"
+                    alt="voice"
+                    style={{
+                      backgroundColor:
+                        contentType === 0 ? 'lightgray' : 'white',
+                    }}
+                  ></st.Media>
+                  <st.Media
+                    src="/write/video.png"
+                    alt="video"
+                    style={{
+                      backgroundColor:
+                        contentType === 1 ? 'lightgray' : 'white',
+                    }}
+                  ></st.Media>
+                  <st.Media
+                    src="/write/picture.png"
+                    alt="picture"
+                    style={{
+                      backgroundColor:
+                        contentType === 2 ? 'lightgray' : 'white',
+                    }}
+                  ></st.Media>
+                </st.Medias>
+              ) : (
+                <st.Medias>
+                  <st.Media
+                    onClick={voiceinput}
+                    src="/write/voice.png"
+                    alt="voice"
+                    style={{
+                      backgroundColor:
+                        contentType === 0 ? 'lightgray' : 'white',
+                    }}
+                  ></st.Media>
+                  <st.Media
+                    onClick={videoinput}
+                    src="/write/video.png"
+                    alt="video"
+                    style={{
+                      backgroundColor:
+                        contentType === 1 ? 'lightgray' : 'white',
+                    }}
+                  ></st.Media>
+                  <st.Media
+                    onClick={pictureinput}
+                    src="/write/picture.png"
+                    alt="picture"
+                    style={{
+                      backgroundColor:
+                        contentType === 2 ? 'lightgray' : 'white',
+                    }}
+                  ></st.Media>
+                </st.Medias>
+              )}
             </st.AddContent>
           </st.ContentBox>
           <stt.EmptyDiv>

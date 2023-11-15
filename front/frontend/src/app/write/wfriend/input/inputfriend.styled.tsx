@@ -17,7 +17,7 @@ export const ContentBox = styled.div`
 
 export const InputContent = styled.textarea`
   width: 80%;
-  height: 250px;
+  height: 253px;
   padding: 10px;
 
   font-size: 16px;
@@ -115,4 +115,11 @@ export const Loading = styled.img`
 export const LoadingText = styled.div`
   font-size: 16px;
   font-weight: bold;
+`
+
+export const ContentLimit = styled.div`
+  font-size: 0.8rem;
+  // color: gray;
+  text-align: right;
+  margin-right: 2rem;
 `
