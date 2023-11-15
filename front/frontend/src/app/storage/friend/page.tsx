@@ -36,7 +36,7 @@ export default function Friend() {
         </f.TitleWrapper>
 
         <f.LetterItemContainer className="h-screen">
-          <f.LetterItemWrapper className='className=" xl:gap-x-8"  grid-cols-3 gap-x-8 gap-y-5 sm:grid-cols-3  lg:grid-cols-3 xl:m-12 xl:grid-cols-3'>
+          <f.LetterItemWrapper className="  grid-cols-3 gap-x-8 gap-y-5 sm:grid-cols-3  lg:grid-cols-3 xl:m-12 xl:grid-cols-3">
             {/* LetterCard component */}
 
             {letterList &&

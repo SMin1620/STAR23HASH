@@ -18,13 +18,15 @@ export default function Letter({ params }: Props) {
   const router = useRouter()
   const [noteInfo, setNoteInfo] = useState<Note>()
   const [content, setContent] = useState<string>()
+
+  const [contentLength, setContentLength] = useState<number>(0)
   useEffect(() => {
     const getRooms = async () => {
       try {
         const response = await getNote(params.reply)
         setNoteInfo(response.data)
       } catch (error) {
-        router.replace('/error')
+        // router.replace('/error')
       }
     }
 
@@ -49,6 +51,11 @@ export default function Letter({ params }: Props) {
   const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.currentTarget.value
     setContent(inputValue)
+    if (content && content.length >= 300) {
+      // alert('내용은 300자 이내로 작성해주세요.')
+      setContent(inputValue.substring(0, 299))
+    }
+    setContentLength(inputValue.length)
   }
   return (
     <>
@@ -74,7 +81,11 @@ export default function Letter({ params }: Props) {
             value={content}
             onChange={handleContent}
           />
-
+          <r.ContentLimit
+            className={contentLength >= 300 ? `text-red-500` : `text-gray-400`}
+          >
+            {contentLength}/300
+          </r.ContentLimit>
           <r.WarningText>작성된 편지는 17:00에 일괄 전송됩니다.</r.WarningText>
           <r.ButtonWrapper>
             <r.Button onClick={handleBackBtnClick}>돌아가기</r.Button>
