@@ -26,7 +26,7 @@ export default function KaKaoShareButton() {
           title: '별이삼샵',
           description: '나에게 메시지를 적어줄래요?',
           imageUrl:
-            'https://star23shop-bucket.s3.ap-northeast-2.amazonaws.com/Group+48.png',
+            'https://star23shop-bucket.s3.ap-northeast-2.amazonaws.com/image.png',
           link: {
             mobileWebUrl: shareUrl,
             webUrl: shareUrl,
