@@ -39,7 +39,6 @@ export default function WriteFriend({ searchParams }: Props) {
     if (userAgent.includes('MyApp')) {
       setIsFromApp(true)
     }
-    console.log(isFromApp ? '앱에서 접근' : '웹에서 접근')
   }, [])
   AWS.config.update({
     accessKeyId: ACCESS_KEY,

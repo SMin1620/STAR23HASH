@@ -164,5 +164,5 @@ export const ContentLimit = styled.div`
   font-size: 0.8rem;
   // color: gray;
   text-align: right;
-  margin-right: 2rem;
+  margin-right: 0.5rem;
 `
