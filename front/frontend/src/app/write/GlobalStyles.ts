@@ -8,6 +8,11 @@ ${reset}
 *{
 }
 body{
+  font-family:
+  'Dovemayo_gothic',
+  -apple-system,
+  sans-serif;
+
   background-color: #C5E7AC;
   display:flex;
   justify-content:center;
