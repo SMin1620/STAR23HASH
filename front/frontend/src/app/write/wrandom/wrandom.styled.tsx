@@ -46,3 +46,10 @@ export const LoadingText = styled.div`
   font-size: 16px;
   font-weight: bold;
 `
+
+export const ContentLimit = styled.div`
+  font-size: 0.8rem;
+  // color: gray;
+  text-align: right;
+  margin-right: 2rem;
+`

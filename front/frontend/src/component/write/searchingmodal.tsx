@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import * as M from './modal.styled'
 import { loginAxios } from '@/app/utils/loginAxios'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   contact: string
@@ -10,6 +11,8 @@ type Props = {
 }
 
 function SearchingModal({ contact, closeState }: Props) {
+  const router = useRouter()
+
   const [phone, setPhone] = useState('') // State to store input text
   const [result, setResult] = useState(false)
   const [resultMessage, setResultMessage] = useState('')
@@ -26,15 +29,17 @@ function SearchingModal({ contact, closeState }: Props) {
       setResult(false)
       return
     } else {
-      const res = await loginAxios(phone)
-      //console.log(res)
-
-      if (res.data.toString() === 'true') {
-        setResultMessage('전송할 수 있어요!')
-        setResult(true)
-      } else {
-        setResultMessage('상대방이 서비스를 이용하고 있지 않아요⊙﹏⊙∥')
-        setResult(false)
+      try {
+        const res = await loginAxios(phone)
+        if (res.data.toString() === 'true') {
+          setResultMessage('전송할 수 있어요!')
+          setResult(true)
+        } else {
+          setResultMessage('상대방이 서비스를 이용하고 있지 않아요⊙﹏⊙∥')
+          setResult(false)
+        }
+      } catch (error) {
+        router.push('/error')
       }
     }
   }
