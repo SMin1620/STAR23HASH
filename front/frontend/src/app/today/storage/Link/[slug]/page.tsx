@@ -17,6 +17,8 @@ import {
   Guide,
   BtnContainer,
   WriteButton,
+  HomeIcon,
+  HomeText,
 } from './link.styled'
 import { useRouter } from 'next/navigation'
 import KaKaoShareButton from '@/component/common/kakaoShareButton/kakaoShareButton'
@@ -143,6 +145,10 @@ export default function TodayLinkStorage({ params }: Props) {
     router.back()
   }
 
+  const goHome = () => {
+    router.replace(`/`)
+  }
+
   // const minDistance = 2
   // const [astronautPositions, setAstronautPostions] = useState<Position[]>([])
 
@@ -233,11 +239,18 @@ export default function TodayLinkStorage({ params }: Props) {
           {isUser && <KaKaoShareButton />}
         </BtnContainer>
         <Guide>
-          화면을 움직일 수 있어요!
-          {isUser && (
+          {isUser ? (
             <>
+              화면을 움직일 수 있어요!
               <br />
               편지는 한번 읽으면 사라져요 ㅜㅜ
+            </>
+          ) : (
+            <>
+              <HomeText onClick={() => goHome()}>
+                ⭐️ 내 링크 만들기 ⭐️
+              </HomeText>
+              화면을 움직일 수 있어요!
             </>
           )}
         </Guide>
