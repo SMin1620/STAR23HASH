@@ -177,3 +177,10 @@ export const impossible = styled.div`
   margin-top: 0.2rem;
   margin-bottom: 0.5rem;
 `
+
+export const ContentLimit = styled.div`
+  font-size: 0.8rem;
+  // color: gray;
+  text-align: right;
+  margin-right: 2rem;
+`
