@@ -35,7 +35,12 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
   const handleFileInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const selectedFile = event.target.files?.[0]
+    const selectedFile =
+      contentType === 1
+        ? new File([event.target.files?.[0]], event.target.files?.[0].name, {
+            type: 'video/mp4',
+          })
+        : event.target.files?.[0]
 
     if (selectedFile) {
       const allowedExtensions = allowedTypes[contentType as keyof AllowedTypes]
