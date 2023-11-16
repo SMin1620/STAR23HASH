@@ -9,6 +9,7 @@ import {
   BtnContainer,
   SendBox,
   AstronautBox,
+  ContentLength,
 } from './write.styled'
 import { linkPost } from '@/app/utils/todayStorage/link/linkPost'
 import { useState } from 'react'
@@ -41,6 +42,8 @@ export default function LinkWrite({ params }: Props) {
     const str = content.replace(/\s/g, '')
     if (str.length <= 1) {
       alert('한글자는 너무했지..?')
+    } else if (content.length > 300) {
+      alert('300자 이내로 작성해주세요! 😢 ')
     } else {
       try {
         const response = await linkPost(content, icon, rollId)
@@ -53,11 +56,6 @@ export default function LinkWrite({ params }: Props) {
         alert('전송에 실패하였습니다.')
       }
     }
-    // if (res.status.toString() === 'OK') {
-    //   router.push(`/write/send?isSuccess=true`)
-    // } else {
-    //   router.push(`/write/send?isSuccess=false`)
-    // }
   }
 
   const handleBack = () => {
@@ -126,6 +124,7 @@ export default function LinkWrite({ params }: Props) {
               onChange={handleContentChange}
             />
           </st.ContentBox>
+          <ContentLength>{content.length} / 300 </ContentLength>
           <BtnContainer>
             <Btn
               onClick={() => {

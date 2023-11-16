@@ -54,3 +54,9 @@ export const Btn = styled.button`
   height: 35px;
   margin: 0 7px;
 `
+export const ContentLength = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2rem;
+  font-size: 1rem;
+`
