@@ -100,20 +100,29 @@ export default function TodayFriendStorage() {
             position={[0, 3.1, 0]}
           />
           {letterList &&
-            letterList.map((item: any, index: number) => (
-              <Float key={item.id} speed={1} floatIntensity={0.1}>
-                <AstronautModel
-                  url={`/assets/character.glb`}
-                  scale={[0.2, 0.2, 0.2]}
-                  position={[
-                    Math.random() * 2 - 1,
-                    Math.random() * 3 - 2,
-                    Math.random() * 3 - 2,
-                  ]}
-                  onClick={() => handleDetailApi(item.id)}
-                />
-              </Float>
-            ))}
+            letterList.map((item: any, index: number) => {
+              const randomIndex = Math.floor(Math.random() * index)
+              const modelIndex = (randomIndex % 5) + 1
+
+              return (
+                <Float key={item.id} speed={1} floatIntensity={0.1}>
+                  <AstronautModel
+                    url={`/assets/character/character${modelIndex}.glb`}
+                    scale={[0.2, 0.2, 0.2]}
+                    position={[
+                      Math.random() * 2 - 1,
+                      Math.random() * 3 - 2,
+                      Math.random() * 3 - 2,
+                    ]}
+                    onClick={(event: any) => {
+                      if (event.intersections[0].object === event.object) {
+                        handleDetailApi(item.id)
+                      }
+                    }}
+                  />
+                </Float>
+              )
+            })}
 
           <PlanetModel
             url="/assets/planet/planet-1.glb"

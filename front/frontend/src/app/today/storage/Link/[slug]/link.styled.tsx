@@ -25,7 +25,7 @@ export const WriteButton = styled.button`
   position: absolute;
   width: 90px;
   height: 38px;
-  bottom: 120px;
+  bottom: 150px;
   border-radius: 20px;
   color: white;
   font-size: 17px;
@@ -59,7 +59,7 @@ export const BackButton = styled.div`
 export const Guide = styled.div`
   position: absolute;
   color: white;
-  bottom: 65px;
+  bottom: 67px;
   left: 0;
   right: 0;
   margin: auto;
@@ -73,4 +73,18 @@ export const BtnContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+`
+export const HomeIcon = styled.img`
+  position: absolute;
+  width: 30px;
+  right: 15px;
+  bottom: 60px;
+`
+export const HomeText = styled.div`
+  position: absolute;
+  bottom: 38px;
+  pointer-events: auto;
+  justify-content: center;
+  width: 100%;
+  color: purple;
 `
