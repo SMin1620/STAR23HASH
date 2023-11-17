@@ -9,7 +9,7 @@ const Main: React.FC = () => {
     const calculateRemainingTime = () => {
       const now = new Date()
       const targetTime = new Date()
-      targetTime.setHours(10, 0, 0) // 오후 5시
+      targetTime.setHours(17, 0, 0) // 오후 5시
 
       let remainingTime = targetTime.getTime() - now.getTime()
 
@@ -20,7 +20,7 @@ const Main: React.FC = () => {
       }
 
       // 현재 시간이 오후 5시 이후 또는 오전 6시 이전인지 확인
-      if (now.getHours() >= 10 || now.getHours() < 6) {
+      if (now.getHours() >= 17 || now.getHours() < 6) {
         setCheck(true)
       } else {
         setCheck(false)
@@ -54,7 +54,7 @@ const Main: React.FC = () => {
           </div>
         ) : (
           <div>
-            <div className="ml-1 mt-14 flex text-2xl text-white">10시까지</div>
+            <div className="ml-1 mt-14 flex text-2xl text-white">5시까지</div>
             <div className="flex items-center justify-center text-5xl text-white">
               {remainingTime}
             </div>

@@ -8,7 +8,7 @@ const Delivery: React.FC = () => {
     const calculateRemainingTime = () => {
       const now = new Date()
       const targetTime = new Date()
-      targetTime.setHours(10, 0, 0) // 오후 5시
+      targetTime.setHours(17, 0, 0) // 오후 5시
 
       let remainingTime = targetTime.getTime() - now.getTime()
 
