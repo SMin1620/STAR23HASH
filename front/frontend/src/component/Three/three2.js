@@ -373,8 +373,7 @@ function Scene() {
                   duration: 1.0,
                   opacity: 1,
                   onComplete: () => {
-                    // console.log(currentHour)
-                    if (currentHour >= 10 || currentHour <= 6) {
+                    if (currentHour >= 17 || currentHour <= 6) {
                       router.push('/today/arrive')
                     } else {
                       router.push('/today/delivery')
