@@ -1,0 +1,46 @@
+//eslint.json
+
+{
+  "root": true,
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js", "**/*.jsx"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
+    }
+  ],
+  "rules": {
+    // 'React' must be in scope when using JSX 에러 해결 (Next.js)
+    "react/react-in-jsx-scope": "off",
+    // ts파일에서 tsx구문 허용 (Next.js)
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "no-unused-vars": "off", //타입스크립트 사용시 interface의 변수명을 eslint가 잡지 않도록 함.
+    "@typescript-eslint/no-unused-vars": "warn", //대신 사용하지 않는 변수는 @typescript/eslint를 통해 잡아줌.
+    "prettier/prettier": "error",
+    "react-hooks/rules-of-hooks": "error", // Hooks 규칙 확인
+    "react-hooks/exhaustive-deps": "warn", // effect의 의존성 배열 확인
+    "@next/next/no-img-element": "off", // Next.js의 <img> 요소 사용 경고 끄기
+    "jsx-a11y/alt-text": "off", // img 요소의 alt 속성 확인 규칙 끄기
+    "@typescript-eslint/no-explicit-any": "off"
+  },
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  }
+}
