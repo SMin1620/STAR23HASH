@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+  elasticsearch:
+    restart: unless-stopped
+    build: ./elasticsearch
+    container_name: elasticsearch
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+    environment:
+      - TZ=Asia/Seoul
+      - ELASTIC_PASSWORD=elasticpassword
+      - node.name=elasticsearch ## 이 이름에 큰 의미 없음, 왜냐하면 싱글노드로 운영할 계획이기 때문에
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node ## 단일노드모드로 사용하겠다는 뜻, 엘라스틱서치는 실제로는 멀티노드로 많이 사용한다.
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    networks:
+      - elastic
+
+  kibana:
+    restart: unless-stopped
+    build: ./kibana
+    container_name: kibana
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,z
+    ports:
+      - "5601:5601" ## 키바나의 기본포트는 5601 이다.
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+
+  logstash:
+    restart: unless-stopped
+    build: ./logstash
+    container_name: logstash
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,z
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,z
+    environment:
+      - "LS_JAVA_OPTS=-Xmx256m -Xms256m"
+    ports:
+      - "5044:5044"
+    depends_on:
+      - elasticsearch
+    networks:
+      - elastic
+
+  apm-server:
+    restart: unless-stopped
+    build: ./apm-server
+    container_name: apm-server
+    cap_add: [ "CHOWN", "DAC_OVERRIDE", "SETGID", "SETUID" ]
+    cap_drop: [ "ALL" ]
+    volumes:
+      - ./apm-server/config/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro,z
+    ports:
+      - "8200:8200"
+    depends_on:
+      - elasticsearch
+      - kibana
+    networks:
+      - elastic
+
+networks:
+  elastic:
