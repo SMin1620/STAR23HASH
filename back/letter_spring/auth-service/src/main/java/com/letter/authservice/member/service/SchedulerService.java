@@ -16,7 +16,7 @@ public class SchedulerService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    @Scheduled(cron = "0 0 10 * * ?")
+    @Scheduled(cron = "0 0 17 * * ?")
     public void reset() {
         List<Member> memberList = memberRepository.findAllByIsWriteTrue();
         for (Member member : memberList) member.setIsWrite(false);
