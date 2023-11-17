@@ -72,6 +72,7 @@ export const Content = styled.div`
   line-height: 36px;
   padding: 8px 10px;
   outline: none;
+  overflow: auto;
 `
 export const ContentBox = styled.div`
   display: flex;
