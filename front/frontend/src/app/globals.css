@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@font-face {
+  font-family: 'Dovemayo_gothic';
+  font-weight: 200;
+  src: url('/fonts/Dovemayo_gothic.ttf') format('truetype');
+}
+
+body {
+  font-family:
+    'Dovemayo_gothic',
+    -apple-system,
+    sans-serif;
+
+  /* font-family: -apple-system, 'Dovemayo_gothic', sans-serif; */
+  background-color: black;
+}
+
+.Title {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+/* @font-face {
+  font-family: 'Dovemayo_gothic';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2')
+    format('woff2');
+} */
