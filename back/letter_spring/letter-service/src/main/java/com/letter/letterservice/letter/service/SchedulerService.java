@@ -16,7 +16,7 @@ public class SchedulerService {
     private final LetterRepository letterRepository;
 
     @Transactional
-    @Scheduled(cron = "0 0 10 * * ?")
+    @Scheduled(cron = "0 0 17 * * ?")
     public void reset() {
         List<Letter> letterList = letterRepository.findAllByStoreFalse();
         for (Letter letter : letterList) letter.setStore(true);
