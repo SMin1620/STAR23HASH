@@ -26,7 +26,7 @@ const allowedTypes: AllowedTypes = {
 }
 
 function InputModal({ contentType, contentUrl, closeState }: Props) {
-  const [file, setFile] = useState<File | undefined>()
+  const [file, setFile] = useState<File | null>()
   const [previewURL, setPreviewURL] = useState<string | undefined>()
   const [errorMessage, setErrorMessage] = useState<string | undefined>()
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -35,9 +35,15 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
   const handleFileInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const selectedFile = event.target.files?.[0]
+    const file = event.target.files?.[0]
+    if (file) {
+      const selectedFile =
+        contentType === 1
+          ? new File([file], file.name, {
+              type: 'video/mp4',
+            })
+          : file
 
-    if (selectedFile) {
       const allowedExtensions = allowedTypes[contentType as keyof AllowedTypes]
       const fileExtension = selectedFile.type
 
@@ -52,7 +58,7 @@ function InputModal({ contentType, contentUrl, closeState }: Props) {
         setErrorMessage(undefined) // 오류 메시지 초기화
       } else {
         setErrorMessage('허용되지 않은 파일 유형입니다.')
-        setFile(undefined)
+        setFile(null)
       }
     }
   }
