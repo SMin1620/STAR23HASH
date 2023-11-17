@@ -17,6 +17,8 @@ import {
   Guide,
   BtnContainer,
   WriteButton,
+  HomeIcon,
+  HomeText,
 } from './link.styled'
 import { useRouter } from 'next/navigation'
 import KaKaoShareButton from '@/component/common/kakaoShareButton/kakaoShareButton'
@@ -89,12 +91,12 @@ export default function TodayLinkStorage({ params }: Props) {
         // setIsUser(true)
         //일치함
         if (parseInt(rollId) == params.slug) {
-          const handleListApi = async (id: number) => {
-            const response = await LinkListGet(id)
-            setRollList(response.data.data)
-          }
+          // const handleListApi = async (id: number) => {
+          //   const response = await LinkListGet(id)
+          //   setRollList(response.data.data)
+          // }
           setIsUser(true)
-          handleListApi(params.slug)
+          // handleListApi(params.slug)
         }
         //다름
         else {
@@ -141,6 +143,10 @@ export default function TodayLinkStorage({ params }: Props) {
 
   const goBack = () => {
     router.back()
+  }
+
+  const goHome = () => {
+    router.replace(`/`)
   }
 
   // const minDistance = 2
@@ -205,8 +211,11 @@ export default function TodayLinkStorage({ params }: Props) {
                       url={`/assets/astronaut/astronaut${item.icon}.glb`}
                       scale={[0.3, 0.3, 0.3]}
                       position={positions[index]}
-                      onClick={() => {
-                        if (isUser) {
+                      onClick={(event: any) => {
+                        if (
+                          isUser &&
+                          event.intersections[0].object === event.object
+                        ) {
                           handleDetailApi(item.id)
                         }
                       }}
@@ -233,11 +242,18 @@ export default function TodayLinkStorage({ params }: Props) {
           {isUser && <KaKaoShareButton />}
         </BtnContainer>
         <Guide>
-          화면을 움직일 수 있어요!
-          {isUser && (
+          {isUser ? (
             <>
+              화면을 움직일 수 있어요!
               <br />
               편지는 한번 읽으면 사라져요 ㅜㅜ
+            </>
+          ) : (
+            <>
+              <HomeText onClick={() => goHome()}>
+                ⭐️ 내 링크 만들기 ⭐️
+              </HomeText>
+              화면을 움직일 수 있어요!
             </>
           )}
         </Guide>

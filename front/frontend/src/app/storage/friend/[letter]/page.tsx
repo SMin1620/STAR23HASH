@@ -60,11 +60,21 @@ export default function Letter({ params }: Props) {
                   alt="미리보기"
                 />
               ) : letterInfo?.type === 1 ? (
-                <l.PreviewMovie className="aspect-auto" controls>
+                <l.PreviewMovie
+                  src={letterInfo.fileUrl}
+                  className="aspect-auto"
+                  autoPlay={true}
+                  controls={true}
+                >
                   <source src={letterInfo.fileUrl} type={'video'} />
                 </l.PreviewMovie>
               ) : letterInfo?.type === 0 ? (
-                <l.PreviewAudio className="aspect-auto" controls>
+                <l.PreviewAudio
+                  className="aspect-auto"
+                  src={letterInfo.fileUrl}
+                  autoPlay={true}
+                  controls={true}
+                >
                   <source src={letterInfo.fileUrl} type={'audio'} />
                 </l.PreviewAudio>
               ) : null}
